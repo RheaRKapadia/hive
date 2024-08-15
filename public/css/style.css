@@ -87,7 +87,7 @@ h1 {
     align-items: center;
 }
 .landing-btn:hover {
-    background-color: #FF8C00; /* Darker orange on hover */
+    background-color: #FF8C00;
 }
 
 .hivemascot {
@@ -142,7 +142,7 @@ input {
     text-decoration: none;
 }
 .btn:hover {
-    background-color: #FF8C00; /* Darker orange on hover */
+    background-color: #FF8C00;
 }
 
 .signup-link {
@@ -161,5 +161,55 @@ input {
 }
 
 .btn:hover {
-    background-color: #FF8C00; /* Darker orange on hover */
+    background-color: #FF8C00;
+}
+
+.name-fields {
+    display: flex;
+    gap: 10px;
+}
+.name-fields label {
+    flex: 1;
+}
+
+.password-toggle {
+    position: relative;
+}
+.password-toggle input {
+    padding-right: 35px;
+}
+.password-toggle button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .name-fields {
+        flex-direction: column;
+    }
+}
+
+/* Dashboard */
+.dashboard-page {
+    flex-direction: column;
+}
+
+.dashboard-content {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1;
+    max-width: 600px;
+    width: 100%;
+}
+
+.dashboard-content h1 {
+    color: #FFD700;
+    margin-bottom: 1.5rem;
 }

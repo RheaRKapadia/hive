@@ -5,12 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
-    <h1>Dashboard - Welcome <%= user.firstName %></h1> 
-    <a href="/user/painpoints" class="btn">Pain Management</a>
-    <a href="/user/locations" class="btn">Locations</a>
-    <a href="/user/settings" class="btn">Settings</a>
-    <a href="/user/workouts" class="btn">Workouts</a>
+<body class="dashboard-page">
+    <div class="dashboard-content">
+        <h1>Dashboard - Welcome <%= user.firstName %></h1>
+        <a href="/user/painpoints" class="btn">Pain Management</a>
+        <a href="/user/locations" class="btn">Locations</a>
+        <a href="/user/settings" class="btn">Settings</a>
+        <a href="/user/workouts" class="btn">Workouts</a>
+    </div>
 </body>
 </html>

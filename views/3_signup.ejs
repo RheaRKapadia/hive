@@ -15,20 +15,25 @@
         <img src="/images/woman_side_profile_nobackground.png" alt="Top Right Image">
     </div>
     <div class="signup-container">
-        <!-- <h1>Sign Up</h1> -->
         <h1>Get Started with Hive <img class="hivemascot" src="/images/HiveMascot.png" alt="Hive Mascot"></h1>
 
         <form method="POST" action="/signup">
+            <div class="name-fields">
+                <label>
+                    First name
+                    <input type="text" name="firstName" required />
+                </label>
+                <label>
+                    Last name
+                    <input type="text" name="lastName" required />
+                </label>
+            </div>
             <label>
-                Enter your full name
-                <input type="text" name="name" required />
-            </label>
-            <label>
-                Enter your email
+                Email address
                 <input type="email" name="email" required />
             </label>
             <label>
-                Enter your password
+                Password
                 <input type="password" name="password" required />
             </label>
             <button type="submit" class="btn">Sign Up</button>
