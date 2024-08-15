@@ -8,23 +8,41 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <h1>Sign Up</h1>
-    <h1>Get Started</h1>
-    <form method="POST" action="/signup">
-        <label>
-            Enter your full name
-            <input type="text" name="name"/>
-        </label></br>
-        <label>
-            Enter your email
-            <input type="email" name="email"/>
-        </label></form></br>
-        <label>
-            Enter your password
-            <input type="text" name="password"/>
-        </label></br>
-        <!-- <button type="submit">Sign Up</button> -->
-    </form>
-    <a href="/user/dashboard" class="btn">Log In</a>
+    <div class="corner-image top-left-image">
+        <img src="/images/track_nobackground.png" alt="Top Left Image">
+    </div>
+      <div class="corner-image top-right-image">
+        <img src="/images/woman_side_profile_nobackground.png" alt="Top Right Image">
+    </div>
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+        <h2>Get Started with Hive <img class="hivemascot" src="/images/HiveMascot.png" alt="Hive Mascot"></h2>
+
+        <form method="POST" action="/signup">
+            <label>
+                Enter your full name
+                <input type="text" name="name" required />
+            </label>
+            <label>
+                Enter your email
+                <input type="email" name="email" required />
+            </label>
+            <label>
+                Enter your password
+                <input type="password" name="password" required />
+            </label>
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+
+        <p class="login-link">
+            Already have an account? <a href="/login">Log In</a>
+        </p>
+    </div>
+    <div class="corner-image bottom-left-image">
+        <img src="/images/street_man_nobackground.png" alt="Bottom Left Image">
+    </div>
+    <div class="corner-image bottom-right-image">
+        <img src="/images/stretching_prosthetic_nobackground.png" alt="Bottom Right Image">
+    </div>
 </body>
 </html>

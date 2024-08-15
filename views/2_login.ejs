@@ -8,22 +8,37 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <h1>Log In</h1>
-    <h1>Welcome to Hive</h1>
-    <p>
-        Don't have an account? <a href="/signup" class="landing-btn">Sign Up</a>
-    </p>
-    <form method="POST" action="/login">
-        <label>
-            Enter your email
-            <input type="email" name="email"/>
-        </label></form></br>
-        <label>
-            Enter your password
-            <input type="text" name="password"/>
-        </label></br>
-        <!-- <button type="submit"class="landing-btn">Log In</button> -->
-    </form>
-    <a href="/user/dashboard" class="btn">Log In</a>
+    <div class="corner-image top-left-image">
+        <img src="/images/track_nobackground.png" alt="Top Left Image">
+      </div>
+      <div class="corner-image top-right-image">
+        <img src="/images/woman_side_profile_nobackground.png" alt="Top Right Image">
+      </div>
+      <div class="login-container">
+        <h1>Log In</h1>
+        <h2>Welcome to Hive <img class="hivemascot" src="/images/HiveMascot.png" alt="Hive Mascot"</h2>
+
+        <form method="POST" action="/login">
+            <label>
+                Enter your email
+                <input type="email" name="email" required />
+            </label>
+            <label>
+                Enter your password
+                <input type="password" name="password" required />
+            </label>
+            <button type="submit" class="btn">Log In</button>
+        </form>
+
+        <p class="signup-link">
+            Don't have an account? <a class="btn" href="/signup">Sign Up</a>
+        </p>
+    </div>
+    <div class="corner-image bottom-left-image">
+        <img src="/images/street_man_nobackground.png" alt="Bottom Left Image">
+    </div>
+    <div class="corner-image bottom-right-image">
+        <img src="/images/stretching_prosthetic_nobackground.png" alt="Bottom Right Image">
+    </div>
 </body>
 </html>
