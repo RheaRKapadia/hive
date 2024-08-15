@@ -1,5 +1,16 @@
 const express = require('express')
 const app = express()
+const admin = require('firebase-admin')
+const serviceAccount = require('./serviceAccountKey.json')
+
+// Initialize Firebase Admin SDK
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "hive-3f18f.firebaseapp.com"
+  });
+
+// Initialize Firestore
+const db = admin.firestore();
 
 //middleware
 app.use(logger)
@@ -37,8 +48,19 @@ app.post('/signup', (req, res) => {
 })
 
 //dashboard page 
-app.get('/user/dashboard', (req, res) => {
-    res.render('4_dashboard')
+app.get('/user/dashboard', async(req, res) => {
+    // res.render('4_dashboard')
+    try {
+        const usersSnapshot = await db.collection('Users').get();
+        const usersList = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+        console.log('Retrieved users:', usersList); // Check the logged data
+
+        const user = usersList.length > 0 ? usersList[0] : { name: 'Guest' }
+        res.status(200).render('4_dashboard', {user});
+      } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch user' });
+      }
 })
 
 //dashboard page 
