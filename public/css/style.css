@@ -1,0 +1,35 @@
+/* Index */
+body {
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+
+  .top-left-image {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  .top-left-image img {
+    max-width: 100px;  /* Adjust size as needed */
+    height: auto;
+  }
+
+  main {
+    text-align: center;
+    color: white;  /* Adjust text color as needed */
+  }
+
+  .landing-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #007bff;  /* Adjust button color as needed */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }

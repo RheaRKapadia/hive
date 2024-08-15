@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const admin = require('firebase-admin')
 const serviceAccount = require('./serviceAccountKey.json')
+const path = require('path');
+
 
 // Initialize Firebase Admin SDK
 admin.initializeApp({
@@ -19,35 +21,39 @@ app.use(express.urlencoded({extended: true}))
 //allows you to parse json info through the body
 app.use(express.json())
 
+//serve static files
+app.use(express.static('public'));
+app.set('views', path.join(__dirname, 'views'))
+
 //use a view engine to view the ejs files
 app.set('view engine', 'ejs')
 
-//landing page 
+//landing page
 app.get('/', (req, res) => {
     res.render('1_index')
 })
 
-//log In page 
+//log In page
 app.get('/login', (req, res) => {
     res.render('2_login')
 })
 
-//log In page 
+//log In page
 app.post('/login', (req, res) => {
     res.redirect('/dashboard')
 })
 
-//Sign Up page 
+//Sign Up page
 app.get('/signup', (req, res) => {
     res.render('3_signup')
 })
 
-//sign up page 
+//sign up page
 app.post('/signup', (req, res) => {
     res.redirect('user/dashboard')
 })
 
-//dashboard page 
+//dashboard page
 app.get('/user/dashboard', async(req, res) => {
     // res.render('4_dashboard')
     try {
@@ -63,7 +69,7 @@ app.get('/user/dashboard', async(req, res) => {
       }
 })
 
-//dashboard page 
+//dashboard page
 app.get('/user/settings', (req, res) => {
     res.render('14_settings')
 })
