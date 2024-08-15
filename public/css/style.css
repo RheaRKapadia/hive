@@ -61,7 +61,7 @@ main {
 }
 
 main img {
-    max-width: 200px; /* Adjust as needed for the Hive logo */
+    max-width: 200px;
     height: auto;
     margin-bottom: 20px;
 }
@@ -75,3 +75,17 @@ main img {
     text-decoration: none;
     border-radius: 5px;
 }
+
+.hivemascot {
+    max-width: 100px; */
+    height: auto;
+    margin-bottom: -20px;
+    /* vertical-align: bottom; */
+}
+
+.hive-heading {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 10px;
+    text-align: center;
+  }
