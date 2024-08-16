@@ -40,7 +40,7 @@ app.get('/login', (req, res) => {
 
 //log In page
 app.post('/login', (req, res) => {
-    res.redirect('/dashboard')
+    res.redirect('/user/dashboard')
 })
 
 //Sign Up page
@@ -50,7 +50,7 @@ app.get('/signup', (req, res) => {
 
 //sign up page
 app.post('/signup', (req, res) => {
-    res.redirect('user/dashboard')
+    res.redirect('/user/dashboard')
 })
 
 //dashboard page
