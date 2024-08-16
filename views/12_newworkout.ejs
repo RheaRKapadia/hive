@@ -8,5 +8,13 @@
 </head>
 <body>
     <h1>New Workout</h1>
+    <div style="overflow:scroll;">
+        <ul>
+            <% exerciseNames.forEach(function(name) { %>
+              <li><%= name %></li>
+            <% }) %>
+          </ul>
+    </div>
+
 </body>
 </html>
