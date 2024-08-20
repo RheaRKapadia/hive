@@ -15,6 +15,19 @@
             <% }) %>
           </ul>
     </div>
+    <div class="pagination">
+      <% if (currentPage > 1) { %>
+          <a href="/user/workouts/new?page=<%= currentPage - 1 %>">&laquo; Previous</a>
+      <% } %>
+
+      <% for (let i = 1; i <= totalPages; i++) { %>
+          <a href="/user/workouts/new?page=<%= i %>" class="<%= currentPage === i ? 'active' : '' %>"><%= i %></a>
+      <% } %>
+
+      <% if (currentPage < totalPages) { %>
+          <a href="/user/workouts/new?page=<%= currentPage + 1 %>">Next &raquo;</a>
+      <% } %>
+    </div>
 
 </body>
 </html>
