@@ -2,18 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HIVE Dashboard</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body class="dashboard-page">
-    <div class="dashboard-content">
-        <h1>Dashboard - Welcome <%= user.firstName %></h1>
-        <a href="/user/painpoints" class="btn">Pain Management</a>
-        <a href="/user/locations" class="btn">Locations</a>
-        <a href="/user/settings" class="btn">Settings</a>
-        <a href="/user/workouts" class="btn">Workouts</a>
-    </div>
+    <header>
+        <div class="logo">
+            <h1>HIVE</h1>
+        </div>
+        <nav>
+            <div class="user-menu">
+                <img src="path_to_user_avatar.jpg" alt="User Avatar" class="avatar">
+                <span>Menu</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-content">
+        <section class="welcome-section">
+            <h2>Welcome back, <%= user.firstName %>!</h2>
+            <div class="quote">
+                <p>"When you have a clear vision of your goal, it's easier to take the first step toward it."</p>
+                <span class="author">LL Cool J</span>
+            </div>
+        </section>
+
+        <section class="workouts-section">
+            <h2>Workouts</h2>
+            <div id="workout-calendar" class="workout-calendar">
+                <!-- Workout calendar will be loaded dynamically -->
+                <div class="loading">Loading workout data...</div>
+            </div>
+        </section>
+
+        <section class="health-section">
+            <h2>Health</h2>
+            <div id="health-data" class="health-data">
+                <!-- Health data will be loaded dynamically -->
+                <div class="loading">Loading health data...</div>
+            </div>
+        </section>
+
+        <section class="locations-section">
+            <h2>Locations</h2>
+            <div id="location-data" class="location-data">
+                <!-- Location data will be loaded dynamically -->
+                <div class="loading">Loading location data...</div>
+            </div>
+        </section>
+
+        <section class="workouts-list-section">
+            <h2>Workouts</h2>
+            <div id="workouts-list" class="workouts-list">
+                <!-- Workouts list will be loaded dynamically -->
+                <div class="loading">Loading workouts...</div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="side-menu">
+        <ul>
+            <li><a href="/user/workouts">Workouts</a></li>
+            <li><a href="/user/routines">Routines</a></li>
+            <li><a href="/user/painpoints">Pain Management</a></li>
+            <li><a href="/user/locations">Locations</a></li>
+        </ul>
+    </nav>
+
+    <script src="./js/dashboard.js"></script>
 </body>
 </html>

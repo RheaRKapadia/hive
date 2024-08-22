@@ -194,22 +194,152 @@ input {
     }
 }
 
-/* Dashboard */
+/* Dashboard Styles */
 .dashboard-page {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    background-image: url('/images/background.jpg');
 }
 
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(30, 30, 30, 0.8);
+}
+
+.logo h1 {
+    color: #ffa500;
+    margin: 0;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Main Content Styles */
 .dashboard-content {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 2rem;
-    border-radius: 10px;
-    text-align: center;
-    z-index: 1;
-    max-width: 600px;
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
 }
 
-.dashboard-content h1 {
-    color: #FFD700;
-    margin-bottom: 1.5rem;
+section {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    color: #ffa500;
+    margin-top: 0;
+}
+
+/* Welcome Section */
+.quote {
+    background-color: rgba(0, 0, 255, 0.6);
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+/* Workouts Section */
+.workout-calendar {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+}
+
+.day {
+    aspect-ratio: 1;
+    background-color: rgba(0, 0, 255, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.day.completed {
+    background-color: #ffa500;
+}
+
+/* Health Section */
+.health-data {
+    min-height: 200px;
+}
+
+/* Locations Section */
+.location-data {
+    min-height: 100px;
+}
+
+/* Workouts List Section */
+.workouts-list {
+    min-height: 100px;
+}
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 200px;
+    background-color: rgba(30, 30, 30, 0.9);
+    padding: 1rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.side-menu.open {
+    transform: translateX(0);
+}
+
+.side-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.side-menu li {
+    margin-bottom: 1rem;
+}
+
+.side-menu a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Loading state */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #ffa500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-content {
+        grid-template-columns: 1fr;
+    }
+
+    .name-fields {
+        flex-direction: column;
+    }
 }
