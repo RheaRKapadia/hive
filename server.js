@@ -55,21 +55,25 @@ app.post('/signup', (req, res) => {
 
 //dashboard page
 app.get('/user/dashboard', async(req, res) => {
-    // res.render('4_dashboard')
     try {
         const usersSnapshot = await db.collection('Users').get();
         const usersList = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-        console.log('Retrieved users:', usersList); // Check the logged data
-
+        console.log('Retrieved users:', usersList);
         const user = usersList.length > 0 ? usersList[0] : { name: 'Guest' }
-        res.status(200).render('4_dashboard', {user});
-      } catch (error) {
+        res.status(200).render('4_dashboard', {user}, (err, html) => {
+            if (err) {
+                console.error('Error rendering dashboard:', err);
+                res.status(500).send('Error rendering dashboard');
+            } else {
+                res.send(html);
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching user:', error);
         res.status(500).json({ error: 'Failed to fetch user' });
-      }
+    }
 })
 
-//dashboard page
 app.get('/user/settings', (req, res) => {
     res.render('14_settings')
 })
