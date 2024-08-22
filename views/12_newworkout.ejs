@@ -9,11 +9,18 @@
 <body>
     <h1>New Workout</h1>
     <div style="overflow:scroll;">
-        <ul>
-            <% exerciseNames.forEach(function(name) { %>
-              <li><%= name %></li>
+        <Table>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Category</th>
+            <% exercises.forEach(function(exercise) { %>
+              <tr>
+                <td><%= exercise.name %></td>
+                <td><%= exercise.description %></td>
+                <td><%= exercise.category.name %></td>
+              </tr>
             <% }) %>
-          </ul>
+          </Table>
     </div>
     <div class="pagination">
       <% if (currentPage > 1) { %>

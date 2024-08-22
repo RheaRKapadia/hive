@@ -13,7 +13,7 @@ router.get('/workout', (req, res) => {
 
 router.get('/new', async (req, res) => {
     //not all of these are in english so will have to clean it further & change capitalization of some of them
-    const apiUrl = 'https://wger.de/api/v2/exercise';
+    const apiUrl = 'https://wger.de/api/v2/exerciseinfo';
     // /?language=2&limit=50
     const limit = 50
     const page = parseInt(req.query.page)
@@ -23,19 +23,21 @@ router.get('/new', async (req, res) => {
     try {
         const response = await axios.get(apiUrl, {
             params: {
-                language: 2,
+                // language: 2,
                 limit: limit,
                 offset: offset
             }
         })
-        const exercises = response.data.results
-        const exerciseNames = exercises.map(exercise => exercise.name)
+        const exercises = response.data.results.filter(exercise => exercise.language.id === 2);
+        // const exercises = response.data.results
+        // const exerciseNames = exercises.map(exercise => exercise.name)
+        // console.log(exercises)
 
         const totalItems = response.data.count;
         const totalPages = Math.ceil(totalItems / limit);
 
         res.status(200).render('12_newworkout', {
-            exerciseNames,
+            exercises,
             currentPage: page,
             totalPages: totalPages
         });
