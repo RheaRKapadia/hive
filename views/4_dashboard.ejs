@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HIVE Dashboard</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="dashboard-page">
     <header>
@@ -22,16 +22,15 @@
     <main class="dashboard-content">
         <section class="welcome-section">
             <h2>Welcome back, <%= user.firstName %>!</h2>
-            <div class="quote">
-                <p>"When you have a clear vision of your goal, it's easier to take the first step toward it."</p>
-                <span class="author">LL Cool J</span>
+            <div id="quote-container" class="quote">
+                <p id="quote-text">Loading quote...</p>
+                <span id="quote-author" class="author"></span>
             </div>
         </section>
 
         <section class="workouts-section">
             <h2>Workouts</h2>
             <div id="workout-calendar" class="workout-calendar">
-                <!-- Workout calendar will be loaded dynamically -->
                 <div class="loading">Loading workout data...</div>
             </div>
         </section>
@@ -39,7 +38,6 @@
         <section class="health-section">
             <h2>Health</h2>
             <div id="health-data" class="health-data">
-                <!-- Health data will be loaded dynamically -->
                 <div class="loading">Loading health data...</div>
             </div>
         </section>
@@ -47,7 +45,6 @@
         <section class="locations-section">
             <h2>Locations</h2>
             <div id="location-data" class="location-data">
-                <!-- Location data will be loaded dynamically -->
                 <div class="loading">Loading location data...</div>
             </div>
         </section>
@@ -55,7 +52,6 @@
         <section class="workouts-list-section">
             <h2>Workouts</h2>
             <div id="workouts-list" class="workouts-list">
-                <!-- Workouts list will be loaded dynamically -->
                 <div class="loading">Loading workouts...</div>
             </div>
         </section>
@@ -71,5 +67,41 @@
     </nav>
 
     <script src="./js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quoteText = document.getElementById('quote-text');
+            const quoteAuthor = document.getElementById('quote-author');
+
+            async function fetchAndDisplayQuote() {
+                const today = new Date().toDateString();
+                const cachedQuote = localStorage.getItem('dailyQuote');
+                const cachedDate = localStorage.getItem('dailyQuoteDate');
+
+                if (cachedQuote && cachedDate === today) {
+                    const { content, author } = JSON.parse(cachedQuote);
+                    quoteText.textContent = `"${content}"`;
+                    quoteAuthor.textContent = author;
+                } else {
+                    try {
+                        const response = await fetch('https://api.quotable.io/random?tags=inspirational');
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch quote');
+                        }
+                        const data = await response.json();
+                        quoteText.textContent = `"${data.content}"`;
+                        quoteAuthor.textContent = data.author;
+                        localStorage.setItem('dailyQuote', JSON.stringify({ content: data.content, author: data.author }));
+                        localStorage.setItem('dailyQuoteDate', today);
+                    } catch (error) {
+                        console.error('Error fetching quote:', error);
+                        quoteText.textContent = 'Failed to load quote. Please try again later.';
+                        quoteAuthor.textContent = '';
+                    }
+                }
+            }
+
+            fetchAndDisplayQuote();
+        });
+    </script>
 </body>
 </html>
