@@ -264,13 +264,15 @@ input {
 
 /* Workouts Section */
 .dashboard-page .workout-calendar {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
+    justify-content: center;
 }
 
 .dashboard-page .day {
-    aspect-ratio: 1;
+    width: 50px;
+    height: 50px;
     background-color: rgba(0, 0, 255, 0.6);
     border-radius: 50%;
     display: flex;
@@ -347,4 +349,179 @@ input {
     .dashboard-page .name-fields {
         flex-direction: column;
     }
+}
+
+
+/* User Profile Page */
+/*  */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.settings {
+    display: flex;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+.sidebar {
+    width: 250px;
+    background-color: #0a4275;
+    padding: 30px;
+}
+.sidebar h2 {
+    margin-top: 0;
+}
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar li {
+    margin-bottom: 10px;
+}
+.sidebar a {
+    color: white;
+    text-decoration: none;
+}
+.sidebar .active {
+    font-weight: bold;
+}
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    background-color: #0a4275;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-pic-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+.change-picture {
+    background: none;
+    border: none;
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 100%;
+    max-width: 600px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+label {
+    margin-bottom: 5px;
+}
+input[type="text"],
+input[type="email"] {
+    padding: 12px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffffff;
+    font-size: 16px;
+}
+.apply-changes {
+    grid-column: 1 / -1;
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-self: start;
+    margin-top: 30px;
+    font-size: 16px;
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.popup-content {
+    background-color: #0a4275;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.popup h3 {
+    margin-top: 0;
+}
+.popup input[type="file"] {
+    margin: 20px 0;
+}
+.popup button {
+    margin: 0 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.popup .upload {
+    background-color: #4caf50;
+    color: white;
+}
+.popup .cancel {
+    background-color: #f44336;
+    color: white;
+}
+
+/* habit tracker aka workout calendar */
+.tracker-container {
+    margin-top: 10px;
+    padding: 10px;
+    overflow: hidden;
+    margin-right: 0px;
+    margin-left: -10px;
+
+}
+
+.tracker-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.day {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #002E66;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+}
+
+.day.completed {
+    background-color: #FFA500; /* Orange color for completed circles */
+    color: #fff; /* White text color for completed circles */
 }
