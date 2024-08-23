@@ -78,6 +78,29 @@ app.get('/user/settings', (req, res) => {
     res.render('14_settings')
 })
 
+// User Profile page
+app.get('/userprofile', async (req, res) => {
+    try {
+        const usersSnapshot = await db.collection('Users').get();
+        const usersList = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        console.log('Retrieved users:', usersList);
+        const user = usersList.length > 0 ? usersList[0] : { name: 'Guest' };
+        res.status(200).render('15_userprofile', { user }, (err, html) => {
+            if (err) {
+                console.error('Error rendering user profile:', err);
+                res.status(500).send('Error rendering user profile');
+            } else {
+                res.send(html);
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching user:', error);
+        res.status(500).json({ error: 'Failed to fetch user' });
+    }
+});
+
+
+
 //get the routes defined in the corresponding file
 const userRouter = require('./routes/users')
 const painPointsRouter = require('./routes/painpoints')
