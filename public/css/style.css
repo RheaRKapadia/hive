@@ -91,7 +91,7 @@ h1 {
 }
 
 .hivemascot {
-    max-width: 100px; */
+    max-width: 100px; /* Ensure this comment is properly opened */
     height: auto;
     margin-bottom: -20px;
 }
@@ -213,3 +213,469 @@ input {
     color: #FFD700;
     margin-bottom: 1.5rem;
 }
+
+
+/* Locations -------------------------------------------------------------------*/ 
+.header-container {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0 20px; 
+}
+
+.hive-heading {
+    height: 50px;
+}
+
+.image-button {
+    background: url('/images/menu.png') no-repeat center center;
+    background-size: contain;
+    width: 40px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.image-button:focus {
+    outline: none;
+}
+
+.image-button:hover {
+    opacity: 0.8; 
+}
+
+.outermost-box {
+    width: 95vw;  
+    height: 90vh; 
+    margin: 0;   
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+.logo-and-menu {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 20px;
+}
+
+.main-box {
+    background-color: rgba(26, 38, 52, 0.75);
+    width: 95vw; 
+    height: 80vh;
+    border-radius: 40px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center elements horizontally */
+    justify-content: center; /* Center elements vertically */
+    gap: 5px;
+    box-sizing: border-box;
+}
+
+.Set-New-Location {
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    gap: 50px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    margin-top:1%;
+}
+.Set-New-Location2 {
+    display: flex;
+    width: 30%;
+    box-sizing: border-box;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.Set-New-Location-Sub-Step {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    height: 40%;
+    box-sizing: border-box;
+}
+
+.Set-New-Location-Sub-Step h3 {
+    margin-bottom: 3px;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+}
+
+.Set-New-Location-Sub-Content {
+    background-color: rgba(11, 64, 156, 0.7);
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom:20px;
+    padding-right:30px;
+    padding-left:30px;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.location-heading {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%;
+    margin-bottom:25px;
+}
+
+.location-heading h1 {
+    font-size: 40px; /* Example: A smaller font size */
+}
+
+.add-button {
+    background: url('/images/add_circle_orange.png') no-repeat center center;
+    background-size: contain;
+    width: 40px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.add-button:focus {
+    outline: none;
+}
+
+.add-button:hover {
+    opacity: 0.8; 
+}
+
+.edit-button{
+    background: url('/images/edit.png') no-repeat center center;
+    background-size: contain;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-button:focus {
+    outline: none;
+}
+
+.edit-button:hover {
+    opacity: 0.8; 
+}
+
+.location-content {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+/* Default: 3 sections per row */
+.ind-location {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 30%;
+    box-sizing: border-box;
+}
+
+.ind-location-header {
+    display: flex;
+    flex-direction: row; /* Horizontal layout by default */
+    padding-right: 5px;
+    padding-bottom: 0;
+    justify-content: space-between; /* Space between heading and link */
+    align-items: center; /* Center vertically */
+    width: 100%;
+    box-sizing: border-box; /* Include padding in the width */
+}
+
+/* Font size for the header */
+.ind-location-header h2 {
+    font-size: 25px;
+}
+
+/* When the screen width is 600px or less, stack elements vertically and center them */
+@media (max-width: 600px) {
+    .ind-location-header {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center; /* Center horizontally */
+        padding-right: 0; /* Remove right padding */
+        padding-top: 10px; /* Optional: Add top padding for spacing */
+        padding-bottom: 10px; /* Optional: Add bottom padding for spacing */
+        gap: 10px; /* Space between heading and link */
+    }
+
+    .ind-location-header header {
+        font-size: 20px; /* Adjust font size if needed */
+    }
+
+    .ind-location-header a {
+        margin-top: 0; /* Remove margin if spacing is managed by gap */
+    }
+}
+
+.ind-location-content {
+    background-color: rgba(11, 64, 156, 0.7);
+    border-radius: 18px;
+    padding: 10px;
+    flex-grow: 1; /* Ensure it grows to fill available space */
+}
+
+/* When the screen width is 900px or less, switch to 2 sections per row */
+@media (max-width: 900px) {
+    .ind-location {
+        width: 45%; 
+    }
+}
+
+/* When the screen width is 600px or less, switch to 1 section per row */
+@media (max-width: 600px) {
+    .ind-location {
+        width: 100%;
+    }
+}
+
+
+  /* New Location FINAL CSS ---------------------------------------*/ 
+.set-new-location-main-box{
+    background-color: rgba(26, 38, 52, 0.75);
+    width: 95vw; 
+    height: 80vh;
+    border-radius: 40px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Center elements horizontally */
+    justify-content: center; /* Center elements vertically */
+    gap: 5px;
+    box-sizing: border-box;
+}
+
+.set-new-location-main-box h1{
+    margin-left: 0; /* Remove left margin to align with the left */
+}
+
+.Set-New-Location1{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    width: 60%;
+    height: 100%;
+  }
+  
+.Set-New-Location1 h3 {
+    text-align: left; /* This will align the text to the left */
+    margin-bottom:5px;
+  }
+  
+.equipment-container {
+    background-color: rgba(11, 64, 156, 0.7);
+    border-radius: 18px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+.equipment-container-top-bar {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin-right:20px;
+    margin-left: 20px;
+    margin-top: 20px; 
+    gap:10px;
+  }
+
+.equipment-container-search-bar{
+    width: 55%; 
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 10px;
+    height: 100%; 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    outline:none;
+}
+
+.equipment-container-filter-bar{
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+    width: 40%; 
+    height:100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); 
+}
+
+.equipment-container-search-add{
+    border-radius: 10px;
+    width: 35px;
+    height: 35px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); 
+}
+
+.equipment-container-header {
+    display: flex;
+    font-weight: bold;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-right: 20px; 
+    margin-left: 20px;
+    padding-bottom:5px;
+    border-bottom: 2px solid white;
+}
+
+.equipment-container-column-Equipment{
+    text-align: left; 
+    width: 43%; 
+}
+
+.equipment-container-column-Description{
+    text-align: left; 
+    width: 56%; 
+}
+
+.equipment-container-column-Add{
+    text-align: left; 
+    width: 5%; 
+}
+
+
+.unique-table-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 10px;
+    height: fit-content; /* Adjust row height based on content */
+  }
+  
+  #tableRows {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  
+.unique-equipment-column {
+    background-color: #34495E; /* Darker blue background for the equipment cells */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 43%;
+    height:20px;
+    height: fit-content;
+
+}
+
+.unique-description-column {
+    display: flex;
+    width: 60%;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+.unique-description-item {
+    display: inline-block;
+    border-radius: 10px;
+    padding:5px;
+}
+
+.unique-item-blue {
+    background-color: #5DADE2; /* Light blue */
+    width: auto;
+    flex-shrink: 0;
+}
+
+.unique-item-pink {
+    background-color: #F1948A; /* Pink */
+    width: auto;
+    flex-shrink: 0;
+}
+
+.unique-item-green {
+    background-color: #58D68D; /* Light green */
+
+}
+
+.unique-add-column {
+    flex: 0.5;
+    text-align: center;
+    width: 7%;
+}
+
+.unique-add-button {
+    background-color: #F1C40F; /* Yellow background */
+    border: none;
+    color: #2C3E50; /* Dark text color */
+    font-size: 24px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.unique-add-button:hover {
+    background-color: #F39C12;
+}
+
+.unique-add-button {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Active state: Green background when clicked */
+  .unique-add-button.active {
+    background-color: green;
+  }

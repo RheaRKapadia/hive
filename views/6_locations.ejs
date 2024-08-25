@@ -4,10 +4,73 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Locations</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Use relative path -->
 </head>
 <body>
-    <h1>Locations</h1>
-    <a href="/user/locations/location" class="btn">jane's gym</a>
+    <main class="outermost-box">
+        <!-- Header: Image & Menu Button -->
+        <header class="logo-and-menu">
+            <img src="/images/Logo.png" alt="Hive Heading" class="hive-heading">
+            <button class="image-button" aria-label="Menu"></button>
+        </header>
+        
+        <main class="main-box">
+            <div class="location-heading">
+                <h1>Locations</h1>
+                <a href="/user/locations/new" class="add-button"></a>
+            </div>
+
+            <!-- Locations: Outermost Rectangular Box  -->
+            <div class="location-content">
+                <div class="ind-location">
+                    <header class="ind-location-header">
+                        <h2>Jane's Gym</h2>
+                        <a href="/user/locations/location" alt="Edit" class="edit-button"></a>
+                    </header>
+
+                    <section class="ind-location-content">
+                        <div  class="ind-location-content-location">
+                            <p class="equipment-text">equipment 1</p>
+                            <p class="equipment-text">equipment 2</p>
+                            <p class="equipment-text">equipment 3</p>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="ind-location">
+                    <section class="ind-location-header">
+                        <h2>Jane's Gym</h2>
+                        <a href="/user/locations/location" alt="Edit" class="edit-button"></a>
+                    </section>
+
+                    <section class="ind-location-content">
+                        <div  class="ind-location-content-location">
+                            <p class="equipment-text">equipment 1</p>
+                            <p class="equipment-text">equipment 2</p>
+                            <p class="equipment-text">equipment 3</p>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="ind-location">
+                    <header class="ind-location-header">
+                        <h2>Jane's Gym</h2>
+                        <a href="/user/locations/location" alt="Edit" class="edit-button"></a>
+                    </header>
+
+                    <section class="ind-location-content">
+                        <div  class="ind-location-content-location">
+                            <p class="equipment-text">equipment 1</p>
+                            <p class="equipment-text">equipment 2</p>
+                            <p class="equipment-text">equipment 3</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            
+
+        </main>
+    </main>
 </body>
 </html>
