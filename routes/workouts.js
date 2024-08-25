@@ -12,36 +12,36 @@ router.get('/workout', (req, res) => {
 })
 
 router.get('/new', async (req, res) => {
-    //not all of these are in english so will have to clean it further & change capitalization of some of them
-    const apiUrl = 'https://wger.de/api/v2/exerciseinfo';
-    // /?language=2&limit=50
-    const limit = 50
-    const page = parseInt(req.query.page)
-    console.log('Requested Page:', page);
-    const offset = (page - 1) * 50
-
-    try {
-        const response = await axios.get(apiUrl, {
-            params: {
-                // language: 2,
-                limit: limit,
-                offset: offset
-            }
-        })
-        const exercises = response.data.results.filter(exercise => exercise.language.id === 2);
-        // const exercises = response.data.results
-        // const exerciseNames = exercises.map(exercise => exercise.name)
-        // console.log(exercises)
-
-        const totalItems = response.data.count;
-        const totalPages = Math.ceil(totalItems / limit);
-
-        res.status(200).render('12_newworkout', {
-            exercises,
-            currentPage: page,
-            totalPages: totalPages
-        });
-    } catch (error) {
+        
+        try {
+            const limit = 50
+            const page = parseInt(req.query.page) || 1
+            console.log('Requested Page:', req.query.page);
+            const offset = (page - 1) * 50
+            console.log('offset', offset)
+            const options = {
+                method: 'GET',
+                url: 'https://exercisedb.p.rapidapi.com/exercises',
+                params: {
+                    limit:  limit,
+                    offset: offset
+                },
+                headers: {
+                    'x-rapidapi-key': '6158129b3amshfe64fae492f2220p15a3ccjsn9ccef1f59794',
+                    'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
+                }
+                };
+            const response = await axios.request(options);
+            exercises = response.data
+            console.log(exercises[1]);
+            const totalItems = response.data.count;
+            const totalPages = Math.ceil(totalItems / limit);
+            res.status(200).render('12_newworkout', {
+                exercises,
+                currentPage: page,
+                totalPages: totalPages
+            })
+        } catch (error) {
         console.error('Error fetching exercises data:', error)
         res.status(500).json({ error: 'Failed to fetch exercises data' });
     }

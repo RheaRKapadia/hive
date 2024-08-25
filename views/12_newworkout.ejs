@@ -8,16 +8,20 @@
 </head>
 <body>
     <h1>New Workout</h1>
-    <div style="overflow:scroll;">
+    <div style="">
         <Table>
           <th>Name</th>
           <th>Description</th>
           <th>Category</th>
+          <th>Main Target</th>
+          <th>Equipment</th>
             <% exercises.forEach(function(exercise) { %>
-              <tr>
+              <tr key="<%exercise.id %>">
                 <td><%= exercise.name %></td>
-                <td><%= exercise.description %></td>
-                <td><%= exercise.category.name %></td>
+                <td><%= exercise.instructions %></td>
+                <td><%= exercise.target %></td>
+                <td><%= exercise.secondaryMuscles %></td>
+                <td><%= exercise.equipment %></td>
               </tr>
             <% }) %>
           </Table>
