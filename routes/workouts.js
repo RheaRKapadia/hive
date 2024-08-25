@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const axios = require('axios');
+const {getAllExercises} = require('../exercisedb')
+
 
 
 router.get('/', (req, res) => {
@@ -14,32 +15,37 @@ router.get('/workout', (req, res) => {
 router.get('/new', async (req, res) => {
         
         try {
-            const limit = 50
-            const page = parseInt(req.query.page) || 1
-            console.log('Requested Page:', req.query.page);
-            const offset = (page - 1) * 50
-            console.log('offset', offset)
-            const options = {
-                method: 'GET',
-                url: 'https://exercisedb.p.rapidapi.com/exercises',
-                params: {
-                    limit:  limit,
-                    offset: offset
-                },
-                headers: {
-                    'x-rapidapi-key': '6158129b3amshfe64fae492f2220p15a3ccjsn9ccef1f59794',
-                    'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
-                }
-                };
-            const response = await axios.request(options);
-            exercises = response.data
-            console.log(exercises[1]);
-            const totalItems = response.data.count;
-            const totalPages = Math.ceil(totalItems / limit);
+            // const limit = 50
+            // const page = parseInt(req.query.page) || 1
+            // console.log('Requested Page:', req.query.page);
+            // const offset = (page - 1) * 50
+            // console.log('offset', offset)
+            // const options = {
+            //     method: 'GET',
+            //     url: 'https://exercisedb.p.rapidapi.com/exercises',
+            //     params: {
+            //         limit:  limit,
+            //         offset: offset
+            //     },
+            //     headers: {
+            //         'x-rapidapi-key': '6158129b3amshfe64fae492f2220p15a3ccjsn9ccef1f59794',
+            //         'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
+            //     }
+            //     };
+            // const response = await axios.request(options);
+            // exercises = response.data
+
+            // console.log(getAllExercises[1]);
+            exercises = await getAllExercises(req, res)
+            console.log(exercises.pagination)
+            
+            // const totalItems = response.data.count;
+            // const totalPages = Math.ceil(totalItems / limit);
             res.status(200).render('12_newworkout', {
-                exercises,
-                currentPage: page,
-                totalPages: totalPages
+                exercises
+
+                // currentPage: page,
+                // totalPages: totalPages
             })
         } catch (error) {
         console.error('Error fetching exercises data:', error)

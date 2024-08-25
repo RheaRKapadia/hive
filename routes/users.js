@@ -33,17 +33,27 @@ router.get('/dashboard', async(req, res) => {
         res.status(500).json({ error: 'Failed to fetch user' });
     }
 })
-// router
-//     .route('/:id')
-//     .get((req, res) => {
-//         res.send(`Get user ${req.user.name}`)
-//     })
-//     .put( (req, res) => {
-//         res.send(`Update user with ID ${req.params.id}`)
-//     })
-//     .delete((req, res) => {
-//         res.send(`Delete user with ID ${req.params.id}`)
-//     })
+
+// User Profile page
+router.get('/userprofile', async (req, res) => {
+    try {
+        const usersSnapshot = await firestore.getUserData()
+        const usersList = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        console.log('Retrieved users:', usersList);
+        const user = usersList.length > 0 ? usersList[0] : { name: 'Guest' };
+        res.status(200).render('15_userprofile', { user }, (err, html) => {
+            if (err) {
+                console.error('Error rendering user profile:', err);
+                res.status(500).send('Error rendering user profile');
+            } else {
+                res.send(html);
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching user:', error);
+        res.status(500).json({ error: 'Failed to fetch user' });
+    }
+});
 
 const users = [{ name: 'Jane'}, { name: 'John'}]
 router.param( 'id', (req, res, next, id) =>{

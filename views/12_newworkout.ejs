@@ -15,7 +15,7 @@
           <th>Category</th>
           <th>Main Target</th>
           <th>Equipment</th>
-            <% exercises.forEach(function(exercise) { %>
+            <% exercises.data.forEach(function(exercise) { %>
               <tr key="<%exercise.id %>">
                 <td><%= exercise.name %></td>
                 <td><%= exercise.instructions %></td>
@@ -27,16 +27,16 @@
           </Table>
     </div>
     <div class="pagination">
-      <% if (currentPage > 1) { %>
-          <a href="/user/workouts/new?page=<%= currentPage - 1 %>">&laquo; Previous</a>
+      <% if (exercises.pagination.currentPage > 1) { %>
+          <a href="/user/workouts/new?page=<%= exercises.pagination.currentPage - 1 %>">&laquo; Previous</a>
       <% } %>
 
-      <% for (let i = 1; i <= totalPages; i++) { %>
-          <a href="/user/workouts/new?page=<%= i %>" class="<%= currentPage === i ? 'active' : '' %>"><%= i %></a>
+      <% for (let i = 1; i <= exercises.pagination.totalPages; i++) { %>
+          <a href="/user/workouts/new?page=<%= i %>" class="<%= exercises.pagination.currentPage === i ? 'active' : '' %>"><%= i %></a>
       <% } %>
 
-      <% if (currentPage < totalPages) { %>
-          <a href="/user/workouts/new?page=<%= currentPage + 1 %>">Next &raquo;</a>
+      <% if (exercises.pagination.currentPage < exercises.pagination.totalPages) { %>
+          <a href="/user/workouts/new?page=<%= exercises.pagination.currentPage + 1 %>">Next &raquo;</a>
       <% } %>
     </div>
 
