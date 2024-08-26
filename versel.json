@@ -11,5 +11,14 @@
         "src": "/(.*)",
         "dest": "index.js"
       }
-    ]
+    ],
+    "github": {
+      "enabled": true,
+      "silent": true
+    },
+    "git": {
+      "deploymentEnabled": {
+        "verceltry": true
+      }
+    }
   }
