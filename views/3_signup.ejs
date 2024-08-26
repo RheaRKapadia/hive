@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css">
+    <script src="https://js.clerk.dev/v1/clerk.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            const clerk = window.Clerk;
+            clerk.load();
+        });
+    </script>
 </head>
 <body>
     <div class="corner-image top-left-image">
@@ -38,6 +45,7 @@
             </label>
             <button type="submit" class="btn">Sign Up</button>
         </form>
+        <div id="clerk-sign-up"></div>
 
         <p class="login-link">
             Already have an account? <a class="btn" href="/login">Log In</a>

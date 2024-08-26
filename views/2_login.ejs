@@ -1,43 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Hive</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+    console.log('Clerk key from EJS:', '<%= NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY %>');
+  </script>
+  <script>
+    // Use the key passed from the server
+    const clerkKey = '<%= NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY %>' || '';
+    console.log('Clerk key from server:', clerkKey);
+
+    // Set the key on the window object
+    window.clerkPublishableKey = clerkKey;
+  </script>
+  <script
+    async
+    crossorigin="anonymous"
+    src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"
+    onload="initializeClerk()"
+    onerror="handleClerkError()"
+    type="text/javascript">
+  </script>
+  <script>
+    function initializeClerk() {
+        console.log('Clerk Key in initializeClerk:', window.clerkPublishableKey);
+        if (!window.clerkPublishableKey) {
+          console.error('Clerk publishable key is not set');
+          document.getElementById('error-message').textContent = 'Configuration error. Please contact support.';
+          return;
+        }
+
+        window.Clerk.load({
+          publishableKey: window.clerkPublishableKey
+        }).then(clerk => {
+          console.log('Clerk loaded successfully');
+          const signInDiv = document.getElementById('sign-in');
+          clerk.mountSignIn(signInDiv);
+        }).catch(error => {
+          console.error('Error initializing Clerk:', error);
+          document.getElementById('error-message').textContent = 'Error initializing login. Please try again later.';
+        });
+      }
+  </script>
 </head>
 <body>
-    <div class="corner-image top-left-image">
-        <img src="/images/track_nobackground.png" alt="Top Left Image">
-      </div>
-      <div class="corner-image top-right-image">
-        <img src="/images/woman_side_profile_nobackground.png" alt="Top Right Image">
-      </div>
-      <div class="login-container">
-        <h1>Welcome to Hive <img class="hivemascot" src="/images/HiveMascot.png" alt="Hive Mascot"></h1>
-
-        <form method="POST" action="/login">
-            <label>
-                Enter your email
-                <input type="email" name="email" required />
-            </label>
-            <label>
-                Enter your password
-                <input type="password" name="password" required />
-            </label>
-            <button type="submit" class="btn">Log In</button>
-        </form>
-
-        <p class="signup-link">
-            Don't have an account? <a class="btn" href="/signup">Sign Up</a>
-        </p>
-    </div>
-    <div class="corner-image bottom-left-image">
-        <img src="/images/street_man_nobackground.png" alt="Bottom Left Image">
-    </div>
-    <div class="corner-image bottom-right-image">
-        <img src="/images/stretching_prosthetic_nobackground.png" alt="Bottom Right Image">
-    </div>
+  <div class="corner-image top-left-image">
+    <img src="/images/track_nobackground.png" alt="Top Left Image">
+  </div>
+  <div class="corner-image top-right-image">
+    <img src="/images/woman_side_profile_nobackground.png" alt="Top Right Image">
+  </div>
+  <div class="login-container">
+    <h1>Welcome to Hive <img class="hivemascot" src="/images/HiveMascot.png" alt="Hive Mascot"></h1>
+    <div id="sign-in"></div>
+    <div id="error-message" style="color: red;"></div>
+    <p class="signup-link">
+      Don't have an account? <a class="btn" href="/signup">Sign Up</a>
+    </p>
+  </div>
+  <div class="corner-image bottom-left-image">
+    <img src="/images/street_man_nobackground.png" alt="Bottom Left Image">
+  </div>
+  <div class="corner-image bottom-right-image">
+    <img src="/images/stretching_prosthetic_nobackground.png" alt="Bottom Right Image">
+  </div>
 </body>
 </html>
