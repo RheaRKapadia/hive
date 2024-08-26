@@ -5,14 +5,25 @@ const serviceAccount = require('./serviceAccountKey.json')
 const path = require('path');
 
 
-// Initialize Firebase Admin SDK
+// Initialize Firebase Admin SDK using environment variables
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "hive-3f18f.firebaseapp.com"
+    credential: admin.credential.cert({
+      "type": process.env.FIREBASE_TYPE,
+      "project_id": process.env.FIREBASE_PROJECT_ID,
+      "private_key_id": process.env.FIREBASE_PRIVATE_KEY_ID,
+      "private_key": process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      "client_email": process.env.FIREBASE_CLIENT_EMAIL,
+      "client_id": process.env.FIREBASE_CLIENT_ID,
+      "auth_uri": process.env.FIREBASE_AUTH_URI,
+      "token_uri": process.env.FIREBASE_TOKEN_URI,
+      "auth_provider_x509_cert_url": process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
+      "client_x509_cert_url": process.env.FIREBASE_CLIENT_X509_CERT_URL
+    }),
+    databaseURL: process.env.FIREBASE_DATABASE_URL
   });
 
-// Initialize Firestore
-const db = admin.firestore();
+  // Initialize Firestore
+  const db = admin.firestore();
 
 //middleware
 app.use(logger)
@@ -121,17 +132,23 @@ function logger(req, res, next){
     next()
 }
 
-app.listen(3000)
+// app.listen(3000)
 
+// 404 handler
 app.use((req, res, next) => {
     res.status(404).render('404', { title: '404: Page Not Found' });
-  });
+});
 
+// Error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
+function logger(req, res, next){
+    console.log(req.originalUrl);
+    next();
+}
 
+// Export the Express app
 module.exports = app;
-
-if (process.env.NODE_ENV !== 'production') {
-    const port = process.env.PORT || 3000;
-    app.listen(port, () => console.log(`Server running on port ${port}`));
-  }
