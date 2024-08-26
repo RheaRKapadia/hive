@@ -69,7 +69,7 @@ router.post('/new', async(req,res) =>{
         userId: req.params.userId
     };
 
-    const res = await db.collection('Locations').set(newLocationData);
+    const reponse = await db.collection('Locations').set(newLocationData);
     res.redirect(`/locations`);
     //frontend: in the form make sure you are using the same ids as above: date, equipment, and name
     //also set method to post in form
