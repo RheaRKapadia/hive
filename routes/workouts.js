@@ -13,9 +13,9 @@ router.get('/workout', (req, res) => {
 })
 
 router.get('/new', async (req, res) => {
-        
+
         try {
-   
+
             exercises = await getAllExercises(req, res)
             console.log(exercises.pagination)
             res.status(200).render('12_newworkout', {

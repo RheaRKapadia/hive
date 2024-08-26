@@ -1,6 +1,5 @@
 const axios = require('axios');
-require('dotenv').config({ path: '/Users/rheakapadia/Desktop/hive/.env.local' });
-
+require('dotenv').config({ path: '.env.local' });
 
 const getAllExercises = async (req, res) => {
     const { page = 1, limit = 50 } = req.query;
@@ -16,16 +15,16 @@ const getAllExercises = async (req, res) => {
                 'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
             },
             params: {
-                limit: limit.toString(),  
-                offset: offset.toString() 
+                limit: limit.toString(),
+                offset: offset.toString()
               }
             };
         const response = await axios.request(options);
         //hard coded total, need to see how to access it
         const total = 1324
         const totalPages = Math.ceil(total / limit);
-       
-        
+
+
         return {
             data: response.data,
             pagination: {
