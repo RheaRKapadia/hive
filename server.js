@@ -17,17 +17,12 @@ app.set('views', path.join(__dirname, 'views'))
 //use a view engine to view the ejs files
 app.set('view engine', 'ejs')
 
-
-
-
 //get the routes defined in the corresponding file
 const otherRouter = require('./routes/other')
 const userRouter = require('./routes/users')
 const painPointsRouter = require('./routes/painpoints')
 const locationsRouter = require('./routes/locations')
 const workoutsRouter = require('./routes/workouts')
-
-
 
 //define what the starting url would be for the given route
 app.use('/', otherRouter)

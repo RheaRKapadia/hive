@@ -30,18 +30,20 @@ router.get('/location/edit', async(req, res) => {
     res.render('8_editlocation', location, equipmentAll)
     //frontend: use data in location to autofill existing location info on edit page
     //get all available equipment from equipmentAll. get equipment the user has from location
-    //for some reason getAllEquipment is making the page load a lot
+    //for some reason getAllEquipment is making the page load a lot, can get rid of equipmentAll on line 30 temporarily for it to load.
 })
 
-//haven't tested this route because theres no form on the frontend, may not work
+//haven't tested this route because theres no form on the frontend, may not work. Send Rhea a message.
+//frontend: make sure the method for the form is put
 //route for submitting form on edit page
-router.post('/:locationId/edit', async(req, res) =>{
+router.put('/:locationId/edit', async(req, res) =>{
     const locationId = req.params.locationId;
     const locationRef = db.collection('Locations').doc(locationId);
     
     const updatedData = {
         locationName: req.body.name,
         equipmentAvailable: req.body.equipment,
+        updatedAt: Timestamp.fromDate(new Date(req.body.date)),
     };
 
     await locationRef.update(updatedData);
@@ -53,12 +55,26 @@ router.get('/new', async(req, res) => {
     equipmentAll = await getAllEquipment(req, res)
     console.log('all equipment: ', equipmentAll)
     res.render('9_newlocation', equipmentAll)
+    //equipmentAll is an an array, the equipment doesn't have an id associated with it.
+    //frontend: create forEach loop to reference all items
 })
 
-//route for submitting new location
-router.post('/new', (req,res) =>{
-    res.redirect('/')
+//route for submitting new location (new location button)
+//haven't tested this route because theres no form on the frontend, may not work. Send Rhea a message.
+router.post('/new', async(req,res) =>{
+    const newLocationData = {
+        createdAt:  Timestamp.fromDate(new Date(req.body.date)),
+        equipmentAvailable: req.body.equipment, //should be array
+        locationName: req.body.name,
+        userId: req.params.userId
+    };
+
+    const res = await db.collection('Locations').set(newLocationData);
+    res.redirect(`/locations`);
+    //frontend: in the form make sure you are using the same ids as above: date, equipment, and name
+    //also set method to post in form
 })
+
 
 
 module.exports = router
