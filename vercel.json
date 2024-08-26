@@ -9,16 +9,19 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "server.js"
+      "dest": "/server.js"
     }
-    ],
-    "github": {
-      "enabled": true,
-      "silent": true
-    },
-    "git": {
-      "deploymentEnabled": {
-        "verceltry": true
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "github": {
+    "enabled": true,
+    "silent": true
+  },
+  "git": {
+    "deploymentEnabled": {
+      "verceltry": true
       }
     }
   }
