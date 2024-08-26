@@ -100,7 +100,6 @@ app.get('/userprofile', async (req, res) => {
 });
 
 
-
 //get the routes defined in the corresponding file
 const userRouter = require('./routes/users')
 const painPointsRouter = require('./routes/painpoints')
@@ -114,7 +113,6 @@ app.use('/user', userRouter)
 app.use('/user/painpoints', painPointsRouter)
 app.use('/user/locations', locationsRouter)
 app.use('/user/workouts', workoutsRouter)
-
 
 
 //simple logger for debugging, print the url used in the terminal
