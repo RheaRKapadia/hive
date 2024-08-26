@@ -41,4 +41,26 @@ const getAllExercises = async (req, res) => {
     }
 }
 
-module.exports = {getAllExercises}
+const getAllEquipment = async (req, res) => {
+
+  try {
+      const options = {
+          method: 'GET',
+          url: 'https://exercisedb.p.rapidapi.com/exercises/equipmentList',
+
+          headers: {
+              'x-rapidapi-key': process.env.X_RAPIDAPI_KEY,
+              'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
+          }
+          };
+      const response = await axios.request(options);
+      return {
+          data: response.data,
+        }
+  } catch (error) {
+  console.error('Error fetching equipment data:', error)
+  res.status(500).json({ error: 'Failed to fetch equipment data' });
+  }
+}
+
+module.exports = {getAllExercises, getAllEquipment}
