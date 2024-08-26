@@ -150,5 +150,7 @@ function logger(req, res, next){
     next();
 }
 
-// Export the Express app
-module.exports = app;
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
