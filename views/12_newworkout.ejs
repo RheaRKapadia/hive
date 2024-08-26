@@ -8,31 +8,35 @@
 </head>
 <body>
     <h1>New Workout</h1>
-    <div style="overflow:scroll;">
+    <div style="">
         <Table>
           <th>Name</th>
           <th>Description</th>
           <th>Category</th>
-            <% exercises.forEach(function(exercise) { %>
-              <tr>
+          <th>Main Target</th>
+          <th>Equipment</th>
+            <% exercises.data.forEach(function(exercise) { %>
+              <tr key="<%exercise.id %>">
                 <td><%= exercise.name %></td>
-                <td><%= exercise.description %></td>
-                <td><%= exercise.category.name %></td>
+                <td><%= exercise.instructions %></td>
+                <td><%= exercise.target %></td>
+                <td><%= exercise.secondaryMuscles %></td>
+                <td><%= exercise.equipment %></td>
               </tr>
             <% }) %>
           </Table>
     </div>
     <div class="pagination">
-      <% if (currentPage > 1) { %>
-          <a href="/user/workouts/new?page=<%= currentPage - 1 %>">&laquo; Previous</a>
+      <% if (exercises.pagination.currentPage > 1) { %>
+          <a href="/user/workouts/new?page=<%= exercises.pagination.currentPage - 1 %>">&laquo; Previous</a>
       <% } %>
 
-      <% for (let i = 1; i <= totalPages; i++) { %>
-          <a href="/user/workouts/new?page=<%= i %>" class="<%= currentPage === i ? 'active' : '' %>"><%= i %></a>
+      <% for (let i = 1; i <= exercises.pagination.totalPages; i++) { %>
+          <a href="/user/workouts/new?page=<%= i %>" class="<%= exercises.pagination.currentPage === i ? 'active' : '' %>"><%= i %></a>
       <% } %>
 
-      <% if (currentPage < totalPages) { %>
-          <a href="/user/workouts/new?page=<%= currentPage + 1 %>">Next &raquo;</a>
+      <% if (exercises.pagination.currentPage < exercises.pagination.totalPages) { %>
+          <a href="/user/workouts/new?page=<%= exercises.pagination.currentPage + 1 %>">Next &raquo;</a>
       <% } %>
     </div>
 
