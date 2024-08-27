@@ -103,7 +103,7 @@ h1 {
     text-align: center;
   }
 
-/* Clerk Styles */
+ /* Login and Clerk Styles */
 .login-container {
     background-color: rgba(30, 30, 30, 0.8);
     padding: 2rem;
@@ -120,10 +120,56 @@ h1 {
 #sign-in {
     margin-top: 20px;
     margin-bottom: 20px;
+    min-height: 300px; /* Ensure there's space for the Clerk component */
 }
 
 /* Clerk overrides */
 .cl-component {
+    color: #000000 !important; /* Ensure text is visible */
+}
+
+.cl-component input,
+.cl-component button {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+.cl-component button {
+    background-color: #FFD700 !important;
+    color: #ffffff !important;
+}
+
+.cl-component button:hover {
+    background-color: #FF8C00 !important;
+}
+
+/* Ensure Clerk modal is visible */
+.cl-modal {
+    z-index: 1000;
+}
+
+
+/* Clerk Styles */
+/* .login-container {
+    background-color: rgba(30, 30, 30, 0.8);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    color: #ffffff;
+    z-index: 10;
+    position: relative;
+}
+
+#sign-in {
+    margin-top: 20px;
+    margin-bottom: 20px;
+} */
+
+/* Clerk overrides */
+/* .cl-component {
     --cl-background-color: rgba(30, 30, 30, 0.8) !important;
     --cl-text-color: #ffffff !important;
     --cl-button-background-color: #FFD700 !important;
@@ -132,7 +178,7 @@ h1 {
 
 .cl-component input {
     color: #000000 !important;
-}
+} */
 
 /* Login */
 /* .login-container {
