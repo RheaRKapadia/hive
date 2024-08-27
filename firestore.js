@@ -46,5 +46,30 @@ module.exports = {
         const painpoints = painpointsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
         return painpoints
     },
+    getUserWorkoutsData: async (userId) => {
+      const workoutsSnapshot = await db.collection('Workouts').where('userId', '==', userId).get()
+      const workouts = workoutsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+      return workouts
+    },
+    getUserSingularWorkoutData: async (userId, workoutId) => {
+      try {
+        const workoutSnapshot = await db.collection('Workouts').doc(workoutId).get();
+    
+        if (!workoutSnapshot.exists) {
+          return { error: 'Location not found' };
+        }
+    
+        const workout = { id: workoutSnapshot.id, ...workoutSnapshot.data() };
+    
+        if (workout.userId !== userId) {
+          return { error: 'Unauthorized access' };
+        }
+    
+        return workout;
+      } catch (error) {
+        console.error('Error retrieving location:', error);
+        return { error: 'Failed to retrieve location' };
+      }
+    },
       
 };
