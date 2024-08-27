@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body class="workouts_list">
     <h1>New Workout</h1>
     <div style="">
         <Table>
@@ -18,9 +18,11 @@
             <% exercises.data.forEach(function(exercise) { %>
               <tr key="<%exercise.id %>">
                 <td><%= exercise.name %></td>
-                <td><%= exercise.instructions %></td>
+                <td class="bullet-list"><%= exercise.instructions %></td>
+                <!-- <td><%= exercise.instructions %></td> -->
                 <td><%= exercise.target %></td>
-                <td><%= exercise.secondaryMuscles %></td>
+                <td class="main-target"><%= exercise.secondaryMuscles %></td>
+                <!-- <td><%= exercise.secondaryMuscles %></td> -->
                 <td><%= exercise.equipment %></td>
               </tr>
             <% }) %>
@@ -39,6 +41,43 @@
           <a href="/user/workouts/new?page=<%= exercises.pagination.currentPage + 1 %>">Next &raquo;</a>
       <% } %>
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          document.querySelectorAll('.bullet-list').forEach(function(element) {
+              var text = element.textContent.trim();
+              var items = text.split('.');
+              if (items.length > 1) {
+                  var list = document.createElement('ul');
+                  items.forEach(function(item) {
+                      if (item.trim()) {
+                          var li = document.createElement('li');
+                          // Remove leading comma and trim
+                          li.textContent = item.replace(/^,\s*/, '').trim();
+                          list.appendChild(li);
+                      }
+                  });
+                  element.textContent = '';
+                  element.appendChild(list);
+              }
+          });
 
+          document.querySelectorAll('.main-target').forEach(function(element) {
+              var text = element.textContent.trim();
+              var items = text.split(',');
+              if (items.length > 1) {
+                  var list = document.createElement('ul');
+                  items.forEach(function(item) {
+                      if (item.trim()) {
+                          var li = document.createElement('li');
+                          li.textContent = item.trim();
+                          list.appendChild(li);
+                      }
+                  });
+                  element.textContent = '';
+                  element.appendChild(list);
+              }
+          });
+      });
+    </script>
 </body>
 </html>
