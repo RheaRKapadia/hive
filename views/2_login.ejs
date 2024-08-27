@@ -7,45 +7,16 @@
   <title>Login - Hive</title>
   <link rel="stylesheet" href="/css/style.css">
   <script>
-    console.log('Clerk key from EJS:', '<%= NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY %>');
-  </script>
-  <script>
-    // Use the key passed from the server
-    const clerkKey = '<%= NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY %>' || '';
-    console.log('Clerk key from server:', clerkKey);
-
-    // Set the key on the window object
-    window.clerkPublishableKey = clerkKey;
-  </script>
-  <script
+    const clerkPublishableKey = 'pk_test_aWRlYWwtc2F0eXItODAuY2xlcmsuYWNjb3VudHMuZGV2JA';
+    console.log('Clerk publishable key:', clerkPublishableKey);
+</script>
+<script
     async
     crossorigin="anonymous"
-    src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"
-    onload="initializeClerk()"
-    onerror="handleClerkError()"
-    type="text/javascript">
-  </script>
-  <script>
-    function initializeClerk() {
-        console.log('Clerk Key in initializeClerk:', window.clerkPublishableKey);
-        if (!window.clerkPublishableKey) {
-          console.error('Clerk publishable key is not set');
-          document.getElementById('error-message').textContent = 'Configuration error. Please contact support.';
-          return;
-        }
-
-        window.Clerk.load({
-          publishableKey: window.clerkPublishableKey
-        }).then(clerk => {
-          console.log('Clerk loaded successfully');
-          const signInDiv = document.getElementById('sign-in');
-          clerk.mountSignIn(signInDiv);
-        }).catch(error => {
-          console.error('Error initializing Clerk:', error);
-          document.getElementById('error-message').textContent = 'Error initializing login. Please try again later.';
-        });
-      }
-  </script>
+    src="https://ideal-satyr-80.clerk.accounts.dev/npm/@clerk/clerk-js@4/dist/clerk.browser.js"
+    onload="window.Clerk.load({ publishableKey: clerkPublishableKey })"
+    data-clerk-publishable-key="pk_test_aWRlYWwtc2F0eXItODAuY2xlcmsuYWNjb3VudHMuZGV2JA">
+</script>
 </head>
 <body>
   <div class="corner-image top-left-image">
@@ -68,5 +39,18 @@
   <div class="corner-image bottom-right-image">
     <img src="/images/stretching_prosthetic_nobackground.png" alt="Bottom Right Image">
   </div>
+  <script>
+    window.addEventListener('load', async function() {
+        try {
+            await window.Clerk.load();
+            const signInDiv = document.getElementById('sign-in');
+            window.Clerk.mountSignIn(signInDiv);
+            console.log('Clerk mounted successfully');
+        } catch (error) {
+            console.error('Error initializing Clerk:', error);
+            document.getElementById('error-message').textContent = 'Error initializing login. Please try again later.';
+        }
+    });
+</script>
 </body>
 </html>

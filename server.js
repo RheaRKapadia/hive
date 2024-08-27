@@ -4,7 +4,7 @@ const admin = require('firebase-admin')
 const serviceAccount = require('./serviceAccountKey.json')
 const path = require('path');
 const { ClerkExpressWithAuth } = require('@clerk/clerk-sdk-node');
-require('dotenv').config();
+require('dotenv').config({ path: '.env' });
 
 const port = process.env.PORT || 3000
 const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
