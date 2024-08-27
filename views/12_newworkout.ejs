@@ -4,31 +4,105 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>New Workouts</title>
 </head>
-<body class="workouts_list">
-    <h1>New Workout</h1>
-    <div style="">
-        <Table>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Main Target</th>
-          <th>Equipment</th>
-            <% exercises.data.forEach(function(exercise) { %>
-              <tr key="<%exercise.id %>">
-                <td><%= exercise.name %></td>
-                <td class="bullet-list"><%= exercise.instructions %></td>
-                <!-- <td><%= exercise.instructions %></td> -->
-                <td><%= exercise.target %></td>
-                <td class="main-target"><%= exercise.secondaryMuscles %></td>
-                <!-- <td><%= exercise.secondaryMuscles %></td> -->
-                <td><%= exercise.equipment %></td>
-              </tr>
-            <% }) %>
-          </Table>
+<body class="newworkout">
+  <header>
+      <div class="logo">
+          <h1>HIVE</h1>
+      </div>
+      <nav>
+          <div class="user-menu">
+              <a href="/user/userprofile">
+                  <img src="/images/avatar.png" alt="User Avatar" class="avatar">
+              </a>
+              <span>Menu</span>
+          </div>
+      </nav>
+  </header>
+  <div class="page-content">
+    <div class="fixed-content">
+        <h1>New Routine</h1>
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Search Workouts">
+            <button class="personalized-workout">Personalized Workout</button>
+        </div>
+        <span>Filter</span>
+                <select id="difficultyFilter" class="filter-button">
+                    <option value="">Difficulty Level</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+                <select id="muscleGroupFilter" class="filter-button">
+                  <option value="">Muscle Groups</option>
+                  <option value="chest">Chest</option>
+                  <option value="back">Back</option>
+                  <option value="legs">Legs</option>
+              </select>
+              <select id="equipmentFilter" class="filter-button">
+                  <option value="">Equipment</option>
+                  <option value="barbell">Barbell</option>
+                  <option value="dumbbell">Dumbbell</option>
+                  <option value="bodyweight">Bodyweight</option>
+              </select>
+              <select id="durationFilter" class="filter-button">
+                <option value="">Duration</option>
+              </select>
+              <select id="userRatingFilter" class="filter-button">
+                <option value="">User Rating</option>
+              </select>
+        <div class="categories">
+            <span>Categories</span>
+            <div class="category">Flexibility</div>
+            <div class="category">Cardio</div>
+            <div class="category">Strength</div>
+        </div>
     </div>
-    <div class="pagination">
+    <div class="scrollable-content">
+        <div class="workout-list">
+            <div class="workout-header">
+                <div>Add</div>
+                <div>Exercise</div>
+                <div>Description</div>
+                <div>Equipment</div>
+                <div>Muscles</div>
+            </div>
+            <% if (exercises && exercises.data && exercises.data.length > 0) { %>
+                <% exercises.data.forEach(function(exercise) { %>
+                    <div class="workout-row">
+                        <button class="add-exercise">+</button>
+                        <div class="exercise-name"><%= exercise.name %></div>
+                        <div><%= exercise.instructions [0] %>.</div>
+                        <div><span class="equipment-tag"><%= exercise.equipment %></span></div>
+                        <div><%= exercise.target %>, <%= exercise.secondaryMuscles.join(', ') %></div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <div class="no-exercises">No exercises found.</div>
+            <% } %>
+        </div>
+    </div>
+    </div>
+  <!-- <div class="content">
+      <h1>New Workout</h1>
+      <div class="workouts-grid">
+          <% exercises.data.forEach(function(exercise) { %>
+              <div class="workout-card">
+                  <div class="workout-title"><%= exercise.name %></div>
+                  <div class="workout-meta">Category: <%= exercise.target %> | Equipment: <%= exercise.equipment %></div>
+                  <ul class="exercise-list bullet-list">
+                      <%= exercise.instructions %>
+                  </ul>
+                  <div class="main-target">
+                      <strong>Main Targets:</strong> <%= exercise.secondaryMuscles %>
+                  </div>
+              </div>
+          <% }) %>
+      </div>
+  </div> -->
+  <!-- <div class="pagination">
       <% if (exercises.pagination.currentPage > 1) { %>
           <a href="/user/workouts/new?page=<%= exercises.pagination.currentPage - 1 %>">&laquo; Previous</a>
       <% } %>
@@ -40,8 +114,9 @@
       <% if (exercises.pagination.currentPage < exercises.pagination.totalPages) { %>
           <a href="/user/workouts/new?page=<%= exercises.pagination.currentPage + 1 %>">Next &raquo;</a>
       <% } %>
-    </div>
-    <script>
+  </div> -->
+  <a href="#" class="add-button">+</a>
+  <script>
       document.addEventListener('DOMContentLoaded', function() {
           document.querySelectorAll('.bullet-list').forEach(function(element) {
               var text = element.textContent.trim();
@@ -51,7 +126,6 @@
                   items.forEach(function(item) {
                       if (item.trim()) {
                           var li = document.createElement('li');
-                          // Remove leading comma and trim
                           li.textContent = item.replace(/^,\s*/, '').trim();
                           list.appendChild(li);
                       }
@@ -62,7 +136,7 @@
           });
 
           document.querySelectorAll('.main-target').forEach(function(element) {
-              var text = element.textContent.trim();
+              var text = element.textContent.trim().replace('Main Targets:', '').trim();
               var items = text.split(',');
               if (items.length > 1) {
                   var list = document.createElement('ul');
@@ -73,11 +147,11 @@
                           list.appendChild(li);
                       }
                   });
-                  element.textContent = '';
+                  element.innerHTML = '<strong>Main Targets:</strong>';
                   element.appendChild(list);
               }
           });
       });
-    </script>
+  </script>
 </body>
 </html>
