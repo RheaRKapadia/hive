@@ -54,21 +54,25 @@ module.exports = {
     getUserSingularWorkoutData: async (userId, workoutId) => {
       try {
         const workoutSnapshot = await db.collection('Workouts').doc(workoutId).get();
-    
+        // const workoutExercisesSnapshot = await db.collection('Workouts').doc(workoutId).collection('exercises').get()
         if (!workoutSnapshot.exists) {
-          return { error: 'Location not found' };
+          return { error: 'workout not found' };
         }
+        // if (!workoutExercisesSnapshot.exists) {
+        //   return { error: 'workout exercises not found' };
+        // }
     
         const workout = { id: workoutSnapshot.id, ...workoutSnapshot.data() };
+        // const workoutExercises = { id: workoutExercisesSnapshot.id, ...workoutExercisesSnapshot.data() };
     
         if (workout.userId !== userId) {
           return { error: 'Unauthorized access' };
         }
-    
-        return workout;
+        return workout
+        // return [workout, workoutExercises];
       } catch (error) {
-        console.error('Error retrieving location:', error);
-        return { error: 'Failed to retrieve location' };
+        console.error('Error retrieving Workout:', error);
+        return { error: 'Failed to retrieve exercises' };
       }
     },
       
