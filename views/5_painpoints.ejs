@@ -9,17 +9,17 @@
 <body>
     <h1>Pain Management</h1>
     <a href="/user/dashboard" class="btn">Back to dashboard</a>
-    <form method="POST" action="/painpoints">
-        <label>
+    <form method="POST" action="/user/painpoints">
+        <label for="location">
             regions of pain
-            <input type="text" name="painregion"/>
+            <input type="text" name="location" id="location"/>
         </label></form></br>
-        <label>
+        <label for="painLevel">
             pain level
-            <input type="text" name="painlevel"/>
+            <input type="text" name="painLevel" id="painLevel"/>
         </label></br>
-        <!-- <button type="submit">Submit</button> -->
+        <button type="submit">Submit</button>
     </form>
-    <a href="/user/painpoints" class="btn">Submit</a>
+    <!-- <a href="/user/painpoints" class="btn">Submit</a> -->
 </body>
 </html>

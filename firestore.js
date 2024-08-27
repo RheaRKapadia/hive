@@ -40,6 +40,11 @@ module.exports = {
           console.error('Error retrieving location:', error);
           return { error: 'Failed to retrieve location' };
         }
-      }
+      },
+      getUserPainpointsData: async (userId) => {
+        const painpointsSnapshot = await db.collection('PainPoints').where('userId', '==', userId).get()
+        const painpoints = painpointsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        return painpoints
+    },
       
 };

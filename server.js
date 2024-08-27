@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const firestore = require('./firestore')
 const path = require('path');
+const bodyParser = require('body-parser');
 
 //middleware
 app.use(logger)
