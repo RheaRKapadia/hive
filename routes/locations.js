@@ -41,6 +41,11 @@ const locations = [
     ]
   }
 ]
+// Route for displaying locations (consider adding an ID or query to specify the location)
+router.get('/', (req, res) => {
+    console.log('Equipments:', equipments); // Should output equipments array
+    res.render('6_locations', { locations, equipments }); // Pass both locations and equipments
+  })
 
 // Route for displaying locations (consider adding an ID or query to specify the location)
 router.get('/location', (req, res) => {
