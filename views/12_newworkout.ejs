@@ -147,24 +147,8 @@
           <% } %>
       </div>
     </div>
-  <!-- <div class="content">
-      <h1>New Workout</h1>
-      <div class="workouts-grid">
-          <% exercises.data.forEach(function(exercise) { %>
-              <div class="workout-card">
-                  <div class="workout-title"><%= exercise.name %></div>
-                  <div class="workout-meta">Category: <%= exercise.target %> | Equipment: <%= exercise.equipment %></div>
-                  <ul class="exercise-list bullet-list">
-                      <%= exercise.instructions %>
-                  </ul>
-                  <div class="main-target">
-                      <strong>Main Targets:</strong> <%= exercise.secondaryMuscles %>
-                  </div>
-              </div>
-          <% }) %>
-      </div>
-  </div> -->
-  <!-- <div class="pagination">
+
+  <div class="pagination">
       <% if (exercises.pagination.currentPage > 1) { %>
           <a href="/user/workouts/new?page=<%= exercises.pagination.currentPage - 1 %>">&laquo; Previous</a>
       <% } %>
@@ -176,102 +160,34 @@
       <% if (exercises.pagination.currentPage < exercises.pagination.totalPages) { %>
           <a href="/user/workouts/new?page=<%= exercises.pagination.currentPage + 1 %>">Next &raquo;</a>
       <% } %>
-  </div> -->
+  </div>
   <a href="#" class="add-button">+</a>
-  <!-- <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          document.querySelectorAll('.bullet-list').forEach(function(element) {
-              var text = element.textContent.trim();
-              var items = text.split('.');
-              if (items.length > 1) {
-                  var list = document.createElement('ul');
-                  items.forEach(function(item) {
-                      if (item.trim()) {
-                          var li = document.createElement('li');
-                          li.textContent = item.replace(/^,\s*/, '').trim();
-                          list.appendChild(li);
-                      }
-                  });
-                  element.textContent = '';
-                  element.appendChild(list);
-              }
-          });
-
-          document.querySelectorAll('.main-target').forEach(function(element) {
-              var text = element.textContent.trim().replace('Main Targets:', '').trim();
-              var items = text.split(',');
-              if (items.length > 1) {
-                  var list = document.createElement('ul');
-                  items.forEach(function(item) {
-                      if (item.trim()) {
-                          var li = document.createElement('li');
-                          li.textContent = item.trim();
-                          list.appendChild(li);
-                      }
-                  });
-                  element.innerHTML = '<strong>Main Targets:</strong>';
-                  element.appendChild(list);
-              }
-          });
-      });
-  </script> -->
-  <!-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('searchInput');
-        const difficultyFilter = document.getElementById('difficultyFilter');
-        const muscleGroupFilter = document.getElementById('muscleGroupFilter');
-        const equipmentFilter = document.getElementById('equipmentFilter');
-        const workoutList = document.getElementById('workoutList');
-
-        let exercises = <%- JSON.stringify(exercises.data) %>; // Assuming you're passing the exercises data to the template
-
-        function renderWorkouts(filteredExercises) {
-            workoutList.innerHTML = `
-                <div class="workout-header">
-                    <div>Add</div>
-                    <div>Exercise</div>
-                    <div>Description</div>
-                    <div>Equipment</div>
-                    <div>Muscles</div>
-                </div>
-                ${filteredExercises.map(exercise => `
-                    <div class="workout-row">
-                        <button class="add-exercise">+</button>
-                        <div class="exercise-name">${exercise.name}</div>
-                        <div>${exercise.instructions[0] || ''}</div>
-                        <div><span class="equipment-tag">${exercise.equipment}</span></div>
-                        <div>${exercise.target}, ${exercise.secondaryMuscles.join(', ')}</div>
-                    </div>
-                `).join('')}
-            `;
-        }
-
-        function filterExercises() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const difficulty = difficultyFilter.value;
-            const muscleGroup = muscleGroupFilter.value;
-            const equipment = equipmentFilter.value;
-
-            const filteredExercises = exercises.filter(exercise =>
-                exercise.name.toLowerCase().includes(searchTerm) &&
-                (difficulty === '' || exercise.difficulty === difficulty) &&
-                (muscleGroup === '' || exercise.target.toLowerCase().includes(muscleGroup) || exercise.secondaryMuscles.some(muscle => muscle.toLowerCase().includes(muscleGroup))) &&
-                (equipment === '' || exercise.equipment.toLowerCase().includes(equipment))
-            );
-
-            renderWorkouts(filteredExercises);
-        }
-
-        searchInput.addEventListener('input', filterExercises);
-        difficultyFilter.addEventListener('change', filterExercises);
-        muscleGroupFilter.addEventListener('change', filterExercises);
-        equipmentFilter.addEventListener('change', filterExercises);
-
-        // Initial render
-        renderWorkouts(exercises);
-    });
-</script> -->
-<script src="path/to/workout-filters.js"></script>
+  <script src="/js/workout-filters.js"></script>
 <script src="/js/exercise-details.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const exerciseContainer = document.getElementById('exerciseContainer');
+
+      exercises.forEach(exercise => {
+          const exerciseRow = document.createElement('div');
+          exerciseRow.className = 'workout-row';
+          exerciseRow.innerHTML = `
+              <button class="add-exercise">+</button>
+              <div class="exercise-name">
+                  <a href="#" class="exercise-link" data-exercise-id="${exercise.id}">${exercise.name}</a>
+              </div>
+              <div class="exercise-description">
+                  <p class="short-description">${exercise.instructions[0]}...</p>
+                  <div class="full-instructions" style="display: none;">
+                      ${exercise.instructions.map(instruction => `<p>${instruction}</p>`).join('')}
+                  </div>
+              </div>
+              <div><span class="equipment-tag">${exercise.equipment}</span></div>
+              <div>${exercise.target}, ${exercise.secondaryMuscles.join(', ')}</div>
+          `;
+          exerciseContainer.appendChild(exerciseRow);
+      });
+  });
+</script>
 </body>
 </html>
