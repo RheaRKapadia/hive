@@ -845,7 +845,7 @@ body.newworkout {
 
 .myworkouts .workouts-container {
         background-color: #1e2835;
-        border-radius: 20px;
+        border-radius: 30px;
         padding: 20px;
         position: relative;
         margin-bottom: -50px;
@@ -866,7 +866,7 @@ body.newworkout {
 }
 .myworkouts .workout-card {
     background-color: #0c3864;
-            border-radius: 15px;
+            border-radius: 25px;
             padding: 15px;
             height: 300px;
             width: 350px;
@@ -877,6 +877,7 @@ body.newworkout {
     font-size: 18px;
             font-weight: bold;
             margin-bottom: 10px;
+            color: white;
 }
 .myworkouts .workout-type {
     font-size: 12px;
@@ -884,8 +885,12 @@ body.newworkout {
             margin-bottom: 5px;
 }
 .myworkouts .workout-exercises {
-    font-size: 14px;
-            margin-top: 10px;
+    font-size: 28px;
+    margin-top: 10px;
+    flex-grow: 1;
+    overflow-y: scroll;
+    color: white;
+    align-items: center;
 }
 
 .myworkouts .workout-location {
