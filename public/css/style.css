@@ -568,7 +568,6 @@ input {
 }
 
 .newworkout header {
-    background-color: #0a2351;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -591,6 +590,7 @@ input {
 .newworkout .user-menu {
     display: flex;
     align-items: center;
+    color: #f0a500;
 }
 
 .newworkout .avatar {
@@ -640,6 +640,7 @@ input {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    align-items: center;
 }
 .filter-button {
     background-color: #0a2351;
@@ -671,14 +672,21 @@ body.newworkout {
     overflow: hidden;
 }
 .page-content {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     height: calc(100vh - 60px);
-    overflow: hidden;
+    overflow: hidden; */
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0 20px 20px 20px;
+    border-radius: 10px;
+    color: white;
 }
 .fixed-content {
     padding: 20px;
     background-color: #0a2351;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 .scrollable-content {
     flex-grow: 1;
@@ -695,7 +703,6 @@ body.newworkout {
     display: grid;
     grid-template-columns: 50px 2fr 3fr 1fr 2fr;
     gap: 10px;
-    padding: 10px 0;
     border-bottom: 1px solid #1e3a6e;
     font-weight: bold;
 }
@@ -724,6 +731,7 @@ body.newworkout {
     background-color: #1e3a6e;
     padding: 8px 15px;
     border-radius: 20px;
+    color: white;
 }
 .equipment-tag {
     background-color: #ff69b4;
@@ -732,4 +740,44 @@ body.newworkout {
     border-radius: 10px;
     display: inline-block;
     font-size: 0.8em;
+}
+
+/* Workout Details Header Styles */
+.workoutdetails {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.workoutdetails header {
+    background-color: #0a2351;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.workoutdetails .logo h1 {
+    margin: 0;
+    color: #f0a500;
+    font-size: 24px;
+}
+
+.workoutdetails nav {
+    display: flex;
+    align-items: center;
+}
+
+.workoutdetails .user-menu {
+    display: flex;
+    align-items: center;
+}
+
+.newworkout .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
 }

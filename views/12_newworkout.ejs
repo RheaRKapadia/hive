@@ -61,29 +61,37 @@
         </div>
     </div>
     <div class="scrollable-content">
-        <div class="workout-list">
-            <div class="workout-header">
-                <div>Add</div>
-                <div>Exercise</div>
-                <div>Description</div>
-                <div>Equipment</div>
-                <div>Muscles</div>
-            </div>
-            <% if (exercises && exercises.data && exercises.data.length > 0) { %>
-                <% exercises.data.forEach(function(exercise) { %>
-                    <div class="workout-row">
-                        <button class="add-exercise">+</button>
-                        <div class="exercise-name"><%= exercise.name %></div>
-                        <div><%= exercise.instructions [0] %>.</div>
-                        <div><span class="equipment-tag"><%= exercise.equipment %></span></div>
-                        <div><%= exercise.target %>, <%= exercise.secondaryMuscles.join(', ') %></div>
-                    </div>
-                <% }); %>
-            <% } else { %>
-                <div class="no-exercises">No exercises found.</div>
-            <% } %>
-        </div>
-    </div>
+      <div class="workout-list">
+          <div class="workout-header">
+              <div>Add</div>
+              <div>Exercise</div>
+              <div>Description</div>
+              <div>Equipment</div>
+              <div>Muscles</div>
+          </div>
+          <% if (exercises && exercises.data && exercises.data.length > 0) { %>
+              <% exercises.data.forEach(function(exercise) { %>
+                  <div class="workout-row">
+                      <button class="add-exercise">+</button>
+                      <div class="exercise-name">
+                        <a href="#" class="exercise-link" data-exercise-id="<%= exercise.id %>"><%= exercise.name %></a>
+                      </div>
+                      <div class="exercise-description">
+                        <p class="short-description"><%= exercise.instructions[0] %>...</p>
+                        <div class="full-instructions" style="display: none;">
+                          <% exercise.instructions.forEach(function(instruction) { %>
+                            <p><%= instruction %></p>
+                          <% }); %>
+                        </div>
+                      </div>
+                      <div><span class="equipment-tag"><%= exercise.equipment %></span></div>
+                      <div><%= exercise.target %>, <%= exercise.secondaryMuscles.join(', ') %></div>
+                  </div>
+              <% }); %>
+          <% } else { %>
+              <div class="no-exercises">No exercises found.</div>
+          <% } %>
+      </div>
     </div>
   <!-- <div class="content">
       <h1>New Workout</h1>
@@ -116,7 +124,7 @@
       <% } %>
   </div> -->
   <a href="#" class="add-button">+</a>
-  <script>
+  <!-- <script>
       document.addEventListener('DOMContentLoaded', function() {
           document.querySelectorAll('.bullet-list').forEach(function(element) {
               var text = element.textContent.trim();
@@ -152,6 +160,64 @@
               }
           });
       });
-  </script>
+  </script> -->
+  <!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const difficultyFilter = document.getElementById('difficultyFilter');
+        const muscleGroupFilter = document.getElementById('muscleGroupFilter');
+        const equipmentFilter = document.getElementById('equipmentFilter');
+        const workoutList = document.getElementById('workoutList');
+
+        let exercises = <%- JSON.stringify(exercises.data) %>; // Assuming you're passing the exercises data to the template
+
+        function renderWorkouts(filteredExercises) {
+            workoutList.innerHTML = `
+                <div class="workout-header">
+                    <div>Add</div>
+                    <div>Exercise</div>
+                    <div>Description</div>
+                    <div>Equipment</div>
+                    <div>Muscles</div>
+                </div>
+                ${filteredExercises.map(exercise => `
+                    <div class="workout-row">
+                        <button class="add-exercise">+</button>
+                        <div class="exercise-name">${exercise.name}</div>
+                        <div>${exercise.instructions[0] || ''}</div>
+                        <div><span class="equipment-tag">${exercise.equipment}</span></div>
+                        <div>${exercise.target}, ${exercise.secondaryMuscles.join(', ')}</div>
+                    </div>
+                `).join('')}
+            `;
+        }
+
+        function filterExercises() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const difficulty = difficultyFilter.value;
+            const muscleGroup = muscleGroupFilter.value;
+            const equipment = equipmentFilter.value;
+
+            const filteredExercises = exercises.filter(exercise =>
+                exercise.name.toLowerCase().includes(searchTerm) &&
+                (difficulty === '' || exercise.difficulty === difficulty) &&
+                (muscleGroup === '' || exercise.target.toLowerCase().includes(muscleGroup) || exercise.secondaryMuscles.some(muscle => muscle.toLowerCase().includes(muscleGroup))) &&
+                (equipment === '' || exercise.equipment.toLowerCase().includes(equipment))
+            );
+
+            renderWorkouts(filteredExercises);
+        }
+
+        searchInput.addEventListener('input', filterExercises);
+        difficultyFilter.addEventListener('change', filterExercises);
+        muscleGroupFilter.addEventListener('change', filterExercises);
+        equipmentFilter.addEventListener('change', filterExercises);
+
+        // Initial render
+        renderWorkouts(exercises);
+    });
+</script> -->
+<script src="path/to/workout-filters.js"></script>
+<script src="/js/exercise-details.js"></script>
 </body>
 </html>
