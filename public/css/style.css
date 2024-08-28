@@ -194,25 +194,370 @@ input {
     }
 }
 
-/* Dashboard */
+/* Dashboard Styles */
+/*  */
 .dashboard-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Header Styles */
+.dashboard-page header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(30, 30, 30, 0.8);
+}
+
+.dashboard-page .logo h1 {
+    color: #ffa500;
+    margin: 0;
+}
+
+.dashboard-page .user-menu {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dashboard-page .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Main Content Styles */
+.dashboard-page .dashboard-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.dashboard-page section {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dashboard-page h2 {
+    color: #ffffff;
+    margin-top: 0;
+}
+
+/* Welcome Section */
+.dashboard-page .quote {
+    background-color: rgba(0, 0, 255, 0.6);
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+/* Workouts Section */
+.dashboard-page .workout-calendar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.dashboard-page .day {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 255, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.dashboard-page .day.completed {
+    background-color: #ffa500;
+}
+
+/* Health Section */
+.dashboard-page .health-data {
+    min-height: 200px;
+}
+
+/* Locations Section */
+.dashboard-page .location-data {
+    min-height: 100px;
+}
+
+/* Workouts List Section */
+.dashboard-page .workouts-list {
+    min-height: 100px;
+}
+
+/* Side Menu */
+.dashboard-page .side-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 200px;
+    background-color: rgba(30, 30, 30, 0.9);
+    padding: 1rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.dashboard-page .side-menu.open {
+    transform: translateX(0);
+}
+
+.dashboard-page .side-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.dashboard-page .side-menu li {
+    margin-bottom: 1rem;
+}
+
+.dashboard-page .side-menu a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Loading state */
+.dashboard-page .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #ffa500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-page .dashboard-content {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-page .name-fields {
+        flex-direction: column;
+    }
+}
+
+
+/* User Profile Page */
+/*  */
+.user-profile-page {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2c2c2c;
+    color: white;
+}
+
+.user-profile-page .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.user-profile-page .settings {
+    display: flex;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.user-profile-page .sidebar {
+    width: 250px;
+    background-color: #0a4275;
+    padding: 30px;
+}
+
+.user-profile-page .sidebar h2 {
+    margin-top: 0;
+}
+
+.user-profile-page .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-profile-page .sidebar li {
+    margin-bottom: 10px;
+}
+
+.user-profile-page .sidebar a {
+    color: white;
+    text-decoration: none;
+}
+
+.user-profile-page .sidebar .active {
+    font-weight: bold;
+}
+
+.user-profile-page .main-content {
+    flex-grow: 1;
+    padding: 40px;
+    background-color: #0a4275;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-profile-page .profile-pic-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.user-profile-page .profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.user-profile-page .change-picture {
+    background: none;
+    border: none;
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.user-profile-page form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.user-profile-page .form-group {
+    display: flex;
     flex-direction: column;
 }
 
-.dashboard-content {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 2rem;
-    border-radius: 10px;
-    text-align: center;
-    z-index: 1;
-    max-width: 600px;
-    width: 100%;
+.user-profile-page label {
+    margin-bottom: 5px;
 }
 
-.dashboard-content h1 {
-    color: #FFD700;
-    margin-bottom: 1.5rem;
+.user-profile-page input[type="text"],
+.user-profile-page input[type="email"] {
+    padding: 12px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffffff;
+    font-size: 16px;
 }
+
+.user-profile-page .apply-changes {
+    grid-column: 1 / -1;
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-self: start;
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+.user-profile-page .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.user-profile-page .popup-content {
+    background-color: #0a4275;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.user-profile-page .popup h3 {
+    margin-top: 0;
+}
+
+.user-profile-page .popup input[type="file"] {
+    margin: 20px 0;
+}
+
+.user-profile-page .popup button {
+    margin: 0 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.user-profile-page .popup .upload {
+    background-color: #4caf50;
+    color: white;
+}
+
+.user-profile-page .popup .cancel {
+    background-color: #f44336;
+    color: white;
+}
+
+/* habit tracker aka workout calendar */
+.tracker-container {
+    margin-top: 10px;
+    padding: 10px;
+    overflow: hidden;
+    margin-right: 0px;
+    margin-left: -10px;
+
+}
+
+.tracker-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.day {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #002E66;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+}
+
+.day.completed {
+    background-color: #FFA500; /* Orange color for completed circles */
+    color: #fff; /* White text color for completed circles */
+}
+
+/* Individual Exercise */
 
 
 /* Locations -------------------------------------------------------------------*/ 

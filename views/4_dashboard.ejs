@@ -2,18 +2,167 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <title>HIVE Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="dashboard-page">
-    <div class="dashboard-content">
-        <h1>Dashboard - Welcome <%= user.firstName %></h1>
-        <a href="/user/painpoints" class="btn">Pain Management</a>
-        <a href="/user/locations" class="btn">Locations</a>
-        <a href="/user/settings" class="btn">Settings</a>
-        <a href="/user/workouts" class="btn">Workouts</a>
-    </div>
+    <header>
+        <div class="logo">
+            <h1>HIVE</h1>
+        </div>
+        <nav>
+            <div class="user-menu">
+                <a href="/user/userprofile">
+                    <img src="/images/avatar.png" alt="User Avatar" class="avatar">
+                </a>
+                <span>Menu</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-content">
+        <section class="welcome-section">
+            <h2>Welcome back, <%= user.firstName %>!</h2>
+            <div id="quote-container" class="quote">
+                <p id="quote-text">Loading quote...</p>
+                <span id="quote-author" class="author"></span>
+            </div>
+        </section>
+
+        <section class="workouts-section">
+            <h2>Workout Tracker</h2>
+            <div id="workout-calendar" class="workout-calendar">
+                <div class="tracker-container">
+                    <div class="tracker-grid">
+                        <div class="day" data-day="1">1</div>
+                        <div class="day" data-day="2">2</div>
+                        <div class="day" data-day="3">3</div>
+                        <div class="day" data-day="4">4</div>
+                        <div class="day" data-day="5">5</div>
+                        <div class="day" data-day="6">6</div>
+                        <div class="day" data-day="7">7</div>
+                        <div class="day" data-day="8">8</div>
+                        <div class="day" data-day="9">9</div>
+                        <div class="day" data-day="10">10</div>
+                        <div class="day" data-day="11">11</div>
+                        <div class="day" data-day="12">12</div>
+                        <div class="day" data-day="13">13</div>
+                        <div class="day" data-day="14">14</div>
+                        <div class="day" data-day="15">15</div>
+                        <div class="day" data-day="16">16</div>
+                        <div class="day" data-day="17">17</div>
+                        <div class="day" data-day="18">18</div>
+                        <div class="day" data-day="19">19</div>
+                        <div class="day" data-day="20">20</div>
+                        <div class="day" data-day="21">21</div>
+                        <div class="day" data-day="22">22</div>
+                        <div class="day" data-day="23">23</div>
+                        <div class="day" data-day="24">24</div>
+                        <div class="day" data-day="25">25</div>
+                        <div class="day" data-day="26">26</div>
+                        <div class="day" data-day="27">27</div>
+                        <div class="day" data-day="28">28</div>
+                        <div class="day" data-day="29">29</div>
+                        <div class="day" data-day="30">30</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="health-section">
+            <h2>Health</h2>
+            <div id="health-data" class="health-data">
+                <div class="loading">Loading health data...</div>
+            </div>
+        </section>
+
+        <section class="locations-section">
+            <h2>Locations</h2>
+            <div id="location-data" class="location-data">
+                <div class="loading">Loading location data...</div>
+            </div>
+        </section>
+
+        <section class="workouts-list-section">
+            <h2>Workouts</h2>
+            <div id="workouts-list" class="workouts-list">
+                <div class="loading">Loading workouts...</div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="side-menu">
+        <ul>
+            <li><a href="/user/workouts">Workouts</a></li>
+            <li><a href="/user/routines">Routines</a></li>
+            <li><a href="/user/painpoints">Pain Management</a></li>
+            <li><a href="/user/locations">Locations</a></li>
+        </ul>
+    </nav>
+
+    <script src="./js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quoteText = document.getElementById('quote-text');
+            const quoteAuthor = document.getElementById('quote-author');
+
+            async function fetchAndDisplayQuote() {
+                const today = new Date().toDateString();
+                const cachedQuote = localStorage.getItem('dailyQuote');
+                const cachedDate = localStorage.getItem('dailyQuoteDate');
+
+                if (cachedQuote && cachedDate === today) {
+                    const { content, author } = JSON.parse(cachedQuote);
+                    quoteText.textContent = `"${content}"`;
+                    quoteAuthor.textContent = author;
+                } else {
+                    try {
+                        const response = await fetch('https://api.quotable.io/random?tags=inspirational');
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch quote');
+                        }
+                        const data = await response.json();
+                        quoteText.textContent = `"${data.content}"`;
+                        quoteAuthor.textContent = data.author;
+                        localStorage.setItem('dailyQuote', JSON.stringify({ content: data.content, author: data.author }));
+                        localStorage.setItem('dailyQuoteDate', today);
+                    } catch (error) {
+                        console.error('Error fetching quote:', error);
+                        quoteText.textContent = 'Failed to load quote. Please try again later.';
+                        quoteAuthor.textContent = '';
+                    }
+                }
+            }
+
+            fetchAndDisplayQuote();
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const days = document.querySelectorAll('.day');
+
+            days.forEach(day => {
+                const dayNumber = parseInt(day.dataset.day, 10);
+                const completedDays = JSON.parse(localStorage.getItem('completedDays')) || [];
+
+                if (completedDays.includes(dayNumber)) {
+                    day.classList.add('completed');
+                }
+
+                day.addEventListener('click', function () {
+                    if (day.classList.contains('completed')) {
+                        day.classList.remove('completed');
+                        completedDays.splice(completedDays.indexOf(dayNumber), 1);
+                    } else {
+                        day.classList.add('completed');
+                        completedDays.push(dayNumber);
+                    }
+
+                    localStorage.setItem('completedDays', JSON.stringify(completedDays));
+                });
+            });
+        });
+    </script>
 </body>
 </html>
