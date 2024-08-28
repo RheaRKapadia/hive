@@ -64,6 +64,12 @@
     </div>
     </div>
 
-    <button class="new-routine-btn">+</button>
+    <button class="new-routine-btn" onclick="window.location.href='/workouts/new'">+</button>
+
+    <script>
+        document.querySelector('.new-routine-btn').addEventListener('click', function() {
+            window.location.href = '/user/workouts/new';
+        });
+    </script>
 </body>
 </html>
