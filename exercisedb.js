@@ -2,7 +2,7 @@ const axios = require('axios');
 require('dotenv').config({ path: '.env.local' });
 
 const getAllExercises = async (req, res) => {
-    const { page = 1, limit = 50 } = req.query;
+    const { page = 1, limit = 1324 } = req.query;
     const offset = (page - 1) * limit; // Calculate the offset
     console.log(process.env.X_RAPIDAPI_KEY)
     try {
