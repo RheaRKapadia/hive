@@ -742,6 +742,44 @@ body.newworkout {
     font-size: 0.8em;
 }
 
+/* styles for exercise name links */
+.exercise-name a {
+    color: white; /* Change this to your desired color */
+    text-decoration: none; /* Removes the underline */
+}
+
+.exercise-name a:hover {
+    color: #f0a500; /* Change color on hover, if desired */
+    text-decoration: underline; /* Add underline on hover, if desired */
+}
+
+/* Style for when the link has been visited */
+.exercise-name a:visited {
+    color: white; /* Keep the same color as unvisited links */
+}
+
+/* maintain the background color of the exercise name div */
+.exercise-name {
+    background-color: #1e3a6e;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+/* entire exercise name div to act like a button */
+.exercise-name {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.exercise-name:hover {
+    background-color: #2a4d8d;
+}
+
+/* Ensure the text color remains consistent when the div is hovered */
+.exercise-name:hover a {
+    color: white;
+}
+
 /* Workout Details Header Styles */
 .workoutdetails {
     display: flex;
