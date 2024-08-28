@@ -629,7 +629,8 @@ input {
     flex-direction: row;
     align-items: stretch;
     flex-wrap: nowrap;
-    margin-top:1%;
+    margin-top:0px;
+
 }
 .Set-New-Location2 {
     display: flex;
@@ -646,7 +647,7 @@ input {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
-    height: 40%;
+    height: 25%;
     box-sizing: border-box;
 }
 
@@ -660,8 +661,8 @@ input {
 .Set-New-Location-Sub-Content {
     background-color: rgba(11, 64, 156, 0.7);
     border-radius: 10px;
-    padding-top: 20px;
-    padding-bottom:20px;
+    padding-top: 10px;
+    padding-bottom:10px;
     padding-right:30px;
     padding-left:30px;
     box-sizing: border-box;
@@ -839,8 +840,14 @@ input {
     flex-direction: column;
     align-items: flex-start; /* Center elements horizontally */
     justify-content: center; /* Center elements vertically */
-    gap: 5px;
     box-sizing: border-box;
+}
+
+.set-new-location-edit_location{
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    margin-bottom:0px;
 }
 
 .set-new-location-main-box h1{

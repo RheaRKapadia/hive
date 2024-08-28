@@ -1,52 +1,72 @@
 const express = require('express')
 const router = express.Router()
-const firestore = require('../firestore')
-const {getAllEquipment} = require('../exercisedb')
+//const firestore = require('../firestore')
+//const {getAllEquipment} = require('../exercisedb')
 
 
-// Sample data for the 9_newlocation page (can be replaced with database logic)
+// CODE CAMILLE USED TO CREATE LOCTIONS, LOCATION, EDIT LOCATION, and NELOCATION
+// Sample data (can be replaced with database logic)
 const equipments = [
-    {
-      name: "Equipment 1",
-      descriptions: [
-        { className: "item-blue" },
-        { className: "item-pink" }
-      ]
-    },
-    {
-      name: "Equipment 2",
-      descriptions: [
-        { className: "item-green" },
-        { className: "item-blue" }
-      ]
-    },
-  ];
-  
-  const locations = [
-      {
-        title: "Jane's Gym",
-        equipments: [
-          {
-            name: "Equipment 1",
-            descriptions: [
-              { className: "item-blue" },
-              { className: "item-pink" }
-            ]
-          },
-          {
-            name: "Equipment 2",
-            descriptions: [
-              { className: "item-green" },
-              { className: "item-blue" }
-            ]
-          }
-        ], 
-        location: "Gym", 
-        tools:[]
-      },
-      // ... other locations
-    ];
+  {
+    name: "Equipment 1",
+    descriptions: [
+      { className: "item-blue" },
+      { className: "item-pink" }
+    ]
+  },
+  {
+    name: "Equipment 2",
+    descriptions: [
+      { className: "item-green" },
+      { className: "item-blue" }
+    ]
+  },
+]
 
+const locations = [
+  {
+    title: "Jane's Gym",
+    location: "Gym",
+    tools: [
+      { e_name: "Equipment 1" },
+      { e_name: "Equipment 2" },
+    ]
+  },
+  {
+    title: "Jane's Gym2",
+    location: "Gym2",
+    tools: [
+      { e_name: "Equipment 3" },
+      { e_name: "Equipment 4" },
+    ]
+  }
+]
+
+// Route for displaying locations (consider adding an ID or query to specify the location)
+router.get('/location', (req, res) => {
+  console.log('Equipments:', equipments); // Should output equipments array
+  res.render('7_location', { locations, equipments }); // Pass both locations and equipments
+})
+
+// Route to edit a location
+router.get('/location/edit', (req, res) => {
+  res.render('8_editlocation', { equipments, locations });
+})
+
+// Route to create a new location
+router.get('/new', (req, res) => {
+  res.render('9_newlocation', { equipments });
+})
+
+// Handling POST request for creating a new location
+router.post('/new', (req, res) => {
+  // Logic to handle form submission and add the new location
+  res.redirect('/');
+});
+
+module.exports = router
+
+/* FIREBASE CONNECTED CODE --------------------------------------------------------
 //route to view all user locations
 router.get('/', async(req, res) => {
     //hard coded userid for now
@@ -120,4 +140,4 @@ router.post('/new', async(req,res) =>{
 })
 
 module.exports = router
-
+*/ 

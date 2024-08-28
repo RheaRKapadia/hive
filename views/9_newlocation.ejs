@@ -80,8 +80,15 @@
                         <h3>Current Toolkit</h3>
                         <div id="equipmentsContainer" class="Set-New-Location-Sub-Content"></div>
                     </section>
+
+                    <section class = "Set-New-Location-Sub-Step">
+                        <h3>3. Title Set Up</h3>
+                        <div class="Set-New-Location-Sub-Content">
+                            <input type="text" placeholder="Enter name">
+                        </div>
+                    </section>
                     
-                    <button class="btn">Submit</button>
+                    <button id="submit-location-equipment" class="btn">Submit</button>
                 </section>
             </section>
         </main>
@@ -133,6 +140,7 @@
 
     <!-- JAVASCRIPT PORTIONS -->
     <script>
+        // locations array - 
         // Get the modals
         var addModal = document.getElementById("myModal");
         var editModal = document.getElementById("editModal");
@@ -384,6 +392,39 @@
                 }
             }
         });
+
+        /*
+        document.getElementById('submit-location-equipment').onclick = function() {
+            // Get the title from the input field
+            var title = document.querySelector('.Set-New-Location-Sub-Step input[placeholder="Enter name"]').value;
+            
+            // Get the location from the input field
+            var location = document.querySelector('.Set-New-Location-Sub-Step input[placeholder="Enter your current location"]').value;
+            
+            // Get the equipment from the "Current Toolkit"
+            var tools = Array.from(document.getElementById('equipmentsContainer').children).map(item => {
+                return { e_name: item.textContent };
+            });
+        
+            // Create the new location object
+            var newLocation = {
+                title: title,
+                location: location,
+                tools: tools
+            };
+        
+            // Add this to the locations array
+            locations.push(newLocation);
+            
+            // Optional: Clear the inputs after submission
+            document.querySelector('.Set-New-Location-Sub-Step input[placeholder="Enter name"]').value = '';
+            document.querySelector('.Set-New-Location-Sub-Step input[placeholder="Enter your current location"]').value = '';
+            document.getElementById('equipmentsContainer').innerHTML = ''; // Clear the current toolkit
+        
+            console.log(locations); // For testing purposes, log the locations array to the console
+        };
+        */
+        
     </script>
 </body>
 </html>
