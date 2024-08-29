@@ -11,10 +11,14 @@ const db = admin.firestore();
 
 module.exports = {
     db,
-    getUserData: async () => {
-        const usersSnapshot = await db.collection('Users').get()
+    getUserData: async (userId) => {
+        const userSnapshot = await db.collection('Users').doc(userId).get()
+        if (!userSnapshot.exists) {
+          return { error: 'User not found' };
+        }
+        const user = { id: userSnapshot.id, ...userSnapshot.data() };
         // return usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        return usersSnapshot
+        return user
     },
     getUserLocationsData: async (userId) => {
         const locationsSnapshot = await db.collection('Locations').where('userId', '==', userId).get()
