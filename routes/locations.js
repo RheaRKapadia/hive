@@ -96,7 +96,7 @@ router.get('/location/edit', async(req, res) => {
     const location = await firestore.getUserSingularLocationData( ' h5B1fNuYmL1bjzEj2QTJ', 'xq2OnDZNfIer1lR9jrPo')
     equipmentAll = await getAllEquipment(req, res)
     console.log('Retrieved user locations for editing:', location, '\nAll equipment: ', equipmentAll)
-    res.render('8_editlocation', location, equipmentAll)
+    res.render('8_editlocation', {location, equipmentAll})
     //frontend: use data in location to autofill existing location info on edit page
     //get all available equipment from equipmentAll. get equipment the user has from location
     //for some reason getAllEquipment is making the page load a lot, can get rid of equipmentAll on line 30 temporarily for it to load.

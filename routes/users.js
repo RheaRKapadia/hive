@@ -13,7 +13,7 @@ router.get('/new', (req, res) => {
 router.post('/', (req, res) => {
     res.send('Create user')
 })
-//dashboard page
+//dashboard page, returns user info: name, id, gender, email, age, date created at, profile pic
 router.get('/dashboard', async(req, res) => {
     try {
         const usersSnapshot = await firestore.getUserData()

@@ -1,5 +1,5 @@
 const axios = require('axios');
-require('dotenv').config({ path: '/Users/rheakapadia/Desktop/hive/.env.local' });
+// require('dotenv').config({ path: '.env.local' });
 
 
 const getAllExercises = async (req, res) => {
