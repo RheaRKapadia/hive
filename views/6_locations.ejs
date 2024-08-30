@@ -23,53 +23,27 @@
 
             <!-- Locations: Outermost Rectangular Box  -->
             <div class="location-content">
+                <% locationsList.forEach(location => { %>
                 <div class="ind-location">
                     <header class="ind-location-header">
-                        <h2>Jane's Gym</h2>
+                        <h2><%= location.locationName %></h2>
                         <a href="/user/locations/location" alt="Edit" class="edit-button"></a>
                     </header>
 
                     <section class="ind-location-content">
-                        <div  class="ind-location-content-location">
-                            <p class="equipment-text">equipment 1</p>
-                            <p class="equipment-text">equipment 2</p>
-                            <p class="equipment-text">equipment 3</p>
+                        <div class="ind-location-content-location">
+                            <% if (location.equipmentAvailable && location.equipmentAvailable.length > 0) { %>
+                                <% location.equipmentAvailable.forEach(item => { %>
+                                    <p class="equipment-text"><%= item %></p>
+                                <% }) %>
+                            <% } else { %>
+                                <p class="equipment-text">No equipment available</p>
+                            <% } %>
                         </div>
                     </section>
                 </div>
-
-                <div class="ind-location">
-                    <section class="ind-location-header">
-                        <h2>Jane's Gym</h2>
-                        <a href="/user/locations/location" alt="Edit" class="edit-button"></a>
-                    </section>
-
-                    <section class="ind-location-content">
-                        <div  class="ind-location-content-location">
-                            <p class="equipment-text">equipment 1</p>
-                            <p class="equipment-text">equipment 2</p>
-                            <p class="equipment-text">equipment 3</p>
-                        </div>
-                    </section>
-                </div>
-
-                <div class="ind-location">
-                    <header class="ind-location-header">
-                        <h2>Jane's Gym</h2>
-                        <a href="/user/locations/location" alt="Edit" class="edit-button"></a>
-                    </header>
-
-                    <section class="ind-location-content">
-                        <div  class="ind-location-content-location">
-                            <p class="equipment-text">equipment 1</p>
-                            <p class="equipment-text">equipment 2</p>
-                            <p class="equipment-text">equipment 3</p>
-                        </div>
-                    </section>
-                </div>
+                <% }) %>
             </div>
-            
-
         </main>
     </main>
 </body>

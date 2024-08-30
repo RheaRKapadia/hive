@@ -42,10 +42,13 @@ const locations = [
   }
 ]
 // Route for displaying locations (consider adding an ID or query to specify the location)
-router.get('/', (req, res) => {
-    console.log('Equipments:', equipments); // Should output equipments array
-    res.render('6_locations', { locations, equipments }); // Pass both locations and equipments
-  })
+router.get('/', async(req, res) => {
+  //hard coded userid for now
+  const locationsList = await firestore.getUserLocationsData(" h5B1fNuYmL1bjzEj2QTJ")
+  console.log('Retriever user locations:', locationsList)
+  res.render('6_locations', locationsList)
+  //to reference the location name for frontend: use the forEach function to then access location.locationName
+})
 
 // Route for displaying locations (consider adding an ID or query to specify the location)
 router.get('/location', (req, res) => {
