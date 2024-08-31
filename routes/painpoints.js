@@ -12,7 +12,6 @@ router.get('/:userId/painpoints', async(req, res) => {
     res.render('5_painpoints', {painpointsList, user})
     //to reference the pain point name for frontend: use the forEach function to then access painpoint.location
     // or painpoint.painLevel
-    //rhea - need to return user as well
 })
 
 //haven't tested out form submit, might not work

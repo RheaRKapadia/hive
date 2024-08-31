@@ -38,8 +38,8 @@ const workoutsRouter = require('./routes/workouts')
 app.use('/', otherRouter)
 app.use('/', userRouter)
 app.use('/', painPointsRouter)
-app.use('/:userid/locations', locationsRouter)
-app.use('/:userid/workouts', workoutsRouter)
+app.use('/', locationsRouter)
+app.use('/', workoutsRouter)
 
 
 //simple logger for debugging, print the url used in the terminal

@@ -17,9 +17,12 @@ const firestore = require('../firestore')
 router.get('/:userId/dashboard', async(req, res) => {
     try {
         const userId = req.params.userId
-        console.log('from dashboard get', userId)
+        const locationsList = await firestore.getUserLocationsData( userId)
+        const painpointsList = await firestore.getUserPainpointsData(userId)
+        const workoutsList = await firestore.getUserWorkoutsData( userId)
+        // console.log('from dashboard get', userId)
         const user = await firestore.getUserData(userId)
-        res.status(200).render('4_dashboard', {user}, (err, html) => {
+        res.status(200).render('4_dashboard', {user, locationsList, painpointsList, workoutsList}, (err, html) => {
             if (err) {
                 console.error('Error rendering dashboard:', err);
                 res.status(500).send('Error rendering dashboard');
