@@ -2,6 +2,7 @@
 const firebase = require('firebase/compat/app');
 require( 'firebase/compat/firestore');
 require('firebase/compat/auth');
+require('dotenv').config({ path: '.env.local' });
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional

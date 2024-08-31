@@ -19,6 +19,8 @@ router.post('/:userId/painpoints', async(req, res) => {
     const user = await firestore.getUserData(userId)
     const newPainpointsData = {
         // createdAt:  Timestamp.fromDate(new Date(req.body.date)),
+        // createdAt : admin.firestore.Timestamp.fromDate(new Date()),
+
         location: req.body.location, //should be array
         painLevel: req.body.painLevel,
         // userId: req.params.userId

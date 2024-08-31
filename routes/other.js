@@ -3,6 +3,7 @@ const router = express.Router()
 require( 'firebase/compat/firestore');
 require('firebase/compat/auth');
 const firebase = require('../firebaseLogin')
+const firestore = require('../firestore')
 
 //landing page
 router.get('/', (req, res) => {
@@ -24,7 +25,6 @@ router.post('/login', (req, res) => {
         const user = userCredential.user;
         const userId = user.uid;
         console.log('from login post', userId)
-
         // Redirect to the user's dashboard using the dynamic user ID
         res.redirect(`/${userId}/dashboard`);
     })
@@ -32,19 +32,6 @@ router.post('/login', (req, res) => {
         console.error("Login Error:", error);
         res.redirect('/login'); // Redirect back to login on error
     });
-    // .then((userCredential) => {
-    //     user = userCredential.user;
-    //     console.log(user)
-    // })
-    // .catch((error) => {
-    // var errorCode = error.code;
-    // var errorMessage = error.message;
-    // });
-    // var user = firebase.auth().currentUser;
-    // // var userId = user[0].id
-    // console.log(user)
-    // userId = user.id
-    // res.redirect('/:userId/dashboard');
 })
 
 //Sign Up page
@@ -53,7 +40,7 @@ router.get('/signup', (req, res) => {
 })
 
 //sign up page
-router.post('/signup', (req, res) => {
+router.post('/signup', async(req, res) => {
     // res.redirect('/user/dashboard')
     try {
         const {firstName, lastName, email, password} = req.body;
@@ -61,14 +48,23 @@ router.post('/signup', (req, res) => {
         .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
-        console.log(user);
+        try{firestore.createUser(firstName, lastName, email)}
+        catch(e) {
+            console.log(e)
+        }
+        userId = user.uid
+        console.log(userId)
+        res.redirect(`/${userId}/dashboard`);
+        
+        // console.log(user);
         })
         .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(error);
         });
-        res.redirect('/user/dashboard');
+        
+        
         } catch(e) {
         console.log(e)
         res.redirect('/signup');

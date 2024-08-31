@@ -1,6 +1,9 @@
 // firestore.js
 const admin = require('firebase-admin');
 const serviceAccount = require('./serviceAccountKey.json')
+require( 'firebase/compat/firestore');
+require('firebase/compat/auth');
+const firebase = require('./firebaseLogin')
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -78,6 +81,26 @@ module.exports = {
         console.error('Error retrieving Workout:', error);
         return { error: 'Failed to retrieve exercises' };
       }
-    },
+    }, 
+    createUser: async(firstName, lastName, email) =>{
+      const uid = firebase.auth().currentUser.uid;
+      const userRef = db.collection("Users").doc(uid);
+      userRef.set({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        profilePic: "",
+        age : null,
+        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        // Timestamp.fromDate(new Date())
+      })
+      .then(() => {
+        console.log("User data stored successfully!");
+      })
+      .catch(error => {
+        console.error("Error storing user data:", error);
+      });
+    }
       
 };
