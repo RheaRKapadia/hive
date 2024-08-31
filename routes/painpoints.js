@@ -27,7 +27,7 @@ router.post('/:userId/painpoints', async(req, res) => {
     };
 
     await db.collection('PainPoints').set(newPainpointsData);
-    res.redirect(`/`);
+    res.redirect(`/:userId/painpoints`);
     //frontend: in the form make sure you are using the same ids as above: date, equipment, and name
     //also set method to post in form
 })
