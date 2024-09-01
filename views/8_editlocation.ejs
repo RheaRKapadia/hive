@@ -35,6 +35,7 @@
                         <!-- Equipment Search Bar -->
                         <div class="equipment-container-top-bar">
                             <input type="text" id="searchBar" class="equipment-container-search-bar" placeholder="Search Bar">
+                            <!--
                             <select id="filterBar" class="equipment-container-filter-bar">
                                 <option value="">Filter Bar</option>
                                 <option value="all">All</option>
@@ -42,13 +43,14 @@
                                 <option value="item-pink">Pink</option>
                                 <option value="item-green">Green</option>
                             </select>
+                            -->
                             <button id="addItemButton" class="equipment-container-search-add" title="Add Item">+</button>
                         </div>
                         
                         <!-- Header of Equipment Table  -->
                         <div class="equipment-container-header">
                             <div class="equipment-container-column-Equipment">Equipment</div>
-                            <div class="equipment-container-column-Description">Description</div>
+                            <!--<div class="equipment-container-column-Description">Description</div>--> 
                             <div class="equipment-container-column-Add">Add</div>
                         </div>
                         
@@ -57,11 +59,15 @@
                             <% equipments.forEach(equipment => { %>
                             <div class="unique-table-row" data-type="<%= equipment.type %>">
                                 <div class="unique-equipment-column unique-equipment-name" data-equipment="<%= equipment.name %>"><%= equipment.name %></div>
+
+                                <!--
                                 <div class="unique-description-column">
                                 <% equipment.descriptions.forEach(description => { %>
                                     <span class="unique-description-item unique-<%= description.className %>"><%= description.className %></span>
                                 <% }); %>
                                 </div>
+                                -->
+
                                 <div class="unique-add-column">
                                 <button class="unique-add-button" data-equipment="<%= equipment.name %>" title="Add to <%= equipment.name %>">+</button>
                                 </div>

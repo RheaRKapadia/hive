@@ -26,19 +26,15 @@
                 <% locationsList.forEach(location => { %>
                 <div class="ind-location">
                     <header class="ind-location-header">
-                        <h2><%= location.locationName %></h2>
-                        <a href="/user/locations/location" alt="Edit" class="edit-button"></a>
+                        <h2><a href="/user/locations/location"><%= location.locationName %></a></h2>
+                        <a href="/user/locations/location/edit" alt="Edit" class="edit-button"></a>
                     </header>
 
                     <section class="ind-location-content">
                         <div class="ind-location-content-location">
-                            <% if (location.equipmentAvailable && location.equipmentAvailable.length > 0) { %>
-                                <% location.equipmentAvailable.forEach(item => { %>
-                                    <p class="equipment-text"><%= item %></p>
-                                <% }) %>
-                            <% } else { %>
-                                <p class="equipment-text">No equipment available</p>
-                            <% } %>
+                            <% location.equipmentAvailable.forEach(item => { %>
+                                <p class="equipment-text"><%= item %></p>
+                            <% }) %>
                         </div>
                     </section>
                 </div>

@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
-//const firestore = require('../firestore')
-//const {getAllEquipment} = require('../exercisedb')
+const firestore = require('../firestore')
+const {getAllEquipment} = require('../exercisedb')
 
 
 // CODE CAMILLE USED TO CREATE LOCTIONS, LOCATION, EDIT LOCATION, and NELOCATION
 // Sample data (can be replaced with database logic)
+
 const equipments = [
   {
     name: "Equipment 1",
@@ -41,12 +42,13 @@ const locations = [
     ]
   }
 ]
+
 // Route for displaying locations (consider adding an ID or query to specify the location)
 router.get('/', async(req, res) => {
   //hard coded userid for now
   const locationsList = await firestore.getUserLocationsData(" h5B1fNuYmL1bjzEj2QTJ")
   console.log('Retriever user locations:', locationsList)
-  res.render('6_locations', locationsList)
+  res.render('6_locations', {locationsList})
   //to reference the location name for frontend: use the forEach function to then access location.locationName
 })
 

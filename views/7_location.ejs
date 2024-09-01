@@ -34,6 +34,7 @@
                         <!-- Equipment Search Bar -->
                         <div class="equipment-container-top-bar">
                             <input type="text" id="searchBar" class="equipment-container-search-bar" placeholder="Search Bar">
+                            <!--
                             <select id="filterBar" class="equipment-container-filter-bar">
                                 <option value="">Filter Bar</option>
                                 <option value="all">All</option>
@@ -41,12 +42,13 @@
                                 <option value="item-pink">Pink</option>
                                 <option value="item-green">Green</option>
                             </select>
+                            -->
                         </div>
                         
                         <!-- Header of Equipment Table  -->
                         <div class="equipment-container-header">
                             <div class="equipment-container-column-Equipment">Equipment</div>
-                            <div class="equipment-container-column-Description">Description</div>
+                            <!-- <div class="equipment-container-column-Description">Description</div> --> 
                         </div>
                         
                         <!-- Table Content -->
@@ -54,11 +56,13 @@
                             <% equipments.forEach(equipment => { %>
                             <div class="unique-table-row" data-type="<%= equipment.type %>">
                                 <div class="unique-equipment-column unique-equipment-name" data-equipment="<%= equipment.name %>"><%= equipment.name %></div>
+                                <!-- 
                                 <div class="unique-description-column">
                                 <% equipment.descriptions.forEach(description => { %>
                                     <span class="unique-description-item unique-<%= description.className %>"><%= description.className %></span>
                                 <% }); %>
                                 </div>
+                                -->
                             </div>
                             <% }); %>
                         </div>
@@ -92,23 +96,8 @@
     
     <!-- JAVASCRIPT PORTIONS -->
     <script>
-        // Open the Edit Equipment modal when an equipment name is clicked
-        document.querySelectorAll(".unique-equipment-name").forEach(name => {
-            name.onclick = function() {
-                var equipment = name.getAttribute('data-equipment');
-                var row = name.closest('.unique-table-row');
-                var descriptions = Array.from(row.querySelectorAll('.unique-description-item')).map(item => item.classList[1].replace('unique-', ''));
-                
-                document.getElementById('editEquipmentName').value = equipment;
-                document.querySelectorAll('input[name="editEquipmentType"]').forEach(checkbox => {
-                    checkbox.checked = descriptions.includes(checkbox.value);
-                });
-                
-                editModal.style.display = "block";
-            }
-        });
-
         // Filter equipment based on the selected type
+        /*
         document.getElementById('filterBar').onchange = function() {
             var filterValue = this.value;
             var rows = document.querySelectorAll('.unique-table-row');
@@ -120,6 +109,7 @@
                 }
             });
         }
+        */
 
         // Search bar functionality
         document.getElementById('searchBar').oninput = function() {
@@ -134,74 +124,6 @@
                 }
             });
         }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var equipmentsContainer = document.getElementById('equipmentsContainer');
-            
-            // Function to update button colors based on the toolkit
-            function updateButtonStates() {
-                document.querySelectorAll('.unique-add-button').forEach(button => {
-                    var equipmentName = button.getAttribute('data-equipment');
-                    var isInToolkit = Array.from(equipmentsContainer.children).some(item => item.textContent.includes(equipmentName));
-                    
-                    if (isInToolkit) {
-                        button.classList.add('active');
-                        button.style.backgroundColor = 'green';
-                    } else {
-                        button.classList.remove('active');
-                        button.style.backgroundColor = 'orange';
-                    }
-                });
-            }
-        
-            // Initialize button states based on current toolkit
-            updateButtonStates();
-        
-            // Add event listener to table buttons
-            document.querySelectorAll('.unique-add-button').forEach(button => {
-                button.onclick = function() {
-                    var equipmentName = button.getAttribute('data-equipment');
-                    var existingItem = Array.from(equipmentsContainer.children).find(item => item.textContent.includes(equipmentName));
-                    
-                    if (button.classList.contains('active')) {
-                        // Remove equipment from the Equipments section
-                        if (existingItem) {
-                            existingItem.remove();
-                        }
-                        // Remove active class from the button
-                        button.classList.remove('active');
-                        button.style.backgroundColor = 'orange';
-                    } else {
-                        // Add equipment to the Equipments section
-                        var equipmentItem = document.createElement('div');
-                        equipmentItem.className = 'tool-item';
-                        equipmentItem.innerHTML = `${equipmentName} <button class="remove-tool-button" data-equipment="${equipmentName}">X</button>`;
-                        equipmentsContainer.appendChild(equipmentItem);
-        
-                        // Add active class to the button
-                        button.classList.add('active');
-                        button.style.backgroundColor = 'green';
-                    }
-                };
-            });
-        
-            // Add event listener to remove buttons in the toolkit
-            equipmentsContainer.addEventListener('click', function(event) {
-                if (event.target.classList.contains('remove-tool-button')) {
-                    var equipmentName = event.target.getAttribute('data-equipment');
-                    var row = Array.from(document.querySelectorAll('.unique-add-button')).find(button => button.getAttribute('data-equipment') === equipmentName);
-                    
-                    // Remove equipment from the Equipments section
-                    if (row) {
-                        row.classList.remove('active');
-                        row.style.backgroundColor = 'orange';
-                    }
-        
-                    // Remove equipment from the toolkit container
-                    event.target.parentElement.remove();
-                }
-            });
-        });
     </script>
 </body>
 </html>
