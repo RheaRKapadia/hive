@@ -959,3 +959,18 @@ body.newworkout {
     border-radius: 50%;
     margin-right: 10px;
 }
+
+.myworkouts .page-content {
+    display: flex;
+}
+.myworkouts .scrollable-content {
+    flex: 1;
+}
+.myworkouts .selected-exercises {
+    width: 300px;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+.myworkouts .submit-button {
+    margin-top: 20px;
+}

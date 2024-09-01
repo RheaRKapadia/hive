@@ -2,13 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HIVE Workouts List</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+<body class="myworkouts">
+    <header>
+        <div class="logo">
+            <h1>HIVE</h1>
+        </div>
+        <nav>
+            <div class="user-menu">
+                <a href="/user/userprofile">
+                    <img src="/images/avatar.png" alt="User Avatar" class="avatar">
+                </a>
+                <span>Menu</span>
+            </div>
+        </nav>
+    </header>
     <h1>Workouts</h1>
     <a href="/<%= userId %>/workouts/workout" class="btn">Back Day</a>
     <a href="/<%= userId %>/workouts/new" class="btn">New Workout</a>
+    <div class="workout-grid">
+        <div class="workout-card">
+            <div class="workout-title">My Workouts</div>
+            <div class="workout-location">Location</div>
+            <div class="workout-exercises">
+                Lat pulldown<br>
+                Dumbbell Dead lift<br>
+                Inverted Row<br>
+            </div>
+        </div>
+    </div>
+    <div class="workout-grid">
+        <% if (workoutsList && workoutsList.length > 0) { %>
+            <% workoutsList.forEach(function(workout) { %>
+                <div class="workout-card">
+                    <div class="workout-title"><%= workout.name %></div>
+                    <div class="workout-location"><%= workout.location %></div>
+                    <div class="workout-exercises">
+                        <% workout.exercises.slice(0, 3).forEach(function(exercise) { %>
+                            <%= exercise.name %><br>
+                        <% }); %>
+                        <% if (workout.exercises.length > 3) { %>
+                            ...and <%= workout.exercises.length - 3 %> more
+                        <% } %>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No workouts found. Create a new workout to get started!</p>
+        <% } %>
+    </div>
+    </div>
+    <button class="new-routine-btn" onclick="window.location.href='/workouts/new'">+</button>
+    <script>
+        document.querySelector('.new-routine-btn').addEventListener('click', function() {
+            window.location.href = '/user/workouts/new';
+        });
+    </script>
 </body>
 </html>
