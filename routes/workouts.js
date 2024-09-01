@@ -48,42 +48,50 @@ router.get('/:userId/workouts/new', async (req, res) => {
 
 //route to display log workout page, returns info for selected workout
 //Rhea - working on being able to access exercises as well
-router.get('/:userId/workouts/workout/log', async(req, res) => {
-    // res.render('13_logworkout')
-    const userId = req.params.userId
-    const workout = await firestore.getUserSingularWorkoutData( userId, 'JN4TCIHmfdIsPANP1iSR')
-    console.log('Retrieved user workout for logging:', workout)
-    const location = await firestore.getUserSingularLocationData(userId, workout.locationId)
-    console.log('Retrieved user workout:', workout, location)
-    res.render('13_logworkout', {workout, location, userId})
-})
+// router.get('/:userId/workouts/workout/log', async(req, res) => {
+//     // res.render('13_logworkout')
+//     const userId = req.params.userId
+//     const workout = await firestore.getUserSingularWorkoutData( userId, 'JN4TCIHmfdIsPANP1iSR')
+//     console.log('Retrieved user workout for logging:', workout)
+//     const location = await firestore.getUserSingularLocationData(userId, workout.locationId)
+//     console.log('Retrieved user workout:', workout, location)
+//     res.render('13_logworkout', {workout, location, userId})
+// })
 
 //route to post new workout to database
 router.post('/:userId/workouts/new', (req,res) =>{
-    res.redirect('/:userId/workouts')
+    const {selectedExercises} = req.body
+    try {
+        firestore.createWorkout(selectedExercises)
+        res.redirect('/:userId/workouts')
+    } catch(error) {
+        console.error('Error submitting exercises:', error)
+        res.status(500).json({ error: 'Failed to send exercises data' });
+    }
+    
 })
 
 
 // Route to get details of a specific workout
-router.get('/:id', async (req, res) => {
-    const exerciseId = req.params.id;
+// router.get('/:id', async (req, res) => {
+//     const exerciseId = req.params.id;
 
-    try {
-        // Fetch the specific exercise data using the exerciseId
-        const exercise = await getAllExercises(req, res, exerciseId);
+//     try {
+//         // Fetch the specific exercise data using the exerciseId
+//         const exercise = await getAllExercises(req, res, exerciseId);
 
-        if (!exercise) {
-            return res.render('16_workoutdetails', { message: 'Exercise not found', exercise: null });
-        }
+//         if (!exercise) {
+//             return res.render('16_workoutdetails', { message: 'Exercise not found', exercise: null });
+//         }
 
-        console.log('Fetched exercise:', exercise);  // Add this line for debugging
+//         console.log('Fetched exercise:', exercise);  // Add this line for debugging
 
-        // Render the workout details page with the exercise data
-        res.render('16_workoutdetails', { exercise: exercise });
-    } catch (error) {
-        console.error('Error fetching exercise details:', error);
-        res.render('16_workoutdetails', { message: 'Could not retrieve exercise details', exercise: null });
-    }
-});
+//         // Render the workout details page with the exercise data
+//         res.render('16_workoutdetails', { exercise: exercise });
+//     } catch (error) {
+//         console.error('Error fetching exercise details:', error);
+//         res.render('16_workoutdetails', { message: 'Could not retrieve exercise details', exercise: null });
+//     }
+// });
 
 module.exports = router

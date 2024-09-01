@@ -101,6 +101,27 @@ module.exports = {
       .catch(error => {
         console.error("Error storing user data:", error);
       });
+    },
+    createWorkout: async(exercises) =>{
+      const uid = firebase.auth().currentUser.uid;
+      const workoutRef = db.collection("Workouts").doc();
+      workoutRef.set({
+        
+        userId: uid,
+        locationId: "",
+        name: "",
+        generatedByAi : false,
+        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        exercises : exercises,
+        // Timestamp.fromDate(new Date())
+      })
+      .then(() => {
+        console.log("User workout data stored successfully!");
+      })
+      .catch(error => {
+        console.error("Error storing user data:", error);
+      });
     }
       
 };
