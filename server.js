@@ -3,14 +3,23 @@ const app = express()
 const firestore = require('./firestore')
 const path = require('path');
 const bodyParser = require('body-parser');
+const firebase = require('./firebaseLogin')
+require('firebase/compat/auth');
+require( 'firebase/compat/firestore');
 
 //middleware
 app.use(logger)
+//keep an account of the current user
+// app.use((req, res, next) => {
+//     var user = firebase.auth().currentUser;
+//     console.log('middleware to detect user:', user)
+//     res.locals.currentUser = user;
+//     next();
+//     })
 //allows you to parse info inputted through forms
 app.use(express.urlencoded({extended: true}))
 //allows you to parse json info through the body
 app.use(express.json())
-
 //serve static files
 app.use(express.static('public'));
 app.set('views', path.join(__dirname, 'views'))
@@ -27,10 +36,10 @@ const workoutsRouter = require('./routes/workouts')
 
 //define what the starting url would be for the given route
 app.use('/', otherRouter)
-app.use('/user', userRouter)
-app.use('/user/painpoints', painPointsRouter)
-app.use('/user/locations', locationsRouter)
-app.use('/user/workouts', workoutsRouter)
+app.use('/', userRouter)
+app.use('/', painPointsRouter)
+app.use('/', locationsRouter)
+app.use('/', workoutsRouter)
 
 
 //simple logger for debugging, print the url used in the terminal

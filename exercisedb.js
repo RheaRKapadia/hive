@@ -1,10 +1,11 @@
 const axios = require('axios');
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
+
 
 const getAllExercises = async (req, res) => {
     const { page = 1, limit = 1324 } = req.query;
     const offset = (page - 1) * limit; // Calculate the offset
-    console.log(process.env.X_RAPIDAPI_KEY)
+    console.log('rapidAPI key:' , process.env.X_RAPIDAPI_KEY)
     try {
         const options = {
             method: 'GET',
@@ -15,16 +16,16 @@ const getAllExercises = async (req, res) => {
                 'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
             },
             params: {
-                limit: limit.toString(),
-                offset: offset.toString()
+                limit: limit.toString(),  
+                offset: offset.toString() 
               }
             };
         const response = await axios.request(options);
         //hard coded total, need to see how to access it
         const total = 1324
         const totalPages = Math.ceil(total / limit);
-
-
+       
+        
         return {
             data: response.data,
             pagination: {
@@ -58,6 +59,7 @@ const getAllEquipment = async (req, res) => {
         }
   } catch (error) {
   console.error('Error fetching equipment data:', error)
+  console.log('rapidAPI key:' , process.env.X_RAPIDAPI_KEY)
   res.status(500).json({ error: 'Failed to fetch equipment data' });
   }
 }
