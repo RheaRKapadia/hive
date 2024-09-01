@@ -4,6 +4,7 @@ const serviceAccount = require('./serviceAccountKey.json')
 require( 'firebase/compat/firestore');
 require('firebase/compat/auth');
 const firebase = require('./firebaseLogin')
+// const { db } = require('./your-firebase-config-file');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -31,17 +32,17 @@ module.exports = {
     getUserSingularLocationData: async (userId, locationId) => {
         try {
           const locationSnapshot = await db.collection('Locations').doc(locationId).get();
-      
+
           if (!locationSnapshot.exists) {
             return { error: 'Location not found' };
           }
-      
+
           const location = { id: locationSnapshot.id, ...locationSnapshot.data() };
-      
+
           if (location.userId !== userId) {
             return { error: 'Unauthorized access' };
           }
-      
+
           return location;
         } catch (error) {
           console.error('Error retrieving location:', error);
@@ -68,10 +69,10 @@ module.exports = {
         // if (!workoutExercisesSnapshot.exists) {
         //   return { error: 'workout exercises not found' };
         // }
-    
+
         const workout = { id: workoutSnapshot.id, ...workoutSnapshot.data() };
         // const workoutExercises = { id: workoutExercisesSnapshot.id, ...workoutExercisesSnapshot.data() };
-    
+
         if (workout.userId !== userId) {
           return { error: 'Unauthorized access' };
         }
@@ -81,7 +82,7 @@ module.exports = {
         console.error('Error retrieving Workout:', error);
         return { error: 'Failed to retrieve exercises' };
       }
-    }, 
+    },
     createUser: async(firstName, lastName, email) =>{
       const uid = firebase.auth().currentUser.uid;
       const userRef = db.collection("Users").doc(uid);
@@ -101,6 +102,43 @@ module.exports = {
       .catch(error => {
         console.error("Error storing user data:", error);
       });
-    }
-      
+    },
+    getUserWorkoutsData: async(userId) =>{
+      try {
+        const workoutsSnapshot = await db.collection('users').doc(userId).collection('workouts').orderBy('createdAt', 'desc').get();
+        return workoutsSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+      } catch (error) {
+        console.error('Error fetching user workouts:', error);
+        return [];
+      }
+    },
+    // New function to save a workout
+saveUserWorkout:async(userId, workoutData)=> {
+  return db.collection('users').doc(userId).collection('workouts').add({
+    ...workoutData,
+    createdAt: new Date()
+  });
+},
+
+// Updated function to get user workouts with exercises
+getDetailedUserWorkouts:async(userId) =>{
+  return db.collection('users').doc(userId).collection('workouts')
+    .orderBy('createdAt', 'desc')
+    .get()
+    .then(snapshot => {
+      return snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+    })
+    .catch(error => {
+      console.error('Error fetching user workouts:', error);
+      return [];
+    });
+},
+
+
 };

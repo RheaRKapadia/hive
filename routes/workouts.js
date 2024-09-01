@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 const {getAllExercises} = require('../exercisedb')
 const firestore = require('../firestore')
-const { db, getUserWorkoutsData, getUserSingularWorkoutData } = require('../firestore');
-
+const { db, getUserSingularWorkoutData } = require('../firestore');
+const { getUserWorkoutsData, saveUserWorkout, getDetailedUserWorkouts } = require('../firestore');
 
 
 //route to display all workouts the user has created
@@ -32,19 +32,24 @@ router.get('/:userId/workouts/workout', async(req, res) => {
 
 //route to display new workout, returns all exercises in api
 router.get('/:userId/workouts/new', async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const exercises = await getAllExercises(req, res);
 
-        try {
-            const userId = req.params.userId
-            exercises = await getAllExercises(req, res)
-            console.log(exercises.pagination)
-            res.status(200).render('12_newworkout', {
-                exercises, userId
-            })
-        } catch (error) {
-        console.error('Error fetching exercises data:', error)
-        res.status(500).json({ error: 'Failed to fetch exercises data' });
+      if (exercises && exercises.pagination) {
+        res.status(200).render('12_newworkout', {
+          exercises,
+          userId  // Make sure to pass userId here
+        });
+      } else {
+        console.error('Exercises data is incomplete:', exercises);
+        res.status(500).render('error', { message: 'Failed to fetch complete exercises data' });
+      }
+    } catch (error) {
+      console.error('Error fetching exercises data:', error);
+      res.status(500).render('error', { message: 'Failed to fetch exercises data' });
     }
-})
+  });
 
 //route to display log workout page, returns info for selected workout
 //Rhea - working on being able to access exercises as well
@@ -86,4 +91,52 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.post('/:userId/workouts/create', async (req, res) => {
+    const userId = req.params.userId;
+    const { exercises, workoutName, location } = req.body;
+
+    try {
+      const workoutRef = await db.collection('users').doc(userId).collection('workouts').add({
+        name: workoutName,
+        location: location,
+        exercises: exercises,
+        createdAt: new Date()
+      });
+
+      res.json({ success: true, workoutId: workoutRef.id });
+    } catch (error) {
+      console.error('Error creating workout:', error);
+      res.status(500).json({ success: false, error: 'Failed to create workout' });
+    }
+  });
+
+  router.post('/:userId/workouts/create', async (req, res) => {
+    const userId = req.params.userId;
+    const { exercises, workoutName, location } = req.body;
+
+    try {
+      const workoutRef = await saveUserWorkout(userId, {
+        name: workoutName,
+        location: location,
+        exercises: exercises
+      });
+
+      res.json({ success: true, workoutId: workoutRef.id });
+    } catch (error) {
+      console.error('Error creating workout:', error);
+      res.status(500).json({ success: false, error: 'Failed to create workout' });
+    }
+  });
+
+  // Update the route that displays all workouts
+  router.get('/:userId/workouts', async (req, res) => {
+    const userId = req.params.userId;
+    try {
+      const workoutsList = await getDetailedUserWorkouts(userId);
+      res.render('10_workouts', { workoutsList, userId });
+    } catch (error) {
+      console.error('Error fetching workouts:', error);
+      res.status(500).render('error', { message: 'Failed to fetch workouts' });
+    }
+  });
 module.exports = router

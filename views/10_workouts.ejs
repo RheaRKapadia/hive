@@ -36,24 +36,24 @@
     </div>
     <div class="workout-grid">
         <% if (workoutsList && workoutsList.length > 0) { %>
-            <% workoutsList.forEach(function(workout) { %>
-                <div class="workout-card">
-                    <div class="workout-title"><%= workout.name %></div>
-                    <div class="workout-location"><%= workout.location %></div>
-                    <div class="workout-exercises">
-                        <% workout.exercises.slice(0, 3).forEach(function(exercise) { %>
-                            <%= exercise.name %><br>
-                        <% }); %>
-                        <% if (workout.exercises.length > 3) { %>
-                            ...and <%= workout.exercises.length - 3 %> more
-                        <% } %>
-                    </div>
-                </div>
-            <% }); %>
+          <% workoutsList.forEach(function(workout) { %>
+            <div class="workout-card">
+              <div class="workout-title"><%= workout.name %></div>
+              <div class="workout-location"><%= workout.location %></div>
+              <div class="workout-exercises">
+                <% workout.exercises.slice(0, 3).forEach(function(exercise) { %>
+                  <%= exercise.name %><br>
+                <% }); %>
+                <% if (workout.exercises.length > 3) { %>
+                  ...and <%= workout.exercises.length - 3 %> more
+                <% } %>
+              </div>
+            </div>
+          <% }); %>
         <% } else { %>
-            <p>No workouts found. Create a new workout to get started!</p>
+          <p>No workouts found. Create a new workout to get started!</p>
         <% } %>
-    </div>
+      </div>
     </div>
     <button class="new-routine-btn" onclick="window.location.href='/workouts/new'">+</button>
     <script>
