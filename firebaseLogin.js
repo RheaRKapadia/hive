@@ -18,6 +18,3 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 module.exports = firebase
-
-
-
