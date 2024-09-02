@@ -39,13 +39,13 @@ body {
 
 .top-right-image {
     top: 10px;
-    right: -60px;
+    right: -80px;
     width: 350px;
     height: 350px;
 }
 
 .bottom-left-image {
-    bottom: -10px;
+    bottom:-10px;
     left: 10px;
     width: 450px;
     height: 450px;
@@ -53,7 +53,7 @@ body {
 
 .bottom-right-image {
     bottom: -35px;
-    right: 10px;
+    right: -20px;
     width: 450px;
     height: 450px;
 }
@@ -71,29 +71,50 @@ main img {
 }
 
 h1 {
-    margin: 0;
+    margin: 0 0 20px 0;
     line-height: 1.2;
     color: #ffffff;
+    font-size: 58px;
+    padding: 20px 0 10px;
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+  .highlighted-text {
+    color: #FFD700;
   }
 
-.landing-btn {
+  .landing-btn {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 12px 24px;
     margin: 10px;
-    background-color: #FFD700;
+    background-color: #FFA000;
+    background-image: linear-gradient(to bottom, #FFD54F, #FFA000);
     color: #ffffff;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 25px;
     align-items: center;
-}
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
 .landing-btn:hover {
-    background-color: #FF8C00;
+    background-color: #FF8F00;
+    background-image: linear-gradient(to bottom, #FFC107, #FF8F00);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
 }
 
 .hivemascot {
-    max-width: 100px; /* Ensure this comment is properly opened */
+    max-width: 100px;
     height: auto;
-    margin-bottom: -20px;
+    margin-bottom: -5px;
 }
 
 .hive-heading {
@@ -743,12 +764,12 @@ input {
 }
 
 
-/* Locations -------------------------------------------------------------------*/ 
+/* Locations -------------------------------------------------------------------*/
 .header-container {
-    display: flex; 
-    justify-content: space-between; 
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 20px; 
+    padding: 0 20px;
 }
 
 .hive-heading {
@@ -769,27 +790,27 @@ input {
 }
 
 .image-button:hover {
-    opacity: 0.8; 
+    opacity: 0.8;
 }
 
 .outermost-box {
-    width: 95vw;  
-    height: 90vh; 
-    margin: 0;   
-    padding: 0; 
-    box-sizing: border-box; 
+    width: 95vw;
+    height: 90vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .logo-and-menu {
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
+    justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
 }
 
 .main-box {
     background-color: rgba(26, 38, 52, 0.75);
-    width: 95vw; 
+    width: 95vw;
     height: 80vh;
     border-radius: 40px;
     padding: 50px;
@@ -891,8 +912,8 @@ input {
 .location-heading {
     padding: 10px;
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     margin-bottom:25px;
 }
@@ -915,7 +936,7 @@ input {
 }
 
 .add-button:hover {
-    opacity: 0.8; 
+    opacity: 0.8;
 }
 
 .edit-button{
@@ -932,7 +953,7 @@ input {
 }
 
 .edit-button:hover {
-    opacity: 0.8; 
+    opacity: 0.8;
 }
 
 .location-content {
@@ -1000,7 +1021,7 @@ input {
 /* When the screen width is 900px or less, switch to 2 sections per row */
 @media (max-width: 900px) {
     .ind-location {
-        width: 45%; 
+        width: 45%;
     }
 }
 
@@ -1012,10 +1033,10 @@ input {
 }
 
 
-  /* New Location FINAL CSS ---------------------------------------*/ 
+  /* New Location FINAL CSS ---------------------------------------*/
 .set-new-location-main-box{
     background-color: rgba(26, 38, 52, 0.75);
-    width: 95vw; 
+    width: 95vw;
     height: 80vh;
     border-radius: 40px;
     padding: 50px;
@@ -1046,12 +1067,12 @@ input {
     width: 60%;
     height: 100%;
   }
-  
+
 .Set-New-Location1 h3 {
     text-align: left; /* This will align the text to the left */
     margin-bottom:5px;
   }
-  
+
   .equipment-container {
     background-color: rgba(11, 64, 156, 0.7);
     border-radius: 18px;
@@ -1071,16 +1092,16 @@ input {
     box-sizing: border-box;
     margin-right:20px;
     margin-left: 20px;
-    margin-top: 20px; 
+    margin-top: 20px;
     gap:10px;
   }
 
 .equipment-container-search-bar{
-    width: 90%; 
+    width: 90%;
     padding: 10px;
     border-radius: 10px;
     font-size: 10px;
-    height: 40%; 
+    height: 40%;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
     outline:none;
 }
@@ -1089,16 +1110,16 @@ input {
     background-color: white;
     padding: 8px;
     border-radius: 10px;
-    width: 40%; 
+    width: 40%;
     height:100%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .equipment-container-search-add{
     border-radius: 10px;
     width: 35px;
     height: 35px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .equipment-container-header {
@@ -1106,21 +1127,21 @@ input {
     font-weight: bold;
     margin-top:10px;
     margin-bottom:10px;
-    margin-right: 20px; 
+    margin-right: 20px;
     margin-left: 20px;
     padding-bottom:5px;
     border-bottom: 2px solid white;
 }
 
 .equipment-container-column-Equipment{
-    text-align: left; 
-    width: 90%; 
+    text-align: left;
+    width: 90%;
 }
 
 
 .equipment-container-column-Add{
-    text-align: left; 
-    width: 10%; 
+    text-align: left;
+    width: 10%;
 }
 
 
@@ -1131,13 +1152,13 @@ input {
     gap: 10px;
     height: fit-content; /* Adjust row height based on content */
   }
-  
+
 #tableRows {
     margin-left: 20px;
     margin-right: 20px;
     overflow-y: scroll; /* Enable vertical scrolling */
     flex-grow: 1; /* Allow the table rows section to take up remaining space */
-    
+
     /* Hide scrollbar but still allow scrolling */
     scrollbar-width: none; /* For Firefox */
     -ms-overflow-style: none;  /* For Internet Explorer and Edge */
@@ -1147,7 +1168,7 @@ input {
     display: none; /* For Chrome, Safari, and Opera */
 }
 
-  
+
 .unique-equipment-column {
     background-color: #34495E; /* Darker blue background for the equipment cells */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -1251,14 +1272,14 @@ input {
         width: 100%;
         text-align: left;
     }
-    
+
 
   .Set-New-Location-Setting-Btn{
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
-    gap: 15px; 
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
     margin-top: 10px;
     border-radius: 10px;
     padding-top: 10px;
@@ -1267,7 +1288,7 @@ input {
     padding-left:30px;
     box-sizing: border-box;
     width: 100%;
-    
+
   }
 
   .location-btn {
@@ -1279,7 +1300,7 @@ input {
     border-radius: 5px;
     align-items: center;
     width: 100%;
-    
+
 }
 .location-btn:hover {
     background-color: #FF8C00;
@@ -1298,7 +1319,7 @@ input {
 .location-dropdown{
     width: 80%;
     height: 30px;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 .titleInput{
@@ -1307,7 +1328,7 @@ input {
 /* Pain Management */
 .pain-management-main-box {
     background-color: rgba(26, 38, 52, 0.75);
-    width: 95vw; 
+    width: 95vw;
     height: 80vh;
     border-radius: 40px;
     padding: 50px;
@@ -1339,7 +1360,7 @@ input {
     justify-content: center;
     position: relative;
     gap:40px;
-    width: 400px; 
+    width: 400px;
 }
 
 .nav-button {
@@ -1372,7 +1393,7 @@ input {
     padding: 1rem;
     border-radius: 8px;
     background-color: '/images/background.jpg'; /* Background color */
-    width: 300px; 
+    width: 300px;
     height: 250px;
     overflow: hidden; /* Ensure no overflow */
 }
@@ -1395,11 +1416,11 @@ input {
     max-width: 100%; /* Ensure it doesn't exceed the container width */
     padding: 0; /* Set padding to 0 */
     margin: 0; /* Ensure there is no margin */
-    
+
     /* Center content horizontally and vertically in the grid container */
     align-content: center; /* Center grid content vertically */
     justify-content: center; /* Center grid content horizontally */
-    
+
     /* Center items within their grid cells */
     align-items: center; /* Center items vertically in their grid cells */
     justify-items: center; /* Center items horizontally in their grid cells */
