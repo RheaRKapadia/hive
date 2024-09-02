@@ -1025,6 +1025,7 @@ body.newworkout {
 .myworkouts .exercise-name a {
     color: white;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .myworkouts .exercise-name:hover {
@@ -1033,6 +1034,48 @@ body.newworkout {
 
 .myworkouts .exercise-name:hover a {
     color: white;
+}
+
+/* Popup styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #0a2351;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.popup h3 {
+    color: #f0a500;
+    margin-bottom: 15px;
+}
+
+.popup button {
+    background-color: #f0a500;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup button:hover {
+    background-color: #ff8c00;
 }
 
 /* Add styles for the exercise table */

@@ -22,7 +22,7 @@
     </header>
     <main>
         <h1>Workouts</h1>
-        <a href="/<%= userId %>/workouts/workout" class="btn">Back Day</a>
+        <!-- <a href="/<%= userId %>/workouts/workout" class="btn">Back Day</a> -->
         <a href="/<%= userId %>/workouts/new" class="btn">New Workout</a>
         <% if (messages && messages.error) { %>
             <div class="error-message">
@@ -78,6 +78,15 @@
         </div>
     </main>
     <button class="new-routine-btn" onclick="window.location.href='/workouts/new'">+</button>
+    <div id="exercisePopup" class="popup">
+        <div class="popup-content">
+            <h3>Exercise Options</h3>
+            <button id="editExercise">Edit Exercise</button>
+            <button id="deleteExercise">Delete Exercise</button>
+            <button id="closePopup">Close</button>
+        </div>
+    </div>
+    <script src="/js/workouts.js"></script>
     <script>
         document.querySelector('.new-routine-btn').addEventListener('click', function() {
             window.location.href = '/user/workouts/new';
