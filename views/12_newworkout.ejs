@@ -24,17 +24,13 @@
   <div class="page-content">
     <div class="fixed-content">
         <h1>New Routine</h1>
+        <input type="text" id="workoutName" placeholder="Workout Name" required>
+            <input type="text" id="workoutLocation" placeholder="Workout Location" required>
         <div class="search-bar">
             <input type="text" class="search-input" placeholder="Search Workouts">
             <button class="personalized-workout">Personalized Workout</button>
         </div>
         <span>Filter</span>
-                <!-- <select id="difficultyFilter" class="filter-button">
-                    <option value="">Difficulty Level</option>
-                    <option value="beginner">Beginner</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="advanced">Advanced</option>
-                </select> -->
                 <select id="bodyPartFilter" class="filter-button">
                   <option value="">Body Part</option>
                   <option value="back">Back</option>
@@ -79,12 +75,6 @@
                 <option value="weighted">Weighted</option>
                 <option value="wheel_roller">Wheel Roller</option>
               </select>
-              <!-- <select id="durationFilter" class="filter-button">
-                <option value="">Duration</option>
-              </select>
-              <select id="userRatingFilter" class="filter-button">
-                <option value="">User Rating</option>
-              </select> -->
               <select id="targetFilter" class="filter-button">
                 <option value="">Target Area</option>
                 <option value="abductors">Abductors</option>
@@ -107,61 +97,58 @@
                 <option value="triceps">Triceps</option>
                 <option value="upper_back">Upper Back</option>
               </select>
-        <!-- <div class="categories">
-            <span>Categories</span>
-            <div class="category">Flexibility</div>
-            <div class="category">Cardio</div>
-            <div class="category">Strength</div>
-        </div> -->
+    </div>
+    <div class="selected-exercises">
+      <h2>Selected Exercises</h2>
+      <ul id="selectedExercisesList"></ul>
+      <button id="submitWorkout" class="submit-button">Create Workout</button>
     </div>
     <div class="scrollable-content">
       <div class="workout-list">
           <div class="workout-header">
-              <div>Add</div>
+              <div>Select</div>
               <div>Exercise</div>
               <div>Description</div>
               <div>Equipment</div>
               <div>Muscles</div>
           </div>
           <% if (exercises && exercises.data && exercises.data.length > 0) { %>
-              <% exercises.data.forEach(function(exercise) { %>
-                  <div class="workout-row">
-                      <button class="add-exercise">+</button>
-                      <div class="exercise-name">
+            <% exercises.data.forEach(function(exercise) { %>
+                <div class="workout-row">
+                    <div>
+                        <input type="checkbox" class="select-exercise" data-exercise-id="<%= exercise.id %>">
+                    </div>
+                    <div class="exercise-name">
                         <a href="#" class="exercise-link" data-exercise-id="<%= exercise.id %>"><%= exercise.name %></a>
-                      </div>
-                      <div class="exercise-description">
+                    </div>
+                    <div class="exercise-description">
                         <p class="short-description"><%= exercise.instructions[0] %>...</p>
                         <div class="full-instructions" style="display: none;">
-                          <% exercise.instructions.forEach(function(instruction) { %>
-                            <p><%= instruction %></p>
-                          <% }); %>
+                            <% exercise.instructions.forEach(function(instruction) { %>
+                                <p><%= instruction %></p>
+                            <% }); %>
                         </div>
-                      </div>
-                      <div><span class="equipment-tag"><%= exercise.equipment %></span></div>
-                      <div><%= exercise.target %>, <%= exercise.secondaryMuscles.join(', ') %></div>
-                  </div>
-              <% }); %>
-          <% } else { %>
-              <div class="no-exercises">No exercises found.</div>
-          <% } %>
+                    </div>
+                    <div><span class="equipment-tag"><%= exercise.equipment %></span></div>
+                    <div class="target-muscles">
+                        <%= exercise.target %>
+                        <% if (exercise.secondaryMuscles && exercise.secondaryMuscles.length > 0) { %>
+                            , <%= exercise.secondaryMuscles.join(', ') %>
+                        <% } %>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <div class="no-exercises">No exercises found.</div>
+        <% } %>
       </div>
-    </div>
-
-  <div class="pagination">
-      <% if (exercises.pagination.currentPage > 1) { %>
-          <a href="/user/workouts/new?page=<%= exercises.pagination.currentPage - 1 %>">&laquo; Previous</a>
-      <% } %>
-
-      <% for (let i = 1; i <= exercises.pagination.totalPages; i++) { %>
-          <a href="/user/workouts/new?page=<%= i %>" class="<%= exercises.pagination.currentPage === i ? 'active' : '' %>"><%= i %></a>
-      <% } %>
-
-      <% if (exercises.pagination.currentPage < exercises.pagination.totalPages) { %>
-          <a href="/user/workouts/new?page=<%= exercises.pagination.currentPage + 1 %>">Next &raquo;</a>
-      <% } %>
   </div>
-  <a href="#" class="add-button">+</a>
+
+  <!-- <a href="#" class="add-button">+</a> -->
+  <script>
+    // Pass the exercises data from the server to the client
+    const exercises = <%- JSON.stringify(exercises.data) %>;
+</script>
   <script src="/js/workout-filters.js"></script>
 <script src="/js/exercise-details.js"></script>
 <script>
@@ -187,6 +174,98 @@
           `;
           exerciseContainer.appendChild(exerciseRow);
       });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const selectedExercises = new Set();
+    const selectedExercisesList = document.getElementById('selectedExercisesList');
+    const submitWorkoutButton = document.getElementById('submitWorkout');
+    const workoutNameInput = document.getElementById('workoutName');
+    const workoutLocationInput = document.getElementById('workoutLocation');
+
+    // Ensure userId is passed from the server
+    const userId = '<%= userId %>';
+
+    if (selectedExercisesList) {
+      document.querySelectorAll('.select-exercise').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          const exerciseId = this.dataset.exerciseId;
+          const exerciseRow = this.closest('.workout-row');
+          const exerciseName = exerciseRow.querySelector('.exercise-name').textContent.trim();
+          const exerciseDescription = exerciseRow.querySelector('.exercise-description').textContent.trim();
+          const exerciseEquipment = exerciseRow.querySelector('.equipment-tag').textContent.trim();
+          const exerciseMuscles = exerciseRow.querySelector('div:last-child').textContent.trim();
+
+          if (this.checked) {
+            selectedExercises.add({
+              id: exerciseId,
+              name: exerciseName,
+              description: exerciseDescription,
+              equipment: exerciseEquipment,
+              muscles: exerciseMuscles
+            });
+            const li = document.createElement('li');
+            li.textContent = exerciseName;
+            li.dataset.exerciseId = exerciseId;
+            selectedExercisesList.appendChild(li);
+          } else {
+            selectedExercises.delete([...selectedExercises].find(e => e.id === exerciseId));
+            const li = selectedExercisesList.querySelector(`li[data-exercise-id="${exerciseId}"]`);
+            if (li) li.remove();
+          }
+        });
+      });
+    } else {
+      console.error('selectedExercisesList element not found');
+    }
+
+    if (submitWorkoutButton) {
+      submitWorkoutButton.addEventListener('click', function() {
+        const workoutName = workoutNameInput.value.trim();
+        const location = workoutLocationInput.value.trim();
+
+        if (!workoutName || !location) {
+          alert('Please enter a workout name and location');
+          return;
+        }
+
+        const selectedExercisesArray = Array.from(selectedExercises).map(ex => ({
+          id: ex.id,
+          name: ex.name,
+          description: ex.description,
+          equipment: ex.equipment,
+          muscles: ex.muscles
+        }));
+
+        fetch(`/${userId}/workouts/new`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            exercises: selectedExercisesArray,
+            workoutName: workoutName,
+            location: location,
+          }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // Redirecting to the given URL from the server response
+              window.location.href = data.redirectUrl;
+            } else {
+              console.error('Error creating workout:', data.error);
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+
+      });
+    } else {
+      console.error('submitWorkoutButton element not found');
+    }
   });
 </script>
 </body>

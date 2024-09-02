@@ -54,29 +54,21 @@ module.exports = {
         return painpoints
     },
     getUserWorkoutsData: async (userId) => {
-      const workoutsSnapshot = await db.collection('Workouts').where('userId', '==', userId).get()
+      const workoutsSnapshot = await db.collection('Workouts').where('userId', '==', userId).orderBy('createdAt', 'desc').get()
       const workouts = workoutsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
       return workouts
     },
     getUserSingularWorkoutData: async (userId, workoutId) => {
       try {
         const workoutSnapshot = await db.collection('Workouts').doc(workoutId).get();
-        // const workoutExercisesSnapshot = await db.collection('Workouts').doc(workoutId).collection('exercises').get()
         if (!workoutSnapshot.exists) {
           return { error: 'workout not found' };
         }
-        // if (!workoutExercisesSnapshot.exists) {
-        //   return { error: 'workout exercises not found' };
-        // }
-    
         const workout = { id: workoutSnapshot.id, ...workoutSnapshot.data() };
-        // const workoutExercises = { id: workoutExercisesSnapshot.id, ...workoutExercisesSnapshot.data() };
-    
         if (workout.userId !== userId) {
           return { error: 'Unauthorized access' };
         }
         return workout
-        // return [workout, workoutExercises];
       } catch (error) {
         console.error('Error retrieving Workout:', error);
         return { error: 'Failed to retrieve exercises' };
@@ -97,6 +89,25 @@ module.exports = {
       })
       .then(() => {
         console.log("User data stored successfully!");
+      })
+      .catch(error => {
+        console.error("Error storing user data:", error);
+      });
+    },
+    createWorkout: async(exercises, name, location, userId) =>{
+      const workoutRef = db.collection("Workouts").doc();
+      workoutRef.set({
+        userId: userId,
+        locationId: "",
+        locationName: location,
+        name: name,
+        generatedByAi : false,
+        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        exercises : exercises,
+      })
+      .then(() => {
+        console.log("User workout data stored successfully!");
       })
       .catch(error => {
         console.error("Error storing user data:", error);

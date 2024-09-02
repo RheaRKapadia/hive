@@ -1,6 +1,7 @@
 const axios = require('axios');
 require('dotenv').config({ path: '.env' });
 require('dotenv').config({ path: '.env' });
+require('dotenv').config({ path: '.env.local' });
 
 
 const getAllExercises = async (req, res) => {
