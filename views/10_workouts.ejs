@@ -20,71 +20,59 @@
             </div>
         </nav>
     </header>
-    <h1>Workouts</h1>
-    <a href="/<%= userId %>/workouts/workout" class="btn">Back Day</a>
-    <a href="/<%= userId %>/workouts/new" class="btn">New Workout</a>
-    <% if (messages && messages.error) { %>
-        <div class="error-message">
-            <%= messages.error %>
-        </div>
-    <% } %>
-
-    <!-- Success message display -->
-    <% if (messages && messages.success) { %>
-        <div class="success-message">
-            <%= messages.success %>
-        </div>
-    <% } %>
-    <!-- <div class="workout-grid">
-        <div class="workout-card">
-            <div class="workout-title">My Workouts</div>
-            <div class="workout-location">Location</div>
-            <div class="workout-exercises">
-                Lat pulldown<br>
-                Dumbbell Dead lift<br>
-                Inverted Row<br>
+    <main>
+        <h1>Workouts</h1>
+        <a href="/<%= userId %>/workouts/workout" class="btn">Back Day</a>
+        <a href="/<%= userId %>/workouts/new" class="btn">New Workout</a>
+        <% if (messages && messages.error) { %>
+            <div class="error-message">
+                <%= messages.error %>
             </div>
-        </div>
-    </div> -->
-    <div class="workout-list">
-        <% if (workoutsList && workoutsList.length > 0) { %>
-            <% workoutsList.forEach(function(workout) { %>
-                <div class="workout-card">
-                    <h2 class="workout-title"><%= workout.name %></h2>
-                    <p class="workout-location">Location: <%= workout.location %></p>
-                    <div class="workout-exercises">
-                        <h3>Exercises:</h3>
-                        <table class="exercise-table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Equipment</th>
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% workout.exercises.forEach(function(exercise) { %>
-                                    <tr>
-                                        <td><a href="/<%= userId %>/exercise/<%= exercise.id %>"><%= exercise.name %></a></td>
-                                        <td><%= exercise.equipment %></td>
-                                        <td>
-                                            <ul>
-                                                <% exercise.description.split('.').filter(point => point.trim()).forEach(function(point) { %>
-                                                    <li><%= point.trim() %>.</li>
-                                                <% }); %>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                <% }); %>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            <% }); %>
-        <% } else { %>
-            <p class="no-workouts-message">No workouts found. Create a new workout to get started!</p>
         <% } %>
-    </div>
+        <% if (messages && messages.success) { %>
+            <div class="success-message">
+                <%= messages.success %>
+            </div>
+        <% } %>
+        <div class="workout-list">
+            <% if (workoutsList && workoutsList.length > 0) { %>
+                <% workoutsList.forEach(function(workout) { %>
+                    <div class="workout-card">
+                        <h2 class="workout-title"><%= workout.name %></h2>
+                        <p class="workout-location">Location: <%= workout.location %></p>
+                        <div class="workout-exercises">
+                            <table class="exercise-table">
+                                <thead>
+                                    <tr>
+                                        <th>Exercise Name</th>
+                                        <th>Equipment</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% workout.exercises.forEach(function(exercise) { %>
+                                        <tr>
+                                            <td><a href="/<%= userId %>/exercise/<%= exercise.id %>"><%= exercise.name %></a></td>
+                                            <td><%= exercise.equipment %></td>
+                                            <td>
+                                                <ul>
+                                                    <% exercise.description.split('.').filter(point => point.trim()).forEach(function(point) { %>
+                                                        <li><%= point.trim() %>.</li>
+                                                    <% }); %>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="no-workouts-message">No workouts found. Create a new workout to get started!</p>
+            <% } %>
+        </div>
+    </main>
     <button class="new-routine-btn" onclick="window.location.href='/workouts/new'">+</button>
     <script>
         document.querySelector('.new-routine-btn').addEventListener('click', function() {

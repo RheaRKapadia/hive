@@ -821,105 +821,6 @@ body.newworkout {
 }
 
 /* My Workouts */
-.myworkouts body {
-    font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: white;
-            margin: 0;
-            padding: 20px;
-}
-.myworkouts .header {
-    display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-}
-.myworkouts .logo {
-    font-size: 24px;
-            font-weight: bold;
-}
-
-.myworkouts .logo span {
-    color: #ffa500;
-}
-
-.myworkouts .workouts-container {
-    background-color: #1e2835;
-    border-radius: 30px;
-    padding: 30px; /* Increased padding */
-    position: relative;
-    margin-bottom: 20px; /* Adjusted margin */
-}
-
-.myworkouts .menu-icon {
-    font-size: 24px;
-}
-.myworkouts h1 {
-    margin-bottom: 20px;
-            font-size: 28px;
-}
-.myworkouts .workout-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Increased minimum width */
-    gap: 30px; /* Increased gap for better spacing */
-
-}
-.myworkouts .workout-card {
-    background-color: #0c3864;
-    border-radius: 25px;
-    padding: 20px; /* Increased padding */
-    min-height: 400px; /* Increased minimum height */
-    width: 100%; /* Full width of grid cell */
-    display: flex;
-    flex-direction: column;
-}
-.myworkouts .workout-title {
-    font-size: 24px; /* Increased font size */
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: white;
-}
-.myworkouts .workout-type,
-.myworkouts .workout-location {
-    font-size: 14px; /* Slightly increased font size */
-    color: #ffa500;
-    margin-bottom: 10px;
-}
-.myworkouts .workout-exercises {
-    font-size: 28px;
-    margin-top: 10px;
-    flex-grow: 1;
-    overflow-y: scroll;
-    color: white;
-    align-items: center;
-}
-
-.myworkouts .workout-location {
-            font-size: 12px;
-            color: #ffa500;
-        }
-
-.myworkouts .new-routine-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #ffa500;
-    color: black;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 30px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.myworkouts .selected {
-    border: 2px solid #3498db;
-}
-
 /* myworkouts header */
 /* Header Styles */
 .myworkouts {
@@ -935,6 +836,7 @@ body.newworkout {
     align-items: center;
     width: 100%;
     box-sizing: border-box;
+    background-color: #0a2351;
 }
 
 .myworkouts .logo h1 {
@@ -961,6 +863,122 @@ body.newworkout {
     margin-right: 10px;
 }
 
+.myworkouts main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+.myworkouts body {
+    font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+}
+.myworkouts .header {
+    display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+}
+.myworkouts .logo {
+    font-size: 24px;
+            font-weight: bold;
+}
+
+.myworkouts .logo span {
+    color: #ffa500;
+}
+
+.myworkouts .workouts-container {
+    background-color: #1e2835;
+    border-radius: 30px;
+    padding: 30px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.myworkouts .menu-icon {
+    font-size: 24px;
+}
+.myworkouts h1 {
+    margin-bottom: 20px;
+            font-size: 28px;
+}
+.myworkouts .workout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Increased minimum width */
+    gap: 30px; */
+
+}
+.myworkouts .workout-card {
+    background-color: #0c3864;
+    border-radius: 25px;
+    padding: 20px;
+    min-height: 400px; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.myworkouts .workout-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: white;
+}
+.myworkouts .workout-type,
+.myworkouts .workout-location {
+    font-size: 14px; /* Slightly increased font size */
+    color: #ffa500;
+    margin-bottom: 10px;
+}
+.myworkouts .workout-exercises {
+    font-size: 28px;
+    margin-top: 10px;
+    flex-grow: 1;
+    overflow-y: scroll;
+    color: white;
+    align-items: center;
+}
+
+.myworkouts .workout-location {
+    font-size: 14px;
+    color: #ffa500;
+    margin-bottom: 10px;
+        }
+
+.myworkouts .new-routine-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffa500;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.myworkouts .selected {
+    border: 2px solid #3498db;
+}
+
+.myworkouts .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #f0a500;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
 .myworkouts .page-content {
     display: flex;
 }
@@ -977,10 +995,10 @@ body.newworkout {
 }
 
 .myworkouts .workout-exercises {
-    font-size: 16px; /* Adjusted for better readability */
+    font-size: 16px;
     margin-top: 15px;
     flex-grow: 1;
-    overflow-y: auto; /* Changed from scroll to auto */
+    overflow-y: auto;
     color: white;
 }
 
