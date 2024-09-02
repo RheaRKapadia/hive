@@ -124,14 +124,19 @@ saveUserWorkout:async(userId, workoutData)=> {
 },
 
 // Updated function to get user workouts with exercises
-getDetailedUserWorkouts:async(userId) =>{
+getDetailedUserWorkouts: function(userId) {
   return db.collection('users').doc(userId).collection('workouts')
     .orderBy('createdAt', 'desc')
     .get()
     .then(snapshot => {
-      return snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
+      return Promise.all(snapshot.docs.map(async doc => {
+        const workout = { id: doc.id, ...doc.data() };
+        // Fetch detailed exercise information for each exercise in the workout
+        workout.exercises = await Promise.all(workout.exercises.map(async exerciseRef => {
+          const exerciseDoc = await exerciseRef.get();
+          return { id: exerciseDoc.id, ...exerciseDoc.data() };
+        }));
+        return workout;
       }));
     })
     .catch(error => {
@@ -139,6 +144,20 @@ getDetailedUserWorkouts:async(userId) =>{
       return [];
     });
 },
+getExerciseDetails: function(userId, exerciseId) {
+  return db.collection('users').doc(userId).collection('exercises').doc(exerciseId).get()
+    .then(doc => {
+      if (doc.exists) {
+        return { id: doc.id, ...doc.data() };
+      } else {
+        return null;
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching exercise details:', error);
+      return null;
+    });
+}
 
 
 };

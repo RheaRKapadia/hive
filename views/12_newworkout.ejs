@@ -113,27 +113,34 @@
               <div>Muscles</div>
           </div>
           <% if (exercises && exercises.data && exercises.data.length > 0) { %>
-              <% exercises.data.forEach(function(exercise) { %>
-                  <div class="workout-row">
-                      <input type="checkbox" class="select-exercise" data-exercise-id="<%= exercise.id %>">
-                      <div class="exercise-name">
-                          <a href="#" class="exercise-link" data-exercise-id="<%= exercise.id %>"><%= exercise.name %></a>
-                      </div>
-                      <div class="exercise-description">
-                          <p class="short-description"><%= exercise.instructions[0] %>...</p>
-                          <div class="full-instructions" style="display: none;">
-                              <% exercise.instructions.forEach(function(instruction) { %>
-                                  <p><%= instruction %></p>
-                              <% }); %>
-                          </div>
-                      </div>
-                      <div><span class="equipment-tag"><%= exercise.equipment %></span></div>
-                      <div><%= exercise.target %>, <%= exercise.secondaryMuscles.join(', ') %></div>
-                  </div>
-              <% }); %>
-          <% } else { %>
-              <div class="no-exercises">No exercises found.</div>
-          <% } %>
+            <% exercises.data.forEach(function(exercise) { %>
+                <div class="workout-row">
+                    <div>
+                        <input type="checkbox" class="select-exercise" data-exercise-id="<%= exercise.id %>">
+                    </div>
+                    <div class="exercise-name">
+                        <a href="#" class="exercise-link" data-exercise-id="<%= exercise.id %>"><%= exercise.name %></a>
+                    </div>
+                    <div class="exercise-description">
+                        <p class="short-description"><%= exercise.instructions[0] %>...</p>
+                        <div class="full-instructions" style="display: none;">
+                            <% exercise.instructions.forEach(function(instruction) { %>
+                                <p><%= instruction %></p>
+                            <% }); %>
+                        </div>
+                    </div>
+                    <div><span class="equipment-tag"><%= exercise.equipment %></span></div>
+                    <div class="target-muscles">
+                        <%= exercise.target %>
+                        <% if (exercise.secondaryMuscles && exercise.secondaryMuscles.length > 0) { %>
+                            , <%= exercise.secondaryMuscles.join(', ') %>
+                        <% } %>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <div class="no-exercises">No exercises found.</div>
+        <% } %>
       </div>
   </div>
 

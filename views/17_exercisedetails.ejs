@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Details - <%= exercise.name %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="exercise-details">
+    <header>
+        <div class="logo">
+            <h1>HIVE</h1>
+        </div>
+        <nav>
+            <div class="user-menu">
+                <a href="/user/userprofile">
+                    <img src="/images/avatar.png" alt="User Avatar" class="avatar">
+                </a>
+                <span>Menu</span>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1><%= exercise.name %></h1>
+        <div class="exercise-info">
+            <p><strong>Equipment:</strong> <%= exercise.equipment %></p>
+            <p><strong>Target Muscles:</strong> <%= exercise.muscles %></p>
+            <h2>Description</h2>
+            <p><%= exercise.description %></p>
+            <h2>Instructions</h2>
+            <ol>
+                <% exercise.instructions.forEach(function(instruction) { %>
+                    <li><%= instruction %></li>
+                <% }); %>
+            </ol>
+        </div>
+        <a href="/<%= userId %>/workouts" class="btn">Back to Workouts</a>
+    </main>
+</body>
+</html>

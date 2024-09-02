@@ -110,23 +110,23 @@ router.post('/:userId/workouts/create', async (req, res) => {
     }
   });
 
-  router.post('/:userId/workouts/create', async (req, res) => {
-    const userId = req.params.userId;
-    const { exercises, workoutName, location } = req.body;
+//   router.post('/:userId/workouts/create', async (req, res) => {
+//     const userId = req.params.userId;
+//     const { exercises, workoutName, location } = req.body;
 
-    try {
-      const workoutRef = await saveUserWorkout(userId, {
-        name: workoutName,
-        location: location,
-        exercises: exercises
-      });
+//     try {
+//       const workoutRef = await saveUserWorkout(userId, {
+//         name: workoutName,
+//         location: location,
+//         exercises: exercises
+//       });
 
-      res.json({ success: true, workoutId: workoutRef.id });
-    } catch (error) {
-      console.error('Error creating workout:', error);
-      res.status(500).json({ success: false, error: 'Failed to create workout' });
-    }
-  });
+//       res.json({ success: true, workoutId: workoutRef.id });
+//     } catch (error) {
+//       console.error('Error creating workout:', error);
+//       res.status(500).json({ success: false, error: 'Failed to create workout' });
+//     }
+//   });
 
   // Update the route that displays all workouts
   router.get('/:userId/workouts', async (req, res) => {
@@ -137,6 +137,28 @@ router.post('/:userId/workouts/create', async (req, res) => {
     } catch (error) {
       console.error('Error fetching workouts:', error);
       res.status(500).render('error', { message: 'Failed to fetch workouts' });
+    }
+  });
+
+  router.get('/:userId/exercise/:exerciseId', async (req, res) => {
+    const { userId, exerciseId } = req.params;
+
+    try {
+      // Fetch the exercise details from your database or API
+      const exercise = await firestore.getExerciseDetails(userId, exerciseId);
+
+      if (exercise) {
+        res.render('17_exercisedetails', { exercise, userId });
+    } else {
+        // Redirect to the workouts page with an error message
+        req.flash('error', 'Exercise not found');
+        res.redirect(`/${userId}/workouts`);
+      }
+    } catch (error) {
+      console.error('Error fetching exercise details:', error);
+      // Redirect to the workouts page with an error message
+      req.flash('error', 'Failed to fetch exercise details');
+      res.redirect(`/${userId}/workouts`);
     }
   });
 module.exports = router
