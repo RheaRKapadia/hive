@@ -89,7 +89,7 @@ router.get('/:userId/workouts/new/ai', async (req, res) => {
         const userId = req.params.userId
         equipmentAll = await getAllEquipment(req, res)
         // console.log(exercises.pagination)
-        res.status(200).render('12_newworkout', {
+        res.status(200).render('17_newAiWorkout', {
             equipmentAll, userId
         })
     } catch (error) {
