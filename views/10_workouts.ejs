@@ -2,13 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HIVE Workouts List</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+<body class="myworkouts">
+    <header>
+        <div class="logo">
+            <h1>HIVE</h1>
+        </div>
+        <nav>
+            <div class="user-menu">
+                <a href="/user/userprofile">
+                    <img src="/images/avatar.png" alt="User Avatar" class="avatar">
+                </a>
+                <span>Menu</span>
+            </div>
+        </nav>
+    </header>
     <h1>Workouts</h1>
     <a href="/<%= userId %>/workouts/workout" class="btn">Back Day</a>
     <a href="/<%= userId %>/workouts/new" class="btn">New Workout</a>
+    
+    <!-- <div class="workout-grid">
+        <div class="workout-card">
+            <div class="workout-title">My Workouts</div>
+            <div class="workout-location">Location</div>
+            <div class="workout-exercises">
+                Lat pulldown<br>
+                Dumbbell Dead lift<br>
+                Inverted Row<br>
+            </div>
+        </div>
+    </div> -->
+    <div class="workout-list">
+        <% if (workoutsList && workoutsList.length > 0) { %>
+            <% workoutsList.forEach(function(workout) { %>
+                <div class="workout-card">
+                    <h2 class="workout-title"><%= workout.name %></h2>
+                    <p class="workout-location">Location: <%= workout.location %></p>
+                    <div class="workout-exercises">
+                        <h3>Exercises:</h3>
+                        <table class="exercise-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Equipment</th>
+                                    <th>Target Muscles</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% workout.exercises.forEach(function(exercise) { %>
+                                    <tr>
+                                        <td><a href="/<%= userId %>/exercise/<%= exercise.id %>"><%= exercise.name %></a></td>
+                                        <td><%= exercise.equipment %></td>
+                                        <td><%= exercise.muscles %></td>
+                                        <td><%= exercise.description.substring(0, 100) %>...</td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="workout-actions">
+                        <a href="/<%= userId %>/workouts/workout/<%= workout.id %>" class="btn btn-small">View Details</a>
+                        <a href="/<%= userId %>/workouts/workout/<%= workout.id %>/edit" class="btn btn-small">Edit</a>
+                        <form action="/<%= userId %>/workouts/<%= workout.id %>/delete" method="POST" class="inline-form">
+                            <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Are you sure you want to delete this workout?')">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p class="no-workouts-message">No workouts found. Create a new workout to get started!</p>
+        <% } %>
+    </div>
+    <button class="new-routine-btn" onclick="window.location.href='/workouts/new'">+</button>
+    <script>
+        document.querySelector('.new-routine-btn').addEventListener('click', function() {
+            window.location.href = '/user/workouts/new';
+        });
+    </script>
 </body>
 </html>

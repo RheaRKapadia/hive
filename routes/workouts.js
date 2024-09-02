@@ -2,32 +2,38 @@ const express = require('express')
 const router = express.Router()
 const {getAllExercises} = require('../exercisedb')
 const firestore = require('../firestore')
-const { db, getUserWorkoutsData, getUserSingularWorkoutData } = require('../firestore');
+
 
 
 
 //route to display all workouts the user has created
 router.get('/:userId/workouts', async(req, res) => {
     // res.render('10_workouts')
-    //hard coded userid for now
     const userId = req.params.userId
-    const workoutsList = await firestore.getUserWorkoutsData( userId)
-    console.log('Retriever user workouts:', workoutsList)
-    res.render('10_workouts', {workoutsList, userId})
+    try{
+        const workoutsList = await firestore.getUserWorkoutsData( userId)
+        console.log('Retriever user workouts:', workoutsList)
+        res.render('10_workouts', {workoutsList, userId})
+    } catch (error){
+        console.error('Error fetching workouts:', error);
+        res.status(500).json({ error: 'Failed to fetch workouts' });
+    }
     //to reference workouts for frontend: use the forEach function to then access workout.name
     // or workout.exercise for list of exercises
 })
 
 //route to display a singular workout created by the user
 //Rhea - working on being able to access exercises as well
-router.get('/:userId/workouts/workout', async(req, res) => {
+router.get('/:userId/workouts/workout/:workoutId', async(req, res) => {
     // res.render('11_workout')
     const userId = req.params.userId
-    const workout = await firestore.getUserSingularWorkoutData( userId, 'JN4TCIHmfdIsPANP1iSR')
+    const workoutId = req.params.workoutId
+    console.log(userId, workoutId)
+    const workout = await firestore.getUserSingularWorkoutData( userId, workoutId)
     console.log(workout.userId, workout.locationId)
-    const location = await firestore.getUserSingularLocationData( userId, workout.locationId)
-    console.log('Retrieved user workout:', workout, location.locationName)
-    res.render('11_workout', {workout, location, userId})
+    // const location = await firestore.getUserSingularLocationData( userId, workout.locationId)
+    console.log('Retrieved user workout:', workout)
+    res.render('11_workout', {workout,  userId})
 })
 
 //route to display new workout, returns all exercises in api
@@ -36,7 +42,7 @@ router.get('/:userId/workouts/new', async (req, res) => {
         try {
             const userId = req.params.userId
             exercises = await getAllExercises(req, res)
-            console.log(exercises.pagination)
+            // console.log(exercises.pagination)
             res.status(200).render('12_newworkout', {
                 exercises, userId
             })
@@ -60,14 +66,18 @@ router.get('/:userId/workouts/new', async (req, res) => {
 
 //route to post new workout to database
 router.post('/:userId/workouts/new', (req,res) =>{
-    const {selectedExercises} = req.body
+    const { exercises, workoutName, location } = req.body;
+    const userId = req.params.userId
     try {
-        firestore.createWorkout(selectedExercises)
-        res.redirect('/:userId/workouts')
+        firestore.createWorkout(exercises, workoutName, location, userId)
+        res.status(200).json({ success: true, redirectUrl: `/${userId}/workouts` });
+        
     } catch(error) {
         console.error('Error submitting exercises:', error)
         res.status(500).json({ error: 'Failed to send exercises data' });
     }
+
+    
     
 })
 
