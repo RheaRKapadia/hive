@@ -81,6 +81,37 @@ router.post('/:userId/workouts/new', (req,res) =>{
     
 })
 
+//route to display new workout ai generated form
+//returns list of all equipment and userId
+router.get('/:userId/workouts/new/ai', async (req, res) => {
+
+    try {
+        const userId = req.params.userId
+        equipmentAll = await getAllEquipment(req, res)
+        // console.log(exercises.pagination)
+        res.status(200).render('12_newworkout', {
+            equipmentAll, userId
+        })
+    } catch (error) {
+    console.error('Error fetching exercises data:', error)
+    res.status(500).json({ error: 'Failed to fetch exercises data' });
+}
+})
+
+//route for submit button on the ai generated workout form
+// no logic implemented yet, just redirects
+router.post('/:userId/workouts/new/ai', async (req, res) => {
+
+    try {
+        const userId = req.params.userId
+        // console.log(exercises.pagination)
+        res.status(200).redirect('10_workouts')
+    } catch (error) {
+    console.error('Error fetching exercises data:', error)
+    res.status(500).json({ error: 'Failed to fetch exercises data' });
+}
+})
+
 
 // Route to get details of a specific workout
 // router.get('/:id', async (req, res) => {
