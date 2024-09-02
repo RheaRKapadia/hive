@@ -52,8 +52,12 @@
                                 <tbody>
                                     <% workout.exercises.forEach(function(exercise) { %>
                                         <tr>
-                                            <td><a href="/<%= userId %>/exercise/<%= exercise.id %>"><%= exercise.name %></a></td>
-                                            <td><%= exercise.equipment %></td>
+                                            <td>
+                                                <div class="exercise-name">
+                                                    <%= exercise.name %>
+                                                </div>
+                                            </td>
+                                            <td><span class="equipment-tag"><%= exercise.equipment %></span></td>
                                             <td>
                                                 <ul>
                                                     <% exercise.description.split('.').filter(point => point.trim()).forEach(function(point) { %>

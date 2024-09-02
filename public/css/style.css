@@ -907,7 +907,7 @@ body.newworkout {
 }
 .myworkouts .workout-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Increased minimum width */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 30px; */
 
 }
@@ -919,6 +919,7 @@ body.newworkout {
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 20px;
 }
 .myworkouts .workout-title {
     font-size: 24px;
@@ -928,7 +929,7 @@ body.newworkout {
 }
 .myworkouts .workout-type,
 .myworkouts .workout-location {
-    font-size: 14px; /* Slightly increased font size */
+    font-size: 14px;
     color: #ffa500;
     margin-bottom: 10px;
 }
@@ -963,6 +964,15 @@ body.newworkout {
     align-items: center;
     justify-content: center;
 }
+.myworkouts .equipment-tag {
+    background-color: #ff69b4;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: 0.8em;
+}
+
 
 .myworkouts .selected {
     border: 2px solid #3498db;
@@ -1002,6 +1012,29 @@ body.newworkout {
     color: white;
 }
 
+/* Updated styles for exercise name */
+.myworkouts .exercise-name {
+    background-color: #1e3a6e;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    color: white;
+    cursor: default;
+}
+
+.myworkouts .exercise-name a {
+    color: white;
+    text-decoration: none;
+}
+
+.myworkouts .exercise-name:hover {
+    background-color: #2a4d8d;
+}
+
+.myworkouts .exercise-name:hover a {
+    color: white;
+}
+
 /* Add styles for the exercise table */
 .myworkouts .exercise-table {
     width: 100%;
@@ -1010,14 +1043,15 @@ body.newworkout {
 
 .myworkouts .exercise-table th,
 .myworkouts .exercise-table td {
-    padding: 8px;
+    padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #1e3a6e;
+    border-bottom: 1px solid #2a4d8d;
 }
 
 .myworkouts .exercise-table th {
     background-color: #1e3a6e;
     color: white;
+    font-weight: bold;
 }
 
 .myworkouts .exercise-table td a {
@@ -1028,7 +1062,10 @@ body.newworkout {
 .myworkouts .exercise-table td a:hover {
     text-decoration: underline;
 }
-
+.myworkouts .exercise-table td ul {
+    margin: 0;
+    padding-left: 20px;
+}
 
 @media (max-width: 1200px) {
     .myworkouts .workout-grid {
@@ -1039,5 +1076,16 @@ body.newworkout {
 @media (max-width: 768px) {
     .myworkouts .workout-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .myworkouts .exercise-table {
+        font-size: 14px;
+    }
+
+    .myworkouts .exercise-table th,
+    .myworkouts .exercise-table td {
+        padding: 8px;
     }
 }
