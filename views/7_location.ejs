@@ -16,8 +16,8 @@
         </header>
         
         <!-- Set New Location Main Box -->
-        <main class="set-new-location-main-box">
-            <h1><%= locations[0].title %></h1>
+        <section class="set-new-location-main-box">
+            <h1><%= location.locationName %></h1>
 
             <p class="set-new-location-edit_location">
                 Welcome to your location dashboard! This page gives an overview of the equipment in this location.
@@ -34,35 +34,18 @@
                         <!-- Equipment Search Bar -->
                         <div class="equipment-container-top-bar">
                             <input type="text" id="searchBar" class="equipment-container-search-bar" placeholder="Search Bar">
-                            <!--
-                            <select id="filterBar" class="equipment-container-filter-bar">
-                                <option value="">Filter Bar</option>
-                                <option value="all">All</option>
-                                <option value="item-blue">Blue</option>
-                                <option value="item-pink">Pink</option>
-                                <option value="item-green">Green</option>
-                            </select>
-                            -->
                         </div>
                         
                         <!-- Header of Equipment Table  -->
                         <div class="equipment-container-header">
                             <div class="equipment-container-column-Equipment">Equipment</div>
-                            <!-- <div class="equipment-container-column-Description">Description</div> --> 
                         </div>
                         
                         <!-- Table Content -->
                         <div id="tableRows">
-                            <% equipments.forEach(equipment => { %>
-                            <div class="unique-table-row" data-type="<%= equipment.type %>">
-                                <div class="unique-equipment-column unique-equipment-name" data-equipment="<%= equipment.name %>"><%= equipment.name %></div>
-                                <!-- 
-                                <div class="unique-description-column">
-                                <% equipment.descriptions.forEach(description => { %>
-                                    <span class="unique-description-item unique-<%= description.className %>"><%= description.className %></span>
-                                <% }); %>
-                                </div>
-                                -->
+                            <% location.equipmentAvailable.forEach(equipment => { %>
+                            <div class="unique-table-row">
+                                <div class="unique-equipment-column unique-equipment-name"><%= equipment %></div>
                             </div>
                             <% }); %>
                         </div>
@@ -76,7 +59,7 @@
                     <section class="Set-New-Location-Sub-Step">
                         <h3>Current Location</h3>
                         <div class="Set-New-Location-Sub-Content">
-                            <p><%= locations[0].location %></p>
+                            <p><%= location.locationName %></p>
                         </div>
                     </section> 
 
@@ -91,26 +74,11 @@
                     </section>
                 </section>
             </section>
-        </main>
+        </section>
     </main>
     
     <!-- JAVASCRIPT PORTIONS -->
     <script>
-        // Filter equipment based on the selected type
-        /*
-        document.getElementById('filterBar').onchange = function() {
-            var filterValue = this.value;
-            var rows = document.querySelectorAll('.unique-table-row');
-            rows.forEach(row => {
-                if (filterValue === "all" || Array.from(row.querySelectorAll('.unique-description-item')).some(item => item.classList.contains(`unique-${filterValue}`))) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
-        }
-        */
-
         // Search bar functionality
         document.getElementById('searchBar').oninput = function() {
             var searchValue = this.value.toLowerCase();

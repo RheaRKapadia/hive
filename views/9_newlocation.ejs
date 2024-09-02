@@ -31,35 +31,22 @@
                         <!-- Equipment Search Bar -->
                         <div class="equipment-container-top-bar">
                             <input type="text" id="searchBar" class="equipment-container-search-bar" placeholder="Search Bar">
-                            <select id="filterBar" class="equipment-container-filter-bar">
-                                <option value="">Filter Bar</option>
-                                <option value="all">All</option>
-                                <option value="item-blue">Blue</option>
-                                <option value="item-pink">Pink</option>
-                                <option value="item-green">Green</option>
-                            </select>
                             <button id="addItemButton" class="equipment-container-search-add" title="Add Item">+</button>
                         </div>
                         
                         <!-- Header of Equipment Table  -->
                         <div class="equipment-container-header">
                             <div class="equipment-container-column-Equipment">Equipment</div>
-                            <div class="equipment-container-column-Description">Description</div>
                             <div class="equipment-container-column-Add">Add</div>
                         </div>
                         
                         <!-- Table Content -->
                         <div id="tableRows">
-                            <% equipments.forEach(equipment => { %>
+                            <% equipmentAll.data.forEach(equipment => { %>
                             <div class="unique-table-row" data-type="<%= equipment.type %>">
-                                <div class="unique-equipment-column unique-equipment-name" data-equipment="<%= equipment.name %>"><%= equipment.name %></div>
-                                <div class="unique-description-column">
-                                <% equipment.descriptions.forEach(description => { %>
-                                    <span class="unique-description-item unique-<%= description.className %>"><%= description.className %></span>
-                                <% }); %>
-                                </div>
+                                <div class="unique-equipment-column unique-equipment-name" data-equipment="<%= equipment %>"><%= equipment %></div>
                                 <div class="unique-add-column">
-                                <button class="unique-add-button" data-equipment="<%= equipment.name %>" title="Add to <%= equipment.name %>">+</button>
+                                    <button class="unique-add-button" data-equipment="<%= equipment %>" title="Add to <%= equipment %>">+</button>
                                 </div>
                             </div>
                             <% }); %>
@@ -69,10 +56,14 @@
             
 
                 <section class="Set-New-Location2">
+                <!-- Set Your Current Location Section -->
                     <section class="Set-New-Location-Sub-Step">
                         <h3>2. Set Your Current Location</h3>
                         <div class="Set-New-Location-Sub-Content">
-                            <input type="text" placeholder="Enter your current location">
+                            <!-- Dropdown Menu -->
+                            <select id="locationDropdown" class="location-dropdown"></select>
+                            <!-- Button to open the Add Location Modal -->
+                            <button id="addLocationButton" class="addLocationbtn">+</button>
                         </div>
                     </section>
                     
@@ -84,7 +75,7 @@
                     <section class = "Set-New-Location-Sub-Step">
                         <h3>3. Title Set Up</h3>
                         <div class="Set-New-Location-Sub-Content">
-                            <input type="text" placeholder="Enter name">
+                            <input type="text" placeholder="Enter name" class="titleInput">
                         </div>
                     </section>
                     
@@ -100,16 +91,8 @@
             <span class="close">&times;</span>
             <h2>Add New Equipment</h2>
             <form id="addEquipmentForm">
-                <label for="equipmentName">Equipment Name:</label><br>
-                <input type="text" id="equipmentName" name="equipmentName" required><br><br>
-                
-                <label for="equipmentType">Equipment Type:</label><br>
-                <label><input type="checkbox" name="equipmentType" value="item-blue"> Blue</label><br>
-                <label><input type="checkbox" name="equipmentType" value="item-pink"> Pink</label><br>
-                <label><input type="checkbox" name="equipmentType" value="item-green"> Green</label><br>
-                <!-- Add more checkboxes as needed -->
-                
-                <br><br>
+                <label for="equipmentName">Equipment Name:</label>
+                <input type="text" id="equipmentName" name="equipmentName" required>
                 <button type="submit">Submit</button>
             </form>
         </div>
@@ -121,26 +104,29 @@
             <span class="close">&times;</span>
             <h2>Edit Equipment</h2>
             <form id="editEquipmentForm">
-                <label for="editEquipmentName">Equipment Name:</label><br>
-                <input type="text" id="editEquipmentName" name="editEquipmentName" required><br><br>
-                
-                <label for="editEquipmentType">Equipment Type:</label><br>
-                <label><input type="checkbox" name="editEquipmentType" value="item-blue"> Blue</label><br>
-                <label><input type="checkbox" name="editEquipmentType" value="item-pink"> Pink</label><br>
-                <label><input type="checkbox" name="editEquipmentType" value="item-green"> Green</label><br>
-                <!-- Add more checkboxes as needed -->
-                
-                <br><br>
+                <label for="editEquipmentName">Equipment Name:</label>
+                <input type="text" id="editEquipmentName" name="editEquipmentName" required>
                 <button type="submit">Save Changes</button>
                 <button type="button" id="removeButton">Remove</button>
             </form>
         </div>
     </div>
 
+    <!-- Modal for Adding Location -->
+    <div id="addLocationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New Location</h2>
+            <form id="addLocationForm">
+                <label for="locationName">Location Name:</label>
+                <input type="text" id="locationName" name="locationName" required>
+                <button type="submit">Add Location</button>
+            </form>
+        </div>
+    </div>
 
     <!-- JAVASCRIPT PORTIONS -->
     <script>
-        // locations array - 
         // Get the modals
         var addModal = document.getElementById("myModal");
         var editModal = document.getElementById("editModal");
@@ -156,30 +142,29 @@
             addModal.style.display = "block";
         }
 
-        // Open the Edit Equipment modal when an equipment name is clicked
-        document.querySelectorAll(".unique-equipment-name").forEach(name => {
-            name.onclick = function() {
-                var equipment = name.getAttribute('data-equipment');
-                var row = name.closest('.unique-table-row');
-                var descriptions = Array.from(row.querySelectorAll('.unique-description-item')).map(item => item.classList[1].replace('unique-', ''));
-                
-                document.getElementById('editEquipmentName').value = equipment;
-                document.querySelectorAll('input[name="editEquipmentType"]').forEach(checkbox => {
-                    checkbox.checked = descriptions.includes(checkbox.value);
-                });
-                
-                editModal.style.display = "block";
-            }
-        });
+        // Function to attach event listeners to equipment names for opening the edit modal
+        function attachEditEventListener() {
+            document.querySelectorAll('.unique-equipment-name').forEach(nameElem => {
+                nameElem.onclick = function() {
+                    var originalName = nameElem.getAttribute('data-equipment');
+                    document.getElementById('editEquipmentName').value = originalName;
+                    document.getElementById('editEquipmentName').setAttribute('data-original-name', originalName);
+                    editModal.style.display = "block";
+                };
+            });
+        }
 
-                // Add event listener to the buttons inside the table rows
+        // Attach event listeners initially
+        attachEditEventListener();
+
+        // Add event listener to the buttons inside the table rows
         document.querySelectorAll('.unique-table-row').forEach(row => {
             var button = row.querySelector('.unique-add-button');
             button.onclick = function() {
                 var equipmentName = button.getAttribute('data-equipment');
                 var equipmentsContainer = document.getElementById('equipmentsContainer');
                 var existingItem = Array.from(equipmentsContainer.children).find(item => item.textContent === equipmentName);
-                
+
                 if (button.classList.contains('active')) {
                     // Remove equipment from the Equipments section
                     if (existingItem) {
@@ -193,7 +178,7 @@
                     equipmentItem.className = 'added-equipment-item';
                     equipmentItem.textContent = equipmentName;
                     equipmentsContainer.appendChild(equipmentItem);
-                    
+
                     // Add active class to the button
                     button.classList.add('active');
                 }
@@ -220,46 +205,32 @@
         // Handle Add Equipment form submission
         document.getElementById('addEquipmentForm').onsubmit = function(event) {
             event.preventDefault();
+
+            // Get the equipment name from the input field
             var name = document.getElementById('equipmentName').value;
-            var types = Array.from(document.querySelectorAll('input[name="equipmentType"]:checked')).map(checkbox => checkbox.value);
-        
+            
+            // Create a new row with the equipment name
             var newRow = document.createElement('div');
             newRow.className = 'unique-table-row';
-            newRow.setAttribute('data-type', types.join(" "));
+            newRow.setAttribute('data-equipment', name);
             newRow.innerHTML = `
                 <div class="unique-equipment-column unique-equipment-name" data-equipment="${name}">${name}</div>
-                <div class="unique-description-column">
-                    ${types.map(type => `<span class="unique-description-item unique-${type}">${type}</span>`).join("")}
-                </div>
                 <div class="unique-add-column">
                     <button class="unique-add-button" data-equipment="${name}" title="Add to ${name}">+</button>
                 </div>
             `;
+            
+            // Append the new row to the table
             document.getElementById('tableRows').appendChild(newRow);
 
-            // Event listener on the parent container (#tableRows)
-            document.getElementById('tableRows').addEventListener('click', function(event) {
-                // Check if the clicked element is the equipment name
-                if (event.target.classList.contains('unique-equipment-name')) {
-                var equipment = event.target.getAttribute('data-equipment');
-                var row = event.target.closest('.unique-table-row');
-                var descriptions = Array.from(row.querySelectorAll('.unique-description-item')).map(item => item.classList[1].replace('unique-', ''));
-                
-                document.getElementById('editEquipmentName').value = equipment;
-                document.querySelectorAll('input[name="editEquipmentType"]').forEach(checkbox => {
-                    checkbox.checked = descriptions.includes(checkbox.value);
-                });
-                
-                editModal.style.display = "block";
-                }
-            });
-        
-            // Add the event listener for the new button
+            // Attach event listeners to the new row
+            attachEditEventListener();
+
             newRow.querySelector('.unique-add-button').onclick = function() {
                 var equipmentName = this.getAttribute('data-equipment');
                 var equipmentsContainer = document.getElementById('equipmentsContainer');
                 var existingItem = Array.from(equipmentsContainer.children).find(item => item.textContent === equipmentName);
-        
+
                 if (this.classList.contains('active')) {
                     // Remove equipment from the Equipments section
                     if (existingItem) {
@@ -273,157 +244,133 @@
                     equipmentItem.className = 'added-equipment-item';
                     equipmentItem.textContent = equipmentName;
                     equipmentsContainer.appendChild(equipmentItem);
-        
+
                     // Add active class to the button
                     this.classList.add('active');
                 }
             };
-        
+
             // Close the modal after submission
-            addModal.style.display = "none";
+            document.getElementById('myModal').style.display = "none";
         };
-        
+
         // Handle Edit Equipment form submission
         document.getElementById('editEquipmentForm').onsubmit = function(event) {
             event.preventDefault();
-            var originalName = document.getElementById('editEquipmentName').value;
-            var types = Array.from(document.querySelectorAll('input[name="editEquipmentType"]:checked')).map(checkbox => checkbox.value);
 
-            // Find the equipment row and update it
-            var rows = document.querySelectorAll('.unique-table-row');
-            rows.forEach(row => {
-                var equipmentNameElem = row.querySelector('.unique-equipment-name');
-                if (equipmentNameElem.getAttribute('data-equipment') === originalName) {
-                    row.setAttribute('data-type', types.join(" "));
-                    equipmentNameElem.innerHTML = originalName;
-                    row.querySelector('.unique-description-column').innerHTML = `
-                        ${types.map(type => `<span class="unique-description-item unique-${type}">${type}</span>`).join("")}
-                    `;
+            var originalName = document.getElementById('editEquipmentName').getAttribute('data-original-name');
+            var newName = document.getElementById('editEquipmentName').value;
+
+            // Update the name in the table
+            document.querySelectorAll('.unique-equipment-name').forEach(nameElem => {
+                if (nameElem.getAttribute('data-equipment') === originalName) {
+                    nameElem.textContent = newName;
+                    nameElem.setAttribute('data-equipment', newName);
+                    nameElem.parentElement.querySelector('.unique-add-button').setAttribute('data-equipment', newName);
                 }
             });
 
-            // Update the Equipments section
+            // Update the name in the Equipments section if it exists
             var equipmentsContainer = document.getElementById('equipmentsContainer');
-            Array.from(equipmentsContainer.children).forEach(item => {
-                if (item.textContent === originalName) {
-                    item.textContent = originalName;
-                }
-            });
+            var existingItem = Array.from(equipmentsContainer.children).find(item => item.textContent === originalName);
+            if (existingItem) {
+                existingItem.textContent = newName;
+            }
 
-            // Close the modal after submission
+            // Close the modal after saving changes
             editModal.style.display = "none";
-        }
+        };
 
-        // Handle Remove button click
+        // Handle the removal of equipment
         document.getElementById('removeButton').onclick = function() {
-            var equipmentName = document.getElementById('editEquipmentName').value;
+            var originalName = document.getElementById('editEquipmentName').getAttribute('data-original-name');
 
-            // Remove the row that matches the equipment name
-            var rows = document.querySelectorAll('.unique-table-row');
-            rows.forEach(row => {
-                var equipmentNameElem = row.querySelector('.unique-equipment-name');
-                if (equipmentNameElem.getAttribute('data-equipment') === equipmentName) {
+            // Remove from the table
+            document.querySelectorAll('.unique-table-row').forEach(row => {
+                var nameElem = row.querySelector('.unique-equipment-name');
+                if (nameElem.getAttribute('data-equipment') === originalName) {
                     row.remove();
                 }
             });
 
-            // Remove the equipment from the Equipments section
+            // Remove from the Equipments section if it exists
             var equipmentsContainer = document.getElementById('equipmentsContainer');
-            Array.from(equipmentsContainer.children).forEach(item => {
-                if (item.textContent === equipmentName) {
-                    item.remove();
-                }
-            });
+            var existingItem = Array.from(equipmentsContainer.children).find(item => item.textContent === originalName);
+            if (existingItem) {
+                existingItem.remove();
+            }
 
-            // Close the modal after removal
+            // Close the modal after removing
             editModal.style.display = "none";
-        }
+        };
 
-        // Filter equipment based on the selected type
-        document.getElementById('filterBar').onchange = function() {
-            var filterValue = this.value;
-            var rows = document.querySelectorAll('.unique-table-row');
-            rows.forEach(row => {
-                if (filterValue === "all" || Array.from(row.querySelectorAll('.unique-description-item')).some(item => item.classList.contains(`unique-${filterValue}`))) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
-        }
-
-        // Search bar functionality
+        // Implement search functionality
         document.getElementById('searchBar').oninput = function() {
-            var searchValue = this.value.toLowerCase();
-            var rows = document.querySelectorAll('.unique-table-row');
-            rows.forEach(row => {
-                var equipmentName = row.querySelector('.unique-equipment-name').textContent.toLowerCase();
-                if (equipmentName.includes(searchValue)) {
-                    row.style.display = "";
+            var searchTerm = this.value.toLowerCase();
+            document.querySelectorAll('.unique-table-row').forEach(row => {
+                var nameElem = row.querySelector('.unique-equipment-name');
+                if (nameElem.textContent.toLowerCase().includes(searchTerm)) {
+                    row.style.display = '';
                 } else {
-                    row.style.display = "none";
+                    row.style.display = 'none';
                 }
             });
-        }
+        };
 
-        // Handle Add to Current Toolkit button click
-        document.querySelectorAll('.unique-add-button').forEach(button => {
-            button.onclick = function() {
-                var equipmentName = button.getAttribute('data-equipment');
-                var equipmentsContainer = document.getElementById('equipmentsContainer');
-                var existingItem = Array.from(equipmentsContainer.children).find(item => item.textContent === equipmentName);
-
-                if (button.classList.contains('active')) {
-                    // Remove equipment from the Equipments section
-                    if (existingItem) {
-                        existingItem.remove();
-                    }
-                    // Remove active class from the button
-                    button.classList.remove('active');
-                } else {
-                    // Add equipment to the Equipments section
-                    var equipmentItem = document.createElement('div');
-                    equipmentItem.className = 'added-equipment-item';
-                    equipmentItem.textContent = equipmentName;
-                    equipmentsContainer.appendChild(equipmentItem);
-
-                    // Add active class to the button
-                    button.classList.add('active');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the modals and buttons
+            var addLocationModal = document.getElementById("addLocationModal");
+            var addLocationButton = document.getElementById("addLocationButton");
+            var locationDropdown = document.getElementById("locationDropdown");
+        
+            // Get the <span> elements that close the modals
+            var spans = document.querySelectorAll(".close");
+        
+            // Open the Add Location modal
+            addLocationButton.onclick = function() {
+                addLocationModal.style.display = "block";
+            }
+        
+            // Close the modals when clicking on <span> (x)
+            spans.forEach(span => {
+                span.onclick = function() {
+                    addLocationModal.style.display = "none";
+                }
+            });
+        
+            // Close the modals when clicking outside of them
+            window.onclick = function(event) {
+                if (event.target == addLocationModal) {
+                    addLocationModal.style.display = "none";
                 }
             }
+        
+            // Handle Add Location form submission
+            document.getElementById('addLocationForm').onsubmit = function(event) {
+                event.preventDefault();
+        
+                // Get the location name from the input field
+                var locationName = document.getElementById('locationName').value.trim();
+        
+                // Check if the location name is not empty and not already in the dropdown
+                if (locationName && !Array.from(locationDropdown.options).some(option => option.value === locationName)) {
+                    // Create a new option with the location name
+                    var newOption = document.createElement('option');
+                    newOption.value = locationName;
+                    newOption.textContent = locationName;
+        
+                    // Append the new option to the dropdown
+                    locationDropdown.appendChild(newOption);
+        
+                    // Close the modal after submission
+                    addLocationModal.style.display = "none";
+        
+                    // Clear the input field
+                    document.getElementById('locationName').value = '';
+                }
+            };
         });
 
-        /*
-        document.getElementById('submit-location-equipment').onclick = function() {
-            // Get the title from the input field
-            var title = document.querySelector('.Set-New-Location-Sub-Step input[placeholder="Enter name"]').value;
-            
-            // Get the location from the input field
-            var location = document.querySelector('.Set-New-Location-Sub-Step input[placeholder="Enter your current location"]').value;
-            
-            // Get the equipment from the "Current Toolkit"
-            var tools = Array.from(document.getElementById('equipmentsContainer').children).map(item => {
-                return { e_name: item.textContent };
-            });
-        
-            // Create the new location object
-            var newLocation = {
-                title: title,
-                location: location,
-                tools: tools
-            };
-        
-            // Add this to the locations array
-            locations.push(newLocation);
-            
-            // Optional: Clear the inputs after submission
-            document.querySelector('.Set-New-Location-Sub-Step input[placeholder="Enter name"]').value = '';
-            document.querySelector('.Set-New-Location-Sub-Step input[placeholder="Enter your current location"]').value = '';
-            document.getElementById('equipmentsContainer').innerHTML = ''; // Clear the current toolkit
-        
-            console.log(locations); // For testing purposes, log the locations array to the console
-        };
-        */
         
     </script>
 </body>

@@ -1,11 +1,11 @@
 const axios = require('axios');
-// require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 
 
 const getAllExercises = async (req, res) => {
     const { page = 1, limit = 50 } = req.query;
     const offset = (page - 1) * limit; // Calculate the offset
-    console.log(process.env.X_RAPIDAPI_KEY)
+    console.log('rapidAPI key:', process.env.X_RAPIDAPI_KEY)
     try {
         const options = {
             method: 'GET',
@@ -42,7 +42,7 @@ const getAllExercises = async (req, res) => {
 }
 
 const getAllEquipment = async (req, res) => {
-
+  console.log(process.env.X_RAPIDAPI_KEY)
   try {
       const options = {
           method: 'GET',
