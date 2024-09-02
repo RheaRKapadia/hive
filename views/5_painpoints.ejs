@@ -16,40 +16,60 @@
 
         <!-- Set New Location Main Box -->
         <main class="pain-management-main-box">
-            <h1>Pain Management</h1>
+            <section class = "pain-management-content">
+                <!-- Header -->
+                <h1>Pain Management</h1>
 
-            <!-- Calendar for Pain Management -->
-            <div class="calendar-container">
-                <button class="nav-button prev-month">&#9664;</button>
-                <div id="calendar" class="calendar"></div>
-                <button class="nav-button next-month">&#9654;</button>
-            </div>
+                <!-- Calander -->
+                <section class="Pain-Tracker-Container">
+                    <h3>Pain Management Tracker </h3>
+                    <div class="calendar-container">
+                        <button class="nav-button prev-month">&#9664;</button>
+                        <div id="calendar" class="calendar"></div>
+                        <button class="nav-button next-month">&#9654;</button>
+                    </div>
+                </section>
 
-            <form method="POST" action="/user/painpoints">
-                <!-- Pain Level -->
-                <label for="painLevel">
-                    Pain Level
-                    <input type="range" min="1" max="10" value="1" class="slider" id="myRange">
-                    <span id="sliderValue">1</span>
-                </label></br>
+                <!-- Form that ill store user pain level and region -->
+                <form method="POST" action="/user/painpoints" class="pain-outBox">
+                    <!--Pain Level Main Box-->
+                    <section>
+                        <h3>Pain Level</h3>
+                        <label for="painLevel" class="painLevelSlider">
+                            <input type="range" min="1" max="10" value="1" class="slider" id="myRange">
+                            <section class="slider-values">
+                                <span id="sliderBeg">1</span>
+                                <span id="sliderValue">1</span>
+                                <span id="sliderEnd">10</span>
+                            </section>
+                        </label>
+                    </section>
 
-                <!-- Regions of Pain -->
-                <label for="location">
-                    Regions of Pain 
-                    <select id="filterBar" class="equipment-container-filter-bar">
-                        <option value="" disabled selected>Regions of Pain</option>
-                        <option value="item-blue">Forearm</option>
-                        <option value="item-pink">Triceps</option>
-                        <option value="item-green">Shoulder</option>
-                    </select>
-                </label></br>
+                    <!-- Regions of Pain -->
+                    <section>
+                        <h3>Regions of Pain</h3>
+                        <label for="location" class="RegionsOfPain-Outer">
+                            <select id="filterBar" class="equipment-container-filter-bar">
+                                <option value="" disabled selected>Regions of Pain</option>
+                                <option value="item-blue">Forearm</option>
+                                <option value="item-pink">Triceps</option>
+                                <option value="item-green">Shoulder</option>
+                            </select>
+                        </label>
+                    </section>
+                    
+                    <!-- Submit Button -->
+                    <section class="pain-manage-button">
+                        <button type="submit" class="btn">Submit</button>
+                    </section>
+                </form>
 
-                <button type="submit">Submit</button>
-            </form>
+            </section>
         </main>
     </main>
 
     <script>
+        /* Calander Scrolling Functionality */ 
         // Get references to the slider and value display elements
         const slider = document.getElementById('myRange');
         const sliderValue = document.getElementById('sliderValue');
@@ -142,7 +162,9 @@
             nextMonthButton.addEventListener('click', showNextMonth);
         
             renderCalendar(currentMonthIndex, currentYear);
-        });
+        }); // END of Calander Scrolling Functionality
+
+
     </script>
 </body>
 </html>

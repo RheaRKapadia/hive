@@ -1,12 +1,19 @@
 const express = require('express')
 const router = express.Router()
 const firestore = require('../firestore')
+const {getAllBodyParts} = require('../exercisedb')
 
 router.get('/', async(req, res) => {
     //hard coded userid for now
+
+    // get pain point list of user 
     const painpointsList = await firestore.getUserPainpointsData( " h5B1fNuYmL1bjzEj2QTJ")
     console.log('Retriever user pain pointss:', painpointsList)
-    res.render('5_painpoints', painpointsList)
+
+    // get list of body parts 
+    const AllBodyParts = await getAllBodyParts(req, res)
+    console.log('Retrieved all body parts:', AllBodyParts)
+    res.render('5_painpoints', {painpointsList, AllBodyParts})
     //to reference the pain point name for frontend: use the forEach function to then access painpoint.location
     // or painpoint.painLevel
 })

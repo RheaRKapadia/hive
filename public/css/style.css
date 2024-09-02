@@ -1130,11 +1130,23 @@ input {
     padding: 50px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center elements horizontally */
     justify-content: center; /* Center elements vertically */
-    gap: 3px;
     box-sizing: border-box;
 }
+
+.pain-management-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Align children (like <h1>) to the left */
+    width: 50%; 
+    height: 100%; 
+}
+
+.pain-management-content h1 {
+    text-align: left; /* Align text within <h1> to the left */
+    width: 100%; /* Ensure <h1> takes full width of the container */
+}
+
 
 .painpoints-page {
     display: grid;
@@ -1149,14 +1161,33 @@ input {
     padding: 1rem;
 }
 
+.Pain-Tracker-Container{
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Arrange children vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+}
+
+.Pain-Tracker-Container h3{ 
+    width: 100%;
+    text-align: left;
+    padding:0;
+    margin-bottom:5px;
+}
+
+.Pain-Tracker-Title{
+    width: 100%; 
+}
+
 .calendar-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    gap:40px;
-    width: 400px; 
+    width: 380px; 
+    height: 230px;
 }
 
 .nav-button {
@@ -1225,7 +1256,7 @@ input {
 .day {
     width: 30px; /* Adjust size as needed */
     height: 30px; /* Adjust size as needed */
-    background-color: rgba(0, 0, 255, 0.6);
+    background-color: rgba(11, 64, 156, 0.6);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1233,6 +1264,7 @@ input {
     font-weight: bold;
     color: #fff;
     text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6)
 }
 
 .day.empty {
@@ -1241,4 +1273,58 @@ input {
 
 .day.completed {
     background-color: #ffa500;
+}
+
+.pain-outBox{
+    width: 100%; 
+}
+
+.pain-outBox h3{
+    text-align: left;
+    padding:0;
+    margin:0;
+    margin-bottom:15px;
+}
+
+.painLevelSlider{
+    display: flex;
+    align-items: center;
+}
+
+.slider{
+    width: 75%;
+}
+
+#sliderValue{
+    width: 85%;
+    text-align: center;  
+    color: White; 
+}
+
+.slider-values{
+    width: 80%;
+    display:flex;
+    padding-left:10px;
+}
+
+#sliderBeg{
+    width: 5%;
+}
+
+#sliderEnd{
+    width: 5%;
+}
+
+
+.RegionsOfPain-Outer{
+    display: flex; 
+    align-items: center;
+}
+
+#filterBar{
+    width: 90%;
+}
+
+.pain-manage-button{
+    width: 100%;
 }
