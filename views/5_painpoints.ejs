@@ -4,22 +4,145 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pain Management Calendar</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Ensure the correct path -->
 </head>
 <body>
-    <h1>Pain Management</h1>
-    <a href="/<%= user.id %>/dashboard" class="btn">Back to dashboard</a>
-    <form method="POST" action="/user/painpoints">
-        <label for="location">
-            regions of pain
-            <input type="text" name="location" id="location"/>
-        </label></form></br>
-        <label for="painLevel">
-            pain level
-            <input type="text" name="painLevel" id="painLevel"/>
-        </label></br>
-        <button type="submit">Submit</button>
-    </form>
-    <!-- <a href="/user/painpoints" class="btn">Submit</a> -->
+    <main class="outermost-box">
+        <header class="logo-and-menu">
+            <img src="/images/Logo.png" alt="Hive Heading" class="hive-heading">
+            <button class="image-button" aria-label="Menu"></button>
+        </header>
+
+        <!-- Set New Location Main Box -->
+        <main class="pain-management-main-box">
+            <h1>Pain Management</h1>
+
+            <!-- Calendar for Pain Management -->
+            <div class="calendar-container">
+                <button class="nav-button prev-month">&#9664;</button>
+                <div id="calendar" class="calendar"></div>
+                <button class="nav-button next-month">&#9654;</button>
+            </div>
+
+            <form method="POST" action="/user/painpoints">
+                <!-- Pain Level -->
+                <label for="painLevel">
+                    Pain Level
+                    <input type="range" min="1" max="10" value="1" class="slider" id="myRange">
+                    <span id="sliderValue">1</span>
+                </label></br>
+
+                <!-- Regions of Pain -->
+                <label for="location">
+                    Regions of Pain 
+                    <select id="filterBar" class="equipment-container-filter-bar">
+                        <option value="" disabled selected>Regions of Pain</option>
+                        <option value="item-blue">Forearm</option>
+                        <option value="item-pink">Triceps</option>
+                        <option value="item-green">Shoulder</option>
+                    </select>
+                </label></br>
+
+                <button type="submit">Submit</button>
+            </form>
+        </main>
+    </main>
+
+    <script>
+        // Get references to the slider and value display elements
+        const slider = document.getElementById('myRange');
+        const sliderValue = document.getElementById('sliderValue');
+
+        // Update the value display when the slider changes
+        slider.oninput = function() {
+            sliderValue.textContent = this.value;
+        }
+
+        // Calendar JavaScript
+        document.addEventListener('DOMContentLoaded', () => {
+            const calendarContainer = document.getElementById('calendar');
+            const prevMonthButton = document.querySelector('.nav-button.prev-month');
+            const nextMonthButton = document.querySelector('.nav-button.next-month');
+        
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+        
+            const daysInMonth = [
+                31, // January
+                28, // February (29 in leap years)
+                31, // March
+                30, // April
+                31, // May
+                30, // June
+                31, // July
+                31, // August
+                30, // September
+                31, // October
+                30, // November
+                31  // December
+            ];
+        
+            let currentMonthIndex = new Date().getMonth(); // Start from the current month
+            let currentYear = new Date().getFullYear(); // Start from the current year
+        
+            function renderCalendar(monthIndex, year) {
+                calendarContainer.innerHTML = ''; // Clear previous content
+        
+                const monthContainer = document.createElement('div');
+                monthContainer.className = 'month';
+                monthContainer.innerHTML = `<h3>${months[monthIndex]} ${year}</h3><div class="days"></div>`;
+        
+                const daysContainer = monthContainer.querySelector('.days');
+                const daysInCurrentMonth = daysInMonth[monthIndex];
+        
+                // Adjust for leap years
+                if (monthIndex === 1 && isLeapYear(year)) {
+                    daysInCurrentMonth = 29;
+                }
+        
+                // Add days of the month
+                for (let day = 1; day <= daysInCurrentMonth; day++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'day';
+                    dayElement.textContent = day;
+                    daysContainer.appendChild(dayElement);
+                }
+        
+                calendarContainer.appendChild(monthContainer);
+            }
+        
+            function isLeapYear(year) {
+                return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+            }
+        
+            function showPreviousMonth() {
+                if (currentMonthIndex === 0) {
+                    currentMonthIndex = 11;
+                    currentYear--;
+                } else {
+                    currentMonthIndex--;
+                }
+                renderCalendar(currentMonthIndex, currentYear);
+            }
+        
+            function showNextMonth() {
+                if (currentMonthIndex === 11) {
+                    currentMonthIndex = 0;
+                    currentYear++;
+                } else {
+                    currentMonthIndex++;
+                }
+                renderCalendar(currentMonthIndex, currentYear);
+            }
+        
+            prevMonthButton.addEventListener('click', showPreviousMonth);
+            nextMonthButton.addEventListener('click', showNextMonth);
+        
+            renderCalendar(currentMonthIndex, currentYear);
+        });
+    </script>
 </body>
 </html>

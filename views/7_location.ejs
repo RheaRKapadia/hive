@@ -1,15 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Locations</title>
+  <link rel="stylesheet" href="/css/style.css"> 
 </head>
+
 <body>
-    <h1>Jane's Gym</h1>
-    <a href="/<%= userId %>/locations" class="btn">Locations</a>
-    <a href="/<%= userId %>/locations/new" class="btn">New Location</a>
-    <a href="/<%= userId %>/locations/location/edit" class="btn">Edit Location</a>
+    <main class="outermost-box">
+        <header class="logo-and-menu">
+            <img src="/images/Logo.png" alt="Hive Heading" class="hive-heading">
+            <button class="image-button" aria-label="Menu"></button>
+        </header>
+        
+        <!-- Set New Location Main Box -->
+        <section class="set-new-location-main-box">
+            <h1><%= location.locationName %></h1>
+
+            <p class="set-new-location-edit_location">
+                Welcome to your location dashboard! This page gives an overview of the equipment in this location.
+            </p>
+
+            <section class="Set-New-Location">
+                <!-- Set Equipment Content -->
+                <div class="Set-New-Location1">
+                    <h3>Equipment Chosen</h3>
+
+                    <!-- Equipment Complete Table -->
+                    <div class="equipment-container">
+
+                        <!-- Equipment Search Bar -->
+                        <div class="equipment-container-top-bar">
+                            <input type="text" id="searchBar" class="equipment-container-search-bar" placeholder="Search Bar">
+                        </div>
+                        
+                        <!-- Header of Equipment Table  -->
+                        <div class="equipment-container-header">
+                            <div class="equipment-container-column-Equipment">Equipment</div>
+                        </div>
+                        
+                        <!-- Table Content -->
+                        <div id="tableRows">
+                            <% location.equipmentAvailable.forEach(equipment => { %>
+                            <div class="unique-table-row">
+                                <div class="unique-equipment-column unique-equipment-name"><%= equipment %></div>
+                            </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- 2nd Column of Location Page -->
+                <section class="Column2-Location">
+
+                    <!-- Current Location Section -->
+                    <section class="Set-New-Location-Sub-Step">
+                        <h3>Current Location</h3>
+                        <div class="Set-New-Location-Sub-Content">
+                            <p><%= location.locationName %></p>
+                        </div>
+                    </section> 
+
+                    <!-- Button Section of 2nd Column -->
+                    <section class="Location-Button-Section">
+                        <h3>Controls</h3>
+                        <div class="Set-New-Location-Setting-Btn">
+                            <a href="/user/locations" class="location-btn">Locations</a>
+                            <a href="/user/locations/new" class="location-btn">New Location</a>
+                            <a href="/user/locations/location/edit" class="location-btn">Edit Location</a>
+                        </div>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </main>
+    
+    <!-- JAVASCRIPT PORTIONS -->
+    <script>
+        // Search bar functionality
+        document.getElementById('searchBar').oninput = function() {
+            var searchValue = this.value.toLowerCase();
+            var rows = document.querySelectorAll('.unique-table-row');
+            rows.forEach(row => {
+                var equipmentName = row.querySelector('.unique-equipment-name').textContent.toLowerCase();
+                if (equipmentName.includes(searchValue)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
 </body>
 </html>
