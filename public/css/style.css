@@ -388,14 +388,6 @@ input {
     border-radius: 5px;
 }
 
-/* Workouts Section
-.dashboard-page .workout-calendar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-} */
-
 .dashboard-page .day {
     width: 50px;
     height: 50px;
@@ -503,67 +495,68 @@ input {
 
 /* Sections */
 .dashboard-page .dashboard-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+
 }
 /* First Row */
 .dashboard-page .first-row {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 1rem;
+    grid-template-columns: 1fr 0.8fr 1fr;
+    gap: 2rem;
 }
 
 /* Welcome Section (Quote) */
 .dashboard-page .welcome-section {
     background-color: rgba(30, 30, 30, 0.8);
     border-radius: 10px;
-    padding: 1rem;
+    padding: 1.5rem;
+    overflow: hidden;
 }
 
 /* Workouts Section */
 .dashboard-page .workouts-section {
     background-color: rgba(30, 30, 30, 0.8);
     border-radius: 10px;
-    /* padding: 1rem; */
+    padding: 1.5rem;
     grid-column: 2;
-    overflow: hidden;
-    padding: 20px;
+    overflow: visible;
     width: 100%;
     box-sizing: border-box;
 }
 
 .dashboard-page .tracker-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 15px;
     justify-content: center;
 }
 
 .dashboard-page .workout-calendar {
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    overflow-y: auto;
+    justify-content: flex-start;
+    overflow-y: visible;
     width: 100%;
-    max-width: 400px;
+    max-width: none;
     margin: 0 auto;
-    margin-left: 100px;
-    margin-top: -30px;
+    margin-left: 0;
+    margin-top: 0;
 }
 
 /* Second Row */
 .dashboard-page .second-row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
 .dashboard-page .day {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     background-color: #002E66;
     color: white;
@@ -572,7 +565,7 @@ input {
     justify-content: center;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-size: 18px;
+     ont-size: 14px;
     font-weight: bold;
 }
 
@@ -583,10 +576,10 @@ input {
 /* Responsive adjustments */
 @media (max-width: 1200px) {
     .dashboard-page .tracker-grid {
-        grid-template-columns: repeat(5, 1fr); /* Adjust to 5 columns for smaller screens */
+        grid-template-columns: repeat(5, 1fr);
     }
     .dashboard-page .day {
-        width: 50px; /* Slightly smaller for medium screens */
+        width: 50px;
         height: 50px;
         font-size: 16px;
     }
@@ -594,10 +587,10 @@ input {
 
 @media (max-width: 768px) {
     .dashboard-page .tracker-grid {
-        grid-template-columns: repeat(4, 1fr); /* Adjust to 4 columns for mobile */
+        grid-template-columns: repeat(4, 1fr);
     }
     .dashboard-page .day {
-        width: 40px; /* Even smaller for mobile screens */
+        width: 40px;
         height: 40px;
         font-size: 14px;
     }
@@ -612,6 +605,16 @@ input {
     padding: 1rem;
 }
 
+/* Workouts List Section - Modified to be smaller */
+.dashboard-page .workouts-list-section {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    padding: 1rem;
+    width: 80%;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .dashboard-page .first-row,
@@ -620,7 +623,9 @@ input {
     }
 
     .dashboard-page .workouts-section {
-        grid-column: 1;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
     }
 }
 
@@ -803,31 +808,6 @@ input {
     margin-left: -10px;
 
 }
-
-/* .tracker-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-} */
-
-/* .day {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #002E66;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-}
-
-.day.completed {
-    background-color: #FFA500; /* Orange color for completed circles */
-    /* color: #fff; /* White text color for completed circles */
-/* } */
 
 /* Ensure the text color remains consistent when the div is hovered */
 .exercise-name:hover a {
@@ -1170,7 +1150,7 @@ input {
 }
 
 .location-heading h1 {
-    font-size: 40px; /* Example: A smaller font size */
+    font-size: 40px;
 }
 
 .add-button {
@@ -1228,13 +1208,13 @@ input {
 
 .ind-location-header {
     display: flex;
-    flex-direction: row; /* Horizontal layout by default */
+    flex-direction: row;
     padding-right: 5px;
     padding-bottom: 0;
-    justify-content: space-between; /* Space between heading and link */
-    align-items: center; /* Center vertically */
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    box-sizing: border-box; /* Include padding in the width */
+    box-sizing: border-box;
 }
 
 /* Font size for the header */
