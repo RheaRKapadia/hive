@@ -16,17 +16,14 @@
         </div>
         <nav>
             <div class="user-menu">
-                <a href="/user/userprofile">
+                <a href="/<%= userId %>/userprofile">
                     <img src="/images/avatar.png" alt="User Avatar" class="avatar">
                 </a>
                 <span onclick="toggleDropdown()">Menu</span>
                 <div id="myDropdown" class="dropdown-content">
-                    <a href="/user/workouts">Workouts</a>
-                    <a href="/user/routines">Routines</a>
-                    <a href="/user/painpoints">Pain Management</a>
-                    <a href="/user/locations">Locations</a>
-                    <a href="/user/profile">Profile</a>
-                    <a href="/logout">Logout</a>
+                    <a href="/<%= userId %>/workouts/">Workouts</a>
+                    <a href="/<%= userId %>/painpoints">Pain Management</a>
+                    <a href="/<%= userId %>/locations">Locations</a>
                 </div>
             </div>
         </nav>
