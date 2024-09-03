@@ -6,7 +6,7 @@
     <title>HIVE Dashboard</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body class="dashboard-page">
+<body class="dashboard-page" data-user-id="<%= userId %>">
     <header>
         <div class="logo">
             <div>
@@ -109,7 +109,7 @@
         </ul>
     </nav>
 
-    <script src="./js/dashboard.js"></script>
+    <script src="/js/dashboard.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const quoteText = document.getElementById('quote-text');

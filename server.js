@@ -27,6 +27,18 @@ app.set('views', path.join(__dirname, 'views'))
 //use a view engine to view the ejs files
 app.set('view engine', 'ejs')
 
+app.use((req, res, next) => {
+    if (req.url.endsWith('.js')) {
+      res.type('application/javascript');
+    }
+    next();
+  });
+
+  app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+});
+
 //get the routes defined in the corresponding file
 const otherRouter = require('./routes/other')
 const userRouter = require('./routes/users')

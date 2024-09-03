@@ -8,7 +8,6 @@ const firestore = require('../firestore')
 
 //route to display all workouts the user has created
 router.get('/:userId/workouts', async(req, res) => {
-    // res.render('10_workouts')
     const userId = req.params.userId
     try{
         const workoutsList = await firestore.getUserWorkoutsData( userId)
@@ -71,14 +70,14 @@ router.post('/:userId/workouts/new', (req,res) =>{
     try {
         firestore.createWorkout(exercises, workoutName, location, userId)
         res.status(200).json({ success: true, redirectUrl: `/${userId}/workouts` });
-        
+
     } catch(error) {
         console.error('Error submitting exercises:', error)
         res.status(500).json({ error: 'Failed to send exercises data' });
     }
 
-    
-    
+
+
 })
 
 //route to display new workout ai generated form
@@ -134,5 +133,23 @@ router.post('/:userId/workouts/new/ai', async (req, res) => {
 //         res.render('16_workoutdetails', { message: 'Could not retrieve exercise details', exercise: null });
 //     }
 // });
+
+// API route for fetching workouts data as JSON
+router.get('/:userId/workouts/data', async (req, res) => {
+    const userId = req.params.userId;
+    try {
+        const workoutsList = await firestore.getUserWorkoutsData(userId);
+        const simplifiedWorkouts = workoutsList.map(workout => ({
+            id: workout.id,
+            name: workout.name,
+            location: workout.location,
+            exerciseNames: workout.exercises.map(exercise => exercise.name)
+        }));
+        res.json(simplifiedWorkouts);
+    } catch (error) {
+        console.error('Error fetching workouts:', error);
+        res.status(500).json({ error: 'Failed to fetch workouts' });
+    }
+});
 
 module.exports = router
