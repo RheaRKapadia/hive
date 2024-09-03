@@ -217,8 +217,55 @@ input {
     color: white;
 }
 
+.signup-container .logo-image {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto;
+}
+
+.signup-container .loginbtn{
+    color:#FFA000;
+    text-decoration: none;
+}
+
+.signup-container .highlighted-text {
+    color: #FFD700;
+  }
+
+.signup-container .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    background-color: #FFA000;
+    background-image: linear-gradient(to bottom, #FFD54F, #FFA000);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 25px;
+    align-items: center;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
 .btn:hover {
     background-color: #FF8C00;
+}
+
+.signup-container h1{
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    color: #ffffff;
+    font-size: 58px;
+    text-align: center;
+}
+
+.signup-container .hivemascot {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: -15px;
 }
 
 .name-fields {
