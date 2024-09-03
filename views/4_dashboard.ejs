@@ -31,7 +31,7 @@
 
     <main class="dashboard-content">
         <section class="welcome-section">
-            <h2>Welcome back, <%= user.firstName %>!</h2>
+            <h2>Welcome back <%= userId.firstName %>!</h2>
             <div id="quote-container" class="quote">
                 <p id="quote-text">Loading quote...</p>
                 <span id="quote-author" class="author"></span>
@@ -99,16 +99,6 @@
             </div>
         </section>
     </main>
-
-    <nav class="side-menu">
-        <ul>
-            <li><a href="/user/workouts">Workouts</a></li>
-            <li><a href="/user/routines">Routines</a></li>
-            <li><a href="/user/painpoints">Pain Management</a></li>
-            <li><a href="/user/locations">Locations</a></li>
-        </ul>
-    </nav>
-
     <script src="/js/dashboard.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
