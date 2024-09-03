@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="workout-stats">
-                <p>You've completed <span id="workout-count">X</span> workouts this month!</p>
+                <p>You've completed <span id="totalWorkoutDays"><%= totalWorkoutDays %></span> workout days this month!</p>
                 <div class="workout-progress">
                     <div class="progress-bar" style="width: 0%;"></div>
                 </div>
@@ -167,11 +167,16 @@
                         console.log(`Day ${dayNumber} marked as not completed`);
                     }
                 });
+
+                // Update total workout days
+                const totalWorkoutDaysElement = document.getElementById('totalWorkoutDays');
+                if (totalWorkoutDaysElement) {
+                    totalWorkoutDaysElement.textContent = completedDays.length;
+                }
             }
 
-            // New function to update workout calendar on the server
             function updateWorkoutCalendar(completedDays) {
-                const userId = document.body.dataset.userId; // Assuming you've added the user ID to the body tag
+                const userId = document.body.dataset.userId;
                 fetch(`/${userId}/updateWorkoutCalendar`, {
                     method: 'POST',
                     headers: {
@@ -183,15 +188,13 @@
                 .then(data => {
                     if (data.error) {
                         console.error('Error updating workout calendar:', data.error);
-                        // You might want to show an error message to the user here
                     } else {
                         console.log('Workout calendar updated successfully');
-                        // You might want to show a success message to the user here
+                        updateUI();
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    // You might want to show an error message to the user here
                 });
             }
 
@@ -215,11 +218,8 @@
                     localStorage.setItem('completedDays', JSON.stringify(completedDays));
                     console.log('Updated localStorage:', JSON.parse(localStorage.getItem('completedDays')));
 
-                    // Update the server
+                    // Update the server and UI
                     updateWorkoutCalendar(completedDays);
-
-                    // Update the UI immediately after changing the state
-                    updateUI();
                 });
             });
         });

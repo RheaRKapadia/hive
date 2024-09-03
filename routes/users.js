@@ -20,9 +20,14 @@ router.get('/:userId/dashboard', async(req, res) => {
         const locationsList = await firestore.getUserLocationsData( userId)
         const painpointsList = await firestore.getUserPainpointsData(userId)
         const workoutsList = await firestore.getUserWorkoutsData( userId)
+        const workoutTracker = await firestore.getUserWorkoutTracker(userId)
         // console.log('from dashboard get', userId)
+
+        // Calculate total workout days
+        const totalWorkoutDays = workoutTracker.workoutCalendar ? workoutTracker.workoutCalendar.length : 0
+
         const user = await firestore.getUserData(userId)
-        res.status(200).render('4_dashboard', {user, locationsList, painpointsList, workoutsList, userId}, (err, html) => {
+        res.status(200).render('4_dashboard', {user, locationsList, painpointsList, workoutsList, userId, totalWorkoutDays}, (err, html) => {
             if (err) {
                 console.error('Error rendering dashboard:', err);
                 res.status(500).send('Error rendering dashboard');
