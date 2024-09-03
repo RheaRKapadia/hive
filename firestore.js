@@ -31,17 +31,17 @@ module.exports = {
     getUserSingularLocationData: async (userId, locationId) => {
         try {
           const locationSnapshot = await db.collection('Locations').doc(locationId).get();
-      
+
           if (!locationSnapshot.exists) {
             return { error: 'Location not found' };
           }
-      
+
           const location = { id: locationSnapshot.id, ...locationSnapshot.data() };
-      
+
           if (location.userId !== userId) {
             return { error: 'Unauthorized access' };
           }
-      
+
           return location;
         } catch (error) {
           console.error('Error retrieving location:', error);
@@ -73,7 +73,7 @@ module.exports = {
         console.error('Error retrieving Workout:', error);
         return { error: 'Failed to retrieve exercises' };
       }
-    }, 
+    },
     createUser: async(firstName, lastName, email) =>{
       const uid = firebase.auth().currentUser.uid;
       const userRef = db.collection("Users").doc(uid);
@@ -112,6 +112,51 @@ module.exports = {
       .catch(error => {
         console.error("Error storing user data:", error);
       });
-    }
-      
+    },
+    updateUserWorkoutCalendar: async (userId, completedDays) => {
+      try {
+        const workoutTrackerRef = db.collection('WorkoutTracker').doc(userId);
+        const workoutTrackerSnapshot = await workoutTrackerRef.get();
+
+        if (!workoutTrackerSnapshot.exists) {
+          // If the document doesn't exist, create a new one
+          await workoutTrackerRef.set({
+            userId: userId,
+            workoutCalendar: completedDays,
+            createdAt: admin.firestore.Timestamp.fromDate(new Date()),
+            updatedAt: admin.firestore.Timestamp.fromDate(new Date())
+          });
+        } else {
+          // If the document exists, update it
+          await workoutTrackerRef.update({
+            workoutCalendar: completedDays,
+            updatedAt: admin.firestore.Timestamp.fromDate(new Date())
+          });
+        }
+
+        console.log('Workout calendar updated successfully for user:', userId);
+        return {
+          id: userId,
+          workoutCalendar: completedDays,
+          updatedAt: admin.firestore.Timestamp.fromDate(new Date())
+        };
+      } catch (error) {
+        console.error('Error updating workout calendar:', error);
+        return { error: 'Failed to update workout calendar' };
+      }
+    },
+    getUserWorkoutTracker: async (userId) => {
+      try {
+        const workoutTrackerSnapshot = await db.collection('WorkoutTracker').doc(userId).get();
+        if (!workoutTrackerSnapshot.exists) {
+          return { error: 'Workout tracker not found' };
+        }
+        const workoutTracker = { id: workoutTrackerSnapshot.id, ...workoutTrackerSnapshot.data() };
+        return workoutTracker;
+      } catch (error) {
+        console.error('Error retrieving workout tracker:', error);
+        return { error: 'Failed to retrieve workout tracker' };
+      }
+    },
+
 };

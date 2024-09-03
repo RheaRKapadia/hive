@@ -61,6 +61,28 @@ router.param( 'id', (req, res, next, id) =>{
     next()
 })
 
+// New route to update workout calendar
+router.post('/:userId/updateWorkoutCalendar', async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const { completedDays } = req.body;
+
+      if (!Array.isArray(completedDays)) {
+        return res.status(400).json({ error: 'Invalid completedDays data' });
+      }
+
+      const result = await firestore.updateUserWorkoutCalendar(userId, completedDays);
+
+      if (result.error) {
+        return res.status(500).json({ error: result.error });
+      }
+
+      res.status(200).json({ message: 'Workout calendar updated successfully' });
+    } catch (error) {
+      console.error('Error updating workout calendar:', error);
+      res.status(500).json({ error: 'Failed to update workout calendar' });
+    }
+  });
 
 
 module.exports = router
