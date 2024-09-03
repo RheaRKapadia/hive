@@ -173,6 +173,13 @@
                 if (totalWorkoutDaysElement) {
                     totalWorkoutDaysElement.textContent = completedDays.length;
                 }
+
+                // Update progress bar
+                const progressBar = document.querySelector('.progress-bar');
+                if (progressBar) {
+                    const progress = (completedDays.length / 30) * 100;
+                    progressBar.style.width = `${progress}%`;
+                }
             }
 
             function updateWorkoutCalendar(completedDays) {
