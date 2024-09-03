@@ -313,31 +313,40 @@ input {
 }
 
 /* Header Styles */
+
 .dashboard-page header {
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    background-color: rgba(30, 30, 30, 0.8);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .dashboard-page .logo h1 {
-    color: #ffa500;
     margin: 0;
+    color: #f0a500;
+    font-size: 24px;
+}
+
+.dashboard-page nav {
+    display: flex;
+    align-items: center;
 }
 
 .dashboard-page .user-menu {
     display: flex;
     align-items: center;
-    cursor: pointer;
+    color: #f0a500;
 }
 
 .dashboard-page .avatar {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     margin-right: 10px;
 }
+
 
 /* Main Content Styles */
 .dashboard-page .dashboard-content {
