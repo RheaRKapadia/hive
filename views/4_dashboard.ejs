@@ -30,6 +30,7 @@
     </header>
 
     <main class="dashboard-content">
+        <div class="first-row">
         <section class="welcome-section">
             <h2>Welcome back <%= userId.firstName %>!</h2>
             <div id="quote-container" class="quote">
@@ -76,8 +77,16 @@
                     </div>
                 </div>
             </div>
+            <div class="workout-stats">
+                <p>You've completed <span id="workout-count">X</span> workouts this month!</p>
+                <div class="workout-progress">
+                    <div class="progress-bar" style="width: 0%;"></div>
+                </div>
+            </div>
+            <p class="motivation-message">"The only bad workout is the one that didn't happen."</p>
         </section>
-
+    </div>
+    <div class="second-row">
         <section class="health-section">
             <h2>Health</h2>
             <div id="health-data" class="health-data">
@@ -98,6 +107,7 @@
                 <div class="loading">Loading workouts...</div>
             </div>
         </section>
+    </div>
     </main>
     <script src="/js/dashboard.js"></script>
     <script>

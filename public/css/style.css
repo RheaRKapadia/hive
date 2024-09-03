@@ -388,13 +388,13 @@ input {
     border-radius: 5px;
 }
 
-/* Workouts Section */
+/* Workouts Section
 .dashboard-page .workout-calendar {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     justify-content: center;
-}
+} */
 
 .dashboard-page .day {
     width: 50px;
@@ -481,37 +481,6 @@ input {
     display: block;
 }
 
-/* Side Menu */
-/* .dashboard-page .side-menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 200px;
-    background-color: rgba(30, 30, 30, 0.9);
-    padding: 1rem;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
-}
-
-.dashboard-page .side-menu.open {
-    transform: translateX(0);
-}
-
-.dashboard-page .side-menu ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.dashboard-page .side-menu li {
-    margin-bottom: 1rem;
-}
-
-.dashboard-page .side-menu a {
-    color: white;
-    text-decoration: none;
-} */
-
 /* Loading state */
 .dashboard-page .loading {
     display: flex;
@@ -532,6 +501,128 @@ input {
     }
 }
 
+/* Sections */
+.dashboard-page .dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+}
+/* First Row */
+.dashboard-page .first-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+}
+
+/* Welcome Section (Quote) */
+.dashboard-page .welcome-section {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+/* Workouts Section */
+.dashboard-page .workouts-section {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    /* padding: 1rem; */
+    grid-column: 2;
+    overflow: hidden;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dashboard-page .tracker-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    justify-content: center;
+}
+
+.dashboard-page .workout-calendar {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-left: 100px;
+    margin-top: -30px;
+}
+
+/* Second Row */
+.dashboard-page .second-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.dashboard-page .day {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #002E66;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.dashboard-page .day.completed {
+    background-color: #FFA500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .dashboard-page .tracker-grid {
+        grid-template-columns: repeat(5, 1fr); /* Adjust to 5 columns for smaller screens */
+    }
+    .dashboard-page .day {
+        width: 50px; /* Slightly smaller for medium screens */
+        height: 50px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-page .tracker-grid {
+        grid-template-columns: repeat(4, 1fr); /* Adjust to 4 columns for mobile */
+    }
+    .dashboard-page .day {
+        width: 40px; /* Even smaller for mobile screens */
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+/* Health, Locations, and Workouts List Sections */
+.dashboard-page .health-section,
+.dashboard-page .locations-section,
+.dashboard-page .workouts-list-section {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-page .first-row,
+    .dashboard-page .second-row {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-page .workouts-section {
+        grid-column: 1;
+    }
+}
 
 /* User Profile Page */
 /*  */
@@ -713,13 +804,13 @@ input {
 
 }
 
-.tracker-grid {
+/* .tracker-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
-}
+} */
 
-.day {
+/* .day {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -735,8 +826,8 @@ input {
 
 .day.completed {
     background-color: #FFA500; /* Orange color for completed circles */
-    color: #fff; /* White text color for completed circles */
-}
+    /* color: #fff; /* White text color for completed circles */
+/* } */
 
 /* Ensure the text color remains consistent when the div is hovered */
 .exercise-name:hover a {
