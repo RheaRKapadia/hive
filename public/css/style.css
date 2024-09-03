@@ -326,7 +326,20 @@ input {
 .dashboard-page .logo h1 {
     margin: 0;
     color: #f0a500;
-    font-size: 24px;
+    font-size: 38px;
+    line-height: 1;
+    transform: translateY(-4px);
+}
+
+.dashboard-page .logo {
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-page .logo img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
 }
 
 .dashboard-page nav {
