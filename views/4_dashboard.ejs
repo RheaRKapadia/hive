@@ -16,7 +16,16 @@
                 <a href="/<%= user.id %>/userprofile">
                     <img src="/images/avatar.png" alt="User Avatar" class="avatar">
                 </a>
-                <span>Menu</span>
+                <!-- <span>Menu</span> -->
+                <span onclick="toggleDropdown()">Menu</span>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="/user/workouts">Workouts</a>
+                    <a href="/user/routines">Routines</a>
+                    <a href="/user/painpoints">Pain Management</a>
+                    <a href="/user/locations">Locations</a>
+                    <a href="/user/profile">Profile</a>
+                    <a href="/logout">Logout</a>
+                </div>
             </div>
         </nav>
     </header>
@@ -163,6 +172,24 @@
                 });
             });
         });
+    </script>
+    <script>
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-menu span')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
     </script>
 </body>
 </html>
