@@ -147,15 +147,6 @@ function setupWorkoutCalendar() {
     });
 }
 
-function setupSideMenu() {
-    const menuToggle = document.querySelector('.user-menu');
-    const sideMenu = document.querySelector('.side-menu');
-
-    menuToggle.addEventListener('click', () => {
-        sideMenu.classList.toggle('open');
-    });
-}
-
 function toggleDropdown() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
