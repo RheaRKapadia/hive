@@ -76,10 +76,6 @@ router.post('/:userId/locations/new', async(req,res) =>{
     } catch(error){
       res.status(500).json({ error: 'Failed to submit location' });
     }
-
-    
-    //frontend: in the form make sure you are using the same ids as above: date, equipment, and name
-    //also set method to post in form
 })
 
 module.exports = router
