@@ -1,5 +1,7 @@
 const axios = require('axios');
 require('dotenv').config({ path: '.env' });
+require('dotenv').config({ path: '.env' });
+require('dotenv').config({ path: '.env.local' });
 
 
 const getAllExercises = async (req, res) => {
@@ -42,7 +44,7 @@ const getAllExercises = async (req, res) => {
 }
 
 const getAllEquipment = async (req, res) => {
-
+  console.log(process.env.X_RAPIDAPI_KEY)
   try {
       const options = {
           method: 'GET',

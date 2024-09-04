@@ -55,14 +55,13 @@ module.exports = {
         return painpoints
     },
     getUserWorkoutsData: async (userId) => {
-      const workoutsSnapshot = await db.collection('Workouts').where('userId', '==', userId).get()
+      const workoutsSnapshot = await db.collection('Workouts').where('userId', '==', userId).orderBy('createdAt', 'desc').get()
       const workouts = workoutsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
       return workouts
     },
     getUserSingularWorkoutData: async (userId, workoutId) => {
       try {
         const workoutSnapshot = await db.collection('Workouts').doc(workoutId).get();
-        // const workoutExercisesSnapshot = await db.collection('Workouts').doc(workoutId).collection('exercises').get()
         if (!workoutSnapshot.exists) {
           return { error: 'workout not found' };
         }
@@ -77,7 +76,6 @@ module.exports = {
           return { error: 'Unauthorized access' };
         }
         return workout
-        // return [workout, workoutExercises];
       } catch (error) {
         console.error('Error retrieving Workout:', error);
         return { error: 'Failed to retrieve exercises' };

@@ -1,6 +1,9 @@
 /* Colors */
 /* #FFD700 honey yellow */
 
+/* Colors */
+/* #FFD700 honey yellow */
+
 
 /* Index */
 body {
@@ -821,105 +824,6 @@ body.newworkout {
 }
 
 /* My Workouts */
-.myworkouts body {
-    font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: white;
-            margin: 0;
-            padding: 20px;
-}
-.myworkouts .header {
-    display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-}
-.myworkouts .logo {
-    font-size: 24px;
-            font-weight: bold;
-}
-
-.myworkouts .logo span {
-    color: #ffa500;
-}
-
-.myworkouts .workouts-container {
-    background-color: #1e2835;
-    border-radius: 30px;
-    padding: 30px; /* Increased padding */
-    position: relative;
-    margin-bottom: 20px; /* Adjusted margin */
-}
-
-.myworkouts .menu-icon {
-    font-size: 24px;
-}
-.myworkouts h1 {
-    margin-bottom: 20px;
-            font-size: 28px;
-}
-.myworkouts .workout-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Increased minimum width */
-    gap: 30px; /* Increased gap for better spacing */
-
-}
-.myworkouts .workout-card {
-    background-color: #0c3864;
-    border-radius: 25px;
-    padding: 20px; /* Increased padding */
-    min-height: 400px; /* Increased minimum height */
-    width: 100%; /* Full width of grid cell */
-    display: flex;
-    flex-direction: column;
-}
-.myworkouts .workout-title {
-    font-size: 24px; /* Increased font size */
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: white;
-}
-.myworkouts .workout-type,
-.myworkouts .workout-location {
-    font-size: 14px; /* Slightly increased font size */
-    color: #ffa500;
-    margin-bottom: 10px;
-}
-.myworkouts .workout-exercises {
-    font-size: 28px;
-    margin-top: 10px;
-    flex-grow: 1;
-    overflow-y: scroll;
-    color: white;
-    align-items: center;
-}
-
-.myworkouts .workout-location {
-            font-size: 12px;
-            color: #ffa500;
-        }
-
-.myworkouts .new-routine-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #ffa500;
-    color: black;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 30px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.myworkouts .selected {
-    border: 2px solid #3498db;
-}
-
 /* myworkouts header */
 /* Header Styles */
 .myworkouts {
@@ -961,6 +865,134 @@ body.newworkout {
     margin-right: 10px;
 }
 
+.myworkouts main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+.myworkouts body {
+    font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+}
+.myworkouts .header {
+    display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+}
+.myworkouts .logo {
+    font-size: 24px;
+            font-weight: bold;
+}
+
+.myworkouts .logo span {
+    color: #ffa500;
+}
+
+.myworkouts .workouts-container {
+    background-color: #1e2835;
+    border-radius: 30px;
+    padding: 30px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.myworkouts .menu-icon {
+    font-size: 24px;
+}
+
+.myworkouts h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+.myworkouts .workout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px; */
+
+}
+.myworkouts .workout-card {
+    background-color: #0c3864;
+    border-radius: 25px;
+    padding: 10px;
+    min-height: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.myworkouts .workout-title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: white;
+}
+.myworkouts .workout-type,
+.myworkouts .workouts-modal .workouts-modal-content .workout-card .workout-location {
+    font-size: 18px;
+    color: #ffa500;
+    margin-top:0px;
+    margin-bottom: 10px;
+}
+.myworkouts .workout-exercises {
+    font-size: 28px;
+    margin-top: 10px;
+    flex-grow: 1;
+    overflow-y: scroll;
+    color: white;
+    align-items: center;
+}
+
+.myworkouts .workout-location {
+    font-size: 14px;
+    color: #ffa500;
+    margin-bottom: 10px;
+        }
+
+.myworkouts .new-routine-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffa500;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.myworkouts .equipment-tag {
+    background-color: #ff69b4;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: 0.8em;
+}
+
+
+.myworkouts .selected {
+    border: 2px solid #3498db;
+}
+
+.myworkouts .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #f0a500;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
 .myworkouts .page-content {
     display: flex;
 }
@@ -977,11 +1009,192 @@ body.newworkout {
 }
 
 .myworkouts .workout-exercises {
-    font-size: 16px; /* Adjusted for better readability */
+    font-size: 16px;
     margin-top: 15px;
     flex-grow: 1;
-    overflow-y: auto; /* Changed from scroll to auto */
+    overflow-y: auto;
     color: white;
+}
+
+/* Updated styles for exercise name */
+.myworkouts .exercise-name {
+    background-color: #1e3a6e;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    color: white;
+    cursor: default;
+}
+
+.myworkouts .exercise-name a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.myworkouts .exercise-name:hover {
+    background-color: #2a4d8d;
+}
+
+.myworkouts .exercise-name:hover a {
+    color: white;
+}
+
+/*Camille Added CSS*/ 
+.myworkouts .main-box {
+    background-color: rgba(26, 38, 52, 0.75);
+    width: 95vw;
+    height: 70vh;
+    border-radius: 40px;
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center elements horizontally */
+    justify-content: center; /* Center elements vertically */
+    box-sizing: border-box;
+    margin-top: 20px; 
+    margin-bottom: 20px;
+}
+
+.myworkouts .title-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+}
+
+.myworkouts .title-container h1{
+    text-align: left; 
+    margin-bottom: 20px;
+    font-size: 50px;
+    margin-bottom: 10px; 
+    padding-bottom: 0; 
+}
+
+.myworkouts .title-container p{
+    text-align: left; 
+    margin-bottom: 20px;
+    font-size: 20px;
+    margin-top:0px;
+}
+
+.myworkouts .Workouts-outermost{
+    width: 90%;
+    height: 80%;
+    background-color: rgb(11,64,156,0.6);
+    border-radius: 20px;
+    padding: 20px;
+    overflow: auto;      /* Adds scrollbars if content overflows */
+}
+
+.myworkouts .Workouts-outermost::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.openModalButton {
+    width: 200px;
+    height: 180px;
+    border-radius: 11px;
+    background-color: rgba(11,64,156,0.1);
+    border: solid 0px;
+    outline: 0.1px solid rgb(187,194,202); 
+    margin: 10px; 
+    box-shadow: 4px 4px 3px rgba(255, 255, 255, 0.1); 
+    
+    font-size: 20px;
+    color:#ccc;
+}
+
+.openModalButton:hover {
+    background-color: rgba(11,64,156,0.5); 
+}
+
+
+/* The Modal (background) */
+.workouts-modal {
+    display: none;
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+}
+
+/* Modal Content */
+.workouts-modal-content {
+    background-color: #0c3864;
+    display: flex; 
+    flex-direction: column;
+    margin: 15% auto; 
+    padding: 40px;
+    width: 80%; 
+    border-radius: 20px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+/* Popup styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #0a2351;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.popup h3 {
+    color: #f0a500;
+    margin-bottom: 15px;
+}
+
+.popup button {
+    background-color: #f0a500;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup button:hover {
+    background-color: #ff8c00;
 }
 
 /* Add styles for the exercise table */
@@ -992,14 +1205,15 @@ body.newworkout {
 
 .myworkouts .exercise-table th,
 .myworkouts .exercise-table td {
-    padding: 8px;
+    padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #1e3a6e;
+    border-bottom: 0.5px solid #6aaaef5f;
 }
 
 .myworkouts .exercise-table th {
-    background-color: #1e3a6e;
     color: white;
+    font-weight: bold;
+    border-radius: 10px;
 }
 
 .myworkouts .exercise-table td a {
@@ -1010,7 +1224,10 @@ body.newworkout {
 .myworkouts .exercise-table td a:hover {
     text-decoration: underline;
 }
-
+.myworkouts .exercise-table td ul {
+    margin: 0;
+    padding-left: 20px;
+}
 
 @media (max-width: 1200px) {
     .myworkouts .workout-grid {
@@ -1022,4 +1239,698 @@ body.newworkout {
     .myworkouts .workout-grid {
         grid-template-columns: 1fr;
     }
+}
+
+@media (max-width: 768px) {
+    .myworkouts .exercise-table {
+        font-size: 14px;
+    }
+
+    .myworkouts .exercise-table th,
+    .myworkouts .exercise-table td {
+        padding: 8px;
+    }
+}
+
+/* Locations -------------------------------------------------------------------*/
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.hive-heading {
+    height: 50px;
+}
+
+.image-button {
+    background: url('/images/menu.png') no-repeat center center;
+    background-size: contain;
+    width: 40px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.image-button:focus {
+    outline: none;
+}
+
+.image-button:hover {
+    opacity: 0.8;
+}
+
+.outermost-box {
+    width: 95vw;
+    height: 90vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.logo-and-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.main-box {
+    background-color: rgba(26, 38, 52, 0.75);
+    width: 95vw;
+    height: 80vh;
+    border-radius: 40px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center elements horizontally */
+    justify-content: center; /* Center elements vertically */
+    gap: 5px;
+    box-sizing: border-box;
+}
+
+.Set-New-Location {
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    gap: 50px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    margin-top:0px;
+
+}
+.Set-New-Location2 {
+    display: flex;
+    width: 30%;
+    box-sizing: border-box;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.Set-New-Location-Sub-Step {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    height: 25%;
+    box-sizing: border-box;
+}
+
+.Set-New-Location-Sub-Step h3 {
+    margin-bottom: 3px;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+}
+
+.Set-New-Location-Sub-Content {
+    background-color: rgba(11, 64, 156, 0.7);
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom:10px;
+    padding-right:30px;
+    padding-left:30px;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.location-heading {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom:25px;
+}
+
+.location-heading h1 {
+    font-size: 40px; /* Example: A smaller font size */
+}
+
+.add-button {
+    background: url('/images/add_circle_orange.png') no-repeat center center;
+    background-size: contain;
+    width: 40px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.add-button:focus {
+    outline: none;
+}
+
+.add-button:hover {
+    opacity: 0.8;
+}
+
+.edit-button{
+    background: url('/images/edit.png') no-repeat center center;
+    background-size: contain;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-button:focus {
+    outline: none;
+}
+
+.edit-button:hover {
+    opacity: 0.8;
+}
+
+.location-content {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+/* Default: 3 sections per row */
+.ind-location {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 30%;
+    box-sizing: border-box;
+}
+
+.ind-location-header {
+    display: flex;
+    flex-direction: row; /* Horizontal layout by default */
+    padding-right: 5px;
+    padding-bottom: 0;
+    justify-content: space-between; /* Space between heading and link */
+    align-items: center; /* Center vertically */
+    width: 100%;
+    box-sizing: border-box; /* Include padding in the width */
+}
+
+/* Font size for the header */
+.ind-location-header h2 {
+    font-size: 25px;
+}
+
+/* When the screen width is 600px or less, stack elements vertically and center them */
+@media (max-width: 600px) {
+    .ind-location-header {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center; /* Center horizontally */
+        padding-right: 0; /* Remove right padding */
+        padding-top: 10px; /* Optional: Add top padding for spacing */
+        padding-bottom: 10px; /* Optional: Add bottom padding for spacing */
+        gap: 10px; /* Space between heading and link */
+    }
+
+    .ind-location-header header {
+        font-size: 20px; /* Adjust font size if needed */
+    }
+
+    .ind-location-header a {
+        margin-top: 0; /* Remove margin if spacing is managed by gap */
+    }
+}
+
+.ind-location-content {
+    background-color: rgba(11, 64, 156, 0.7);
+    border-radius: 18px;
+    padding: 10px;
+    flex-grow: 1; /* Ensure it grows to fill available space */
+}
+
+/* When the screen width is 900px or less, switch to 2 sections per row */
+@media (max-width: 900px) {
+    .ind-location {
+        width: 45%;
+    }
+}
+
+/* When the screen width is 600px or less, switch to 1 section per row */
+@media (max-width: 600px) {
+    .ind-location {
+        width: 100%;
+    }
+}
+
+
+  /* New Location FINAL CSS ---------------------------------------*/
+.set-new-location-main-box{
+    background-color: rgba(26, 38, 52, 0.75);
+    width: 95vw;
+    height: 80vh;
+    border-radius: 40px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Center elements horizontally */
+    justify-content: center; /* Center elements vertically */
+    box-sizing: border-box;
+}
+
+.set-new-location-edit_location{
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    margin-bottom:0px;
+}
+
+.set-new-location-main-box h1{
+    margin-left: 0; /* Remove left margin to align with the left */
+}
+
+.Set-New-Location1{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    width: 60%;
+    height: 100%;
+  }
+
+.Set-New-Location1 h3 {
+    text-align: left; /* This will align the text to the left */
+    margin-bottom:5px;
+  }
+
+  .equipment-container {
+    background-color: rgba(11, 64, 156, 0.7);
+    border-radius: 18px;
+    padding: 10px;
+    width: 100%;
+    height: 400px; /* Set a fixed height for the container */
+    margin: 0 auto;
+    overflow: hidden; /* Hide overflow */
+    display: flex;
+    flex-direction: column; /* Ensure child elements are stacked vertically */
+}
+
+
+.equipment-container-top-bar {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin-right:20px;
+    margin-left: 20px;
+    margin-top: 20px;
+    gap:10px;
+  }
+
+.equipment-container-search-bar{
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 10px;
+    height: 40%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    outline:none;
+}
+
+.equipment-container-filter-bar{
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+    width: 40%;
+    height:100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.equipment-container-search-add{
+    border-radius: 10px;
+    width: 35px;
+    height: 35px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.equipment-container-header {
+    display: flex;
+    font-weight: bold;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-bottom:5px;
+    border-bottom: 2px solid white;
+}
+
+.equipment-container-column-Equipment{
+    text-align: left;
+    width: 90%;
+}
+
+
+.equipment-container-column-Add{
+    text-align: left;
+    width: 10%;
+}
+
+
+.unique-table-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 10px;
+    height: fit-content; /* Adjust row height based on content */
+  }
+
+#tableRows {
+    margin-left: 20px;
+    margin-right: 20px;
+    overflow-y: scroll; /* Enable vertical scrolling */
+    flex-grow: 1; /* Allow the table rows section to take up remaining space */
+
+    /* Hide scrollbar but still allow scrolling */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+#tableRows::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+
+.unique-equipment-column {
+    background-color: #34495E; /* Darker blue background for the equipment cells */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 84%;
+    height:20px;
+    height: fit-content;
+
+}
+
+.unique-description-column {
+    display: flex;
+    width: 60%;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+.unique-description-item {
+    display: inline-block;
+    border-radius: 10px;
+    padding:5px;
+}
+
+.unique-item-blue {
+    background-color: #5DADE2; /* Light blue */
+    width: auto;
+    flex-shrink: 0;
+}
+
+.unique-item-pink {
+    background-color: #F1948A; /* Pink */
+    width: auto;
+    flex-shrink: 0;
+}
+
+.unique-item-green {
+    background-color: #58D68D; /* Light green */
+
+}
+
+.unique-add-column {
+    flex: 0.5;
+    text-align: center;
+    width: 7%;
+}
+
+.unique-add-button {
+    background-color: #F1C40F; /* Yellow background */
+    border: none;
+    color: #2C3E50; /* Dark text color */
+    font-size: 24px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.unique-add-button:hover {
+    background-color: #F39C12;
+}
+
+.unique-add-button {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Active state: Green background when clicked */
+  .unique-add-button.active {
+    background-color: green;
+  }
+
+  .Column2-Location {
+    display: flex;
+    width: 30%;
+    box-sizing: border-box;
+    flex-direction: column; /* Change to column to stack items vertically */
+    align-items: center; /* Center the items horizontally */
+    justify-content: center; /* Center the items vertically */
+    gap: 10px;
+}
+
+
+  .Location-Button-Section {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top:20px;
+    }
+
+    .Location-Button-Section h3 {
+        margin-bottom: 1px;
+        padding: 0;
+        width: 100%;
+        text-align: left;
+    }
+
+
+  .Set-New-Location-Setting-Btn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom:10px;
+    padding-right:30px;
+    padding-left:30px;
+    box-sizing: border-box;
+    width: 100%;
+
+  }
+
+  .location-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FFD700;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    align-items: center;
+    width: 100%;
+
+}
+.location-btn:hover {
+    background-color: #FF8C00;
+}
+
+.addLocationbtn{
+    display: inline-block;
+    background-color: #FFD700;
+    padding: 5px 8px;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.location-dropdown{
+    width: 80%;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.titleInput{
+    width: 80%;
+}
+/* Pain Management */
+.pain-management-main-box {
+    background-color: rgba(26, 38, 52, 0.75);
+    width: 95vw;
+    height: 80vh;
+    border-radius: 40px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center elements horizontally */
+    justify-content: center; /* Center elements vertically */
+    gap: 3px;
+    box-sizing: border-box;
+}
+
+.painpoints-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 1rem;
+}
+
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap:40px;
+    width: 400px;
+}
+
+.nav-button {
+    background-color: black;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.prev-month {
+    left: 0;
+}
+
+.next-month {
+    right: 0;
+}
+
+.calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: '/images/background.jpg'; /* Background color */
+    width: 300px;
+    height: 250px;
+    overflow: hidden; /* Ensure no overflow */
+}
+
+.month {
+    text-align: center;
+    width: 100%;
+}
+
+.month h3 {
+    color: white;
+    margin-top: 0;
+}
+
+.days-header, .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 days a week */
+    gap: 0.3rem; /* Adjust this value to reduce the column gap */
+    width: 100%; /* Full width of the container */
+    max-width: 100%; /* Ensure it doesn't exceed the container width */
+    padding: 0; /* Set padding to 0 */
+    margin: 0; /* Ensure there is no margin */
+
+    /* Center content horizontally and vertically in the grid container */
+    align-content: center; /* Center grid content vertically */
+    justify-content: center; /* Center grid content horizontally */
+
+    /* Center items within their grid cells */
+    align-items: center; /* Center items vertically in their grid cells */
+    justify-items: center; /* Center items horizontally in their grid cells */
+}
+
+.day {
+    width: 30px; /* Adjust size as needed */
+    height: 30px; /* Adjust size as needed */
+    background-color: rgba(0, 0, 255, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+}
+
+.day.empty {
+    background-color: transparent;
+}
+
+.day.completed {
+    background-color: #ffa500;
 }
