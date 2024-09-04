@@ -370,6 +370,42 @@
                 }
             };
         });
+        document.getElementById('submit-location-equipment').onclick = async function() {
+            const locationDropdown = document.getElementById('locationDropdown');
+            const selectedLocation = locationDropdown.value; // Get the selected location
+            const equipmentsContainer = document.getElementById('equipmentsContainer');
+            const equipmentItems = Array.from(equipmentsContainer.children).map(item => item.textContent); // Get the selected equipment names
+            const userId = "<%= userId %>"; // You need to pass the userId to the frontend, either by rendering it in the template or getting it from the URL
+            const locationName = document.querySelector('.titleInput').value;
+            console.log(locationName)
+            // Construct the data object
+            const data = {
+                location: locationName,
+                equipment: equipmentItems
+            };
+
+            try {
+                const response = await fetch(`/${userId}/locations/new`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    // Redirect to the locations page after successful submission
+                    window.location.href = `/${userId}/locations`;
+                } else {
+                    console.log(`${userId}`)
+                    alert('Failed to submit location');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+
  
     </script>
 </body>

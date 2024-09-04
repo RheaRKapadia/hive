@@ -67,9 +67,9 @@
                     <section class="Location-Button-Section">
                         <h3>Controls</h3>
                         <div class="Set-New-Location-Setting-Btn">
-                            <a href="/user/locations" class="location-btn">Locations</a>
-                            <a href="/user/locations/new" class="location-btn">New Location</a>
-                            <a href="/user/locations/location/edit" class="location-btn">Edit Location</a>
+                            <a href="/<%= userId %>/locations" class="location-btn">Locations</a>
+                            <a href="/<%= userId %>/locations/new" class="location-btn">New Location</a>
+                            <a href="/<%= userId %>/locations/edit/<%= location.id %>" class="location-btn">Edit Location</a>
                         </div>
                     </section>
                 </section>

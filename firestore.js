@@ -132,40 +132,7 @@ module.exports = {
             workoutCalendar: completedDays,
             updatedAt: admin.firestore.Timestamp.fromDate(new Date())
           });
-        },
-    createPainPoint: async(userId, region, painLevel) =>{
-      const painpointsRef = db.collection("PainPoints").doc();
-      painpointsRef.set({
-        userId: userId,
-        region: region,
-        painLevel: painLevel,
-        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
-        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
-      })
-      .then(() => {
-        console.log("User pain points data stored successfully!");
-      })
-      .catch(error => {
-        console.error("Error storing user data:", error);
-      });
-    },
-    createLocation: async(userId, location, equipment) =>{
-      const locationRef = db.collection("Locations").doc();
-      locationRef.set({
-        userId: userId,
-        location: location,
-        equipment: equipment,
-        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
-        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
-      })
-      .then(() => {
-        console.log("User pain points data stored successfully!");
-      })
-      .catch(error => {
-        console.error("Error storing user data:", error);
-      });
-    },
-
+        }
         console.log('Workout calendar updated successfully for user:', userId);
         return {
           id: userId,
@@ -189,6 +156,38 @@ module.exports = {
         console.error('Error retrieving workout tracker:', error);
         return { error: 'Failed to retrieve workout tracker' };
       }
+    },
+    createPainPoint: async(userId, region, painLevel) =>{
+      const painpointsRef = db.collection("PainPoints").doc();
+      painpointsRef.set({
+        userId: userId,
+        region: region,
+        painLevel: painLevel,
+        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+      })
+      .then(() => {
+        console.log("User pain points data stored successfully!");
+      })
+      .catch(error => {
+        console.error("Error storing user data:", error);
+      });
+    },
+    createLocation: async(userId, location, equipment) =>{
+      const locationRef = db.collection("Locations").doc();
+      locationRef.set({
+        userId: userId,
+        locationName: location,
+        equipmentAvailable: equipment,
+        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+      })
+      .then(() => {
+        console.log("User pain points data stored successfully!");
+      })
+      .catch(error => {
+        console.error("Error storing user data:", error);
+      });
     },
 
 };
