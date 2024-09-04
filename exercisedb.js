@@ -93,3 +93,4 @@ const getAllMuscles = async (req, res) => {
 }
 
 module.exports = {getAllExercises, getAllEquipment, getAllMuscles}
+

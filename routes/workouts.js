@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {getAllExercises} = require('../exercisedb')
+const {getAllExercises, getAllEquipment} = require('../exercisedb')
 const firestore = require('../firestore')
 
 
