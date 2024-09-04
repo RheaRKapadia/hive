@@ -9,7 +9,7 @@ router.get('/:userId/painpoints', async(req, res) => {
     const user = await firestore.getUserData(userId)
     const painpointsList = await firestore.getUserPainpointsData(user.id)
     console.log('Retrieved user pain points:', painpointsList)
-    res.render('5_painpoints', {painpointsList, user})
+    res.render('5_painpoints', {painpointsList, user, userId})
     //to reference the pain point name for frontend: use the forEach function to then access painpoint.location
     // or painpoint.painLevel
 })
