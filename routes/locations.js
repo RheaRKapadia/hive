@@ -67,15 +67,17 @@ router.get('/:userId/locations/new', async(req, res) => {
 //route for submitting new location (new location button)
 //haven't tested this route because theres no form on the frontend, may not work. Send Rhea a message.
 router.post('/:userId/locations/new', async(req,res) =>{
-    const newLocationData = {
-        createdAt:  Timestamp.fromDate(new Date(req.body.date)),
-        equipmentAvailable: req.body.equipment, //should be array
-        locationName: req.body.name,
-        userId: req.params.userId
-    };
+    const locationName = req.body.location
+    const userId = req.params.userId
+    const equipment = req.params.equipment
+    try {
+      await firestore.createLocation(userId, locationName, equipment)
+      res.redirect(`/${userId}/locations`);
+    } catch(error){
+      res.status(500).json({ error: 'Failed to submit location' });
+    }
 
-    const reponse = await db.collection('Locations').set(newLocationData);
-    res.redirect(`/:userId/locations`);
+    
     //frontend: in the form make sure you are using the same ids as above: date, equipment, and name
     //also set method to post in form
 })
