@@ -923,6 +923,7 @@ body.newworkout {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 .myworkouts .workout-title {
     font-size: 40px;
@@ -1012,6 +1013,7 @@ body.newworkout {
     font-size: 16px;
     margin-top: 15px;
     flex-grow: 1;
+    overflow-y: auto;
     overflow-y: auto;
     color: white;
 }
@@ -1238,6 +1240,17 @@ body.newworkout {
 @media (max-width: 768px) {
     .myworkouts .workout-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .myworkouts .exercise-table {
+        font-size: 14px;
+    }
+
+    .myworkouts .exercise-table th,
+    .myworkouts .exercise-table td {
+        padding: 8px;
     }
 }
 
