@@ -42,6 +42,7 @@
         <section class="workouts-section">
             <h2>Workout Tracker</h2>
             <div id="workout-calendar" class="workout-calendar">
+                <h3 id="current-month-year"></h3>
                 <div class="tracker-container">
                     <div class="tracker-grid">
                         <div class="day" data-day="1">1</div>
@@ -155,8 +156,19 @@
             let completedDays = JSON.parse(localStorage.getItem('completedDays')) || [];
             console.log('Initial completed days:', completedDays);
 
+            // New function to update the current month and year
+            function updateCurrentMonthYear() {
+                const now = new Date();
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+                const currentMonthYear = `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+                document.getElementById('current-month-year').textContent = currentMonthYear;
+            }
+
             function updateUI() {
                 console.log('Updating UI');
+                updateCurrentMonthYear(); // Call the new function
                 days.forEach(day => {
                     const dayNumber = parseInt(day.dataset.day, 10);
                     if (completedDays.includes(dayNumber)) {
