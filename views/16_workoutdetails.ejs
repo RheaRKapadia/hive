@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Workout Details</title>
+</head>
+<body class="workoutdetails">
+    <header>
+        <div class="logo">
+            <h1>HIVE</h1>
+        </div>
+        <nav>
+            <div class="user-menu">
+                <a href="/user/userprofile">
+                    <img src="/images/avatar.png" alt="User Avatar" class="avatar">
+                </a>
+                <span>Menu</span>
+            </div>
+        </nav>
+    </header>
+    <div class="content">
+        <% if (exercise) { %>
+            <h1><%= exercise.name %></h1>
+            <div class="exercise-details">
+                <p><strong>Equipment:</strong> <%= exercise.equipment || 'Not specified' %></p>
+                <p><strong>Target Muscle:</strong> <%= exercise.target || 'Not specified' %></p>
+                <p><strong>Secondary Muscles:</strong> <%= Array.isArray(exercise.secondaryMuscles) ? exercise.secondaryMuscles.join(', ') : (exercise.secondaryMuscles || 'Not specified') %></p>
+                <h2>Instructions:</h2>
+                <% if (Array.isArray(exercise.instructions) && exercise.instructions.length > 0) { %>
+                    <ol>
+                        <% exercise.instructions.forEach(instruction => { %>
+                            <li><%= instruction %></li>
+                        <% }); %>
+                    </ol>
+                <% } else { %>
+                    <p>No instructions available.</p>
+                <% } %>
+            </div>
+        <% } else { %>
+            <p><%= message || 'Exercise not found' %></p>
+        <% } %>
+    </div>
+</body>
+</html>

@@ -2,12 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HIVE Workouts</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-    <h1>Back Day</h1>
-    <a href="/user/workouts/workout/log" class="btn">Start Back Dat Workout</a>
+<body class="myworkouts">
+    <header>
+        <div class="logo">
+            <h1>HIVE</h1>
+        </div>
+        <nav>
+            <div class="user-menu">
+                <a href="/user/userprofile">
+                    <img src="/images/avatar.png" alt="User Avatar" class="avatar">
+                </a>
+                <span>Menu</span>
+            </div>
+        </nav>
+    </header>
+    <div class="workouts-container">
+    <h1>Workouts</h1>
+
+    <div class="workout-grid">
+        <div class="workout-card">
+            <div class="workout-title">Back Day</div>
+            <div class="workout-location">Location</div>
+            <div class="workout-exercises">
+                Lat pulldown<br>
+                Dumbbell Dead lift<br>
+                Inverted Row<br>
+                Lat pulldown<br>
+                Dumbbell Dead lift<br>
+                Inverted Row<br>
+                Lat pulldown<br>
+                Dumbbell Dead lift<br>
+                Inverted Row<br>
+            </div>
+        </div>
+        <div class="workout-card">
+            <div class="workout-title">Leg Day</div>
+            <div class="workout-location">Location</div>
+        </div>
+        <div class="workout-card">
+            <div class="workout-title">Arms Day</div>
+            <div class="workout-location">Location</div>
+        </div>
+        <div class="workout-card">
+            <div class="workout-title">Warm up</div>
+            <div class="workout-location">Location</div>
+            <div class="workout-type">AI Generated</div>
+            <div class="workout-location">Home</div>
+        </div>
+        <div class="workout-card">
+            <div class="workout-title">Back Day</div>
+            <div class="workout-location">Location</div>
+        </div>
+        <div class="workout-card selected">
+            <div class="workout-title">Back Day</div>
+            <div class="workout-location">Location</div>
+        </div>
+    </div>
+    </div>
+
+    <button class="new-routine-btn" onclick="window.location.href='/workouts/new'">+</button>
+
+    <script>
+        document.querySelector('.new-routine-btn').addEventListener('click', function() {
+            window.location.href = '/user/workouts/new';
+        });
+    </script>
 </body>
 </html>
