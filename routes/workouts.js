@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {getAllExercises} = require('../exercisedb')
+const {getAllExercises, getAllEquipment, getAllMuscles, getTargetMuscles} = require('../exercisedb')
 const firestore = require('../firestore')
 
 
@@ -87,10 +87,17 @@ router.get('/:userId/workouts/new/ai', async (req, res) => {
 
     try {
         const userId = req.params.userId
-        equipmentAll = await getAllEquipment(req, res)
+        const equipmentAll = await getAllEquipment(req, res)
+        const targetMusclesAll = await getTargetMuscles(req, res)
+
+        /*
+        console.log(userId)
+        console.log(equipmentAll)
+        console.log(targetMusclesAll)
+        */
         // console.log(exercises.pagination)
         res.status(200).render('17_newAiWorkout', {
-            equipmentAll, userId
+            equipmentAll, targetMusclesAll, userId
         })
     } catch (error) {
     console.error('Error fetching exercises data:', error)

@@ -1561,3 +1561,82 @@ input {
 .day.completed {
     background-color: #ffa500;
 }
+
+
+/* New AI Workout */
+
+.New-AI-Title{
+    width: 100%;
+    padding: 20px; 
+}
+.New-AI-Title h1{
+    font-size:36px; 
+    text-align: left; 
+    padding-bottom:0; 
+    margin-bottom:10px;
+}
+
+.New-AI-Title p{
+    text-align: left; 
+    padding-bottom:0; 
+    padding-top:0;
+    margin-top:0;
+    margin-bottom:5px;
+}
+
+.equipment-targets-container{
+    display: flex; 
+    flex-direction: row; 
+}
+
+.ai-equipment-container{
+    width: 50%;    
+}
+
+.ai-equipment-container h2{
+    text-align: left; 
+}
+
+.ai-targetMuscle-container{
+    width: 50%;    
+}
+
+.ai-targetMuscle-container h2{
+    text-align: left;   
+}
+
+.checkbox-background {
+    background-color: rgba(11, 64, 156, 0.6);
+    border-radius: 10px;
+    width: 100%;
+    height: 200px;
+    overflow-y: auto;
+    box-sizing: border-box; /* Ensure padding is included in width/height calculation */
+    padding-top: 10px;
+}
+
+
+.checkbox-background::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+
+.ai-workout-options{
+    display:flex;
+    flex-direction: row;
+    padding-right: 50px; 
+    padding-left: 50px; 
+    padding-bottom: 10px;
+    padding-top: 10px; 
+    gap: 20px; 
+}
+
+.AI-Workout-Btn-Container{
+    display: flex; 
+    justify-content: flex-end;
+}
+
+.AI-Workout-Btn{
+    width: 30%;
+    margin-top:20px; 
+}
