@@ -1083,10 +1083,9 @@ body.newworkout {
 .myworkouts .Workouts-outermost{
     width: 90%;
     height: 80%;
-    background-color: rgb(11,64,156,0.6);
     border-radius: 20px;
     padding: 20px;
-    overflow: auto;      /* Adds scrollbars if content overflows */
+    overflow: auto; 
 }
 
 .myworkouts .Workouts-outermost::-webkit-scrollbar {
@@ -1094,8 +1093,8 @@ body.newworkout {
 }
 
 .openModalButton {
-    width: 200px;
-    height: 180px;
+    width: 100%;
+    height: 50px;
     border-radius: 11px;
     background-color: rgba(11,64,156,0.1);
     border: solid 0px;
