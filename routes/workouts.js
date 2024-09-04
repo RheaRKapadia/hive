@@ -105,7 +105,7 @@ router.post('/:userId/workouts/new/ai', async (req, res) => {
     try {
         const userId = req.params.userId
         // console.log(exercises.pagination)
-        res.status(200).redirect('10_workouts')
+        res.status(200).redirect(`${userId}/workouts`)
     } catch (error) {
     console.error('Error fetching exercises data:', error)
     res.status(500).json({ error: 'Failed to fetch exercises data' });

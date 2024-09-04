@@ -112,6 +112,22 @@ module.exports = {
       .catch(error => {
         console.error("Error storing user data:", error);
       });
+    },
+    createPainPoint: async(userId, region, painLevel) =>{
+      const painpointsRef = db.collection("PainPoints").doc();
+      painpointsRef.set({
+        userId: userId,
+        region: region,
+        painLevel: painLevel,
+        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+      })
+      .then(() => {
+        console.log("User pain points data stored successfully!");
+      })
+      .catch(error => {
+        console.error("Error storing user data:", error);
+      });
     }
       
 };
