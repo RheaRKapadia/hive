@@ -46,6 +46,18 @@ app.use(session({
     next();
   });
 
+app.use((req, res, next) => {
+    if (req.url.endsWith('.js')) {
+      res.type('application/javascript');
+    }
+    next();
+  });
+
+  app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+});
+
 //get the routes defined in the corresponding file
 const otherRouter = require('./routes/other')
 const userRouter = require('./routes/users')

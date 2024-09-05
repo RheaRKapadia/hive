@@ -150,4 +150,98 @@ getExerciseDetails: function(userId, exerciseId) {
       return null;
     });
 },
+    updateUserWorkoutCalendar: async (userId, completedDays) => {
+      try {
+        const workoutTrackerRef = db.collection('WorkoutTracker').doc(userId);
+        const workoutTrackerSnapshot = await workoutTrackerRef.get();
+
+        if (!workoutTrackerSnapshot.exists) {
+          // If the document doesn't exist, create a new one
+          await workoutTrackerRef.set({
+            userId: userId,
+            workoutCalendar: completedDays,
+            createdAt: admin.firestore.Timestamp.fromDate(new Date()),
+            updatedAt: admin.firestore.Timestamp.fromDate(new Date())
+          });
+        } else {
+          // If the document exists, update it
+          await workoutTrackerRef.update({
+            workoutCalendar: completedDays,
+            updatedAt: admin.firestore.Timestamp.fromDate(new Date())
+          });
+        }
+        console.log('Workout calendar updated successfully for user:', userId);
+        return {
+          id: userId,
+          workoutCalendar: completedDays,
+          updatedAt: admin.firestore.Timestamp.fromDate(new Date())
+        };
+      } catch (error) {
+        console.error('Error updating workout calendar:', error);
+        return { error: 'Failed to update workout calendar' };
+      }
+    },
+    getUserWorkoutTracker: async (userId) => {
+      try {
+        const workoutTrackerSnapshot = await db.collection('WorkoutTracker').doc(userId).get();
+        if (!workoutTrackerSnapshot.exists) {
+          return { error: 'Workout tracker not found' };
+        }
+        const workoutTracker = { id: workoutTrackerSnapshot.id, ...workoutTrackerSnapshot.data() };
+        return workoutTracker;
+      } catch (error) {
+        console.error('Error retrieving workout tracker:', error);
+        return { error: 'Failed to retrieve workout tracker' };
+      }
+    },
+    createPainPoint: async(userId, region, painLevel) =>{
+      const painpointsRef = db.collection("PainPoints").doc();
+      painpointsRef.set({
+        userId: userId,
+        region: region,
+        painLevel: painLevel,
+        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+      })
+      .then(() => {
+        console.log("User pain points data stored successfully!");
+      })
+      .catch(error => {
+        console.error("Error storing user data:", error);
+      });
+    },
+    createLocation: async(userId, location, equipment, possibleLocations) =>{
+      const locationRef = db.collection("Locations").doc();
+      locationRef.set({
+        userId: userId,
+        locationName: location,
+        equipmentAvailable: equipment,
+        possibleLocations: possibleLocations,
+        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+      })
+      .then(() => {
+        console.log("User pain points data stored successfully!");
+      })
+      .catch(error => {
+        console.error("Error storing user data:", error);
+      });
+    },
+    updateLocation: async(userId, locationId, location, equipment, possibleLocations) =>{
+      const locationRef = db.collection("Locations").doc(locationId);
+      locationRef.update({
+        userId: userId,
+        locationName: location,
+        equipmentAvailable: equipment,
+        possibleLocations: possibleLocations,
+        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+      })
+      .then(() => {
+        console.log("User pain points data updated successfully!");
+      })
+      .catch(error => {
+        console.error("Error updating user data:", error);
+      });
+    },
+
 };

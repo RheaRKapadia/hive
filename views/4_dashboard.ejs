@@ -6,24 +6,33 @@
     <title>HIVE Dashboard</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body class="dashboard-page">
+<body class="dashboard-page" data-user-id="<%= userId %>">
     <header>
         <div class="logo">
+            <div>
+                <img src="/images/Logo.png" alt="Hive Logo">
+              </div>
             <h1>HIVE</h1>
         </div>
         <nav>
             <div class="user-menu">
-                <a href="/<%= user.id %>/userprofile">
+                <a href="/<%= userId %>/userprofile">
                     <img src="/images/avatar.png" alt="User Avatar" class="avatar">
                 </a>
-                <span>Menu</span>
+                <span class="menu-trigger" onclick="toggleDropdown()">Menu</span>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="/<%= userId %>/workouts/">Workouts</a>
+                    <a href="/<%= userId %>/painpoints">Pain Management</a>
+                    <a href="/<%= userId %>/locations">Locations</a>
+                </div>
             </div>
         </nav>
     </header>
 
     <main class="dashboard-content">
+        <div class="first-row">
         <section class="welcome-section">
-            <h2>Welcome back, <%= user.firstName %>!</h2>
+            <h2>Welcome back <%= user.firstName %>!</h2>
             <div id="quote-container" class="quote">
                 <p id="quote-text">Loading quote...</p>
                 <span id="quote-author" class="author"></span>
@@ -33,6 +42,7 @@
         <section class="workouts-section">
             <h2>Workout Tracker</h2>
             <div id="workout-calendar" class="workout-calendar">
+                <h3 id="current-month-year"></h3>
                 <div class="tracker-container">
                     <div class="tracker-grid">
                         <div class="day" data-day="1">1</div>
@@ -68,8 +78,23 @@
                     </div>
                 </div>
             </div>
-        </section>
+            <div class="workout-stats">
+                <p>You've completed <span id="totalWorkoutDays"><%= totalWorkoutDays %></span> workout days this month!</p>
+                <div class="workout-progress">
+                    <div class="progress-bar" style="width: 0%;"></div>
+                </div>
+            </div>
+            <p class="motivation-message">"The only bad workout is the one that didn't happen."</p>
 
+        </section>
+        <section class="workouts-list-section">
+            <h2>Workouts</h2>
+            <div id="workouts-list" class="workouts-list">
+                <div class="loading">Loading workouts...</div>
+            </div>
+        </section>
+    </div>
+    <div class="second-row">
         <section class="health-section">
             <h2>Health</h2>
             <div id="health-data" class="health-data">
@@ -83,25 +108,9 @@
                 <div class="loading">Loading location data...</div>
             </div>
         </section>
-
-        <section class="workouts-list-section">
-            <h2>Workouts</h2>
-            <div id="workouts-list" class="workouts-list">
-                <div class="loading">Loading workouts...</div>
-            </div>
-        </section>
+    </div>
     </main>
-
-    <nav class="side-menu">
-        <ul>
-            <li><a href="/user/workouts">Workouts</a></li>
-            <li><a href="/user/routines">Routines</a></li>
-            <li><a href="/user/painpoints">Pain Management</a></li>
-            <li><a href="/user/locations">Locations</a></li>
-        </ul>
-    </nav>
-
-    <script src="./js/dashboard.js"></script>
+    <script src="/js/dashboard.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const quoteText = document.getElementById('quote-text');
@@ -139,30 +148,118 @@
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM Content Loaded');
             const days = document.querySelectorAll('.day');
+            console.log('Number of day elements:', days.length);
 
-            days.forEach(day => {
-                const dayNumber = parseInt(day.dataset.day, 10);
-                const completedDays = JSON.parse(localStorage.getItem('completedDays')) || [];
+            let completedDays = JSON.parse(localStorage.getItem('completedDays')) || [];
+            console.log('Initial completed days:', completedDays);
 
-                if (completedDays.includes(dayNumber)) {
-                    day.classList.add('completed');
+            // New function to update the current month and year
+            function updateCurrentMonthYear() {
+                const now = new Date();
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+                const currentMonthYear = `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+                document.getElementById('current-month-year').textContent = currentMonthYear;
+            }
+
+            function updateUI() {
+                console.log('Updating UI');
+                updateCurrentMonthYear(); // Call the new function
+                days.forEach(day => {
+                    const dayNumber = parseInt(day.dataset.day, 10);
+                    if (completedDays.includes(dayNumber)) {
+                        day.classList.add('completed');
+                        console.log(`Day ${dayNumber} marked as completed`);
+                    } else {
+                        day.classList.remove('completed');
+                        console.log(`Day ${dayNumber} marked as not completed`);
+                    }
+                });
+
+                // Update total workout days
+                const totalWorkoutDaysElement = document.getElementById('totalWorkoutDays');
+                if (totalWorkoutDaysElement) {
+                    totalWorkoutDaysElement.textContent = completedDays.length;
                 }
 
-                day.addEventListener('click', function () {
-                    if (day.classList.contains('completed')) {
-                        day.classList.remove('completed');
-                        completedDays.splice(completedDays.indexOf(dayNumber), 1);
+                // Update progress bar
+                const progressBar = document.querySelector('.progress-bar');
+                if (progressBar) {
+                    const progress = (completedDays.length / 30) * 100;
+                    progressBar.style.width = `${progress}%`;
+                }
+            }
+
+            function updateWorkoutCalendar(completedDays) {
+                const userId = document.body.dataset.userId;
+                fetch(`/${userId}/updateWorkoutCalendar`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ completedDays }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('Error updating workout calendar:', data.error);
                     } else {
-                        day.classList.add('completed');
+                        console.log('Workout calendar updated successfully');
+                        updateUI();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+
+            // Initial UI update
+            updateUI();
+
+            days.forEach(day => {
+                day.addEventListener('click', function () {
+                    console.log('Day clicked:', this.dataset.day);
+                    const dayNumber = parseInt(this.dataset.day, 10);
+                    const index = completedDays.indexOf(dayNumber);
+
+                    if (index > -1) {
+                        completedDays.splice(index, 1);
+                        console.log(`Removed day ${dayNumber} from completed days`);
+                    } else {
                         completedDays.push(dayNumber);
+                        console.log(`Added day ${dayNumber} to completed days`);
                     }
 
                     localStorage.setItem('completedDays', JSON.stringify(completedDays));
+                    console.log('Updated localStorage:', JSON.parse(localStorage.getItem('completedDays')));
+
+                    // Update the server and UI
+                    updateWorkoutCalendar(completedDays);
                 });
             });
         });
+    </script>
+    <script>
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-menu span')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
     </script>
 </body>
 </html>

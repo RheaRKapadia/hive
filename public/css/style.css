@@ -212,31 +212,53 @@ input {
 }
 
 /* Header Styles */
+
 .dashboard-page header {
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    background-color: rgba(30, 30, 30, 0.8);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .dashboard-page .logo h1 {
-    color: #ffa500;
     margin: 0;
+    color: #f0a500;
+    font-size: 38px;
+    line-height: 1;
+    transform: translateY(-4px);
+}
+
+.dashboard-page .logo {
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-page .logo img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.dashboard-page nav {
+    display: flex;
+    align-items: center;
 }
 
 .dashboard-page .user-menu {
     display: flex;
     align-items: center;
-    cursor: pointer;
+    color: #f0a500;
 }
 
 .dashboard-page .avatar {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     margin-right: 10px;
 }
+
 
 /* Main Content Styles */
 .dashboard-page .dashboard-content {
@@ -263,14 +285,6 @@ input {
     background-color: rgba(0, 0, 255, 0.6);
     padding: 1rem;
     border-radius: 5px;
-}
-
-/* Workouts Section */
-.dashboard-page .workout-calendar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
 }
 
 .dashboard-page .day {
@@ -303,35 +317,63 @@ input {
     min-height: 100px;
 }
 
-/* Side Menu */
-.dashboard-page .side-menu {
-    position: fixed;
-    top: 0;
+/* Menu drop down */
+
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-trigger {
+    cursor: pointer;
+}
+
+.menu-trigger:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #f0a500, 0 0 20px #f0a500, 0 0 30px #f0a500;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#current-month-year{
+    color:#f0a500;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
     right: 0;
-    height: 100%;
-    width: 200px;
-    background-color: rgba(30, 30, 30, 0.9);
-    padding: 1rem;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
+    top: 100%;
+    margin-top: 10px;
+    background-color: #0a2351;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001;
+    border-radius: 10px;
 }
 
-.dashboard-page .side-menu.open {
-    transform: translateX(0);
+.user-menu::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 10px;
 }
 
-.dashboard-page .side-menu ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.dashboard-page .side-menu li {
-    margin-bottom: 1rem;
-}
-
-.dashboard-page .side-menu a {
+.dropdown-content a {
     color: white;
+    padding: 12px 16px;
     text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: block;
 }
 
 /* Loading state */
@@ -354,6 +396,184 @@ input {
     }
 }
 
+/* Sections */
+.dashboard-page .dashboard-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+
+}
+/* First Row */
+.dashboard-page .first-row {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr 1fr;
+    gap: 2rem;
+}
+
+/* Welcome Section (Quote) */
+.dashboard-page .welcome-section {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    padding: 1.5rem;
+    overflow: hidden;
+}
+
+/* Workouts Section */
+.dashboard-page .workouts-section {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    padding: 1.5rem;
+    grid-column: 2;
+    overflow: visible;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dashboard-page .tracker-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    justify-content: center;
+}
+
+.dashboard-page .workout-calendar {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: visible;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    margin-left: 0;
+    margin-top: 0;
+}
+
+/* Second Row */
+.dashboard-page .second-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.dashboard-page .day {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #1E3A5F;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-page .day:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+.dashboard-page .day.completed {
+    background-color: #FFA500;
+}
+
+.dashboard-page .workout-stats {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.dashboard-page .workout-stats p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+#totalWorkoutDays {
+    font-weight: bold;
+    color: #FFA500;
+}
+
+.dashboard-page .workout-progress {
+    background-color: #1E3A5F;
+    border-radius: 10px;
+    height: 10px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.dashboard-page .progress-bar {
+    height: 100%;
+    background-color: #FFA500;
+    transition: width 0.5s ease-in-out;
+}
+
+.dashboard-page .motivation-message {
+    font-style: italic;
+    color: #FFA500;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .dashboard-page .tracker-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    .dashboard-page .day {
+        width: 50px;
+        height: 50px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-page .tracker-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .dashboard-page .day {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+/* Health, Locations, and Workouts List Sections */
+.dashboard-page .health-section,
+.dashboard-page .locations-section,
+.dashboard-page .workouts-list-section {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+/* Workouts List Section - Modified to be smaller */
+.dashboard-page .workouts-list-section {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    padding: 1rem;
+    width: 80%;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-page .first-row,
+    .dashboard-page .second-row {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-page .workouts-section {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    }
+}
 
 /* User Profile Page */
 /*  */
@@ -1536,7 +1756,7 @@ body.newworkout {
 }
 
 .location-heading h1 {
-    font-size: 40px; /* Example: A smaller font size */
+    font-size: 40px;
 }
 
 .add-button {
@@ -1594,13 +1814,13 @@ body.newworkout {
 
 .ind-location-header {
     display: flex;
-    flex-direction: row; /* Horizontal layout by default */
+    flex-direction: row;
     padding-right: 5px;
     padding-bottom: 0;
-    justify-content: space-between; /* Space between heading and link */
-    align-items: center; /* Center vertically */
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    box-sizing: border-box; /* Include padding in the width */
+    box-sizing: border-box;
 }
 
 /* Font size for the header */
@@ -2027,25 +2247,25 @@ body.newworkout {
 
 .days-header, .days {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 days a week */
-    gap: 0.3rem; /* Adjust this value to reduce the column gap */
-    width: 100%; /* Full width of the container */
-    max-width: 100%; /* Ensure it doesn't exceed the container width */
-    padding: 0; /* Set padding to 0 */
-    margin: 0; /* Ensure there is no margin */
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.3rem;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
 
     /* Center content horizontally and vertically in the grid container */
-    align-content: center; /* Center grid content vertically */
-    justify-content: center; /* Center grid content horizontally */
+    align-content: center;
+    justify-content: center;
 
     /* Center items within their grid cells */
-    align-items: center; /* Center items vertically in their grid cells */
-    justify-items: center; /* Center items horizontally in their grid cells */
+    align-items: center;
+    justify-items: center;
 }
 
 .day {
-    width: 30px; /* Adjust size as needed */
-    height: 30px; /* Adjust size as needed */
+    width: 30px;
+    height: 30px;
     background-color: rgba(0, 0, 255, 0.6);
     border-radius: 50%;
     display: flex;
@@ -2062,4 +2282,145 @@ body.newworkout {
 
 .day.completed {
     background-color: #ffa500;
+}
+
+/* Workoutslide on dashboard */
+.workout-slider {
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.workout-slider .slides-container {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.workout-slide {
+    flex: 0 0 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.workout-slider .slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.workout-slider .slider-nav.prev {
+    left: 10px;
+}
+
+.workout-slider .slider-nav.next {
+    right: 10px;
+}
+
+.workout-item {
+    background: rgb(10, 28, 183);
+    border-radius: 8px;
+    padding: 20px;
+    color: white;
+    height: 300px;
+}
+
+/* Typography */
+.workout-slide h3 {
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.workout-slide h4 {
+    font-size: 1.2rem;
+    color: rgb(255, 255, 255);
+    margin-bottom: 0.5rem;
+}
+
+/* Exercise list */
+.workout-slide .exercise-list {
+    /* background-color: #ecf0f1; */
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.workout-slide ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.workout-slide li {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Button styles */
+.workout-slider .btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #db8d34;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.workout-slider .btn:hover {
+    background-color: #2980b9;
+}
+
+/* Navigation buttons */
+.workout-slider .slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(52, 152, 219, 0.7);
+    color: #ffffff;
+    border: none;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.workout-slider .slider-nav:hover {
+    background-color: rgba(52, 152, 219, 1);
+}
+
+.workout-slider .prev {
+    left: 10px;
+}
+
+.workout-slider .next {
+    right: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .workout-slider {
+        max-width: 90%;
+    }
+
+    .workout-slide {
+        padding: 1rem;
+    }
+
+    .workout-slide h3 {
+        font-size: 1.5rem;
+    }
+
+    .workout-slide h4 {
+        font-size: 1.1rem;
+    }
 }
