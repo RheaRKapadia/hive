@@ -68,12 +68,12 @@
         </div>
 
         <!-- Button for Ne orkout -->
-        <!-- <button class="new-routine-btn" onclick="window.location.href='/<%= user.id %>/workouts/new'">+</button> -->
+        <button class="new-routine-btn" onclick="window.location.href='/<%= userId %>/workouts/new'">+</button>
     </main>
 
     <script>
         document.querySelector('.new-routine-btn').addEventListener('click', function() {
-            window.location.href = '/<%= user.id %>/workouts/new';
+            window.location.href = '/<%= userId %>/workouts/new';
         });
 
 
