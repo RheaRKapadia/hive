@@ -26,7 +26,7 @@ const { getUserWorkoutsData, saveUserWorkout, getDetailedWorkouts } = require('.
   router.get('/:userId/workouts', async (req, res) => {
     try {
       const workoutsList = await getDetailedWorkouts();
-      console.log('Fetched workouts:', workoutsList); 
+      console.log('Fetched workouts:', workoutsList);
       res.render('10_workouts', { workoutsList, userId: req.params.userId });
     } catch (error) {
       console.error('Error fetching workouts:', error);
@@ -109,24 +109,24 @@ router.get('/:userId/workouts/new', async (req, res) => {
 //     }
 // });
 
-router.post('/:userId/workouts/create', async (req, res) => {
-    const userId = req.params.userId;
-    const { exercises, workoutName, location } = req.body;
+// router.post('/:userId/workouts/create', async (req, res) => {
+//     const userId = req.params.userId;
+//     const { exercises, workoutName, location } = req.body;
 
-    try {
-      const workoutRef = await db.collection('users').doc(userId).collection('workouts').add({
-        name: workoutName,
-        location: location,
-        exercises: exercises,
-        createdAt: new Date()
-      });
+//     try {
+//       const workoutRef = await db.collection('users').doc(userId).collection('workouts').add({
+//         name: workoutName,
+//         location: location,
+//         exercises: exercises,
+//         createdAt: new Date()
+//       });
 
-      res.json({ success: true, workoutId: workoutRef.id });
-    } catch (error) {
-      console.error('Error creating workout:', error);
-      res.status(500).json({ success: false, error: 'Failed to create workout' });
-    }
-  });
+//       res.json({ success: true, workoutId: workoutRef.id });
+//     } catch (error) {
+//       console.error('Error creating workout:', error);
+//       res.status(500).json({ success: false, error: 'Failed to create workout' });
+//     }
+//   });
 
 //   router.post('/:userId/workouts/create', async (req, res) => {
 //     const userId = req.params.userId;
@@ -145,6 +145,27 @@ router.post('/:userId/workouts/create', async (req, res) => {
 //       res.status(500).json({ success: false, error: 'Failed to create workout' });
 //     }
 //   });
+
+router.post('/:userId/workouts/create', async (req, res) => {
+  const userId = req.params.userId;
+  const { name, location, exercises } = req.body;
+
+  try {
+    // Create a new workout document in the Workouts collection
+    const workoutRef = await db.collection('Workouts').add({
+      userId: userId,
+      name: name,
+      location: location,
+      exercises: exercises,
+      createdAt: new Date()
+    });
+
+    res.status(200).json({ success: true, workoutId: workoutRef.id });
+  } catch (error) {
+    console.error('Error creating workout:', error);
+    res.status(500).json({ success: false, error: 'Failed to create workout' });
+  }
+});
 
   // router.get('/:userId/exercise/:exerciseId', async (req, res) => {
   //   const { userId, exerciseId } = req.params;

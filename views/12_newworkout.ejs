@@ -69,7 +69,7 @@
       <ul id="selectedExercisesList"></ul>
       <button id="submitWorkout" class="submit-button">Create Workout</button>
     </div>
-    <div class="scrollable-content">
+    <div id="exerciseContainer" class="scrollable-content">
       <div class="workout-list">
           <div class="workout-header">
               <div>Select</div>
@@ -171,75 +171,85 @@
       const userId = '<%= userId %>';
 
       if (selectedExercisesList) {
-          document.querySelectorAll('.select-exercise').forEach(checkbox => {
-              checkbox.addEventListener('change', function() {
-                  const exerciseId = this.dataset.exerciseId;
-                  const exerciseRow = this.closest('.workout-row');
-                  const exerciseName = exerciseRow.querySelector('.exercise-name').textContent.trim();
-                  const exerciseDescription = exerciseRow.querySelector('.exercise-description').textContent.trim();
-                  const exerciseEquipment = exerciseRow.querySelector('.equipment-tag').textContent.trim();
-                  const exerciseMuscles = exerciseRow.querySelector('div:last-child').textContent.trim();
+        document.querySelectorAll('.select-exercise').forEach(checkbox => {
+          checkbox.addEventListener('change', function() {
+            const exerciseId = this.dataset.exerciseId;
+            const exerciseRow = this.closest('.workout-row');
+            const exerciseName = exerciseRow.querySelector('.exercise-name').textContent.trim();
+            const exerciseDescription = exerciseRow.querySelector('.exercise-description').textContent.trim();
+            const exerciseEquipment = exerciseRow.querySelector('.equipment-tag').textContent.trim();
+            const exerciseMuscles = exerciseRow.querySelector('div:last-child').textContent.trim();
 
-                  if (this.checked) {
-                      selectedExercises.add({
-                          id: exerciseId,
-                          name: exerciseName,
-                          description: exerciseDescription,
-                          equipment: exerciseEquipment,
-                          muscles: exerciseMuscles
-                      });
-                      const li = document.createElement('li');
-                      li.textContent = exerciseName;
-                      li.dataset.exerciseId = exerciseId;
-                      selectedExercisesList.appendChild(li);
-                  } else {
-                      selectedExercises.delete([...selectedExercises].find(e => e.id === exerciseId));
-                      const li = selectedExercisesList.querySelector(`li[data-exercise-id="${exerciseId}"]`);
-                      if (li) li.remove();
-                  }
+            if (this.checked) {
+              selectedExercises.add({
+                id: exerciseId,
+                name: exerciseName,
+                description: exerciseDescription,
+                equipment: exerciseEquipment,
+                muscles: exerciseMuscles
               });
+              const li = document.createElement('li');
+              li.textContent = exerciseName;
+              li.dataset.exerciseId = exerciseId;
+              selectedExercisesList.appendChild(li);
+            } else {
+              selectedExercises.delete([...selectedExercises].find(e => e.id === exerciseId));
+              const li = selectedExercisesList.querySelector(`li[data-exercise-id="${exerciseId}"]`);
+              if (li) li.remove();
+            }
           });
+        });
       } else {
-          console.error('selectedExercisesList element not found');
+        console.error('selectedExercisesList element not found');
       }
 
       if (submitWorkoutButton) {
-          submitWorkoutButton.addEventListener('click', async function() {
-              if (workoutNameInput && workoutLocationSelect) {
-                  const workoutName = workoutNameInput.value.trim();
-                  const workoutLocation = workoutLocationSelect.value;
+        submitWorkoutButton.addEventListener('click', async function() {
+          if (workoutNameInput && workoutLocationSelect) {
+            const workoutName = workoutNameInput.value.trim();
+            const workoutLocation = workoutLocationSelect.value;
 
-                  if (workoutName && workoutLocation && selectedExercises.size > 0) {
-                      const response = await fetch('/user/workouts/new', {
-                          method: 'POST',
-                          headers: {
-                              'Content-Type': 'application/json'
-                          },
-                          body: JSON.stringify({
-                              userId: userId,
-                              name: workoutName,
-                              location: workoutLocation,
-                              exercises: [...selectedExercises]
-                          })
-                      });
+            if (workoutName && workoutLocation && selectedExercises.size > 0) {
+              const response = await fetch(`/${userId}/workouts/create`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  name: workoutName,
+                  location: workoutLocation,
+                  exercises: Array.from(selectedExercises).map(exercise => ({
+                    id: exercise.id,
+                    name: exercise.name,
+                    description: exercise.description,
+                    equipment: exercise.equipment,
+                    muscles: exercise.muscles
+                  }))
+                })
+              });
 
-                      if (response.ok) {
-                          alert('Workout created successfully!');
-                          window.location.href = '/user/workouts'; // Redirect to the workouts page
-                      } else {
-                          alert('Failed to create workout. Please try again.');
-                      }
-                  } else {
-                      alert('Please fill out all fields and select at least one exercise.');
-                  }
+              if (response.ok) {
+                const result = await response.json();
+                if (result.success) {
+                  alert('Workout created successfully!');
+                  window.location.href = `/${userId}/workouts`;
+                } else {
+                  alert('Failed to create workout. Please try again.');
+                }
               } else {
-                  console.error('Workout name or location input elements not found');
+                alert('Failed to create workout. Please try again.');
               }
-          });
+            } else {
+              alert('Please fill out all fields and select at least one exercise.');
+            }
+          } else {
+            console.error('Workout name or location input elements not found');
+          }
+        });
       } else {
-          console.error('submitWorkoutButton element not found');
+        console.error('submitWorkoutButton element not found');
       }
-  });
+    });
   </script>
 </body>
 </html>
