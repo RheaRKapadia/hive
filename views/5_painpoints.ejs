@@ -42,22 +42,22 @@
                 <button class="nav-button next-month">&#9654;</button>
             </div>
 
-            <form method="POST" action="/user/painpoints">
+            <form method="POST" action="/<%= user.id %>/painpoints">
                 <!-- Pain Level -->
                 <label for="painLevel">
                     Pain Level
-                    <input type="range" min="1" max="10" value="1" class="slider" id="myRange">
+                    <input type="range" min="1" max="10" value="1" class="slider" id="myRange" name="painLevel">
                     <span id="sliderValue">1</span>
                 </label></br>
 
                 <!-- Regions of Pain -->
                 <label for="location">
                     Regions of Pain
-                    <select id="filterBar" class="equipment-container-filter-bar">
+                    <select id="filterBar" class="equipment-container-filter-bar" name="region">
                         <option value="" disabled selected>Regions of Pain</option>
-                        <option value="item-blue">Forearm</option>
-                        <option value="item-pink">Triceps</option>
-                        <option value="item-green">Shoulder</option>
+                        <option value="Forearm">Forearm</option>
+                        <option value="Triceps">Triceps</option>
+                        <option value="Shoulder">Shoulder</option>
                     </select>
                 </label></br>
 

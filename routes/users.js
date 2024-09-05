@@ -27,6 +27,7 @@ router.get('/:userId/dashboard', async(req, res) => {
         const totalWorkoutDays = workoutTracker.workoutCalendar ? workoutTracker.workoutCalendar.length : 0
 
         const user = await firestore.getUserData(userId)
+        // console.log(user)
         res.status(200).render('4_dashboard', {user, locationsList, painpointsList, workoutsList, userId, totalWorkoutDays}, (err, html) => {
             if (err) {
                 console.error('Error rendering dashboard:', err);

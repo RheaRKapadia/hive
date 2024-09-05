@@ -7,6 +7,9 @@ const firebase = require('./firebaseLogin')
 require('firebase/compat/auth');
 require( 'firebase/compat/firestore');
 
+const session = require('express-session');
+const flash = require('connect-flash');
+
 //middleware
 app.use(logger)
 //keep an account of the current user
@@ -26,6 +29,22 @@ app.set('views', path.join(__dirname, 'views'))
 
 //use a view engine to view the ejs files
 app.set('view engine', 'ejs')
+
+// Set up session middleware
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: false
+  }));
+
+  // Set up flash middleware
+  app.use(flash());
+
+  // Make flash messages available to all views
+  app.use((req, res, next) => {
+    res.locals.messages = req.flash();
+    next();
+  });
 
 app.use((req, res, next) => {
     if (req.url.endsWith('.js')) {

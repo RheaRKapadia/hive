@@ -15,20 +15,22 @@ router.get('/:userId/locations', async(req, res) => {
 })
 
 //route to display a singular location
-router.get('/:userId/locations/location', async(req, res) => {
+router.get('/:userId/locations/location/:locationId', async(req, res) => {
     //hard coded userid and locationid for now
     const userId = req.params.userId
-    const location = await firestore.getUserSingularLocationData( userId , 'xq2OnDZNfIer1lR9jrPo')
+    const locationId = req.params.locationId
+    const location = await firestore.getUserSingularLocationData( userId , locationId)
     console.log('Retrieved user location:', location)
     res.render('7_location', {location, userId})
     //frontend: to reference the location name for frontend: location.locationName
 })
 
 //route to display edit location page
-router.get('/location/edit', async(req, res) => {
+router.get('/:userId/locations/edit/:locationId', async(req, res) => {
     //hard coded userid and locationid for now
     const userId = req.params.userId
-    const location = await firestore.getUserSingularLocationData( userId, 'xq2OnDZNfIer1lR9jrPo')
+    const locationId = req.params.locationId
+    const location = await firestore.getUserSingularLocationData( userId, locationId)
     equipmentAll = await getAllEquipment(req, res)
     console.log('Retrieved user locations for editing:', location, '\nAll equipment: ', equipmentAll)
     res.render('8_editlocation', {location, equipmentAll, userId})
@@ -40,18 +42,26 @@ router.get('/location/edit', async(req, res) => {
 //haven't tested this route because theres no form on the frontend, may not work. Send Rhea a message.
 //frontend: make sure the method for the form is put
 //route for submitting form on edit page
-router.put('/:locationId/edit', async(req, res) =>{
+router.put('/:userId/locations/edit/:locationId', async(req, res) =>{
     const locationId = req.params.locationId;
-    const locationRef = db.collection('Locations').doc(locationId);
+    const userId = req.params.userId
+    const { equipment, location } = req.body;
+    const userLocations = await firestore.getUserLocationsData(userId);
+    let possibleLocations = [];
     
-    const updatedData = {
-        locationName: req.body.name,
-        equipmentAvailable: req.body.equipment,
-        updatedAt: Timestamp.fromDate(new Date(req.body.date)),
-    };
-
-    await locationRef.update(updatedData);
-    res.redirect(`/locations/${locationId}`);
+    for (const location of userLocations) {
+      possibleLocations.push(location.locationName);
+    }
+    
+    console.log(possibleLocations);
+    try {
+      console.log('before function')
+      await firestore.updateLocation(userId, locationId, location, equipment, possibleLocations)
+      console.log('after function')
+      res.redirect(`/${userId}/locations`);
+    } catch (error){
+      res.status(500).json({ error: 'Failed to edit location' });
+    }
 })
 
 //route to display creating a new location
@@ -67,17 +77,26 @@ router.get('/:userId/locations/new', async(req, res) => {
 //route for submitting new location (new location button)
 //haven't tested this route because theres no form on the frontend, may not work. Send Rhea a message.
 router.post('/:userId/locations/new', async(req,res) =>{
-    const newLocationData = {
-        createdAt:  Timestamp.fromDate(new Date(req.body.date)),
-        equipmentAvailable: req.body.equipment, //should be array
-        locationName: req.body.name,
-        userId: req.params.userId
-    };
-
-    const reponse = await db.collection('Locations').set(newLocationData);
-    res.redirect(`/:userId/locations`);
-    //frontend: in the form make sure you are using the same ids as above: date, equipment, and name
-    //also set method to post in form
+    const userId = req.params.userId
+    const { equipment, location } = req.body;
+    console.log(userId)
+    const userLocations = await firestore.getUserLocationsData(userId);
+    let possibleLocations = [];
+    
+    for (const location of userLocations) {
+        possibleLocations.push(location.locationName);
+    }
+    
+    console.log(possibleLocations);
+    
+    try {
+      console.log('before creating location')
+      await firestore.createLocation(userId, location, equipment, possibleLocations)
+      console.log('after creating location')
+      res.redirect(`/${userId}/locations`);
+    } catch(error){
+      res.status(500).json({ error: 'Failed to submit location' });
+    }
 })
 
 module.exports = router
