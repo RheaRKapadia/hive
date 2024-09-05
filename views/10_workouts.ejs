@@ -20,17 +20,17 @@
             </div>
         </nav>
     </header>
-    
+
     <main class="main-box">
         <!-- Heading for Page -->
-         
-        <section class="title-container"> 
+
+        <section class="title-container">
             <h1>Workouts</h1>
             <p>Welcome to the archival page of your customized or AI generated workouts! Need to add more? Click on the + button at the right corner to generate more plans.</p>
         </section>
 
         <!--
-        Assume these buttons no longer apply 
+        Assume these buttons no longer apply
         <a href="/<%= userId %>/workouts/workout" class="btn">Back Day</a>
         <a href="/<%= userId %>/workouts/new" class="btn">New Workout</a>
         -->
@@ -65,15 +65,15 @@
                 <span class="close">&times;</span>
                 <div id="modalWorkoutContent"></div>
             </div>
-        </div>        
+        </div>
 
         <!-- Button for Ne orkout -->
-        <button class="new-routine-btn" onclick="window.location.href='/workouts/new'">+</button>
+        <button class="new-routine-btn" onclick="window.location.href='/<%= user.id %>/workouts/new'">+</button>
     </main>
-    
+
     <script>
         document.querySelector('.new-routine-btn').addEventListener('click', function() {
-            window.location.href = '/user/workouts/new';
+            window.location.href = '/<%= user.id %>/workouts/new';
         });
 
 
@@ -81,7 +81,7 @@
             const modal = document.getElementById("workoutModal");
             const modalContent = document.getElementById("modalWorkoutContent");
             const closeModal = document.getElementsByClassName("close")[0];
-        
+
             document.querySelectorAll(".openModalButton").forEach(function (button) {
                 button.addEventListener("click", function () {
                     const workout = JSON.parse(this.getAttribute("data-workout"));
@@ -121,19 +121,19 @@
                     modal.style.display = "block";
                 });
             });
-        
+
             closeModal.onclick = function () {
                 modal.style.display = "none";
             }
-        
+
             window.onclick = function (event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
             }
         });
-        
-        
+
+
     </script>
 </body>
 </html>
