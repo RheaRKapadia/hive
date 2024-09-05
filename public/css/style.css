@@ -666,6 +666,123 @@ input {
     margin-right: 10px;
 }
 
+/* Styles for the workout location dropdown */
+.newworkout select#workoutLocation {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #1e3a6e;
+    color: white;
+    font-size: 16px;
+    appearance: none; /* Remove default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+}
+
+.newworkout select#workoutLocation:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #f0a500;
+}
+
+.newworkout select#workoutLocation option {
+    background-color: #0a2351;
+    color: white;
+}
+
+/* Style for the placeholder option */
+.newworkout select#workoutLocation option[value=""] {
+    color: white;
+}
+
+/* Adjust the styles of the surrounding elements for consistency */
+
+.newworkout .selected-exercises {
+    background-color: #0a2351;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .newworkout .selected-exercises h2 {
+    color: white;
+    margin-top: 5px;
+  }
+
+  .newworkout .workout-info {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .newworkout .workout-name-container,
+  .newworkout .workout-location-container {
+    flex: 0 1 auto;
+  }
+
+  .newworkout .workout-name-container input,
+  .newworkout .workout-location-container select {
+    width: 100px;
+    padding: 8px;
+    padding-right: 30px;
+    border: none;
+    border-radius: 15px;
+    background-color: #1e3a6e;
+    color: white;
+    font-size: 14px;
+    appearance: none;
+    cursor: pointer;
+    text-align: center;
+
+  }
+
+  .newworkout .workout-location-container select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 0.8em;
+    padding: 5px 5px;  /* Increase left and right padding */
+    text-indent: 1px;
+  }
+
+  .newworkout .workout-name-container input:focus,
+  .newworkout .workout-location-container select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #f0a500;
+  }
+
+  .newworkout .workout-location-container select option {
+    background-color: #0a2351;
+    color: white;
+  }
+
+  .newworkout .workout-location-container select option[value=""] {
+    color: #999;
+  }
+
+  .newworkout .submit-button {
+    background-color: #f0a500;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .newworkout .submit-button:hover {
+    background-color: #ff8c00;
+  }
+
 
 body.newworkout {
     display: flex;
@@ -1042,7 +1159,7 @@ body.newworkout {
     color: white;
 }
 
-/*Camille Added CSS*/ 
+/*Camille Added CSS*/
 .myworkouts .main-box {
     background-color: rgba(26, 38, 52, 0.75);
     width: 95vw;
@@ -1054,7 +1171,7 @@ body.newworkout {
     align-items: center; /* Center elements horizontally */
     justify-content: center; /* Center elements vertically */
     box-sizing: border-box;
-    margin-top: 20px; 
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
@@ -1066,15 +1183,15 @@ body.newworkout {
 }
 
 .myworkouts .title-container h1{
-    text-align: left; 
+    text-align: left;
     margin-bottom: 20px;
     font-size: 50px;
-    margin-bottom: 10px; 
-    padding-bottom: 0; 
+    margin-bottom: 10px;
+    padding-bottom: 0;
 }
 
 .myworkouts .title-container p{
-    text-align: left; 
+    text-align: left;
     margin-bottom: 20px;
     font-size: 20px;
     margin-top:0px;
@@ -1085,7 +1202,7 @@ body.newworkout {
     height: 80%;
     border-radius: 20px;
     padding: 20px;
-    overflow: auto; 
+    overflow: auto;
 }
 
 .myworkouts .Workouts-outermost::-webkit-scrollbar {
@@ -1098,16 +1215,16 @@ body.newworkout {
     border-radius: 11px;
     background-color: rgba(11,64,156,0.4);
     border: solid 0px;
-    outline: 0.1px solid rgb(187,194,202); 
-    margin: 10px; 
-    box-shadow: 4px 4px 3px rgba(255, 255, 255, 0.1); 
-    
+    outline: 0.1px solid rgb(187,194,202);
+    margin: 10px;
+    box-shadow: 4px 4px 3px rgba(255, 255, 255, 0.1);
+
     font-size: 20px;
     color:#ccc;
 }
 
 .openModalButton:hover {
-    background-color: rgba(11,64,156,0.7); 
+    background-color: rgba(11,64,156,0.7);
 }
 
 
@@ -1115,23 +1232,23 @@ body.newworkout {
 .workouts-modal {
     display: none;
     position: fixed;
-    z-index: 1; 
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
+    width: 100%;
+    height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4); 
+    background-color: rgba(0,0,0,0.4);
 }
 
 /* Modal Content */
 .workouts-modal-content {
     background-color: #0c3864;
-    display: flex; 
+    display: flex;
     flex-direction: column;
-    margin: 15% auto; 
+    margin: 15% auto;
     padding: 40px;
-    width: 80%; 
+    width: 80%;
     border-radius: 20px;
 }
 
