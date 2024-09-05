@@ -42,7 +42,31 @@ const getAllExercises = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch exercises data' });
     }
 }
-
+const getAllMuscles = async (req, res) => {
+  console.log('API Key:', process.env.X_RAPIDAPI_KEY);
+  try {
+      const options = {
+          method: 'GET',
+          url: 'https://exercisedb.p.rapidapi.com/exercises/bodyPartList',
+          headers: {
+              'x-rapidapi-key': process.env.X_RAPIDAPI_KEY,
+              'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
+          }
+      };
+      const response = await axios.request(options);
+      return {
+          data: response.data
+      };
+  } catch (error) {
+      console.error('Error fetching muscles data:', error.message);
+      if (error.response) {
+          console.error('Response data:', error.response.data);
+          console.error('Response status:', error.response.status);
+          console.error('Response headers:', error.response.headers);
+      }
+      res.status(500).json({ error: 'Failed to fetch muscles data' });
+  }
+}
 const getAllEquipment = async (req, res) => {
   console.log(process.env.X_RAPIDAPI_KEY)
   try {
@@ -65,5 +89,29 @@ const getAllEquipment = async (req, res) => {
   res.status(500).json({ error: 'Failed to fetch equipment data' });
   }
 }
-
-module.exports = {getAllExercises, getAllEquipment}
+const getTargetMuscles = async (req, res) => {
+  console.log('API Key:', process.env.X_RAPIDAPI_KEY);
+  try {
+      const options = {
+          method: 'GET',
+          url: 'https://exercisedb.p.rapidapi.com/exercises/targetList',
+          headers: {
+              'x-rapidapi-key': process.env.X_RAPIDAPI_KEY,
+              'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
+          }
+      };
+      const response = await axios.request(options);
+      return {
+          data: response.data
+      };
+  } catch (error) {
+      console.error('Error fetching muscles data:', error.message);
+      if (error.response) {
+          console.error('Response data:', error.response.data);
+          console.error('Response status:', error.response.status);
+          console.error('Response headers:', error.response.headers);
+      }
+      res.status(500).json({ error: 'Failed to fetch muscles data' });
+  }
+}
+module.exports = {getAllExercises, getAllEquipment, getAllMuscles, getTargetMuscles}

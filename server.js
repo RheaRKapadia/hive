@@ -45,6 +45,7 @@ const userRouter = require('./routes/users')
 const painPointsRouter = require('./routes/painpoints')
 const locationsRouter = require('./routes/locations')
 const workoutsRouter = require('./routes/workouts')
+const aiWorkoutsRouter = require('./routes/aiWorkouts')
 
 //define what the starting url would be for the given route
 app.use('/', otherRouter)
@@ -52,6 +53,7 @@ app.use('/', userRouter)
 app.use('/', painPointsRouter)
 app.use('/', locationsRouter)
 app.use('/', workoutsRouter)
+app.use('/', aiWorkoutsRouter)
 
 
 //simple logger for debugging, print the url used in the terminal

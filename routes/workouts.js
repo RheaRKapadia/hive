@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {getAllExercises} = require('../exercisedb')
+const {getAllExercises, getAllEquipment, getAllMuscles, getTargetMuscles} = require('../exercisedb')
 const firestore = require('../firestore')
 
 
@@ -82,34 +82,41 @@ router.post('/:userId/workouts/new', (req,res) =>{
 
 //route to display new workout ai generated form
 //returns list of all equipment and userId
-router.get('/:userId/workouts/new/ai', async (req, res) => {
+// router.get('/:userId/workouts/new/ai', async (req, res) => {
 
-    try {
-        const userId = req.params.userId
-        equipmentAll = await getAllEquipment(req, res)
-        // console.log(exercises.pagination)
-        res.status(200).render('17_newAiWorkout', {
-            equipmentAll, userId
-        })
-    } catch (error) {
-    console.error('Error fetching exercises data:', error)
-    res.status(500).json({ error: 'Failed to fetch exercises data' });
-}
-})
+//     try {
+//         const userId = req.params.userId
+//         const equipmentAll = await getAllEquipment(req, res)
+//         const targetMusclesAll = await getTargetMuscles(req, res)
+
+//         /*
+//         console.log(userId)
+//         console.log(equipmentAll)
+//         console.log(targetMusclesAll)
+//         */
+//         // console.log(exercises.pagination)
+//         res.status(200).render('17_newAiWorkout', {
+//             equipmentAll, targetMusclesAll, userId
+//         })
+//     } catch (error) {
+//     console.error('Error fetching exercises data:', error)
+//     res.status(500).json({ error: 'Failed to fetch exercises data' });
+// }
+// })
 
 //route for submit button on the ai generated workout form
 // no logic implemented yet, just redirects
-router.post('/:userId/workouts/new/ai', async (req, res) => {
+// router.post('/:userId/workouts/new/ai', async (req, res) => {
 
-    try {
-        const userId = req.params.userId
-        // console.log(exercises.pagination)
-        res.status(200).redirect(`${userId}/workouts`)
-    } catch (error) {
-    console.error('Error fetching exercises data:', error)
-    res.status(500).json({ error: 'Failed to fetch exercises data' });
-}
-})
+//     try {
+//         const userId = req.params.userId
+//         // console.log(exercises.pagination)
+//         res.status(200).redirect(`${userId}/workouts`)
+//     } catch (error) {
+//     console.error('Error fetching exercises data:', error)
+//     res.status(500).json({ error: 'Failed to fetch exercises data' });
+// }
+// })
 
 
 // Route to get details of a specific workout

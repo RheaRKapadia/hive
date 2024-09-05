@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@clerk/clerk-sdk-node": "^5.0.28",
+    "@pinecone-database/pinecone": "^3.0.2",
     "@vercel/speed-insights": "^1.0.12",
     "axios": "^1.7.5",
     "dotenv": "^16.4.5",
@@ -21,7 +22,9 @@
     "firebase-admin": "^12.3.1",
     "firebase-auth": "^0.1.2",
     "franc": "^6.2.0",
-    "openai": "^4.57.3"
+    "openai": "^4.57.3",
+    "pinecone": "^0.1.0",
+    "requests": "^0.3.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
