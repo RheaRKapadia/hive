@@ -23,7 +23,7 @@
                 <span class="menu-trigger" onclick="toggleDropdown()">Menu</span>
                 <div id="myDropdown" class="dropdown-content">
                     <a href="/<%= userId %>/workouts/">Workouts</a>
-                    <a href="/<%= userId %>/painpoints">Pain Management</a>
+                    <a href="/<%= userId %>/dashboard">Dashboard</a>
                     <a href="/<%= userId %>/locations">Locations</a>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <button class="nav-button next-month">&#9654;</button>
             </div>
 
-            <form method="POST" action="/<%= <%= user.id %>.id %>/painpoints">
+            <form method="POST" action="/<%= user.id %>.id %>/painpoints">
                 <!-- Pain Level -->
                 <label for="painLevel">
                     Pain Level
@@ -160,6 +160,24 @@
 
             renderCalendar(currentMonthIndex, currentYear);
         });
+    </script>
+    <script>
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-trigger')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
     </script>
 </body>
 </html>
