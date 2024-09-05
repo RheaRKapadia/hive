@@ -194,14 +194,13 @@ getExerciseDetails: function(userId, exerciseId) {
         return { error: 'Failed to retrieve workout tracker' };
       }
     },
-    createPainPoint: async(userId, region, painLevel) =>{
+    createPainPoint: async(userId, region, painLevel, date) =>{
       const painpointsRef = db.collection("PainPoints").doc();
       painpointsRef.set({
         userId: userId,
         region: region,
         painLevel: painLevel,
-        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
-        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        date: date
       })
       .then(() => {
         console.log("User pain points data stored successfully!");

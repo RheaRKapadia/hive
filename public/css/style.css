@@ -2549,15 +2549,23 @@ body.newworkout {
 .pain-management-main-box {
     background-color: rgba(26, 38, 52, 0.75);
     width: 95vw;
-    height: 80vh;
+    height: 86vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
     border-radius: 40px;
     padding: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center elements horizontally */
-    justify-content: center; /* Center elements vertically */
-    gap: 3px;
-    box-sizing: border-box;
+}
+
+.pain-management-content{
+    width: 60%; 
+
+}
+.pain-management-main-box .pain-management-content h1{
+    text-align: left; 
+    font-size: 43px;
+    width: 100%; 
 }
 
 .painpoints-page {
@@ -2573,18 +2581,42 @@ body.newworkout {
     padding: 1rem;
 }
 
+.Pain-Tracker-Container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:0;
+}
+
+.Pain-Tracker-Container h3{
+    width: 100%;
+    text-align: left; 
+    font-size: 20px;
+    margin-top:20px;
+    margin-bottom:3px;
+    padding:0;
+}
+
+.Pain-Tracker-Container .calendar-container h3{
+    margin-top:3px;
+    font-size: 18px;
+}
+
 .calendar-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    gap:40px;
-    width: 400px;
+    width: 380px;
+    height: 205px;
+    margin-top:0px;
 }
 
 .nav-button {
-    background-color: black;
+    background-color: rgb(21, 21, 21, 0.6);
     border: none;
     color: white;
     font-size: 1rem;
@@ -2621,6 +2653,7 @@ body.newworkout {
 .month {
     text-align: center;
     width: 100%;
+    margin: 0px;
 }
 
 .month h3 {
@@ -2649,7 +2682,7 @@ body.newworkout {
 .day {
     width: 30px;
     height: 30px;
-    background-color: rgba(0, 0, 255, 0.6);
+    background-color: rgba(26, 64, 188, 0.498);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -2657,15 +2690,240 @@ body.newworkout {
     font-weight: bold;
     color: #fff;
     text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .day.empty {
     background-color: transparent;
 }
 
-.day.completed {
-    background-color: #ffa500;
+.highlighted-day {
+    background-color: orange;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
 }
+
+.pain-outBox {
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.date-and-level-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.date-container {
+    width: 35%;
+    display: flex;
+    flex-direction:column;
+    justify-content: flex-start;
+}
+
+.date-container h3{
+    width: 100%; 
+    text-align: left; 
+}
+
+.painDate{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-weight: bold;
+}
+
+.level-container{
+    width: 60%;
+    margin-left: 3px;
+}
+
+.level-container h3{
+    width: 100%; 
+    text-align: left; 
+    margin-left: 3px;
+}
+
+.painLevelSlider{
+    padding: 5px;
+}
+
+.slider-values {
+    display: flex;
+    justify-content: space-between; /* Distributes the items evenly */
+    align-items: center;            /* Vertically aligns the items */
+    width: 100%;                    /* Adjust the width as needed */
+    margin-top: 0px; 
+    padding: 0px; 
+}
+
+/* Basic styles for the range input */
+input[type="range"] {
+    -webkit-appearance: none; /* Remove default styling */
+    width: 95%; /* Width of the slider */
+    background: transparent; /* Ensure background is transparent */
+    border: none; /* Remove default border */
+    outline: none; /* Remove outline */
+}
+
+/* Remove outline on focus */
+input[type="range"]:focus {
+    outline: none;
+}
+
+/* Webkit browsers (Chrome, Safari) */
+input[type="range"]::-webkit-slider-runnable-track {
+    background: rgb(248, 209, 102); /* Track color */
+    height: 5px; /* Track height */
+    border-radius: 5px; /* Optional: Round the track edges */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default thumb styling */
+    height: 15px; /* Thumb height */
+    width: 15px; /* Thumb width */
+    background: rgb(199, 122, 55); /* Thumb color */
+    border-radius: 50%; /* Make the thumb circular */
+    cursor: pointer; /* Change cursor on hover */
+    margin-top: -5px; /* Adjust thumb position */
+}
+
+/* Change the background color and text color of the input */
+input[type="date"] {
+    background-color: rgba(11, 64, 156, 0.7);
+    color: #333;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    color: #fefefe;
+}
+
+/* Change the calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: #ffcc00;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+/* Optionally remove the default border */
+input[type="date"]:focus {
+    outline: none;
+    border-color: #ff6600;
+}
+
+/* For Firefox, you can style the input, but the calendar icon may be harder to style */
+input[type="date"]::-moz-focus-inner {
+    border: 0;
+}
+
+.RegionsOfPain-Section h3{
+    width: 100%; 
+    text-align: left;
+    padding:0px; 
+    margin-bottom: 5px;
+}
+
+.RegionsOfPain-Outer{
+    width: 100%; 
+    margin-top:2px;
+}
+
+
+/* Style the select dropdown */
+.RegionsOfPain-filter-bar {
+    width: 90%; 
+    background-color: rgba(11, 64, 156, 0.7);
+    color: white; /* Text color */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    appearance: none; /* Removes default dropdown arrow */
+    margin-top: 3px; 
+}
+
+/* Style the dropdown arrow */
+.RegionsOfPain-filter-bar::after {
+    content: '▼'; /* Customize the dropdown arrow */
+    font-size: 12px;
+    color: white;
+    padding-left: 10px;
+}
+
+.RegionsOfPain-filter-bar option {
+    background-color: rgba(30, 53, 92, 0.984); /* Background of the options */
+    color: white; /* Text color */
+}
+
+.pain-manage-button{
+    width: 100%;
+}
+
+.pain-manage-button .location-btn{
+    width: 40%;
+    
+}
+
+.pain-management-pics {
+    background-color: rgba(27, 63, 125, 0.7);
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    margin-left: 30px;
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.pain-management-pics .image-container {
+    display: flex;
+    gap: 50px;
+}
+
+
+main img {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.modalDate {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    overflow: auto;
+}
+
+.modalDate-content {
+    background-color: rgb(143, 111, 28);
+    color: rgb(204, 204, 204);
+    width: 30%;
+    border-radius: 10px;
+    margin: 15% auto;
+    padding: 40px;
+}
+
+
 
 /* Workoutslide on dashboard */
 .workout-slider {
