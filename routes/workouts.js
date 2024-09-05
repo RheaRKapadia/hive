@@ -76,26 +76,26 @@ router.post('/:userId/workouts/new', (req,res) =>{
 
 
 // Route to get details of a specific workout
-router.get('/:id', async (req, res) => {
-    const exerciseId = req.params.id;
+// router.get('/:id', async (req, res) => {
+//     const exerciseId = req.params.id;
 
-    try {
-        // Fetch the specific exercise data using the exerciseId
-        const exercise = await getAllExercises(req, res, exerciseId);
+//     try {
+//         // Fetch the specific exercise data using the exerciseId
+//         const exercise = await getAllExercises(req, res, exerciseId);
 
-        if (!exercise) {
-            return res.render('16_workoutdetails', { message: 'Exercise not found', exercise: null });
-        }
+//         if (!exercise) {
+//             return res.render('16_workoutdetails', { message: 'Exercise not found', exercise: null });
+//         }
 
-        console.log('Fetched exercise:', exercise);  // Add this line for debugging
+//         console.log('Fetched exercise:', exercise);  // Add this line for debugging
 
-        // Render the workout details page with the exercise data
-        res.render('16_workoutdetails', { exercise: exercise });
-    } catch (error) {
-        console.error('Error fetching exercise details:', error);
-        res.render('16_workoutdetails', { message: 'Could not retrieve exercise details', exercise: null });
-    }
-});
+//         // Render the workout details page with the exercise data
+//         res.render('16_workoutdetails', { exercise: exercise });
+//     } catch (error) {
+//         console.error('Error fetching exercise details:', error);
+//         res.render('16_workoutdetails', { message: 'Could not retrieve exercise details', exercise: null });
+//     }
+// });
 
 router.post('/:userId/workouts/create', async (req, res) => {
     const userId = req.params.userId;
