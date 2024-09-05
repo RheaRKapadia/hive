@@ -7,12 +7,29 @@
     <title>Pain Management Calendar</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Ensure the correct path -->
 </head>
-<body>
+<body class="painpoints-page">
+    <header>
+        <div class="logo">
+            <div>
+                <img src="/images/Logo.png" alt="Hive Logo">
+              </div>
+            <h1>HIVE</h1>
+        </div>
+        <nav>
+            <div class="user-menu">
+                <a href="/<%= userId %>/userprofile">
+                    <img src="/images/avatar.png" alt="User Avatar" class="avatar">
+                </a>
+                <span class="menu-trigger" onclick="toggleDropdown()">Menu</span>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="/<%= userId %>/workouts/">Workouts</a>
+                    <a href="/<%= userId %>/painpoints">Pain Management</a>
+                    <a href="/<%= userId %>/locations">Locations</a>
+                </div>
+            </div>
+        </nav>
+    </header>
     <main class="outermost-box">
-        <header class="logo-and-menu">
-            <img src="/images/Logo.png" alt="Hive Heading" class="hive-heading">
-            <button class="image-button" aria-label="Menu"></button>
-        </header>
 
         <!-- Set New Location Main Box -->
         <main class="pain-management-main-box">
@@ -25,18 +42,18 @@
                 <button class="nav-button next-month">&#9654;</button>
             </div>
 
-            <form method="POST" action="/<%= user.id %>/painpoints">
+            <form method="POST" action="/<%= <%= user.id %>.id %>/painpoints">
                 <!-- Pain Level -->
                 <label for="painLevel">
                     Pain Level
-                    <input type="range" min="1" max="10" value="1" class="slider" id="myRange" name="painLevel">
+                    <input type="range" min="1" max="10" value="1" class="slider" id="myRange" name="painLevel" name="painLevel">
                     <span id="sliderValue">1</span>
                 </label></br>
 
                 <!-- Regions of Pain -->
                 <label for="location">
-                    Regions of Pain 
-                    <select id="filterBar" class="equipment-container-filter-bar" name="region">
+                    Regions of Pain
+                    <select id="filterBar" class="equipment-container-filter-bar" name="region" name="region">
                         <option value="" disabled selected>Regions of Pain</option>
                         <option value="Forearm">Forearm</option>
                         <option value="Triceps">Triceps</option>
@@ -64,12 +81,12 @@
             const calendarContainer = document.getElementById('calendar');
             const prevMonthButton = document.querySelector('.nav-button.prev-month');
             const nextMonthButton = document.querySelector('.nav-button.next-month');
-        
+
             const months = [
                 'January', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'
             ];
-        
+
             const daysInMonth = [
                 31, // January
                 28, // February (29 in leap years)
@@ -84,25 +101,25 @@
                 30, // November
                 31  // December
             ];
-        
+
             let currentMonthIndex = new Date().getMonth(); // Start from the current month
             let currentYear = new Date().getFullYear(); // Start from the current year
-        
+
             function renderCalendar(monthIndex, year) {
                 calendarContainer.innerHTML = ''; // Clear previous content
-        
+
                 const monthContainer = document.createElement('div');
                 monthContainer.className = 'month';
                 monthContainer.innerHTML = `<h3>${months[monthIndex]} ${year}</h3><div class="days"></div>`;
-        
+
                 const daysContainer = monthContainer.querySelector('.days');
                 const daysInCurrentMonth = daysInMonth[monthIndex];
-        
+
                 // Adjust for leap years
                 if (monthIndex === 1 && isLeapYear(year)) {
                     daysInCurrentMonth = 29;
                 }
-        
+
                 // Add days of the month
                 for (let day = 1; day <= daysInCurrentMonth; day++) {
                     const dayElement = document.createElement('div');
@@ -110,14 +127,14 @@
                     dayElement.textContent = day;
                     daysContainer.appendChild(dayElement);
                 }
-        
+
                 calendarContainer.appendChild(monthContainer);
             }
-        
+
             function isLeapYear(year) {
                 return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
             }
-        
+
             function showPreviousMonth() {
                 if (currentMonthIndex === 0) {
                     currentMonthIndex = 11;
@@ -127,7 +144,7 @@
                 }
                 renderCalendar(currentMonthIndex, currentYear);
             }
-        
+
             function showNextMonth() {
                 if (currentMonthIndex === 11) {
                     currentMonthIndex = 0;
@@ -137,10 +154,10 @@
                 }
                 renderCalendar(currentMonthIndex, currentYear);
             }
-        
+
             prevMonthButton.addEventListener('click', showPreviousMonth);
             nextMonthButton.addEventListener('click', showNextMonth);
-        
+
             renderCalendar(currentMonthIndex, currentYear);
         });
     </script>
