@@ -11,14 +11,16 @@
     <main class="outermost-box">
         <!-- Header: Image & Menu Button -->
         <header class="logo-and-menu">
-            <img src="/images/Logo.png" alt="Hive Heading" class="hive-heading">
+            <a href="/<%= userId %>/dashboard">
+                <img src="/images/Logo.png" alt="Hive Heading" class="hive-heading">
+            </a>
             <button class="image-button" aria-label="Menu"></button>
         </header>
         
         <main class="main-box">
             <div class="location-heading">
                 <h1>Locations</h1>
-                <a href="/user/locations/new" class="add-button"></a>
+                <a href="/<%= userId %>/locations/new" class="add-button"></a>
             </div>
 
             <!-- Locations: Outermost Rectangular Box  -->
@@ -26,8 +28,8 @@
                 <% locationsList.forEach(location => { %>
                 <div class="ind-location">
                     <header class="ind-location-header">
-                        <h2><a href="/user/locations/location"><%= location.locationName %></a></h2>
-                        <a href="/user/locations/location/edit" alt="Edit" class="edit-button"></a>
+                        <h2><a href="/<%= userId %>/locations/location/<%= location.id %>"><%= location.locationName %></a></h2>
+                        <a href="/<%= userId %>/locations/edit/<%= location.id %>" alt="Edit" class="edit-button"></a>
                     </header>
 
                     <section class="ind-location-content">

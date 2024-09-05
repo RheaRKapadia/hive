@@ -1,42 +1,34 @@
 const express = require('express')
 const router = express.Router()
 const firestore = require('../firestore')
-const {getAllMuscles} = require('../exercisedb')
+const {getAllEquipment, getAllTargetMuscles} = require('../exercisedb')
 
 router.get('/:userId/painpoints', async(req, res) => {
-    const userId = req.params.userId                                         // USER ID 
-    const user = await firestore.getUserData(userId)                         // Getitng Pain Point List Associated to the User 
+    //hard coded userid for now
+    const userId = req.params.userId
+    const user = await firestore.getUserData(userId)
     const painpointsList = await firestore.getUserPainpointsData(user.id)
-    const MusclesList = await getAllMuscles(req, res)                        // Getting the Possible Muscle to Identify Pain 
-
-    /*
-    console.log('USER ID: ', userId)
-    console.log('Retrieved user:', user)
-    console.log('Retrieved user id:', user.id)
-    console.log('Retrieved user pain points:', painpointsList)
-    console.log('Retrieved all muscles:', MusclesList)
-    */
-   
+    MusclesList = await getAllTargetMuscles(req, res)
     res.render('5_painpoints', {painpointsList, user, MusclesList})
+    //to reference the pain point name for frontend: use the forEach function to then access painpoint.location
+    // or painpoint.painLevel
 })
 
 //haven't tested out form submit, might not work
 router.post('/:userId/painpoints', async(req, res) => {
-    const user = await firestore.getUserData(userId)
-    const newPainpointsData = {
-        // createdAt:  Timestamp.fromDate(new Date(req.body.date)),
-        // createdAt : admin.firestore.Timestamp.fromDate(new Date()),
+    const userId = req.params.userId
+    const region = req.body.region
+    const painLevel = req.body.painLevel
+    const date = req.body.date
 
-        location: req.body.location, //should be array
-        painLevel: req.body.painLevel,
-        // userId: req.params.userId
-        userId:  user.id
-        //hard coded user id for now
-    };
-
-    await db.collection('PainPoints').set(newPainpointsData);
-    res.redirect(`/:userId/painpoints`);
-    //frontend: in the form make sure you are using the same ids as above: date, equipment, and name
+    try {
+        await firestore.createPainPoint(userId, region, painLevel, date)
+        res.redirect(`/${userId}/painpoints`);
+    } catch(error) {
+        res.status(500).json({ error: 'Failed to submit pain point' });
+    }
+    
+    //frontend: in the form make sure you are using the same ids as above
     //also set method to post in form
 })
 
