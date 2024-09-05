@@ -206,5 +206,24 @@ module.exports = {
         console.error("Error updating user data:", error);
       });
     },
+    createAiWorkout: async(exercises, name, location, userId) =>{
+      const workoutRef = db.collection("Workouts").doc();
+      workoutRef.set({
+        userId: userId,
+        locationId: "",
+        locationName: '',
+        name: 'AI Workout',
+        generatedByAi : true,
+        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        exercises : exercises,
+      })
+      .then(() => {
+        console.log("User workout data stored successfully!");
+      })
+      .catch(error => {
+        console.error("Error storing user data:", error);
+      });
+    },
 
 };

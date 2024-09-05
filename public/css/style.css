@@ -1870,7 +1870,8 @@ input {
 
 .New-AI-Title{
     width: 100%;
-    padding: 20px; 
+    /* padding: 20px;  */
+    height: 100%;
 }
 .New-AI-Title h1{
     font-size:36px; 
@@ -1890,6 +1891,7 @@ input {
 .equipment-targets-container{
     display: flex; 
     flex-direction: row; 
+    gap: 20px;
 }
 
 .ai-equipment-container{
@@ -1940,6 +1942,14 @@ input {
 }
 
 .AI-Workout-Btn{
-    width: 30%;
+    width: 15%;
     margin-top:20px; 
 }
+
+.ai-workout-slider{
+    /* width: 400px; */
+    /* padding-left: 2vw; */
+    display: flex;
+}
+
+
