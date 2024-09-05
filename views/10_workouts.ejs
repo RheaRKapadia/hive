@@ -51,8 +51,10 @@
         <!-- Workouts-outermost section -->
         <div class="Workouts-outermost">
             <% if (workoutsList && workoutsList.length > 0) { %>
-                <% workoutsList.forEach(function(workout, index) { %>
-                    <button class="openModalButton" data-workout="<%= JSON.stringify(workout) %>"><%= workout.name %></button>
+                <% workoutsList.forEach(function(workout) { %>
+                    <button class="openModalButton" data-workout="<%= JSON.stringify(workout) %>">
+                        <%= workout.name || 'Unnamed Workout' %>
+                    </button>
                 <% }); %>
             <% } else { %>
                 <p class="no-workouts-message">No workouts found. Create a new workout to get started!</p>

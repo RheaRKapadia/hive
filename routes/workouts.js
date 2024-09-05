@@ -3,24 +3,36 @@ const router = express.Router()
 const {getAllExercises} = require('../exercisedb')
 const firestore = require('../firestore')
 const { db, getUserSingularWorkoutData } = require('../firestore');
-const { getUserWorkoutsData, saveUserWorkout, getDetailedUserWorkouts } = require('../firestore');
+const { getUserWorkoutsData, saveUserWorkout, getDetailedWorkouts } = require('../firestore');
 
 
 //route to display all workouts the user has created
-router.get('/:userId/workouts', async(req, res) => {
-    // res.render('10_workouts')
-    const userId = req.params.userId
-    try{
-        const workoutsList = await firestore.getUserWorkoutsData( userId)
-        console.log('Retriever user workouts:', workoutsList)
-        res.render('10_workouts', {workoutsList, userId})
-    } catch (error){
-        console.error('Error fetching workouts:', error);
-        res.status(500).json({ error: 'Failed to fetch workouts' });
+// router.get('/:userId/workouts', async(req, res) => {
+//     // res.render('10_workouts')
+//     const userId = req.params.userId
+//     try{
+//         const workoutsList = await firestore.getUserWorkoutsData( userId)
+//         console.log('Retriever user workouts:', workoutsList)
+//         res.render('10_workouts', {workoutsList, userId})
+//     } catch (error){
+//         console.error('Error fetching workouts:', error);
+//         res.status(500).json({ error: 'Failed to fetch workouts' });
+//     }
+//     //to reference workouts for frontend: use the forEach function to then access workout.name
+//     // or workout.exercise for list of exercises
+// })
+
+  // Update the route that displays all workouts
+  router.get('/:userId/workouts', async (req, res) => {
+    try {
+      const workoutsList = await getDetailedWorkouts();
+      console.log('Fetched workouts:', workoutsList); 
+      res.render('10_workouts', { workoutsList, userId: req.params.userId });
+    } catch (error) {
+      console.error('Error fetching workouts:', error);
+      res.status(500).render('error', { message: 'Failed to fetch workouts' });
     }
-    //to reference workouts for frontend: use the forEach function to then access workout.name
-    // or workout.exercise for list of exercises
-})
+  });
 
 //route to display a singular workout created by the user
 //Rhea - working on being able to access exercises as well
@@ -70,9 +82,9 @@ router.get('/:userId/workouts/new', async (req, res) => {
 // })
 
 //route to post new workout to database
-router.post('/:userId/workouts/new', (req,res) =>{
-    res.redirect('/:userId/workouts')
-})
+// router.post('/:userId/workouts/new', (req,res) =>{
+//     res.redirect('/:userId/workouts')
+// })
 
 
 // Route to get details of a specific workout
@@ -134,37 +146,25 @@ router.post('/:userId/workouts/create', async (req, res) => {
 //     }
 //   });
 
-  // Update the route that displays all workouts
-  router.get('/:userId/workouts', async (req, res) => {
-    const userId = req.params.userId;
-    try {
-      const workoutsList = await getDetailedUserWorkouts(userId);
-      res.render('10_workouts', { workoutsList, userId });
-    } catch (error) {
-      console.error('Error fetching workouts:', error);
-      res.status(500).render('error', { message: 'Failed to fetch workouts' });
-    }
-  });
+  // router.get('/:userId/exercise/:exerciseId', async (req, res) => {
+  //   const { userId, exerciseId } = req.params;
 
-  router.get('/:userId/exercise/:exerciseId', async (req, res) => {
-    const { userId, exerciseId } = req.params;
+  //   try {
+  //     // Fetch the exercise details from your database or API
+  //     const exercise = await firestore.getExerciseDetails(userId, exerciseId);
 
-    try {
-      // Fetch the exercise details from your database or API
-      const exercise = await firestore.getExerciseDetails(userId, exerciseId);
-
-      if (exercise) {
-        res.render('17_exercisedetails', { exercise, userId });
-    } else {
-        // Redirect to the workouts page with an error message
-        req.flash('error', 'Exercise not found');
-        res.redirect(`/${userId}/workouts`);
-      }
-    } catch (error) {
-      console.error('Error fetching exercise details:', error);
-      // Redirect to the workouts page with an error message
-      req.flash('error', 'Failed to fetch exercise details');
-      res.redirect(`/${userId}/workouts`);
-    }
-  });
+  //     if (exercise) {
+  //       res.render('17_exercisedetails', { exercise, userId });
+  //   } else {
+  //       // Redirect to the workouts page with an error message
+  //       req.flash('error', 'Exercise not found');
+  //       res.redirect(`/${userId}/workouts`);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching exercise details:', error);
+  //     // Redirect to the workouts page with an error message
+  //     req.flash('error', 'Failed to fetch exercise details');
+  //     res.redirect(`/${userId}/workouts`);
+  //   }
+  // });
 module.exports = router

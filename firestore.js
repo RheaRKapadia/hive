@@ -122,23 +122,17 @@ saveUserWorkout:async(userId, workoutData)=> {
 },
 
 // Updated function to get user workouts with exercises
-getDetailedUserWorkouts: function(userId) {
-  return db.collection('users').doc(userId).collection('workouts')
+getDetailedWorkouts: function() {
+  return db.collection('Workouts')  // Make sure this is 'Workouts', not 'workouts'
     .orderBy('createdAt', 'desc')
     .get()
     .then(snapshot => {
-      return Promise.all(snapshot.docs.map(async doc => {
-        const workout = { id: doc.id, ...doc.data() };
-        // Fetch detailed exercise information for each exercise in the workout
-        workout.exercises = await Promise.all(workout.exercises.map(async exerciseRef => {
-          const exerciseDoc = await exerciseRef.get();
-          return { id: exerciseDoc.id, ...exerciseDoc.data() };
-        }));
-        return workout;
-      }));
+      return snapshot.docs.map(doc => {
+        return { id: doc.id, ...doc.data() };
+      });
     })
     .catch(error => {
-      console.error('Error fetching user workouts:', error);
+      console.error('Error fetching workouts:', error);
       return [];
     });
 },
@@ -155,7 +149,5 @@ getExerciseDetails: function(userId, exerciseId) {
       console.error('Error fetching exercise details:', error);
       return null;
     });
-}
-
-
+},
 };
