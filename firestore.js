@@ -173,12 +173,13 @@ module.exports = {
         console.error("Error storing user data:", error);
       });
     },
-    createLocation: async(userId, location, equipment) =>{
+    createLocation: async(userId, location, equipment, possibleLocations) =>{
       const locationRef = db.collection("Locations").doc();
       locationRef.set({
         userId: userId,
         locationName: location,
         equipmentAvailable: equipment,
+        possibleLocations: possibleLocations,
         createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
         updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
       })

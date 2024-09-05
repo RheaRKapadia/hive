@@ -72,9 +72,18 @@ router.post('/:userId/locations/new', async(req,res) =>{
     const userId = req.params.userId
     const { equipment, location } = req.body;
     console.log(userId)
+    const userLocations = await firestore.getUserLocationsData(userId);
+    let possibleLocations = [];
+    
+    for (const location of userLocations) {
+        possibleLocations.push(location.locationName);
+    }
+    
+    console.log(possibleLocations); // This will contain all the location names
+    
     try {
       console.log('before creating location')
-      await firestore.createLocation(userId, location, equipment)
+      await firestore.createLocation(userId, location, equipment, possibleLocations)
       console.log('after creating location')
       res.redirect(`/${userId}/locations`);
     } catch(error){
