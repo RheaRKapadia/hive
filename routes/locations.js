@@ -44,16 +44,24 @@ router.get('/:userId/locations/edit/:locationId', async(req, res) => {
 //route for submitting form on edit page
 router.put('/:userId/locations/edit/:locationId', async(req, res) =>{
     const locationId = req.params.locationId;
-    const locationRef = db.collection('Locations').doc(locationId);
+    const userId = req.params.userId
+    const { equipment, location } = req.body;
+    const userLocations = await firestore.getUserLocationsData(userId);
+    let possibleLocations = [];
     
-    const updatedData = {
-        locationName: req.body.name,
-        equipmentAvailable: req.body.equipment,
-        updatedAt: Timestamp.fromDate(new Date(req.body.date)),
-    };
-
-    await locationRef.update(updatedData);
-    res.redirect(`/locations/${locationId}`);
+    for (const location of userLocations) {
+      possibleLocations.push(location.locationName);
+    }
+    
+    console.log(possibleLocations);
+    try {
+      console.log('before function')
+      await firestore.updateLocation(userId, locationId, location, equipment, possibleLocations)
+      console.log('after function')
+      res.redirect(`/${userId}/locations`);
+    } catch (error){
+      res.status(500).json({ error: 'Failed to edit location' });
+    }
 })
 
 //route to display creating a new location
@@ -79,7 +87,7 @@ router.post('/:userId/locations/new', async(req,res) =>{
         possibleLocations.push(location.locationName);
     }
     
-    console.log(possibleLocations); // This will contain all the location names
+    console.log(possibleLocations);
     
     try {
       console.log('before creating location')

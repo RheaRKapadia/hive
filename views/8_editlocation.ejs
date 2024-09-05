@@ -92,7 +92,7 @@
                     <section class = "Set-New-Location-Sub-Step">
                         <h3>Title</h3>
                         <div class="Set-New-Location-Sub-Content">
-                            <input type="text" name="currentLocation" value="<%= location.locationName %>" placeholder= "Enter Location">
+                            <input id='titleInput' type="text" name="currentLocation" value="<%= location.locationName %>" placeholder= "Enter Location">
                         </div>
                     </section>
                     
@@ -449,6 +449,42 @@
                 }
             };
         });
+        document.getElementById('submit-location-equipment').onclick = async function() {
+            const locationDropdown = document.getElementById('locationDropdown');
+            const selectedLocation = locationDropdown.value; // Get the selected location
+            const equipmentsContainer = document.getElementById('equipmentsContainer');
+            const equipmentItems = Array.from(equipmentsContainer.children).map(item => item.textContent); // Get the selected equipment names
+            const userId = "<%= userId %>"
+            const locationName = document.querySelector('.titleInput').value;
+            const locationId = "<%= location.id %>"
+            console.log(locationName, 'testing here')
+            // Construct the data object
+            const data = {
+                location: locationName,
+                equipment: equipmentItems
+            };
+
+            try {
+                const response = await fetch(`/${userId}/locations/edit/${locationId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    // Redirect to the locations page after successful submission
+                    window.location.href = `/${userId}/locations`;
+                } else {
+                    console.log(`${userId}`)
+                    alert('Failed to submit location');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
         
     </script>
 </body>

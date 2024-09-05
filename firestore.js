@@ -190,5 +190,21 @@ module.exports = {
         console.error("Error storing user data:", error);
       });
     },
+    updateLocation: async(userId, locationId, location, equipment, possibleLocations) =>{
+      const locationRef = db.collection("Locations").doc(locationId);
+      locationRef.update({
+        userId: userId,
+        locationName: location,
+        equipmentAvailable: equipment,
+        possibleLocations: possibleLocations,
+        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+      })
+      .then(() => {
+        console.log("User pain points data updated successfully!");
+      })
+      .catch(error => {
+        console.error("Error updating user data:", error);
+      });
+    },
 
 };
