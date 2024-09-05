@@ -2478,7 +2478,6 @@ input[type="date"]::-moz-focus-inner {
     padding-left: 10px;
 }
 
-/* Change the background and text color of options */
 .RegionsOfPain-filter-bar option {
     background-color: rgba(30, 53, 92, 0.984); /* Background of the options */
     color: white; /* Text color */
