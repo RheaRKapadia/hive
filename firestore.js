@@ -261,5 +261,24 @@ getExerciseDetails: function(userId, exerciseId) {
         console.error("Error storing user data:", error);
       });
     },
+    createWorkout: async(exercises, name, location, userId) =>{
+      const workoutRef = db.collection("Workouts").doc();
+      workoutRef.set({
+        userId: userId,
+        locationId: "",
+        locationName: location,
+        name: name,
+        generatedByAi : false,
+        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        exercises : exercises,
+      })
+      .then(() => {
+        console.log("User workout data stored successfully!");
+      })
+      .catch(error => {
+        console.error("Error storing user data:", error);
+      });
+    },
 
 };

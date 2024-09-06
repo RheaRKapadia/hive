@@ -48,7 +48,8 @@ router.post('/:userId/workouts/create', async (req, res) => {
       name: name,
       location: location,
       exercises: exercises,
-      createdAt: new Date()
+      createdAt: new Date(),
+      generatedByAi : false,
     });
 
     res.status(200).json({ success: true, workoutId: workoutRef.id });
