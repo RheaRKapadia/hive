@@ -90,23 +90,38 @@
         <section class="workouts-list-section">
             <h2>Workouts</h2>
             <div id="workouts-list" class="workouts-list">
-                <div class="loading">Loading workouts...</div>
-            </div>
+                <% locationsList.forEach(location => { %>
+                    <a href="/<%= userId %>/locations/location/<%= location.id %>">
+                        <%= location.locationName %></a>
+                <% }) %>
+            </div>            
         </section>
     </div>
     <div class="second-row">
         <section class="health-section">
             <h2>Health</h2>
             <div id="health-data" class="health-data">
-                <div class="loading">Loading health data...</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Days Count</th>
+                            <th>Region</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% occurrencesArray.forEach(item => { %>
+                            <tr>
+                                <td><%= item.daysCount %></td>
+                                <td><%= item.region %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
             </div>
         </section>
 
         <section class="locations-section">
             <h2>Locations</h2>
-            <div id="location-data" class="location-data">
-                <div class="loading">Loading location data...</div>
-            </div>
         </section>
     </div>
     </main>
@@ -147,6 +162,7 @@
             fetchAndDisplayQuote();
         });
     </script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM Content Loaded');
@@ -260,6 +276,8 @@
                 }
             }
         }
+
+        
     </script>
 </body>
 </html>

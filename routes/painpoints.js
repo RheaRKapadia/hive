@@ -6,10 +6,12 @@ const {getAllEquipment, getAllTargetMuscles} = require('../exercisedb')
 router.get('/:userId/painpoints', async(req, res) => {
     //hard coded userid for now
     const userId = req.params.userId
+    console.log('UserId:', userId)
     const user = await firestore.getUserData(userId)
+    console.log('Retrieved user:', user)
     const painpointsList = await firestore.getUserPainpointsData(user.id)
     MusclesList = await getAllTargetMuscles(req, res)
-    res.render('5_painpoints', {painpointsList, user, MusclesList})
+    res.render('5_painpoints', {painpointsList, userId, user, MusclesList})
     //to reference the pain point name for frontend: use the forEach function to then access painpoint.location
     // or painpoint.painLevel
 })

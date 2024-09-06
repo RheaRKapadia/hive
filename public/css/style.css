@@ -409,12 +409,38 @@ input {
 /* Health Section */
 .dashboard-page .health-data {
     min-height: 200px;
+    padding-right: 30px; 
+    padding-left: 30px; 
 }
+
+.dashboard-page .health-data table {
+    background-color: rgba(12, 56, 100, 0.6); /* Correct format */
+    border-radius: 20px; 
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+}
+
+
+.dashboard-page .health-data th {
+    margin-bottom: 5px;  /* Space below the <thead> element */
+    padding-top: 5px;   /* Space above the content within the <thead> */
+}
+
+.dashboard-page .health-data th{
+    border-bottom: 2px solid #ccc; /* Thick black border at the bottom of the <thead> */
+}   
 
 /* Locations Section */
 .dashboard-page .location-data {
     min-height: 100px;
 }
+
+
+
+
+
+
 
 /* Workouts List Section */
 .dashboard-page .workouts-list {
@@ -1389,7 +1415,7 @@ body.newworkout {
 .myworkouts .workout-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px; */
+    gap: 30px; 
 
 }
 .myworkouts .workout-card {
@@ -2566,6 +2592,7 @@ body.newworkout {
     text-align: left; 
     font-size: 43px;
     width: 100%; 
+    margin:0px;
 }
 
 .painpoints-page {
