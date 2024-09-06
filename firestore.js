@@ -4,6 +4,7 @@ const serviceAccount = require('./serviceAccountKey.json')
 require( 'firebase/compat/firestore');
 require('firebase/compat/auth');
 const firebase = require('./firebaseLogin')
+// const { db } = require('./your-firebase-config-file');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -64,7 +65,13 @@ module.exports = {
         if (!workoutSnapshot.exists) {
           return { error: 'workout not found' };
         }
+        // if (!workoutExercisesSnapshot.exists) {
+        //   return { error: 'workout exercises not found' };
+        // }
+
         const workout = { id: workoutSnapshot.id, ...workoutSnapshot.data() };
+        // const workoutExercises = { id: workoutExercisesSnapshot.id, ...workoutExercisesSnapshot.data() };
+
         if (workout.userId !== userId) {
           return { error: 'Unauthorized access' };
         }
@@ -94,25 +101,55 @@ module.exports = {
         console.error("Error storing user data:", error);
       });
     },
-    createWorkout: async(exercises, name, location, userId) =>{
-      const workoutRef = db.collection("Workouts").doc();
-      workoutRef.set({
-        userId: userId,
-        locationId: "",
-        locationName: location,
-        name: name,
-        generatedByAi : false,
-        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
-        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
-        exercises : exercises,
-      })
-      .then(() => {
-        console.log("User workout data stored successfully!");
-      })
-      .catch(error => {
-        console.error("Error storing user data:", error);
-      });
+    getUserWorkoutsData: async(userId) =>{
+      try {
+        const workoutsSnapshot = await db.collection('users').doc(userId).collection('workouts').orderBy('createdAt', 'desc').get();
+        return workoutsSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+      } catch (error) {
+        console.error('Error fetching user workouts:', error);
+        return [];
+      }
     },
+    // New function to save a workout
+saveUserWorkout:async(userId, workoutData)=> {
+  return db.collection('users').doc(userId).collection('workouts').add({
+    ...workoutData,
+    createdAt: new Date()
+  });
+},
+
+// Updated function to get user workouts with exercises
+getDetailedWorkouts: function() {
+  return db.collection('Workouts')  // Make sure this is 'Workouts', not 'workouts'
+    .orderBy('createdAt', 'desc')
+    .get()
+    .then(snapshot => {
+      return snapshot.docs.map(doc => {
+        return { id: doc.id, ...doc.data() };
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching workouts:', error);
+      return [];
+    });
+},
+getExerciseDetails: function(userId, exerciseId) {
+  return db.collection('users').doc(userId).collection('exercises').doc(exerciseId).get()
+    .then(doc => {
+      if (doc.exists) {
+        return { id: doc.id, ...doc.data() };
+      } else {
+        return null;
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching exercise details:', error);
+      return null;
+    });
+},
     updateUserWorkoutCalendar: async (userId, completedDays) => {
       try {
         const workoutTrackerRef = db.collection('WorkoutTracker').doc(userId);
@@ -157,14 +194,13 @@ module.exports = {
         return { error: 'Failed to retrieve workout tracker' };
       }
     },
-    createPainPoint: async(userId, region, painLevel) =>{
+    createPainPoint: async(userId, region, painLevel, date) =>{
       const painpointsRef = db.collection("PainPoints").doc();
       painpointsRef.set({
         userId: userId,
         region: region,
         painLevel: painLevel,
-        createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
-        updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),
+        date: date
       })
       .then(() => {
         console.log("User pain points data stored successfully!");

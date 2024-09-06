@@ -1,6 +1,9 @@
 /* Colors */
 /* #FFD700 honey yellow */
 
+/* Colors */
+/* #FFD700 honey yellow */
+
 
 /* Index */
 body {
@@ -856,6 +859,366 @@ input {
 
 }
 
+.tracker-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.day {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #002E66;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+}
+
+.day.completed {
+    background-color: #FFA500;
+    color: #fff;
+}
+
+
+/* workouts */
+
+/* Header Styles */
+.newworkout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.newworkout header {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.newworkout .logo h1 {
+    margin: 0;
+    color: #f0a500;
+    font-size: 24px;
+}
+
+.newworkout nav {
+    display: flex;
+    align-items: center;
+}
+
+.newworkout .user-menu {
+    display: flex;
+    align-items: center;
+    color: #f0a500;
+}
+
+.newworkout .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.newworkout .content {
+    flex: 1;
+    padding: 20px;
+    background-color: #0a2351;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.content {
+    padding: 20px;
+    background-color: #0a2351;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.search-input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    margin-right: 10px;
+}
+.personalized-workout {
+    background-color: #f0a500;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+.filter-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.filter-button {
+    background-color: #0a2351;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+.categories {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+.category {
+    background-color: #0a2351;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+/* Styles for the workout location dropdown */
+.newworkout select#workoutLocation {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #1e3a6e;
+    color: white;
+    font-size: 16px;
+    appearance: none; /* Remove default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+}
+
+.newworkout select#workoutLocation:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #f0a500;
+}
+
+.newworkout select#workoutLocation option {
+    background-color: #0a2351;
+    color: white;
+}
+
+/* Style for the placeholder option */
+.newworkout select#workoutLocation option[value=""] {
+    color: white;
+}
+
+/* Adjust the styles of the surrounding elements for consistency */
+
+.newworkout .selected-exercises {
+    background-color: #0a2351;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .newworkout .selected-exercises h2 {
+    color: white;
+    margin-top: 5px;
+  }
+
+  .newworkout .workout-info {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .newworkout .workout-name-container,
+  .newworkout .workout-location-container {
+    flex: 0 1 auto;
+  }
+
+  .newworkout .workout-name-container input,
+  .newworkout .workout-location-container select {
+    width: 100px;
+    padding: 8px;
+    padding-right: 30px;
+    border: none;
+    border-radius: 15px;
+    background-color: #1e3a6e;
+    color: white;
+    font-size: 14px;
+    appearance: none;
+    cursor: pointer;
+    text-align: center;
+
+  }
+
+  .newworkout .workout-location-container select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 0.8em;
+    padding: 5px 5px;  /* Increase left and right padding */
+    text-indent: 1px;
+  }
+
+  .newworkout .workout-name-container input:focus,
+  .newworkout .workout-location-container select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #f0a500;
+  }
+
+  .newworkout .workout-location-container select option {
+    background-color: #0a2351;
+    color: white;
+  }
+
+  .newworkout .workout-location-container select option[value=""] {
+    color: #999;
+  }
+
+  .newworkout .submit-button {
+    background-color: #f0a500;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .newworkout .submit-button:hover {
+    background-color: #ff8c00;
+  }
+
+
+body.newworkout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+.page-content {
+    /* display: flex;
+    flex-direction: column;
+    height: calc(100vh - 60px);
+    overflow: hidden; */
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0 20px 20px 20px;
+    border-radius: 10px;
+    color: white;
+}
+.fixed-content {
+    padding: 20px;
+    background-color: #0a2351;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.scrollable-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0 20px 20px 20px;
+}
+.workout-list {
+    background-color: #0a2351;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.workout-header {
+    display: grid;
+    grid-template-columns: 50px 2fr 3fr 1fr 2fr;
+    gap: 10px;
+    border-bottom: 1px solid #1e3a6e;
+    font-weight: bold;
+}
+.workout-row {
+    display: grid;
+    grid-template-columns: 50px 2fr 3fr 1fr 2fr;
+    gap: 10px;
+    padding: 15px 0;
+    border-bottom: 1px solid #1e3a6e;
+    align-items: center;
+}
+.add-exercise {
+    background-color: #f0a500;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+}
+.exercise-name {
+    background-color: #1e3a6e;
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: white;
+}
+.equipment-tag {
+    background-color: #ff69b4;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: 0.8em;
+}
+
+/* styles for exercise name links */
+.exercise-name a {
+    color: white; /* Change this to your desired color */
+    text-decoration: none; /* Removes the underline */
+}
+
+.exercise-name a:hover {
+    color: #f0a500; /* Change color on hover, if desired */
+    text-decoration: underline; /* Add underline on hover, if desired */
+}
+
+/* Style for when the link has been visited */
+.exercise-name a:visited {
+    color: white; /* Keep the same color as unvisited links */
+}
+
+/* maintain the background color of the exercise name div */
+.exercise-name {
+    background-color: #1e3a6e;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+/* entire exercise name div to act like a button */
+.exercise-name {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.exercise-name:hover {
+    background-color: #2a4d8d;
+}
+
 /* Ensure the text color remains consistent when the div is hovered */
 .exercise-name:hover a {
     color: white;
@@ -902,104 +1265,6 @@ input {
 }
 
 /* My Workouts */
-.myworkouts body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a1a;
-    color: white;
-    margin: 0;
-    padding: 20px;
-}
-.myworkouts .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.myworkouts .logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.myworkouts .logo span {
-    color: #ffa500;
-}
-
-.myworkouts .workouts-container {
-        background-color: #1e2835;
-        border-radius: 30px;
-        padding: 20px;
-        position: relative;
-        margin-bottom: -50px;
-}
-
-.myworkouts .menu-icon {
-    font-size: 24px;
-}
-.myworkouts h1 {
-    margin-bottom: 20px;
-            font-size: 28px;
-}
-.myworkouts .workout-grid {
-    display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-
-}
-.myworkouts .workout-card {
-    background-color: #0c3864;
-            border-radius: 25px;
-            padding: 15px;
-            height: 300px;
-            width: 350px;
-            display: flex;
-            flex-direction: column;
-}
-.myworkouts .workout-title {
-    font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: white;
-}
-.myworkouts .workout-type {
-    font-size: 12px;
-            color: #ffa500;
-            margin-bottom: 5px;
-}
-.myworkouts .workout-exercises {
-    font-size: 28px;
-    margin-top: 10px;
-    flex-grow: 1;
-    overflow-y: scroll;
-    color: white;
-    align-items: center;
-}
-
-.myworkouts .workout-location {
-            font-size: 12px;
-            color: #ffa500;
-        }
-
-.myworkouts .new-routine-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #ffa500;
-    color: black;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 30px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.myworkouts .selected {
-    border: 2px solid #3498db;
-}
-
 /* myworkouts header */
 /* Header Styles */
 .myworkouts {
@@ -1041,6 +1306,441 @@ input {
     margin-right: 10px;
 }
 
+.myworkouts main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+.myworkouts body {
+    font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+}
+.myworkouts .header {
+    display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+}
+.myworkouts .logo {
+    font-size: 24px;
+            font-weight: bold;
+}
+
+.myworkouts .logo span {
+    color: #ffa500;
+}
+
+.myworkouts .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 10px;
+    background-color: #0a2351;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001;
+    border-radius: 10px;
+}
+
+.myworkouts .user-menu::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 10px;
+}
+
+.myworkouts .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.myworkouts .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.myworkouts .show {
+    display: block;
+}
+
+.myworkouts .workouts-container {
+    background-color: #1e2835;
+    border-radius: 30px;
+    padding: 30px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.myworkouts .menu-icon {
+    font-size: 24px;
+}
+
+.myworkouts h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+.myworkouts .workout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px; */
+
+}
+.myworkouts .workout-card {
+    background-color: #0c3864;
+    border-radius: 25px;
+    padding: 10px;
+    min-height: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin-bottom: 20px;
+}
+.myworkouts .workout-title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: white;
+}
+.myworkouts .workout-type,
+.myworkouts .workouts-modal .workouts-modal-content .workout-card .workout-location {
+    font-size: 18px;
+    color: #ffa500;
+    margin-top:0px;
+    margin-bottom: 10px;
+}
+.myworkouts .workout-exercises {
+    font-size: 28px;
+    margin-top: 10px;
+    flex-grow: 1;
+    overflow-y: scroll;
+    color: white;
+    align-items: center;
+}
+
+.myworkouts .workout-location {
+    font-size: 14px;
+    color: #ffa500;
+    margin-bottom: 10px;
+        }
+
+.myworkouts .new-routine-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffa500;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.myworkouts .equipment-tag {
+    background-color: #ff69b4;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: 0.8em;
+}
+
+
+.myworkouts .selected {
+    border: 2px solid #3498db;
+}
+
+.myworkouts .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #f0a500;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
+.myworkouts .page-content {
+    display: flex;
+}
+.myworkouts .scrollable-content {
+    flex: 1;
+}
+.myworkouts .selected-exercises {
+    width: 300px;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+.myworkouts .submit-button {
+    margin-top: 20px;
+}
+
+.myworkouts .workout-exercises {
+    font-size: 16px;
+    margin-top: 15px;
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-y: auto;
+    color: white;
+}
+
+/* Updated styles for exercise name */
+.myworkouts .exercise-name {
+    background-color: #1e3a6e;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    color: white;
+    cursor: default;
+}
+
+.myworkouts .exercise-name a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.myworkouts .exercise-name:hover {
+    background-color: #2a4d8d;
+}
+
+.myworkouts .exercise-name:hover a {
+    color: white;
+}
+
+/*Camille Added CSS*/
+.myworkouts .main-box {
+    background-color: rgba(26, 38, 52, 0.75);
+    width: 95vw;
+    height: 70vh;
+    border-radius: 40px;
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center elements horizontally */
+    justify-content: center; /* Center elements vertically */
+    box-sizing: border-box;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.myworkouts .title-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+}
+
+.myworkouts .title-container h1{
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 50px;
+    margin-bottom: 10px;
+    padding-bottom: 0;
+}
+
+.myworkouts .title-container p{
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 20px;
+    margin-top:0px;
+}
+
+.myworkouts .Workouts-outermost{
+    width: 90%;
+    height: 80%;
+    border-radius: 20px;
+    padding: 20px;
+    overflow: auto;
+}
+
+.myworkouts .Workouts-outermost::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.openModalButton {
+    width: 100%;
+    height: 50px;
+    border-radius: 11px;
+    background-color: rgba(11,64,156,0.4);
+    border: solid 0px;
+    outline: 0.1px solid rgb(187,194,202);
+    margin: 10px;
+    box-shadow: 4px 4px 3px rgba(255, 255, 255, 0.1);
+
+    font-size: 20px;
+    color:#ccc;
+}
+
+.openModalButton:hover {
+    background-color: rgba(11,64,156,0.7);
+}
+
+
+/* The Modal (background) */
+.workouts-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content */
+.workouts-modal-content {
+    background-color: #0c3864;
+    display: flex;
+    flex-direction: column;
+    margin: 15% auto;
+    padding: 40px;
+    width: 80%;
+    border-radius: 20px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+/* Popup styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #0a2351;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.popup h3 {
+    color: #f0a500;
+    margin-bottom: 15px;
+}
+
+.popup button {
+    background-color: #f0a500;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup button:hover {
+    background-color: #ff8c00;
+}
+
+/* Add styles for the exercise table */
+.myworkouts .exercise-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.myworkouts .exercise-table th,
+.myworkouts .exercise-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 0.5px solid #6aaaef5f;
+}
+
+.myworkouts .exercise-table th {
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.myworkouts .exercise-table td a {
+    color: #ffa500;
+    text-decoration: none;
+}
+
+.myworkouts .exercise-table td a:hover {
+    text-decoration: underline;
+}
+.myworkouts .exercise-table td ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+@media (max-width: 1200px) {
+    .myworkouts .workout-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .myworkouts .workout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .myworkouts .exercise-table {
+        font-size: 14px;
+    }
+
+    .myworkouts .exercise-table th,
+    .myworkouts .exercise-table td {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .myworkouts .exercise-table {
+        font-size: 14px;
+    }
+
+    .myworkouts .exercise-table th,
+    .myworkouts .exercise-table td {
+        padding: 8px;
+    }
+}
 
 /* Locations -------------------------------------------------------------------*/
 .header-container {
@@ -1074,9 +1774,10 @@ input {
 .outermost-box {
     width: 95vw;
     height: 90vh;
-    margin: 0;
+    margin: 30px;
     padding: 0;
     box-sizing: border-box;
+    align-items: center;
 }
 
 .logo-and-menu {
@@ -1200,6 +1901,65 @@ input {
     font-size: 40px;
 }
 
+.locations-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Header for Locations */
+.locations-page header {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.locations-page .logo h1 {
+    margin: 0;
+    color: #f0a500;
+    font-size: 38px;
+    line-height: 1;
+    transform: translateY(-4px);
+}
+
+.locations-page .logo {
+    display: flex;
+    align-items: center;
+}
+
+.locations-page .logo img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.locations-page nav {
+    display: flex;
+    align-items: center;
+}
+
+.locations-page .user-menu {
+    display: flex;
+    align-items: center;
+    color: #f0a500;
+}
+
+.locations-page .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
 .add-button {
     background: url('/images/add_circle_orange.png') no-repeat center center;
     background-size: contain;
@@ -1310,6 +2070,81 @@ input {
     }
 }
 
+/* Adjust the location-page header styles */
+.location-page header {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.location-page .logo {
+    display: flex;
+    align-items: center;
+}
+
+.location-page .logo img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.location-page .logo h1 {
+    margin: 0;
+    color: #f0a500;
+    font-size: 38px;
+    line-height: 1;
+    transform: translateY(-4px);
+}
+
+.location-page nav {
+    display: flex;
+    align-items: center;
+}
+
+.location-page .user-menu {
+    display: flex;
+    align-items: center;
+    color: #f0a500;
+}
+
+.location-page .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Styles for the dropdown menu */
+.location-page .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 10px;
+    background-color: #0a2351;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001;
+    border-radius: 10px;
+}
+
+.location-page .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.location-page .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.location-page .show {
+    display: block;
+}
 
   /* New Location FINAL CSS ---------------------------------------*/
 .set-new-location-main-box{
@@ -1604,18 +2439,133 @@ input {
     width: 80%;
 }
 /* Pain Management */
+/* pain headings */
+/* Header Styles */
+
+.painpoints-page header {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.painpoints-page .logo h1 {
+    margin: 0;
+    color: #f0a500;
+    font-size: 38px;
+    line-height: 1;
+    transform: translateY(-4px);
+}
+
+.painpoints-page .logo {
+    display: flex;
+    align-items: center;
+}
+
+.painpoints-page .logo img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.painpoints-page nav {
+    display: flex;
+    align-items: center;
+}
+
+.painpoints-page .user-menu {
+    display: flex;
+    align-items: center;
+    color: #f0a500;
+}
+
+.painpoints-page .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Dropdown  */
+/* Menu drop down */
+
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-trigger {
+    cursor: pointer;
+}
+
+.menu-trigger:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #f0a500, 0 0 20px #f0a500, 0 0 30px #f0a500;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 10px;
+    background-color: #0a2351;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001;
+    border-radius: 10px;
+}
+
+.user-menu::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 10px;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: block;
+}
+
+/* main styles pain */
+
 .pain-management-main-box {
     background-color: rgba(26, 38, 52, 0.75);
     width: 95vw;
-    height: 80vh;
+    height: 86vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
     border-radius: 40px;
     padding: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center elements horizontally */
-    justify-content: center; /* Center elements vertically */
-    gap: 3px;
-    box-sizing: border-box;
+}
+
+.pain-management-content{
+    width: 60%; 
+
+}
+.pain-management-main-box .pain-management-content h1{
+    text-align: left; 
+    font-size: 43px;
+    width: 100%; 
 }
 
 .painpoints-page {
@@ -1631,18 +2581,42 @@ input {
     padding: 1rem;
 }
 
+.Pain-Tracker-Container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:0;
+}
+
+.Pain-Tracker-Container h3{
+    width: 100%;
+    text-align: left; 
+    font-size: 20px;
+    margin-top:20px;
+    margin-bottom:3px;
+    padding:0;
+}
+
+.Pain-Tracker-Container .calendar-container h3{
+    margin-top:3px;
+    font-size: 18px;
+}
+
 .calendar-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    gap:40px;
-    width: 400px;
+    width: 380px;
+    height: 205px;
+    margin-top:0px;
 }
 
 .nav-button {
-    background-color: black;
+    background-color: rgb(21, 21, 21, 0.6);
     border: none;
     color: white;
     font-size: 1rem;
@@ -1679,6 +2653,7 @@ input {
 .month {
     text-align: center;
     width: 100%;
+    margin: 0px;
 }
 
 .month h3 {
@@ -1707,7 +2682,7 @@ input {
 .day {
     width: 30px;
     height: 30px;
-    background-color: rgba(0, 0, 255, 0.6);
+    background-color: rgba(26, 64, 188, 0.498);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1715,15 +2690,240 @@ input {
     font-weight: bold;
     color: #fff;
     text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .day.empty {
     background-color: transparent;
 }
 
-.day.completed {
-    background-color: #ffa500;
+.highlighted-day {
+    background-color: orange;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
 }
+
+.pain-outBox {
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.date-and-level-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.date-container {
+    width: 35%;
+    display: flex;
+    flex-direction:column;
+    justify-content: flex-start;
+}
+
+.date-container h3{
+    width: 100%; 
+    text-align: left; 
+}
+
+.painDate{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-weight: bold;
+}
+
+.level-container{
+    width: 60%;
+    margin-left: 3px;
+}
+
+.level-container h3{
+    width: 100%; 
+    text-align: left; 
+    margin-left: 3px;
+}
+
+.painLevelSlider{
+    padding: 5px;
+}
+
+.slider-values {
+    display: flex;
+    justify-content: space-between; /* Distributes the items evenly */
+    align-items: center;            /* Vertically aligns the items */
+    width: 100%;                    /* Adjust the width as needed */
+    margin-top: 0px; 
+    padding: 0px; 
+}
+
+/* Basic styles for the range input */
+input[type="range"] {
+    -webkit-appearance: none; /* Remove default styling */
+    width: 95%; /* Width of the slider */
+    background: transparent; /* Ensure background is transparent */
+    border: none; /* Remove default border */
+    outline: none; /* Remove outline */
+}
+
+/* Remove outline on focus */
+input[type="range"]:focus {
+    outline: none;
+}
+
+/* Webkit browsers (Chrome, Safari) */
+input[type="range"]::-webkit-slider-runnable-track {
+    background: rgb(248, 209, 102); /* Track color */
+    height: 5px; /* Track height */
+    border-radius: 5px; /* Optional: Round the track edges */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default thumb styling */
+    height: 15px; /* Thumb height */
+    width: 15px; /* Thumb width */
+    background: rgb(199, 122, 55); /* Thumb color */
+    border-radius: 50%; /* Make the thumb circular */
+    cursor: pointer; /* Change cursor on hover */
+    margin-top: -5px; /* Adjust thumb position */
+}
+
+/* Change the background color and text color of the input */
+input[type="date"] {
+    background-color: rgba(11, 64, 156, 0.7);
+    color: #333;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    color: #fefefe;
+}
+
+/* Change the calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: #ffcc00;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+/* Optionally remove the default border */
+input[type="date"]:focus {
+    outline: none;
+    border-color: #ff6600;
+}
+
+/* For Firefox, you can style the input, but the calendar icon may be harder to style */
+input[type="date"]::-moz-focus-inner {
+    border: 0;
+}
+
+.RegionsOfPain-Section h3{
+    width: 100%; 
+    text-align: left;
+    padding:0px; 
+    margin-bottom: 5px;
+}
+
+.RegionsOfPain-Outer{
+    width: 100%; 
+    margin-top:2px;
+}
+
+
+/* Style the select dropdown */
+.RegionsOfPain-filter-bar {
+    width: 90%; 
+    background-color: rgba(11, 64, 156, 0.7);
+    color: white; /* Text color */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    appearance: none; /* Removes default dropdown arrow */
+    margin-top: 3px; 
+}
+
+/* Style the dropdown arrow */
+.RegionsOfPain-filter-bar::after {
+    content: '▼'; /* Customize the dropdown arrow */
+    font-size: 12px;
+    color: white;
+    padding-left: 10px;
+}
+
+.RegionsOfPain-filter-bar option {
+    background-color: rgba(30, 53, 92, 0.984); /* Background of the options */
+    color: white; /* Text color */
+}
+
+.pain-manage-button{
+    width: 100%;
+}
+
+.pain-manage-button .location-btn{
+    width: 40%;
+    
+}
+
+.pain-management-pics {
+    background-color: rgba(27, 63, 125, 0.7);
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    margin-left: 30px;
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.pain-management-pics .image-container {
+    display: flex;
+    gap: 50px;
+}
+
+
+main img {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.modalDate {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    overflow: auto;
+}
+
+.modalDate-content {
+    background-color: rgb(143, 111, 28);
+    color: rgb(204, 204, 204);
+    width: 30%;
+    border-radius: 10px;
+    margin: 15% auto;
+    padding: 40px;
+}
+
+
 
 /* Workoutslide on dashboard */
 .workout-slider {

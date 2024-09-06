@@ -16,73 +16,149 @@
                 <a href="/user/userprofile">
                     <img src="/images/avatar.png" alt="User Avatar" class="avatar">
                 </a>
-                <span>Menu</span>
+                <span class="menu-trigger" onclick="toggleDropdown()">Menu</span>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="/<%= userId %>/dashboard/">Dashboard</a>
+                    <a href="/<%= userId %>/painpoints">Pain Management</a>
+                    <a href="/<%= userId %>/locations">Locations</a>
+                </div>
             </div>
         </nav>
     </header>
-    <h1>Workouts</h1>
-    <a href="/<%= userId %>/workouts/workout" class="btn">Back Day</a>
-    <a href="/<%= userId %>/workouts/new" class="btn">New Workout</a>
 
-    <!-- <div class="workout-grid">
-        <div class="workout-card">
-            <div class="workout-title">My Workouts</div>
-            <div class="workout-location">Location</div>
-            <div class="workout-exercises">
-                Lat pulldown<br>
-                Dumbbell Dead lift<br>
-                Inverted Row<br>
+    <main class="main-box">
+        <!-- Heading for Page -->
+
+        <section class="title-container">
+            <h1>Workouts</h1>
+            <p>Welcome to the archival page of your customized or AI generated workouts! Need to add more? Click on the + button at the right corner to generate more plans.</p>
+        </section>
+
+        <!--
+        Assume these buttons no longer apply
+        <a href="/<%= userId %>/workouts/workout" class="btn">Back Day</a>
+        <a href="/<%= userId %>/workouts/new" class="btn">New Workout</a>
+        -->
+
+        <% if (messages && messages.error) { %>
+            <div class="error-message">
+                <%= messages.error %>
+            </div>
+        <% } %>
+
+        <!-- Success message display -->
+        <% if (messages && messages.success) { %>
+            <div class="success-message">
+                <%= messages.success %>
+            </div>
+        <% } %>
+
+        <!-- Workouts-outermost section -->
+        <div class="Workouts-outermost">
+            <% if (workoutsList && workoutsList.length > 0) { %>
+                <% workoutsList.forEach(function(workout) { %>
+                    <button class="openModalButton" data-workout="<%= JSON.stringify(workout) %>">
+                        <%= workout.name || 'Unnamed Workout' %>
+                    </button>
+                <% }); %>
+            <% } else { %>
+                <p class="no-workouts-message">No workouts found. Create a new workout to get started!</p>
+            <% } %>
+        </div>
+
+        <!-- Modal -->
+        <div id="workoutModal" class="workouts-modal">
+            <div class="workouts-modal-content">
+                <span class="close">&times;</span>
+                <div id="modalWorkoutContent"></div>
             </div>
         </div>
-    </div> -->
-    <div class="workout-list">
-        <% if (workoutsList && workoutsList.length > 0) { %>
-            <% workoutsList.forEach(function(workout) { %>
-                <div class="workout-card">
-                    <h2 class="workout-title"><%= workout.name %></h2>
-                    <p class="workout-location">Location: <%= workout.location %></p>
-                    <div class="workout-exercises">
-                        <h3>Exercises:</h3>
-                        <table class="exercise-table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Equipment</th>
-                                    <th>Target Muscles</th>
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% workout.exercises.forEach(function(exercise) { %>
-                                    <tr>
-                                        <td><a href="/<%= userId %>/exercise/<%= exercise.id %>"><%= exercise.name %></a></td>
-                                        <td><%= exercise.equipment %></td>
-                                        <td><%= exercise.muscles %></td>
-                                        <td><%= exercise.description %>...</td>
-                                        <!-- .substring(0, 100) -->
-                                    </tr>
-                                <% }); %>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="workout-actions">
-                        <a href="/<%= userId %>/workouts/workout/<%= workout.id %>" class="btn btn-small">View Details</a>
-                        <a href="/<%= userId %>/workouts/workout/<%= workout.id %>/edit" class="btn btn-small">Edit</a>
-                        <form action="/<%= userId %>/workouts/<%= workout.id %>/delete" method="POST" class="inline-form">
-                            <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Are you sure you want to delete this workout?')">Delete</button>
-                        </form>
-                    </div>
-                </div>
-            <% }); %>
-        <% } else { %>
-            <p class="no-workouts-message">No workouts found. Create a new workout to get started!</p>
-        <% } %>
-    </div>
-    <button class="new-routine-btn" onclick="window.location.href='/workouts/new'">+</button>
+
+        <!-- Button for Ne orkout -->
+        <button class="new-routine-btn" onclick="window.location.href='/<%= userId %>/workouts/new'">+</button>
+    </main>
+
     <script>
         document.querySelector('.new-routine-btn').addEventListener('click', function() {
-            window.location.href = '/user/workouts/new';
+            window.location.href = '/<%= userId %>/workouts/new';
         });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = document.getElementById("workoutModal");
+            const modalContent = document.getElementById("modalWorkoutContent");
+            const closeModal = document.getElementsByClassName("close")[0];
+
+            document.querySelectorAll(".openModalButton").forEach(function (button) {
+                button.addEventListener("click", function () {
+                    const workout = JSON.parse(this.getAttribute("data-workout"));
+                    modalContent.innerHTML = `
+                        <div class="workout-card">
+                            <h2 class="workout-title">${workout.name}</h2>
+                            <p class="workout-location">Location: ${workout.location}</p>
+                            <div class="workout-exercises">
+                                <h3>Exercises:</h3>
+                                <table class="exercise-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Equipment</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${workout.exercises.map(exercise => `
+                                            <tr>
+                                                <td><a href="/${workout.userId}/exercise/${exercise.id}">${exercise.name}</a></td>
+                                                <td>${exercise.equipment}</td>
+                                                <td>
+                                                    <ul>
+                                                        ${exercise.description.split('.').filter(point => point.trim()).map(point => `
+                                                            <li>${point.trim()}.</li>
+                                                        `).join('')}
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    `;
+                    modal.style.display = "block";
+                });
+            });
+
+            closeModal.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+
+
+    </script>
+    <script>
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-trigger')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
     </script>
 </body>
 </html>
