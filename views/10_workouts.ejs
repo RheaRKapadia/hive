@@ -79,6 +79,9 @@
     </main>
 
     <script>
+        console.log(document.querySelectorAll(".openModalButton").length); // Check the number of buttons
+
+
         document.querySelector('.new-routine-btn').addEventListener('click', function() {
             window.location.href = '/<%= userId %>/workouts/new';
         });
@@ -88,10 +91,11 @@
             const modal = document.getElementById("workoutModal");
             const modalContent = document.getElementById("modalWorkoutContent");
             const closeModal = document.getElementsByClassName("close")[0];
-
+            
             document.querySelectorAll(".openModalButton").forEach(function (button) {
                 button.addEventListener("click", function () {
                     const workout = JSON.parse(this.getAttribute("data-workout"));
+                    console.log("Workout data:", workout); // Log the workout data
                     modalContent.innerHTML = `
                         <div class="workout-card">
                             <h2 class="workout-title">${workout.name}</h2>
@@ -113,9 +117,9 @@
                                                 <td>${exercise.equipment}</td>
                                                 <td>
                                                     <ul>
-                                                        ${exercise.description.split('.').filter(point => point.trim()).map(point => `
-                                                            <li>${point.trim()}.</li>
-                                                        `).join('')}
+                                                        <ul>
+                                                            ${exercise.description}
+                                                        </ul>
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -162,3 +166,9 @@
     </script>
 </body>
 </html>
+
+<!-- <ul>
+    ${exercise.description.split('.').filter(point => point.trim()).map(point => `
+        <li>${point.trim()}.</li>
+    `).join('')}
+</ul> -->
