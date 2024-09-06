@@ -15,13 +15,6 @@ router.get('/:userId/workouts/new/ai', async (req, res) => {
         const userId = req.params.userId
         const equipmentAll = await getAllEquipment(req, res)
         const targetMusclesAll = await getTargetMuscles(req, res)
-
-        /*
-        console.log(userId)
-        console.log(equipmentAll)
-        console.log(targetMusclesAll)
-        */
-        // console.log(exercises.pagination)
         res.status(200).render('17_newAiWorkout', {
             equipmentAll, targetMusclesAll, userId
         })
@@ -34,6 +27,7 @@ router.get('/:userId/workouts/new/ai', async (req, res) => {
 router.post('/:userId/workouts/new/ai', async (req, res) => {
     try {
         console.log('beginning of post route')
+        userId = req.params.userId
         const { muscle, equipment } = req.body;  // Extract form data (selected muscles and equipment)
         console.log('muscles: ', muscle, "\nequipment: ", equipment)
         const pineconeClient = new Pinecone({
@@ -63,19 +57,17 @@ router.post('/:userId/workouts/new/ai', async (req, res) => {
 
         // Prepare the response by extracting exercise metadata
         const recommendedExercises = results.matches.map((match) => ({
+            id: match.id,
             name: match.metadata.name,
             target: match.metadata.target,
             equipment: match.metadata.equipment,
             secondaryMuscles: match.metadata.secondaryMuscles,
-            instructions: match.metadata.instructions,
+            description: match.metadata.instructions,
         }));
 
-        firestore.createWorkout(exercises, workoutName, location, userId)
+        firestore.createAiWorkout(recommendedExercises, userId)
         // Send the recommended exercises as a JSON response
-        res.status(200).json({
-            message: 'Recommended exercises based on your selection:',
-            exercises: recommendedExercises,
-        });
+        res.status(200).redirect(`/${userId}/workouts`)
         console.log('end of post route')
     } catch (error) {
         console.error('Error generating workout:', error);

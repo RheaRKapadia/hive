@@ -58,7 +58,8 @@
                                         <td><a href="/<%= userId %>/exercise/<%= exercise.id %>"><%= exercise.name %></a></td>
                                         <td><%= exercise.equipment %></td>
                                         <td><%= exercise.muscles %></td>
-                                        <td><%= exercise.description.substring(0, 100) %>...</td>
+                                        <td><%= exercise.description %>...</td>
+                                        <!-- .substring(0, 100) -->
                                     </tr>
                                 <% }); %>
                             </tbody>

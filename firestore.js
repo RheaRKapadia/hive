@@ -206,7 +206,7 @@ module.exports = {
         console.error("Error updating user data:", error);
       });
     },
-    createAiWorkout: async(exercises, name, location, userId) =>{
+    createAiWorkout: async(exercises, userId) =>{
       const workoutRef = db.collection("Workouts").doc();
       workoutRef.set({
         userId: userId,

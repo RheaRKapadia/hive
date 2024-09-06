@@ -1947,8 +1947,8 @@ input {
 }
 
 .ai-workout-slider{
-    /* width: 400px; */
-    /* padding-left: 2vw; */
+    width: 45%;
+    padding-left: 2vw;
     display: flex;
 }
 
