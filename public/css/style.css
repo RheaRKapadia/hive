@@ -420,7 +420,54 @@ input {
 .dashboard-page .workouts-list {
     min-height: 100px;
 }
+/* drop down for new workout*/
+/* #new-workout-trigger{
+    cursor: pointer;
+} */
 
+#new-workout-trigger:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #f0a500, 0 0 20px #f0a500, 0 0 30px #f0a500;
+    transform: translateY(5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content-workout {
+    display: none;
+    position: absolute;
+    right: 5%;
+    top: 75%;
+    /* margin-top: 10px; */
+    background-color: #0a2351;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001;
+    border-radius: 10px;
+}
+
+/* .user-menu::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 10px;
+} */
+
+.dropdown-content-workout a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content-workout a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: block;
+}
 /* Menu drop down */
 
 .user-menu {
@@ -1433,8 +1480,8 @@ body.newworkout {
 
 .myworkouts .new-routine-btn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 4%;
+    right: 4%;
     background-color: #ffa500;
     color: black;
     border: none;
@@ -3144,6 +3191,7 @@ img {
 .AI-Workout-Btn{
     width: 15%;
     margin-top:20px; 
+    left: 5%
 }
 
 .ai-workout-slider{

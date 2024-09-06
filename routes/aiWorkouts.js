@@ -28,7 +28,8 @@ router.post('/:userId/workouts/new/ai', async (req, res) => {
     try {
         console.log('beginning of post route')
         userId = req.params.userId
-        const { muscle, equipment } = req.body;  // Extract form data (selected muscles and equipment)
+        const { muscle, equipment, numExercises, workoutName } = req.body; 
+        console.log('name: ', workoutName)
         console.log('muscles: ', muscle, "\nequipment: ", equipment)
         const pineconeClient = new Pinecone({
             apiKey: process.env.PINECONE_API_KEY,
@@ -37,8 +38,15 @@ router.post('/:userId/workouts/new/ai', async (req, res) => {
         const index = pineconeClient.index('exercise-db');
         const openai = new OpenAI();
 
+        // Ensure muscle and equipment are always arrays
+        const muscleArray = Array.isArray(muscle) ? muscle : [muscle];
+        const equipmentArray = Array.isArray(equipment) ? equipment : [equipment];
+
+        console.log('muscles: ', muscleArray, "\nequipment: ", equipmentArray);
+
         // Combine user-selected muscles and equipment for embedding
-        const userSelection = `Muscles: ${muscle.join(', ')}, Equipment: ${equipment.join(', ')}`;
+        const userSelection = `Muscles: ${muscleArray.join(', ')}, Equipment: ${equipmentArray.join(', ')}`;
+
 
         // Create an embedding of the user input using OpenAI
         const embeddingResponse = await openai.embeddings.create({
@@ -50,7 +58,7 @@ router.post('/:userId/workouts/new/ai', async (req, res) => {
 
         // Query Pinecone to retrieve the top 6 exercises from the exercise database
         const results = await index.query({
-            topK: 6,  // Retrieve the top 6 matches
+            topK: numExercises,  // Retrieve user defined responses
             includeMetadata: true,
             vector: embedding,
         });
@@ -65,7 +73,7 @@ router.post('/:userId/workouts/new/ai', async (req, res) => {
             description: match.metadata.instructions,
         }));
 
-        firestore.createAiWorkout(recommendedExercises, userId)
+        firestore.createAiWorkout(recommendedExercises, userId, workoutName)
         // Send the recommended exercises as a JSON response
         res.status(200).redirect(`/${userId}/workouts`)
         console.log('end of post route')

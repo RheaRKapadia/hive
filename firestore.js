@@ -242,13 +242,14 @@ getExerciseDetails: function(userId, exerciseId) {
         console.error("Error updating user data:", error);
       });
     },
-    createAiWorkout: async(exercises, userId) =>{
+    createAiWorkout: async(exercises, userId, workoutName) =>{
       const workoutRef = db.collection("Workouts").doc();
+      console.log(workoutName)
       workoutRef.set({
         userId: userId,
         locationId: "",
         locationName: '',
-        name: 'AI Workout',
+        name: workoutName,
         generatedByAi : true,
         createdAt :  admin.firestore.Timestamp.fromDate(new Date()),
         updatedAt :  admin.firestore.Timestamp.fromDate(new Date()),

@@ -74,18 +74,16 @@
             </div>
         </div>
 
-        <!-- Button for Ne orkout -->
-        <button class="new-routine-btn" onclick="window.location.href='/<%= userId %>/workouts/new'">+</button>
+        <!-- Button for New workout -->
+        <button class="new-routine-btn" id = 'new-workout-trigger' onclick="toggleDropdown()" >+</button>
+        <div id="myDropdownWorkouts" class="dropdown-content-workout">
+            <a href='/<%= userId %>/workouts/new'>Create a new workout</a>
+            <a href="/<%= userId %>/workouts/new/ai">Create an AI generated workout</a>
+        </div>
     </main>
 
     <script>
         console.log(document.querySelectorAll(".openModalButton").length); // Check the number of buttons
-
-
-        document.querySelector('.new-routine-btn').addEventListener('click', function() {
-            window.location.href = '/<%= userId %>/workouts/new';
-        });
-
 
         document.addEventListener("DOMContentLoaded", function () {
             const modal = document.getElementById("workoutModal");
@@ -155,6 +153,24 @@
         window.onclick = function(event) {
             if (!event.target.matches('.menu-trigger')) {
                 var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        function toggleDropdown() {
+            document.getElementById("myDropdownWorkouts").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('#new-workout-trigger')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content-workout");
                 for (var i = 0; i < dropdowns.length; i++) {
                     var openDropdown = dropdowns[i];
                     if (openDropdown.classList.contains('show')) {
