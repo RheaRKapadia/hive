@@ -2604,6 +2604,116 @@ body.newworkout {
 .titleInput{
     width: 80%;
 }
+
+/* Nav Bar for Edit Locations Page */ 
+.edit-locations-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+    /* Header for Locations */
+.edit-locations-page header {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.edit-locations-page .logo h1 {
+    margin: 0;
+    color: #f0a500;
+    font-size: 38px;
+    line-height: 1;
+    transform: translateY(-4px);
+}
+
+.edit-locations-page .logo {
+    display: flex;
+    align-items: center;
+}
+
+.edit-locations-page .logo img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.edit-locations-page nav {
+    display: flex;
+    align-items: center;
+}
+
+.edit-locations-page .user-menu {
+    display: flex;
+    align-items: center;
+    color: #f0a500;
+}
+
+.edit-locations-page .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.edit-locations-page .menu-trigger {
+    cursor: pointer;
+}
+
+.edit-locations-page .menu-trigger:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #f0a500, 0 0 20px #f0a500, 0 0 30px #f0a500;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.edit-locations-page .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 10px;
+    background-color: #0a2351;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001;
+    border-radius: 10px;
+}
+
+.edit-locations-page .user-menu::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 10px;
+}
+
+.edit-locations-page .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.edit-locations-page .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.edit-locations-page .show {
+    display: block;
+}
+
+
 /* Pain Management */
 /* pain headings */
 /* Header Styles */
