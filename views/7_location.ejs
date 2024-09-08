@@ -9,6 +9,7 @@
 </head>
 
 <body class="location-page">
+    <!-- Navigation Bar Header -->
     <header>
         <div class="logo">
             <div>
@@ -30,19 +31,22 @@
             </div>
         </nav>
     </header>
+
+    <!-- Location Content -->
     <main class="outermost-box">
 
-        <!-- Set New Location Main Box -->
-        <section class="set-new-location-main-box">
-            <h1><%= location.locationName %></h1>
+        <!-- Location Main Box -->
+        <section class="main-box">
+            <!-- Location Header -->
+            <div class="location-heading">
+                <h1><%= location.locationName %></h1>
+                <p>Welcome to your location dashboard! This page gives an overview of the equipment in this location.</p>
+            </div>
 
-            <p class="set-new-location-edit_location">
-                Welcome to your location dashboard! This page gives an overview of the equipment in this location.
-            </p>
-
-            <section class="Set-New-Location">
+            <!-- Location Content-->
+            <section class="location-content">
                 <!-- Set Equipment Content -->
-                <div class="Set-New-Location1">
+                <div class="table-outer-container">
                     <h3>Equipment Chosen</h3>
 
                     <!-- Equipment Complete Table -->
@@ -55,14 +59,14 @@
 
                         <!-- Header of Equipment Table  -->
                         <div class="equipment-container-header">
-                            <div class="equipment-container-column-Equipment">Equipment</div>
+                            Equipment
                         </div>
 
                         <!-- Table Content -->
                         <div id="tableRows">
                             <% location.equipmentAvailable.forEach(equipment => { %>
                             <div class="unique-table-row">
-                                <div class="unique-equipment-column unique-equipment-name"><%= equipment %></div>
+                                <div class="unique-equipment-column"><%= equipment %></div>
                             </div>
                             <% }); %>
                         </div>
@@ -83,7 +87,7 @@
                     <!-- Button Section of 2nd Column -->
                     <section class="Location-Button-Section">
                         <h3>Controls</h3>
-                        <div class="Set-New-Location-Setting-Btn">
+                        <div class="Btn-Group">
                             <a href="/<%= userId %>/locations" class="location-btn">Locations</a>
                             <a href="/<%= userId %>/locations/new" class="location-btn">New Location</a>
                             <a href="/<%= userId %>/locations/edit/<%= location.id %>" class="location-btn">Edit Location</a>
@@ -100,15 +104,17 @@
         document.getElementById('searchBar').oninput = function() {
             var searchValue = this.value.toLowerCase();
             var rows = document.querySelectorAll('.unique-table-row');
+            
             rows.forEach(row => {
-                var equipmentName = row.querySelector('.unique-equipment-name').textContent.toLowerCase();
+                var equipmentName = row.querySelector('.unique-equipment-column').textContent.toLowerCase();
+                
                 if (equipmentName.includes(searchValue)) {
                     row.style.display = "";
                 } else {
                     row.style.display = "none";
                 }
             });
-        }
+        }        
     </script>
     <script>
         function toggleDropdown() {

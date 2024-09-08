@@ -33,17 +33,18 @@
     
     <main class="outermost-box">
         <!-- Set New Location Main Box -->
-        <main class="set-new-location-main-box">
-            <h1><%= location.locationName %></h1>
+        <main class="main-box">
+            <div class="location-heading">
+                <h1><%= location.locationName %></h1>
+                <p>
+                    Welcome to your location dashboard. If you want to 
+                    edit any components, make sure to press "commit changes."
+                </p>
+            </div>
 
-            <p class="set-new-location-edit_location">
-                Welcome to your location dashboard. If you want to 
-                edit any components, make sure to press "commit changes."
-            </p>
-
-            <section class="Set-New-Location">
+            <div class="location-content">
                 <!-- Set Equipment Content -->
-                <div class="Set-New-Location1">
+                <div class="table-outer-container">
                     <h3>Equipment Options</h3>
 
                     <!-- Equipment Complete Table -->
@@ -52,7 +53,7 @@
                         <!-- Equipment Search Bar -->
                         <div class="equipment-container-top-bar">
                             <input type="text" id="searchBar" class="equipment-container-search-bar" placeholder="Search Bar">
-                            <button id="addItemButton" class="equipment-container-search-add" title="Add Item">+</button>
+                            <button id="addItemButton" title="Add Item">+</button>
                         </div>
                         
                         <!-- Header of Equipment Table  -->
@@ -65,13 +66,14 @@
                         <div id="tableRows">
                             <% equipmentAll.data.forEach(equipment => { %>
                             <div class="unique-table-row" data-type="<%= equipment.type %>">
-                                <div class="unique-equipment-column unique-equipment-name" data-equipment="<%= equipment %>"><%= equipment %></div>
+                                <div class="unique-equipment-column" data-equipment="<%= equipment %>"><%= equipment %></div>
                                 <div class="unique-add-column">
                                     <button class="unique-add-button" data-equipment="<%= equipment %>" title="Add to <%= equipment %>">+</button>
                                 </div>
                             </div>
                             <% }); %>
                         </div>
+
 
                     </div>
                 </div>
@@ -113,9 +115,9 @@
                         </div>
                     </section>
                     
-                    <button id="submit-location-equipment" class="btn">Commit Changes</button>
+                    <button id="submit-location-equipment" class="location-btn">Commit Changes</button>
                 </section>
-            </section>
+            </div>
         </main>
     </main>
 
@@ -127,7 +129,7 @@
             <form id="addEquipmentForm">
                 <label for="equipmentName">Equipment Name:</label>
                 <input type="text" id="equipmentName" name="equipmentName" required>
-                <button type="submit">Edit</button>
+                <button type="submit" class="location-btn">Edit</button>
             </form>
         </div>
     </div>
@@ -140,7 +142,7 @@
             <form id="editEquipmentForm">
                 <label for="editEquipmentName">Equipment Name:</label>
                 <input type="text" id="editEquipmentName" name="editEquipmentName" required>
-                <button type="submit">Save Changes</button>
+                <button type="submit" class="location-btn">Save Changes</button>
                 <button type="button" id="removeButton">Remove</button>
             </form>
         </div>
@@ -154,7 +156,7 @@
             <form id="addLocationForm">
                 <label for="locationName">Location Name:</label>
                 <input type="text" id="locationName" name="locationName" required>
-                <button type="submit">Add Location</button>
+                <button type="submit" class="location-btn">Add Location</button>
             </form>
         </div>
     </div>
@@ -179,7 +181,7 @@
 
         // Function to attach event listeners to equipment names for opening the edit modal
         function attachEditEventListener() {
-            document.querySelectorAll('.unique-equipment-name').forEach(nameElem => {
+            document.querySelectorAll('.unique-equipment-column').forEach(nameElem => {
                 nameElem.onclick = function() {
                     var originalName = nameElem.getAttribute('data-equipment');
                     document.getElementById('editEquipmentName').value = originalName;

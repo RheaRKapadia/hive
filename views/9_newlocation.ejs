@@ -86,7 +86,7 @@
                     
                     <section class="Set-New-Location-Sub-Step">
                         <h3>Current Toolkit</h3>
-                        <div id="equipmentsContainer" class="Set-New-Location-Sub-Content"></div>
+                        <div id="equipmentsContainer"></div>
                     </section>
 
                     <section class = "Set-New-Location-Sub-Step">
@@ -96,7 +96,7 @@
                         </div>
                     </section>
                     
-                    <button id="submit-location-equipment" class="btn">Submit</button>
+                    <button id="submit-location-equipment" class="location-btn">Submit</button>
                 </section>
             </section>
         </main>
@@ -110,7 +110,7 @@
             <form id="addEquipmentForm">
                 <label for="equipmentName">Equipment Name:</label>
                 <input type="text" id="equipmentName" name="equipmentName" required>
-                <button type="submit">Submit</button>
+                <button class="location-btn" type="submit">Submit</button>
             </form>
         </div>
     </div>
@@ -123,7 +123,7 @@
             <form id="editEquipmentForm">
                 <label for="editEquipmentName">Equipment Name:</label>
                 <input type="text" id="editEquipmentName" name="editEquipmentName" required>
-                <button type="submit">Save Changes</button>
+                <button type="submit" class="location-btn" >Save Changes</button>
                 <button type="button" id="removeButton">Remove</button>
             </form>
         </div>
@@ -137,7 +137,7 @@
             <form id="addLocationForm">
                 <label for="locationName">Location Name:</label>
                 <input type="text" id="locationName" name="locationName" required>
-                <button type="submit">Add Location</button>
+                <button type="submit" class="location-btn">Add Location</button>
             </form>
         </div>
     </div>

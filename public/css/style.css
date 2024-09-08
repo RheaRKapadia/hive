@@ -1846,8 +1846,6 @@ body.newworkout {
 }
 
 
-
-
 /* Popup styles */
 .popup {
     display: none;
@@ -1956,63 +1954,78 @@ body.newworkout {
     }
 }
 
-/* Locations -------------------------------------------------------------------*/
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.hive-heading {
-    height: 50px;
-}
-
-.image-button {
-    background: url('/images/menu.png') no-repeat center center;
-    background-size: contain;
-    width: 40px;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-}
-
-.image-button:focus {
-    outline: none;
-}
-
-.image-button:hover {
-    opacity: 0.8;
-}
-
-.outermost-box {
-    width: 95vw;
-    height: 90vh;
-    margin: 30px;
-    padding: 0;
-    box-sizing: border-box;
-    align-items: center;
-}
-
-.logo-and-menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
-
+/* Universal Styling ------------------------------------------------------- */
+/* Adjustments for .main-box */
 .main-box {
     background-color: rgba(26, 38, 52, 0.75);
-    width: 95vw;
-    height: 80vh;
+    width: 100%;
+    max-width: 1200px;
     border-radius: 40px;
     padding: 50px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center elements horizontally */
-    justify-content: center; /* Center elements vertically */
+    align-items: center;
     gap: 5px;
     box-sizing: border-box;
+    margin: 0 auto;
+    height: auto;
+    overflow: visible;
+}
+
+/* Universal Styling */
+.outermost-box {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* Responsive design using media queries */
+@media (max-width: 1024px) {
+    .main-box {
+        padding: 30px;
+        border-radius: 30px;
+    }
+    .ind-location {
+        width: 45%; /* Adjust size for tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-box {
+        padding: 20px;
+        border-radius: 20px;
+    }
+    .ind-location {
+        width: 100%; /* Stack locations vertically on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .main-box {
+        padding: 15px;
+        border-radius: 15px;
+    }
+    .location-heading h1 {
+        font-size: 28px; /* Reduce heading size on small screens */
+    }
+}
+
+/* Locations -------------------------------------------------------------------*/
+.locations-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .Set-New-Location {
@@ -2039,6 +2052,7 @@ body.newworkout {
     justify-content: center;
 }
 
+
 .Set-New-Location-Sub-Step {
     display: flex;
     flex-direction: column;
@@ -2058,12 +2072,32 @@ body.newworkout {
 .Set-New-Location-Sub-Content {
     background-color: rgba(11, 64, 156, 0.7);
     border-radius: 10px;
-    padding-top: 10px;
-    padding-bottom:10px;
-    padding-right:30px;
-    padding-left:30px;
+    padding: 10px 30px; 
     box-sizing: border-box;
-    height: 100%;
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    gap: 10px;
+}
+
+#equipmentsContainer {
+    background-color: rgba(11, 64, 156, 0.7);
+    border-radius: 10px;
+    padding: 10px 30px; 
+    box-sizing: border-box;
+    height: 100%; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start; 
+    gap: 2px;
+    max-height: 400px; 
+    overflow-y: auto;  
+}
+
+#equipmentsContainer::-webkit-scrollbar {
+    display: none; 
 }
 
 
@@ -2080,11 +2114,36 @@ body.newworkout {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: rgb(10, 44, 102);
     margin: 15% auto;
-    padding: 20px;
+    padding: 50px;
     width: 80%;
     border-radius: 10px;
+    color:rgb(255, 255, 255);
+}
+
+/*Temporary fix for the input text box idth being outside of container*/
+#equipmentName{
+    width: 98%;
+}
+
+#editEquipmentName{
+    width: 98%;
+}
+
+#locationName{
+    width: 98%;
+}
+
+#removeButton{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e1593e;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    align-items: center;
+    width: 100%;
 }
 
 .close {
@@ -2115,18 +2174,6 @@ body.newworkout {
     font-size: 40px;
 }
 
-.locations-page {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-    min-height: 100vh;
-    background-image: url('/images/background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
 /* Header for Locations */
 .locations-page header {
     padding: 10px 20px;
@@ -2135,6 +2182,11 @@ body.newworkout {
     align-items: center;
     width: 100%;
     box-sizing: border-box;
+}
+
+.locations-page .location-heading {
+    flex-direction: row; 
+    align-items: center;
 }
 
 .locations-page .logo h1 {
@@ -2210,12 +2262,14 @@ body.newworkout {
 
 .location-content {
     width: 100%;
-    height: 100%;
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 25px;
+    align-items: center;
+    /* Allow the content to adjust the height of the parent */
+    height: auto;
 }
 
 /* Default: 3 sections per row */
@@ -2229,19 +2283,30 @@ body.newworkout {
 
 .ind-location-header {
     display: flex;
-    flex-direction: row;
-    padding-right: 5px;
-    padding-bottom: 0;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin:0px;
     box-sizing: border-box;
+    margin-left: 0px;
 }
 
 /* Font size for the header */
 .ind-location-header h2 {
     font-size: 25px;
+    margin:0px;
+    text-align: left; 
 }
+
+.ind-location-header h2 a {
+    color: #f0f0f0; /* Change the link color */
+    text-decoration: none; /* Optional: remove underline if desired */
+}
+
+.ind-location-header h2 a:hover {
+    color: #ecc284; /* Change the color when hovered */
+}
+
 
 /* When the screen width is 600px or less, stack elements vertically and center them */
 @media (max-width: 600px) {
@@ -2251,7 +2316,7 @@ body.newworkout {
         padding-right: 0; /* Remove right padding */
         padding-top: 10px; /* Optional: Add top padding for spacing */
         padding-bottom: 10px; /* Optional: Add bottom padding for spacing */
-        gap: 10px; /* Space between heading and link */
+        gap: 3px; /* Space between heading and link */
     }
 
     .ind-location-header header {
@@ -2267,7 +2332,20 @@ body.newworkout {
     background-color: rgba(11, 64, 156, 0.7);
     border-radius: 18px;
     padding: 10px;
-    flex-grow: 1; /* Ensure it grows to fill available space */
+    flex-grow: 1;
+    overflow-y: auto; /* Allow vertical scrolling */
+    max-height: 400px; /* Set a maximum height */
+    box-sizing: border-box;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Edge */
+.ind-location-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.ind-location-content {
+    scrollbar-width: none; /* For Firefox */
 }
 
 /* When the screen width is 900px or less, switch to 2 sections per row */
@@ -2284,7 +2362,20 @@ body.newworkout {
     }
 }
 
-/* Adjust the location-page header styles */
+/* LOCATION-PAGE */
+.location-page{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+        /* Location Page Header */ 
 .location-page header {
     padding: 10px 20px;
     display: flex;
@@ -2331,7 +2422,7 @@ body.newworkout {
     margin-right: 10px;
 }
 
-/* Styles for the dropdown menu */
+        /* Location Page Header Nav Bar Dropdon*/
 .location-page .dropdown-content {
     display: none;
     position: absolute;
@@ -2359,6 +2450,418 @@ body.newworkout {
 .location-page .show {
     display: block;
 }
+
+
+/* Location Page, Edit Location, and New Location Page Universal Styling */
+.location-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    margin: 0px; 
+}
+
+
+.location-heading p{
+    margin: 0px; 
+    text-align: left;
+}
+
+.location-content{
+    display: flex;
+    gap: 50px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    margin-top:0px;
+}    
+
+@media (max-width: 768px) {
+    .location-content {
+        flex-direction: column;
+        gap: 10px; 
+        align-items: center;
+    }
+}
+
+
+.table-outer-container{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    width: 60%;
+    height: 80%;
+  }
+
+.table-outer-container h3 {
+    text-align: left; 
+    margin-bottom: 6px;
+  }
+
+@media (max-width: 768px) {
+    .table-outer-container {
+        width: 90%;
+        height: auto; 
+        padding: 10px; 
+    }
+
+    .table-outer-container h3 {
+        text-align: left; 
+        margin-bottom: 10px;
+    }
+}
+
+
+.equipment-container {
+    background-color: rgba(11, 64, 156, 0.7);
+    border-radius: 18px;
+    padding: 10px;
+    width: 95%;
+    height: 400px; 
+    margin: 0 auto;
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column; 
+}
+
+.equipment-container-top-bar {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin-right:20px;
+    margin-left: 20px;
+    margin-top: 20px;
+    gap:10px;
+  }
+
+
+.equipment-container-search-bar{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 10px;
+    height: 40%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    outline:none;
+}
+
+.equipment-container-header {
+    display: flex;
+    font-weight: bold;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-bottom:5px;
+    border-bottom: 2px solid white;
+}
+
+#tableRows {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-top:5px;
+    overflow-y: scroll; 
+    flex-grow: 1; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+}
+
+#tableRows::-webkit-scrollbar {
+    display: none;
+}
+
+.unique-table-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+    gap: 10px;
+    height: fit-content;
+}
+
+.location-page .unique-equipment-column {
+    background-color:  rgba(11, 64, 156, 0.4);
+    box-shadow: 0 4px 6px rgba(15, 15, 15, 0.1);
+    outline: 0.5px solid #ababab;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 90%;
+    height:20px;
+    height: fit-content;
+}
+
+.location-page .Column2-Location {
+    display: flex;
+    width: 30%;
+    box-sizing: border-box;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .location-page .Column2-Location {
+        width: 90%;
+        height: auto; 
+        padding: 10px; 
+    }
+
+    .location-page .Column2-Location h3 {
+        text-align: left; 
+        margin-bottom: 3px;
+    }
+}
+
+.location-page .Set-New-Location-Sub-Step {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.location-page .Set-New-Location-Sub-Step h3 {
+    margin-top: 0px; 
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+.location-page .Set-New-Location-Sub-Content {
+    background-color: rgba(11, 64, 156, 0.7);
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom:10px;
+    padding-right:30px;
+    padding-left:30px;
+    box-sizing: border-box;
+    height: 100%;
+
+    display: flex; 
+    justify-content: center;
+    align-items: center;     
+    height: 100%;          
+    text-align: center;    
+}
+
+
+.location-page .Location-Button-Section {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 18px; 
+}
+
+.location-page .Location-Button-Section h3 {
+        margin-top:0px;
+        margin-bottom: -4px; 
+        padding: 0;
+        width: 100%;
+        text-align: left;
+}
+
+.location-page .Btn-Group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom:10px;
+    padding-right:30px;
+    padding-left:30px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .location-page .location-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FFD700;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    align-items: center;
+    width: 100%;
+}
+
+.location-btn:hover {
+    background-color: #FF8C00;
+}
+
+    /*Equipment Table */ 
+.equipment-container-header {
+    display: flex;
+    font-weight: bold;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-bottom:5px;
+    border-bottom: 2px solid white;
+    gap: 10px; 
+}
+
+
+/* EDIT-LOCATION-PAGE */
+.edit-location-page{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.remove-tool-button {
+    margin-left: 3px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: none; 
+    color: #d67568;
+    font-weight: bold; 
+}
+
+        /* Edit Location Page Header */ 
+.edit-location-page header {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.edit-location-page .logo {
+    display: flex;
+    align-items: center;
+}
+
+.edit-location-page .logo img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.edit-location-page .logo h1 {
+    margin: 0;
+    color: #f0a500;
+    font-size: 38px;
+    line-height: 1;
+    transform: translateY(-4px);
+}
+
+.edit-location-page nav {
+    display: flex;
+    align-items: center;
+}
+
+.edit-location-page .user-menu {
+    display: flex;
+    align-items: center;
+    color: #f0a500;
+}
+
+.edit-location-page .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+        /* Edit Location Page Header Nav Bar Dropdown*/
+.edit-location-page .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 10px;
+    background-color: #0a2351;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001;
+    border-radius: 10px;
+}
+
+.edit-location-page .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.edit-location-page .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.edit-location-page .show {
+    display: block;
+}
+
+    /* Edit Location CSS */ 
+.edit-location-page .table-outer-container h3{
+    text-align: left; 
+}
+
+.edit-location-page .equipment-container{
+    outline: 3px solid yellow; 
+    width: 90%;
+}
+
+.edit-location-page .search-add{
+    border-radius: 10px;
+    width: 35px;
+    height: 35px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+#addItemButton {
+    padding: 10px; 
+    border-radius: 10px;
+}
+
+.edit-location-page #tableRows {
+    text-align: center;
+    outline: 1px solid red;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;   
+    justify-content: center; 
+    padding: 0px; 
+}
+
+
+.edit-location-page .unique-equipment-column{
+    background-color:  rgba(11, 64, 156, 0.4);
+    box-shadow: 0 4px 6px rgba(15, 15, 15, 0.1);
+    outline: 0.5px solid #ababab;
+    margin-left: 0px; 
+    text-align: center;
+    width: 80%; 
+    height: fit-content;
+}
+
+.edit-location-page .unique-table-row {
+    outline: 2px solid green; 
+    gap: 10px; 
+    width: 100%; 
+    margin-bottom: 12px;
+    height: fit-content;
+}
+
 
   /* New Location FINAL CSS ---------------------------------------*/
 .set-new-location-main-box{
@@ -2505,7 +3008,6 @@ body.newworkout {
     width: 84%;
     height:20px;
     height: fit-content;
-
 }
 
 .unique-description-column {
@@ -2621,13 +3123,12 @@ body.newworkout {
   .location-btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #FFD700;
+    background-color: #d1b712;
     color: #ffffff;
     text-decoration: none;
     border-radius: 5px;
     align-items: center;
     width: 100%;
-
 }
 .location-btn:hover {
     background-color: #FF8C00;
@@ -2647,6 +3148,8 @@ body.newworkout {
     width: 80%;
     height: 30px;
     border-radius: 10px;
+    background-color: rgba(11, 64, 156, 0.7);
+    color:#ccc;
 }
 
 .titleInput{
@@ -3391,10 +3894,10 @@ img {
 }
 
 /* New AI Workout */
+/* New AI Workout */
 
 .New-AI-Title{
     width: 100%;
-    /* padding: 20px;  */
     height: 100%;
 }
 .New-AI-Title h1{
@@ -3440,15 +3943,13 @@ img {
     width: 100%;
     height: 200px;
     overflow-y: auto;
-    box-sizing: border-box; /* Ensure padding is included in width/height calculation */
+    box-sizing: border-box;
     padding-top: 10px;
 }
-
 
 .checkbox-background::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
 }
-
 
 .ai-workout-options{
     display:flex;
@@ -3468,14 +3969,39 @@ img {
 .AI-Workout-Btn{
     width: 15%;
     margin-top:20px; 
-    left: 5%
+    left: 5%;
 }
 
-.ai-workout-slider{
-    width: 45%;
+.ai-workout-slider {
+    width: 100%; 
     padding-left: 2vw;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 
+
+/* Checkbox size and alignment fix */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px; 
+    vertical-align: middle; 
+    margin-right: 10px; 
+}
+
+label {
+    display: flex; 
+    align-items: center;
+    line-height: 1.5em; 
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#workoutName{
+    width: 80%; 
+}
