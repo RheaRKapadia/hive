@@ -14,21 +14,51 @@ const firestore = require('../firestore')
 //     res.send('Create user')
 // })
 //dashboard page, returns user info: name, id, gender, email, age, date created at, profile pic
+
+function calculateOccurences(painpointsList){
+    // Step 1: Create a map to store region counts
+    const regionCounts = new Map();
+
+    // Step 2: Iterate through the painpointsList
+    painpointsList.forEach(painpoint => {
+    const { region, date } = painpoint;
+    
+    // Initialize the region in the map if not already present
+    if (!regionCounts.has(region)) {
+        regionCounts.set(region, new Set());
+    }
+    
+    // Add the date to the set of dates for this region
+    regionCounts.get(region).add(date);
+    });
+
+    // Step 3: Transform the map into an array of objects
+    const resultArray = Array.from(regionCounts.entries()).map(([region, datesSet]) => ({
+    region,
+    daysCount: datesSet.size
+    }));
+
+    console.log(resultArray);
+    return resultArray;
+}
+
 router.get('/:userId/dashboard', async(req, res) => {
     try {
         const userId = req.params.userId
-        const locationsList = await firestore.getUserLocationsData( userId)
+        const locationsList = await firestore.getUserLocationsData(userId)
         const painpointsList = await firestore.getUserPainpointsData(userId)
         const workoutsList = await firestore.getUserWorkoutsData( userId)
         const workoutTracker = await firestore.getUserWorkoutTracker(userId)
         // console.log('from dashboard get', userId)
+        console.log('Location List:', locationsList)
+        const occurrencesArray = calculateOccurences(painpointsList);
 
         // Calculate total workout days
         const totalWorkoutDays = workoutTracker.workoutCalendar ? workoutTracker.workoutCalendar.length : 0
 
         const user = await firestore.getUserData(userId)
         // console.log(user)
-        res.status(200).render('4_dashboard', {user, locationsList, painpointsList, workoutsList, userId, totalWorkoutDays}, (err, html) => {
+        res.status(200).render('4_dashboard', {user, locationsList, occurrencesArray, workoutsList, userId, totalWorkoutDays}, (err, html) => {
             if (err) {
                 console.error('Error rendering dashboard:', err);
                 res.status(500).send('Error rendering dashboard');
