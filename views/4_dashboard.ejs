@@ -90,7 +90,7 @@
         <section class="workouts-list-section">
             <h2>Workouts</h2>
             <div id="workouts-list" class="workouts-list">
-            </div>            
+            </div>
         </section>
     </div>
     <div class="second-row">
@@ -123,13 +123,13 @@
                     <a href="/<%= userId %>/locations/location/<%= location.id %>" class="location-link">
                         <%= location.locationName %>
                     </a>
-                <% }) %>                
-            </div>    
+                <% }) %>
+            </div>
         </section>
     </div>
     </main>
     <script src="/js/dashboard.js"></script>
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             const quoteText = document.getElementById('quote-text');
             const quoteAuthor = document.getElementById('quote-author');
@@ -145,14 +145,14 @@
                     quoteAuthor.textContent = author;
                 } else {
                     try {
-                        const response = await fetch('https://api.quotable.io/random?tags=inspirational');
+                        const response = await fetch('https://zenquotes.io/api/random');
                         if (!response.ok) {
                             throw new Error('Failed to fetch quote');
                         }
                         const data = await response.json();
-                        quoteText.textContent = `"${data.content}"`;
-                        quoteAuthor.textContent = data.author;
-                        localStorage.setItem('dailyQuote', JSON.stringify({ content: data.content, author: data.author }));
+                        quoteText.textContent = `"${data[0].q}"`;
+                        quoteAuthor.textContent = data[0].a;
+                        localStorage.setItem('dailyQuote', JSON.stringify({ content: data[0].q, author: data[0].a }));
                         localStorage.setItem('dailyQuoteDate', today);
                     } catch (error) {
                         console.error('Error fetching quote:', error);
@@ -164,8 +164,8 @@
 
             fetchAndDisplayQuote();
         });
-    </script>
-    
+    </script> -->
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM Content Loaded');
@@ -280,7 +280,7 @@
             }
         }
 
-        
+
     </script>
 </body>
 </html>

@@ -4,6 +4,7 @@ const firestore = require('./firestore')
 const path = require('path');
 const bodyParser = require('body-parser');
 const firebase = require('./firebaseLogin')
+const axios = require('axios');
 require('firebase/compat/auth');
 require( 'firebase/compat/firestore');
 
@@ -56,6 +57,16 @@ app.use((req, res, next) => {
   app.use((req, res, next) => {
     console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
     next();
+});
+
+app.get('/api/quote', async (req, res) => {
+  try {
+    const response = await axios.get('https://zenquotes.io/api/random');
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error fetching quote:', error);
+    res.status(500).json({ error: 'Failed to fetch quote' });
+  }
 });
 
 //get the routes defined in the corresponding file

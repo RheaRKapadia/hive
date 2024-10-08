@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchAndDisplayWorkouts(userId);
     setupQuote();
     setupWorkoutCalendar();
-    setupSideMenu();
 });
 
 async function fetchAndDisplayWorkouts(userId) {
@@ -88,34 +87,85 @@ function changeSlide(direction) {
 }
 
 function setupQuote() {
+    const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    const storage = isChrome ? sessionStorage : localStorage;
     const quoteText = document.getElementById('quote-text');
     const quoteAuthor = document.getElementById('quote-author');
 
+    console.log('setupQuote function called (Chrome version)');
+
     async function fetchAndDisplayQuote() {
+        console.log('fetchAndDisplayQuote function called');
+
+        quoteText.textContent = 'Loading quote...';
+        quoteAuthor.textContent = '';
+
         const today = new Date().toDateString();
-        const cachedQuote = localStorage.getItem('dailyQuote');
-        const cachedDate = localStorage.getItem('dailyQuoteDate');
+        const cachedQuote = sessionStorage.getItem('dailyQuote');
+        const cachedDate = sessionStorage.getItem('dailyQuoteDate');
+
+        console.log('Cached quote:', cachedQuote);
+        console.log('Cached date:', cachedDate);
 
         if (cachedQuote && cachedDate === today) {
-            const { content, author } = JSON.parse(cachedQuote);
-            quoteText.textContent = `"${content}"`;
-            quoteAuthor.textContent = author;
-        } else {
+            console.log('Using cached quote');
             try {
-                const response = await fetch('https://api.quotable.io/random?tags=inspirational');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch quote');
+                const parsedQuote = JSON.parse(cachedQuote);
+                console.log('Parsed cached quote:', parsedQuote);
+                const content = parsedQuote.q || parsedQuote.content;
+                const author = parsedQuote.a || parsedQuote.author;
+
+                if (content && author) {
+                    quoteText.textContent = `"${content}"`;
+                    quoteAuthor.textContent = author;
+                } else {
+                    throw new Error('Invalid cached quote data');
                 }
-                const data = await response.json();
-                quoteText.textContent = `"${data.content}"`;
-                quoteAuthor.textContent = data.author;
-                localStorage.setItem('dailyQuote', JSON.stringify({ content: data.content, author: data.author }));
-                localStorage.setItem('dailyQuoteDate', today);
             } catch (error) {
-                console.error('Error fetching quote:', error);
-                quoteText.textContent = 'Failed to load quote. Please try again later.';
-                quoteAuthor.textContent = '';
+                console.error('Error parsing cached quote:', error);
+                await fetchNewQuote();
             }
+        } else {
+            console.log('Fetching new quote');
+            await fetchNewQuote();
+        }
+    }
+
+    async function fetchNewQuote() {
+        console.log('fetchNewQuote function called');
+        try {
+            const response = await fetch('/api/quote');
+            console.log('API response status:', response.status);
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch quote: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('Quote API response:', data);
+
+            if (Array.isArray(data) && data.length > 0) {
+                const quoteData = data[0];
+                console.log('Quote data:', quoteData);
+
+                const content = quoteData.q || quoteData.content;
+                const author = quoteData.a || quoteData.author;
+
+                if (content && author) {
+                    quoteText.textContent = `"${content}"`;
+                    quoteAuthor.textContent = author;
+                    sessionStorage.setItem('dailyQuote', JSON.stringify(quoteData));
+                    sessionStorage.setItem('dailyQuoteDate', new Date().toDateString());
+                } else {
+                    throw new Error('Invalid quote data structure');
+                }
+            } else {
+                throw new Error('Invalid API response format');
+            }
+        } catch (error) {
+            console.error('Error fetching quote:', error);
+            quoteText.textContent = 'Inspiration is within you today.';
+            quoteAuthor.textContent = '';
         }
     }
 
