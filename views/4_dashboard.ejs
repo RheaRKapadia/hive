@@ -126,9 +126,159 @@
                 <% }) %>
             </div>
         </section>
+        <section class="water-tracker-section">
+            <h2>Water Intake</h2>
+            <div class="water-tracker-card">
+                <div class="water-tracker-header">
+                    <h3>Water Tracker</h3>
+                    <button id="resetWaterBtn" class="reset-btn">Reset</button>
+                </div>
+                <div class="water-tracker-content">
+                    <div class="water-bottle-container">
+                        <svg id="bottleImage" class="bottle-image" viewBox="0 0 100 200" width="100" height="200">
+                            <defs>
+                                <clipPath id="bottleClip">
+                                    <path id="bottleShape" d="M30 10 L70 10 L80 30 L80 190 L20 190 L20 30 Z" />
+                                </clipPath>
+                                <radialGradient id="waterGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                                    <stop offset="0%" style="stop-color:rgb(0,210,255);stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:rgb(0,150,255);stop-opacity:1" />
+                                </radialGradient>
+                            </defs>
+                            <path id="bottleOutline" d="M30 10 L70 10 L80 30 L80 190 L20 190 L20 30 Z" fill="none" stroke="white" stroke-width="2"/>
+                            <g clip-path="url(#bottleClip)">
+                                <rect id="waterFill" x="0" y="200" width="100" height="200" fill="url(#waterGradient)" />
+                                <path id="waterWave" d="M0 200 Q25 180 50 200 T100 200" fill="url(#waterGradient)">
+                                    <animate attributeName="d"
+                                             dur="3s"
+                                             repeatCount="indefinite"
+                                             values="M0 200 Q25 180 50 200 T100 200;
+                                                     M0 200 Q25 220 50 200 T100 200;
+                                                     M0 200 Q25 180 50 200 T100 200" />
+                                </path>
+                                <g id="bubbles"></g>
+                            </g>
+                        </svg>
+                    </div>
+                    <p id="waterIntakeText" class="intake-text">0ml / 2000ml</p>
+                    <div class="water-input">
+                        <select id="bottleSelect" class="bottle-select">
+                            <option value="">Select your water bottle</option>
+                            <option value="739">Hydro Flask (24 oz / 739 ml)</option>
+                            <option value="946">Nalgene (32 oz / 946 ml)</option>
+                            <option value="621">S'well (25 oz / 621 ml)</option>
+                            <option value="769">Yeti Rambler (26 oz / 769 ml)</option>
+                            <option value="709">CamelBak Eddy+ (24 oz / 709 ml)</option>
+                        </select>
+                        <button id="addWaterBtn" class="add-btn">Add Water</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     </main>
     <script src="/js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const waterFill = document.getElementById('waterFill');
+            const waterWave = document.getElementById('waterWave');
+            const bottleShape = document.getElementById('bottleShape');
+            const bottleOutline = document.getElementById('bottleOutline');
+            const waterIntakeText = document.getElementById('waterIntakeText');
+            const bottleSelect = document.getElementById('bottleSelect');
+            const addWaterBtn = document.getElementById('addWaterBtn');
+            const resetWaterBtn = document.getElementById('resetWaterBtn');
+            const bubblesContainer = document.getElementById('bubbles');
+
+            let dailyGoal = 2000; // Default goal: 2000ml
+            let currentIntake = 0;
+
+            const bottleShapes = {
+                '739': "M30 10 L70 10 L75 30 L75 180 C75 185 70 190 65 190 L35 190 C30 190 25 185 25 180 L25 30 Z", // Hydro Flask
+                '946': "M30 10 L70 10 L80 30 L80 190 L20 190 L20 30 Z", // Nalgene
+                '621': "M35 10 L65 10 C75 30 75 50 75 70 L75 190 C75 195 70 200 65 200 L35 200 C30 200 25 195 25 190 L25 70 C25 50 25 30 35 10 Z", // S'well
+                '769': "M30 10 L70 10 L75 30 C80 60 80 90 80 120 L80 190 C80 195 75 200 70 200 L30 200 C25 200 20 195 20 190 L20 120 C20 90 20 60 25 30 Z", // Yeti Rambler
+                '709': "M35 10 L65 10 L70 30 L70 180 C70 185 65 190 60 190 L40 190 C35 190 30 185 30 180 L30 30 Z" // CamelBak Eddy+
+            };
+
+            function updateWaterTracker() {
+                const progress = (currentIntake / dailyGoal) * 100;
+                waterFill.setAttribute('y', 200 - (progress * 2));
+                waterWave.setAttribute('transform', `translate(0, ${-progress * 2})`);
+                waterIntakeText.textContent = `${currentIntake}ml / ${dailyGoal}ml`;
+            }
+
+            function updateBottleImage(bottleType) {
+                const shape = bottleShapes[bottleType] || bottleShapes['946']; // Default to Nalgene shape
+                bottleShape.setAttribute('d', shape);
+                bottleOutline.setAttribute('d', shape);
+            }
+
+            function addWater() {
+                const selectedBottle = parseInt(bottleSelect.value);
+                if (selectedBottle) {
+                    currentIntake = Math.min(currentIntake + selectedBottle, dailyGoal);
+                    updateWaterTracker();
+                    animateWaterFill();
+                    createBubbles();
+                } else {
+                    alert("Please select a water bottle first.");
+                }
+            }
+
+            function animateWaterFill() {
+                waterFill.style.transition = 'y 0.5s ease-out';
+                waterWave.style.transition = 'transform 0.5s ease-out';
+                updateWaterTracker();
+                setTimeout(() => {
+                    waterFill.style.transition = '';
+                    waterWave.style.transition = '';
+                }, 500);
+            }
+
+            function createBubbles() {
+                for (let i = 0; i < 5; i++) {
+                    const bubble = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                    bubble.setAttribute("cx", Math.random() * 80 + 10);
+                    bubble.setAttribute("cy", 200);
+                    bubble.setAttribute("r", Math.random() * 3 + 1);
+                    bubble.setAttribute("fill", "rgba(255, 255, 255, 0.5)");
+                    bubblesContainer.appendChild(bubble);
+
+                    const animateBubble = bubble.animate([
+                        { transform: `translate(0, 0)` },
+                        { transform: `translate(${Math.random() * 20 - 10}px, -${Math.random() * 100 + 50}px)` }
+                    ], {
+                        duration: Math.random() * 2000 + 1000,
+                        easing: 'ease-out',
+                        fill: 'forwards'
+                    });
+
+                    animateBubble.onfinish = () => bubble.remove();
+                }
+            }
+
+            function resetIntake() {
+                currentIntake = 0;
+                updateWaterTracker();
+                bottleSelect.value = '';
+                updateBottleImage('');
+                bubblesContainer.innerHTML = '';
+            }
+
+            addWaterBtn.addEventListener('click', addWater);
+            resetWaterBtn.addEventListener('click', resetIntake);
+
+            bottleSelect.addEventListener('change', function() {
+                updateBottleImage(this.value);
+                addWaterBtn.disabled = !this.value;
+            });
+
+            // Initial update
+            updateWaterTracker();
+            addWaterBtn.disabled = true;
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM Content Loaded');

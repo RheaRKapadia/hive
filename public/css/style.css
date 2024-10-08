@@ -69,7 +69,7 @@ main {
     text-align: center;
     color: white;
     z-index: 1;
-    padding-left: 80px;  /* Added Padidng to the Left because title is off center */ 
+    padding-left: 80px;  /* Added Padidng to the Left because title is off center */
 }
 
 main img {
@@ -91,12 +91,12 @@ h1 {
     justify-content: center;
     gap: 10px;
     margin-top: 10px;
-    padding-left: 80px;  /* Added Padidng to the Left because title is off center */ 
+    padding-left: 80px;  /* Added Padidng to the Left because title is off center */
 }
 
 .highlighted-text {
     color: #FFD700;
-    padding-left: 10px; 
+    padding-left: 10px;
 }
 
 .landing-btn {
@@ -126,9 +126,9 @@ h1 {
 main {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
-    text-align: center; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 main h1 {
@@ -141,8 +141,8 @@ main h1 {
     align-items: center;
     gap: 10px;
     margin-top: -10px;
-    text-align: center; 
-    padding-left:10px; 
+    text-align: center;
+    padding-left:10px;
 }
 
 .hivemascot {
@@ -153,7 +153,7 @@ main h1 {
     margin-bottom: -5px;
 }
 
-/* Images for Log In and Sign Up Pages - Prevents Overlapping */ 
+/* Images for Log In and Sign Up Pages - Prevents Overlapping */
 /* Medium screens (tablets and small desktops) */
 @media (max-width: 1200px) {
     .login-signup-pages .top-left-image {
@@ -232,7 +232,7 @@ main h1 {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: 300px; 
+    max-width: 300px;
     width: 100%;
     color:#ffffff;
 }
@@ -319,7 +319,7 @@ input {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: 300px; 
+    max-width: 300px;
     width: 100%;
     color: white;
 }
@@ -386,16 +386,16 @@ input {
 }
 
 .name-fields label {
-    display: flex;  
+    display: flex;
     flex: 1;
-    flex-direction: column; 
+    flex-direction: column;
 }
 
 input {
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 100%; 
+    width: 100%;
 }
 
 .password-toggle {
@@ -528,13 +528,13 @@ input {
 /* Health Section */
 .dashboard-page .health-data {
     min-height: 200px;
-    padding-right: 30px; 
-    padding-left: 30px; 
+    padding-right: 30px;
+    padding-left: 30px;
 }
 
 .dashboard-page .health-data table {
     background-color: rgba(0, 0, 255, 0.6);
-    border-radius: 20px; 
+    border-radius: 20px;
     padding-left: 20px;
     padding-right: 20px;
     width: 100%;
@@ -542,22 +542,22 @@ input {
 
 
 .dashboard-page .health-data th {
-    margin-bottom: 5px; 
-    padding-top: 5px; 
+    margin-bottom: 5px;
+    padding-top: 5px;
 }
 
 .dashboard-page .health-data th{
-    border-bottom: 2px solid #ccc; 
-}   
+    border-bottom: 2px solid #ccc;
+}
 
 
 /* Locations Section */
 .dashboard-page .locations-list {
-    padding: 15px; 
-    display: flex; 
-    flex-direction: column; 
-    overflow-y: auto; 
-    max-height: 100vh; 
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 100vh;
 }
 
 .dashboard-page .locations-list::-webkit-scrollbar {
@@ -565,17 +565,17 @@ input {
 }
 
 .dashboard-page .locations-list a {
-    margin: 8px; 
-    height: 30px; 
-    text-decoration: none; 
-    font-size: 16px; 
-    border-radius: 4px; 
+    margin: 8px;
+    height: 30px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
     background-color: rgba(0, 0, 255, 0.5);
-    outline: 0.3px solid white; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    color: white; 
+    outline: 0.3px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
@@ -771,7 +771,7 @@ input {
 /* Second Row */
 .dashboard-page .second-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
 }
 
@@ -880,6 +880,12 @@ input {
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+    .dashboard-page .second-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .dashboard-page .first-row,
     .dashboard-page .second-row {
@@ -1603,7 +1609,7 @@ body.newworkout {
 .myworkouts .workout-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px; 
+    gap: 30px;
 
 }
 .myworkouts .workout-card {
@@ -2072,11 +2078,11 @@ body.newworkout {
 .Set-New-Location-Sub-Content {
     background-color: rgba(11, 64, 156, 0.7);
     border-radius: 10px;
-    padding: 10px 30px; 
+    padding: 10px 30px;
     box-sizing: border-box;
-    height: 100%; 
-    display: flex; 
-    align-items: center; 
+    height: 100%;
+    display: flex;
+    align-items: center;
     justify-content: center;
     gap: 10px;
 }
@@ -2084,20 +2090,20 @@ body.newworkout {
 #equipmentsContainer {
     background-color: rgba(11, 64, 156, 0.7);
     border-radius: 10px;
-    padding: 10px 30px; 
+    padding: 10px 30px;
     box-sizing: border-box;
-    height: 100%; 
-    display: flex; 
+    height: 100%;
+    display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: flex-start; 
+    align-items: center;
+    justify-content: flex-start;
     gap: 2px;
-    max-height: 400px; 
-    overflow-y: auto;  
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 #equipmentsContainer::-webkit-scrollbar {
-    display: none; 
+    display: none;
 }
 
 
@@ -2185,7 +2191,7 @@ body.newworkout {
 }
 
 .locations-page .location-heading {
-    flex-direction: row; 
+    flex-direction: row;
     align-items: center;
 }
 
@@ -2295,7 +2301,7 @@ body.newworkout {
 .ind-location-header h2 {
     font-size: 25px;
     margin:0px;
-    text-align: left; 
+    text-align: left;
 }
 
 .ind-location-header h2 a {
@@ -2375,7 +2381,7 @@ body.newworkout {
     background-attachment: fixed;
 }
 
-        /* Location Page Header */ 
+        /* Location Page Header */
 .location-page header {
     padding: 10px 20px;
     display: flex;
@@ -2458,12 +2464,12 @@ body.newworkout {
     flex-direction: column;
     align-items: flex-start;
     padding: 0px;
-    margin: 0px; 
+    margin: 0px;
 }
 
 
 .location-heading p{
-    margin: 0px; 
+    margin: 0px;
     text-align: left;
 }
 
@@ -2477,12 +2483,12 @@ body.newworkout {
     align-items: stretch;
     flex-wrap: nowrap;
     margin-top:0px;
-}    
+}
 
 @media (max-width: 768px) {
     .location-content {
         flex-direction: column;
-        gap: 10px; 
+        gap: 10px;
         align-items: center;
     }
 }
@@ -2499,19 +2505,19 @@ body.newworkout {
   }
 
 .table-outer-container h3 {
-    text-align: left; 
+    text-align: left;
     margin-bottom: 6px;
   }
 
 @media (max-width: 768px) {
     .table-outer-container {
         width: 90%;
-        height: auto; 
-        padding: 10px; 
+        height: auto;
+        padding: 10px;
     }
 
     .table-outer-container h3 {
-        text-align: left; 
+        text-align: left;
         margin-bottom: 10px;
     }
 }
@@ -2522,11 +2528,11 @@ body.newworkout {
     border-radius: 18px;
     padding: 10px;
     width: 95%;
-    height: 400px; 
+    height: 400px;
     margin: 0 auto;
-    overflow: hidden; 
+    overflow: hidden;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
 }
 
 .equipment-container-top-bar {
@@ -2565,9 +2571,9 @@ body.newworkout {
     margin-left: 0px;
     margin-right: 0px;
     padding-top:5px;
-    overflow-y: scroll; 
-    flex-grow: 1; 
-    scrollbar-width: none; 
+    overflow-y: scroll;
+    flex-grow: 1;
+    scrollbar-width: none;
     -ms-overflow-style: none;
 }
 
@@ -2599,21 +2605,21 @@ body.newworkout {
     display: flex;
     width: 30%;
     box-sizing: border-box;
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 
 @media (max-width: 768px) {
     .location-page .Column2-Location {
         width: 90%;
-        height: auto; 
-        padding: 10px; 
+        height: auto;
+        padding: 10px;
     }
 
     .location-page .Column2-Location h3 {
-        text-align: left; 
+        text-align: left;
         margin-bottom: 3px;
     }
 }
@@ -2627,7 +2633,7 @@ body.newworkout {
 }
 
 .location-page .Set-New-Location-Sub-Step h3 {
-    margin-top: 0px; 
+    margin-top: 0px;
     margin-bottom: 10px;
     width: 100%;
     text-align: left;
@@ -2643,11 +2649,11 @@ body.newworkout {
     box-sizing: border-box;
     height: 100%;
 
-    display: flex; 
+    display: flex;
     justify-content: center;
-    align-items: center;     
-    height: 100%;          
-    text-align: center;    
+    align-items: center;
+    height: 100%;
+    text-align: center;
 }
 
 
@@ -2657,12 +2663,12 @@ body.newworkout {
     align-items: stretch;
     width: 100%;
     box-sizing: border-box;
-    margin-top: 18px; 
+    margin-top: 18px;
 }
 
 .location-page .Location-Button-Section h3 {
         margin-top:0px;
-        margin-bottom: -4px; 
+        margin-bottom: -4px;
         padding: 0;
         width: 100%;
         text-align: left;
@@ -2699,7 +2705,7 @@ body.newworkout {
     background-color: #FF8C00;
 }
 
-    /*Equipment Table */ 
+    /*Equipment Table */
 .equipment-container-header {
     display: flex;
     font-weight: bold;
@@ -2709,7 +2715,7 @@ body.newworkout {
     margin-left: 20px;
     padding-bottom:5px;
     border-bottom: 2px solid white;
-    gap: 10px; 
+    gap: 10px;
 }
 
 
@@ -2730,12 +2736,12 @@ body.newworkout {
     margin-left: 3px;
     border-radius: 5px;
     background-color: transparent;
-    border: none; 
+    border: none;
     color: #d67568;
-    font-weight: bold; 
+    font-weight: bold;
 }
 
-        /* Edit Location Page Header */ 
+        /* Edit Location Page Header */
 .edit-location-page header {
     padding: 10px 20px;
     display: flex;
@@ -2811,13 +2817,13 @@ body.newworkout {
     display: block;
 }
 
-    /* Edit Location CSS */ 
+    /* Edit Location CSS */
 .edit-location-page .table-outer-container h3{
-    text-align: left; 
+    text-align: left;
 }
 
 .edit-location-page .equipment-container{
-    outline: 3px solid yellow; 
+    outline: 3px solid yellow;
     width: 90%;
 }
 
@@ -2829,7 +2835,7 @@ body.newworkout {
 }
 
 #addItemButton {
-    padding: 10px; 
+    padding: 10px;
     border-radius: 10px;
 }
 
@@ -2837,10 +2843,10 @@ body.newworkout {
     text-align: center;
     outline: 1px solid red;
     display: flex;
-    flex-direction: column; 
-    align-items: center;   
-    justify-content: center; 
-    padding: 0px; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
 }
 
 
@@ -2848,16 +2854,16 @@ body.newworkout {
     background-color:  rgba(11, 64, 156, 0.4);
     box-shadow: 0 4px 6px rgba(15, 15, 15, 0.1);
     outline: 0.5px solid #ababab;
-    margin-left: 0px; 
+    margin-left: 0px;
     text-align: center;
-    width: 80%; 
+    width: 80%;
     height: fit-content;
 }
 
 .edit-location-page .unique-table-row {
-    outline: 2px solid green; 
-    gap: 10px; 
-    width: 100%; 
+    outline: 2px solid green;
+    gap: 10px;
+    width: 100%;
     margin-bottom: 12px;
     height: fit-content;
 }
@@ -3156,7 +3162,7 @@ body.newworkout {
     width: 80%;
 }
 
-/* Nav Bar for Edit Locations Page */ 
+/* Nav Bar for Edit Locations Page */
 .edit-locations-page {
     display: grid;
     grid-template-columns: 1fr;
@@ -3386,13 +3392,13 @@ body.newworkout {
 }
 
 .pain-management-content{
-    width: 60%; 
+    width: 60%;
 
 }
 .pain-management-main-box .pain-management-content h1{
-    text-align: left; 
+    text-align: left;
     font-size: 43px;
-    width: 100%; 
+    width: 100%;
 }
 
 .painpoints-page {
@@ -3419,7 +3425,7 @@ body.newworkout {
 
 .Pain-Tracker-Container h3{
     width: 100%;
-    text-align: left; 
+    text-align: left;
     font-size: 20px;
     margin-top:20px;
     margin-bottom:3px;
@@ -3561,8 +3567,8 @@ form {
 }
 
 .date-container h3{
-    width: 100%; 
-    text-align: left; 
+    width: 100%;
+    text-align: left;
 }
 
 .painDate{
@@ -3578,8 +3584,8 @@ form {
 }
 
 .level-container h3{
-    width: 100%; 
-    text-align: left; 
+    width: 100%;
+    text-align: left;
     margin-left: 3px;
 }
 
@@ -3592,8 +3598,8 @@ form {
     justify-content: space-between; /* Distributes the items evenly */
     align-items: center;            /* Vertically aligns the items */
     width: 100%;                    /* Adjust the width as needed */
-    margin-top: 0px; 
-    padding: 0px; 
+    margin-top: 0px;
+    padding: 0px;
 }
 
 /* Basic styles for the range input */
@@ -3656,28 +3662,28 @@ input[type="date"]::-moz-focus-inner {
 }
 
 .RegionsOfPain-Section h3{
-    width: 100%; 
+    width: 100%;
     text-align: left;
-    padding:0px; 
+    padding:0px;
     margin-bottom: 5px;
 }
 
 .RegionsOfPain-Outer{
-    width: 100%; 
+    width: 100%;
     margin-top:2px;
 }
 
 
 /* Style the select dropdown */
 .RegionsOfPain-filter-bar {
-    width: 90%; 
+    width: 90%;
     background-color: rgba(11, 64, 156, 0.7);
     color: white; /* Text color */
     padding: 10px;
     border-radius: 5px;
     font-size: 16px;
     appearance: none; /* Removes default dropdown arrow */
-    margin-top: 3px; 
+    margin-top: 3px;
 }
 
 /* Style the dropdown arrow */
@@ -3699,7 +3705,7 @@ input[type="date"]::-moz-focus-inner {
 
 .pain-manage-button .location-btn{
     width: 40%;
-    
+
 }
 
 .pain-management-pics {
@@ -3901,40 +3907,40 @@ img {
     height: 100%;
 }
 .New-AI-Title h1{
-    font-size:36px; 
-    text-align: left; 
-    padding-bottom:0; 
+    font-size:36px;
+    text-align: left;
+    padding-bottom:0;
     margin-bottom:10px;
 }
 
 .New-AI-Title p{
-    text-align: left; 
-    padding-bottom:0; 
+    text-align: left;
+    padding-bottom:0;
     padding-top:0;
     margin-top:0;
     margin-bottom:5px;
 }
 
 .equipment-targets-container{
-    display: flex; 
-    flex-direction: row; 
+    display: flex;
+    flex-direction: row;
     gap: 20px;
 }
 
 .ai-equipment-container{
-    width: 50%;    
+    width: 50%;
 }
 
 .ai-equipment-container h2{
-    text-align: left; 
+    text-align: left;
 }
 
 .ai-targetMuscle-container{
-    width: 50%;    
+    width: 50%;
 }
 
 .ai-targetMuscle-container h2{
-    text-align: left;   
+    text-align: left;
 }
 
 .checkbox-background {
@@ -3954,26 +3960,26 @@ img {
 .ai-workout-options{
     display:flex;
     flex-direction: row;
-    padding-right: 50px; 
-    padding-left: 50px; 
+    padding-right: 50px;
+    padding-left: 50px;
     padding-bottom: 10px;
-    padding-top: 10px; 
-    gap: 20px; 
+    padding-top: 10px;
+    gap: 20px;
 }
 
 .AI-Workout-Btn-Container{
-    display: flex; 
+    display: flex;
     justify-content: flex-end;
 }
 
 .AI-Workout-Btn{
     width: 15%;
-    margin-top:20px; 
+    margin-top:20px;
     left: 5%;
 }
 
 .ai-workout-slider {
-    width: 100%; 
+    width: 100%;
     padding-left: 2vw;
     display: flex;
     flex-direction: column;
@@ -3985,15 +3991,15 @@ img {
 /* Checkbox size and alignment fix */
 input[type="checkbox"] {
     width: 16px;
-    height: 16px; 
-    vertical-align: middle; 
-    margin-right: 10px; 
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 10px;
 }
 
 label {
-    display: flex; 
+    display: flex;
     align-items: center;
-    line-height: 1.5em; 
+    line-height: 1.5em;
 }
 
 .checkbox-container {
@@ -4003,5 +4009,131 @@ label {
 }
 
 #workoutName{
-    width: 80%; 
+    width: 80%;
+}
+
+/* Water Tracker Styles */
+.water-tracker-section {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.water-tracker-card {
+    background-color: rgba(11, 64, 156, 0.7);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.water-tracker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.water-tracker-header h3 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 1.2em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.reset-btn {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.reset-btn:hover {
+    background-color: #ff8787;
+    transform: scale(1.05);
+}
+
+.water-bottle-container {
+    position: relative;
+    height: 250px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.bottle-image {
+    max-height: 100%;
+    width: auto;
+}
+
+.intake-text {
+    text-align: center;
+    margin: 10px 0;
+    color: #ffffff;
+    font-size: 1.1em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.water-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.bottle-select {
+    width: 100%;
+    padding: 8px;
+    background-color: #4a89dc;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.bottle-select:hover {
+    background-color: #5d9cec;
+}
+
+.add-btn {
+    background-color: #37bc9b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.add-btn:hover {
+    background-color: #48cfad;
+    transform: scale(1.05);
+}
+
+.add-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .water-tracker-section {
+        width: 100%;
+    }
 }
