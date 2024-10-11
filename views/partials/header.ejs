@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIVE </title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="dashboard-page" data-user-id="<%= userId %>"></body>
+    <header>
+        <div class="logo">
+            <div>
+                <img src="/images/Logo.png" alt="Hive Logo">
+              </div>
+            <h1>HIVE</h1>
+        </div>
+        <nav>
+            <div class="user-menu">
+                <a href="/<%= userId %>/userprofile">
+                    <img src="/images/avatar.png" alt="User Avatar" class="avatar">
+                </a>
+                <!-- <span class="menu-trigger" onclick="toggleDropdown()">Menu</span> -->
+                <img src="/images/menu.png" alt="menu bar" class="menu-trigger" onclick="toggleDropdown()">
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="/<%= userId %>/workouts/">Workouts</a>
+                    <a href="/<%= userId %>/painpoints">Pain Management</a>
+                    <a href="/<%= userId %>/locations">Locations</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <script>
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-menu img')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+
+    </script>

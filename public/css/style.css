@@ -3,7 +3,16 @@
 
 /* Colors */
 /* #FFD700 honey yellow */
+@font-face {
+    font-family: 'regularRoundo';
+    src: url('images/fonts/Roundo/WEB/fonts/Roundo-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
+* {
+    font-family: 'regularRoundo', sans-serif;
+}
 
 html, body {
     height: 100%; /* Ensure both the html and body take the full viewport height */
@@ -24,6 +33,9 @@ body {
     height: 100%; /* Ensure body takes up the full height */
 }
 
+#landingContent h1{
+    text-align: left;
+}
 /* Default for large screens */
 .corner-image {
     position: fixed;
@@ -66,24 +78,24 @@ body {
 }
 
 main {
-    text-align: center;
+    text-align: left;
     color: white;
     z-index: 1;
-    padding-left: 80px;  /* Added Padidng to the Left because title is off center */ 
+    /* padding-left: 80px;  Added Padidng to the Left because title is off center  */
 }
 
-main img {
+/* main img {
     max-width: 200px;
     height: auto;
     margin-bottom: 20px;
-}
+} */
 
 h1 {
-    margin: 0 0 20px 0;
-    line-height: 1.2;
+    /* margin: 0 0 20px 0; */
+    line-height: 1;
     color: #ffffff;
     font-size: 58px;
-    padding: 20px 0 10px;
+    /* padding: 20px 0 10px; */
   }
 
 .button-container {
@@ -126,14 +138,14 @@ h1 {
 main {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
-    text-align: center; 
+    align-items: start; 
+    justify-content: start; 
+    text-align: start; 
 }
 
 main h1 {
     margin-bottom: 0;
-    line-height: 1.2;
+    line-height: 0.5;
 }
 
 .hive-heading {
@@ -142,7 +154,7 @@ main h1 {
     gap: 10px;
     margin-top: -10px;
     text-align: center; 
-    padding-left:10px; 
+    /* padding-left:10px;  */
 }
 
 .hivemascot {
@@ -447,10 +459,10 @@ input {
 
 .dashboard-page .logo h1 {
     margin: 0;
-    color: #f0a500;
+    color: #fff;
     font-size: 38px;
     line-height: 1;
-    transform: translateY(-4px);
+    transform: translateY(-1px);
 }
 
 .dashboard-page .logo {
@@ -459,7 +471,7 @@ input {
 }
 
 .dashboard-page .logo img {
-    height: 40px;
+    height: 60px;
     width: auto;
     margin-right: 10px;
 }
@@ -476,10 +488,11 @@ input {
 }
 
 .dashboard-page .avatar {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     margin-right: 10px;
+    transform: translateY(1px);
 }
 
 
@@ -3322,6 +3335,9 @@ body.newworkout {
     position: relative;
     display: inline-block;
 }
+.user-menu img{
+    height: 2.5em;
+}
 
 .menu-trigger {
     cursor: pointer;
@@ -3718,11 +3734,11 @@ input[type="date"]::-moz-focus-inner {
 }
 
 
-main img {
+/* main img {
     max-width: 200px;
     height: auto;
     margin-bottom: 20px;
-}
+} */
 
 img {
     overflow-clip-margin: content-box;
@@ -4005,3 +4021,42 @@ label {
 #workoutName{
     width: 80%; 
 }
+
+/* User Profile Content */
+.content-all {
+    /* background-color: #2980b9; */
+    display: flex;
+    justify-content: center;  
+    align-items: center; 
+
+}
+
+.section-wrapper {
+    background-color: rgba(16, 21, 26, 0.70);
+    border-radius: 40px;
+    width: 85vw;
+    height: 80vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-profile-blue-graphic {
+    width: 85.25vw;
+    height: 70vh; 
+    position: absolute;
+    bottom: 0;
+    transform: translateX(1px);
+}
+
+.user-profile-grid {
+    z-index: 1;
+    width: 85.25vw;
+    height: 70vh; 
+    margin-top: 10vh;
+    display: grid;
+    grid-template-columns: 27% 47% 26%;
+    grid-template-rows: 15% 70% 15%;
+}
+
+
