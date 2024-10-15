@@ -4131,6 +4131,24 @@ label {
     transform: none;
 }
 
+.fraction-select {
+    width: 100%;
+    padding: 8px;
+    background-color: #4a89dc;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+}
+
+.fraction-select:hover {
+    background-color: #5d9cec;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .water-tracker-section {

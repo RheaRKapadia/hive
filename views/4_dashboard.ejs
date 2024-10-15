@@ -170,6 +170,12 @@
                             <option value="769">Yeti Rambler (26 oz / 769 ml)</option>
                             <option value="709">CamelBak Eddy+ (24 oz / 709 ml)</option>
                         </select>
+                        <select id="fractionSelect" class="fraction-select">
+                            <option value="1">Full bottle</option>
+                            <option value="0.75">3/4 bottle</option>
+                            <option value="0.5">1/2 bottle</option>
+                            <option value="0.25">1/4 bottle</option>
+                        </select>
                         <button id="addWaterBtn" class="add-btn">Add Water</button>
                     </div>
                 </div>
@@ -216,13 +222,15 @@
 
             function addWater() {
                 const selectedBottle = parseInt(bottleSelect.value);
-                if (selectedBottle) {
-                    currentIntake = Math.min(currentIntake + selectedBottle, dailyGoal);
+                const selectedFraction = parseFloat(fractionSelect.value);
+                if (selectedBottle && selectedFraction) {
+                    const addedAmount = Math.round(selectedBottle * selectedFraction);
+                    currentIntake = Math.min(currentIntake + addedAmount, dailyGoal);
                     updateWaterTracker();
                     animateWaterFill();
                     createBubbles();
                 } else {
-                    alert("Please select a water bottle first.");
+                    alert("Please select a water bottle and fraction.");
                 }
             }
 
@@ -273,6 +281,11 @@
                 updateBottleImage(this.value);
                 addWaterBtn.disabled = !this.value;
             });
+
+            fractionSelect.addEventListener('change', function() {
+                addWaterBtn.disabled = !(this.value && bottleSelect.value);
+            });
+
 
             // Initial update
             updateWaterTracker();
