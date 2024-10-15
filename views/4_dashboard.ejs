@@ -134,31 +134,57 @@
                     <button id="resetWaterBtn" class="reset-btn">Reset</button>
                 </div>
                 <div class="water-tracker-content">
-                    <div class="water-bottle-container">
-                        <svg id="bottleImage" class="bottle-image" viewBox="0 0 100 200" width="100" height="200">
-                            <defs>
-                                <clipPath id="bottleClip">
-                                    <path id="bottleShape" d="M30 10 L70 10 L80 30 L80 190 L20 190 L20 30 Z" />
-                                </clipPath>
-                                <radialGradient id="waterGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                                    <stop offset="0%" style="stop-color:rgb(0,210,255);stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:rgb(0,150,255);stop-opacity:1" />
-                                </radialGradient>
-                            </defs>
-                            <path id="bottleOutline" d="M30 10 L70 10 L80 30 L80 190 L20 190 L20 30 Z" fill="none" stroke="white" stroke-width="2"/>
-                            <g clip-path="url(#bottleClip)">
-                                <rect id="waterFill" x="0" y="200" width="100" height="200" fill="url(#waterGradient)" />
-                                <path id="waterWave" d="M0 200 Q25 180 50 200 T100 200" fill="url(#waterGradient)">
-                                    <animate attributeName="d"
-                                             dur="3s"
-                                             repeatCount="indefinite"
-                                             values="M0 200 Q25 180 50 200 T100 200;
-                                                     M0 200 Q25 220 50 200 T100 200;
-                                                     M0 200 Q25 180 50 200 T100 200" />
-                                </path>
-                                <g id="bubbles"></g>
-                            </g>
-                        </svg>
+                    <div class="water-bottles-container">
+                        <div class="bottle-wrapper">
+                            <h4>Daily Goal: 2000ml</h4>
+                            <svg id="goalBottleImage" class="bottle-image" viewBox="0 0 100 200" width="100" height="200">
+                                <defs>
+                                    <clipPath id="goalBottleClip">
+                                        <path id="goalBottleShape" d="M30 10 L70 10 L80 30 L80 190 L20 190 L20 30 Z" />
+                                    </clipPath>
+                                    <radialGradient id="waterGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                                        <stop offset="0%" style="stop-color:rgb(0,210,255);stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:rgb(0,150,255);stop-opacity:1" />
+                                    </radialGradient>
+                                </defs>
+                                <path id="goalBottleOutline" d="M30 10 L70 10 L80 30 L80 190 L20 190 L20 30 Z" fill="none" stroke="white" stroke-width="2"/>
+                                <g clip-path="url(#goalBottleClip)">
+                                    <rect id="goalWaterFill" x="0" y="200" width="100" height="200" fill="url(#waterGradient)" />
+                                    <path id="goalWaterWave" d="M0 200 Q25 180 50 200 T100 200" fill="url(#waterGradient)">
+                                        <animate attributeName="d"
+                                                 dur="3s"
+                                                 repeatCount="indefinite"
+                                                 values="M0 200 Q25 180 50 200 T100 200;
+                                                         M0 200 Q25 220 50 200 T100 200;
+                                                         M0 200 Q25 180 50 200 T100 200" />
+                                    </path>
+                                    <g id="goalBubbles"></g>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="bottle-wrapper">
+                            <h4 id="selectedBottleLabel">Selected Bottle</h4>
+                            <svg id="selectedBottleImage" class="bottle-image" viewBox="0 0 100 200" width="100" height="200">
+                                <defs>
+                                    <clipPath id="selectedBottleClip">
+                                        <path id="selectedBottleShape" d="M30 10 L70 10 L80 30 L80 190 L20 190 L20 30 Z" />
+                                    </clipPath>
+                                </defs>
+                                <path id="selectedBottleOutline" d="M30 10 L70 10 L80 30 L80 190 L20 190 L20 30 Z" fill="none" stroke="white" stroke-width="2"/>
+                                <g clip-path="url(#selectedBottleClip)">
+                                    <rect id="selectedWaterFill" x="0" y="200" width="100" height="200" fill="url(#waterGradient)" />
+                                    <path id="selectedWaterWave" d="M0 200 Q25 180 50 200 T100 200" fill="url(#waterGradient)">
+                                        <animate attributeName="d"
+                                                 dur="3s"
+                                                 repeatCount="indefinite"
+                                                 values="M0 200 Q25 180 50 200 T100 200;
+                                                         M0 200 Q25 220 50 200 T100 200;
+                                                         M0 200 Q25 180 50 200 T100 200" />
+                                    </path>
+                                    <g id="selectedBubbles"></g>
+                                </g>
+                            </svg>
+                        </div>
                     </div>
                     <p id="waterIntakeText" class="intake-text">0ml / 2000ml</p>
                     <div class="water-input">
@@ -186,110 +212,181 @@
     <script src="/js/dashboard.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const waterFill = document.getElementById('waterFill');
-            const waterWave = document.getElementById('waterWave');
-            const bottleShape = document.getElementById('bottleShape');
-            const bottleOutline = document.getElementById('bottleOutline');
+            const goalWaterFill = document.getElementById('goalWaterFill');
+            const goalWaterWave = document.getElementById('goalWaterWave');
+            const selectedWaterFill = document.getElementById('selectedWaterFill');
+            const selectedWaterWave = document.getElementById('selectedWaterWave');
+            const goalBottleShape = document.getElementById('goalBottleShape');
+            const goalBottleOutline = document.getElementById('goalBottleOutline');
+            const selectedBottleShape = document.getElementById('selectedBottleShape');
+            const selectedBottleOutline = document.getElementById('selectedBottleOutline');
             const waterIntakeText = document.getElementById('waterIntakeText');
             const bottleSelect = document.getElementById('bottleSelect');
+            const fractionSelect = document.getElementById('fractionSelect');
             const addWaterBtn = document.getElementById('addWaterBtn');
             const resetWaterBtn = document.getElementById('resetWaterBtn');
-            const bubblesContainer = document.getElementById('bubbles');
+            const selectedBottleLabel = document.getElementById('selectedBottleLabel');
 
-            let dailyGoal = 2000; // Default goal: 2000ml
+            let dailyGoal = 2000;
             let currentIntake = 0;
+            let selectedBottleSize = 0;
+            let currentBottleIntake = 0;
 
             const bottleShapes = {
-                '739': "M30 10 L70 10 L75 30 L75 180 C75 185 70 190 65 190 L35 190 C30 190 25 185 25 180 L25 30 Z", // Hydro Flask
-                '946': "M30 10 L70 10 L80 30 L80 190 L20 190 L20 30 Z", // Nalgene
-                '621': "M35 10 L65 10 C75 30 75 50 75 70 L75 190 C75 195 70 200 65 200 L35 200 C30 200 25 195 25 190 L25 70 C25 50 25 30 35 10 Z", // S'well
-                '769': "M30 10 L70 10 L75 30 C80 60 80 90 80 120 L80 190 C80 195 75 200 70 200 L30 200 C25 200 20 195 20 190 L20 120 C20 90 20 60 25 30 Z", // Yeti Rambler
-                '709': "M35 10 L65 10 L70 30 L70 180 C70 185 65 190 60 190 L40 190 C35 190 30 185 30 180 L30 30 Z" // CamelBak Eddy+
+                '739': "M30 10 L70 10 L75 30 L75 180 C75 185 70 190 65 190 L35 190 C30 190 25 185 25 180 L25 30 Z",
+                '946': "M30 10 L70 10 L80 30 L80 190 L20 190 L20 30 Z",
+                '621': "M35 10 L65 10 C75 30 75 50 75 70 L75 190 C75 195 70 200 65 200 L35 200 C30 200 25 195 25 190 L25 70 C25 50 25 30 35 10 Z",
+                '769': "M30 10 L70 10 L75 30 C80 60 80 90 80 120 L80 190 C80 195 75 200 70 200 L30 200 C25 200 20 195 20 190 L20 120 C20 90 20 60 25 30 Z",
+                '709': "M35 10 L65 10 L70 30 L70 180 C70 185 65 190 60 190 L40 190 C35 190 30 185 30 180 L30 30 Z"
             };
 
             function updateWaterTracker() {
-                const progress = (currentIntake / dailyGoal) * 100;
-                waterFill.setAttribute('y', 200 - (progress * 2));
-                waterWave.setAttribute('transform', `translate(0, ${-progress * 2})`);
+                const goalProgress = (currentIntake / dailyGoal) * 100;
+                const goalWaterLevel = Math.max(10, 200 - (goalProgress * 1.9));
+                goalWaterFill.setAttribute('y', goalWaterLevel);
+                goalWaterWave.setAttribute('transform', `translate(0, ${goalWaterLevel - 200})`);
+
+                if (selectedBottleSize > 0) {
+                    const selectedProgress = (currentBottleIntake / selectedBottleSize) * 100;
+                    let selectedWaterLevel;
+                    if (selectedProgress >= 99.9) {
+                        selectedWaterLevel = 10;
+                    } else {
+                        selectedWaterLevel = Math.max(10, 200 - (selectedProgress * 1.9));
+                    }
+                    selectedWaterFill.setAttribute('y', selectedWaterLevel);
+                    selectedWaterWave.setAttribute('transform', `translate(0, ${selectedWaterLevel - 200})`);
+                } else {
+                    selectedWaterFill.setAttribute('y', 200);
+                    selectedWaterWave.setAttribute('transform', 'translate(0, 0)');
+                }
+
                 waterIntakeText.textContent = `${currentIntake}ml / ${dailyGoal}ml`;
             }
 
             function updateBottleImage(bottleType) {
-                const shape = bottleShapes[bottleType] || bottleShapes['946']; // Default to Nalgene shape
-                bottleShape.setAttribute('d', shape);
-                bottleOutline.setAttribute('d', shape);
+                const shape = bottleShapes[bottleType] || bottleShapes['946'];
+                selectedBottleShape.setAttribute('d', shape);
+                selectedBottleOutline.setAttribute('d', shape);
+                selectedBottleSize = parseInt(bottleType);
+                currentBottleIntake = 0;
+                selectedBottleLabel.textContent = `Selected Bottle: ${selectedBottleSize}ml`;
+                updateWaterTracker();
             }
 
             function addWater() {
-                const selectedBottle = parseInt(bottleSelect.value);
                 const selectedFraction = parseFloat(fractionSelect.value);
-                if (selectedBottle && selectedFraction) {
-                    const addedAmount = Math.round(selectedBottle * selectedFraction);
+                if (selectedBottleSize && selectedFraction) {
+                    const addedAmount = Math.round(selectedBottleSize * selectedFraction);
                     currentIntake = Math.min(currentIntake + addedAmount, dailyGoal);
-                    updateWaterTracker();
-                    animateWaterFill();
+                    currentBottleIntake += addedAmount;
+
+                    if (currentBottleIntake >= selectedBottleSize) {
+                        // Bottle is full, animate fill and then reset
+                        animateWaterFill(true);
+                        setTimeout(() => {
+                            alert("Great job! You've filled the current bottle. Let's start a new one!");
+                            resetSelectedBottle();
+                        }, 600);
+                    } else {
+                        animateWaterFill(false);
+                    }
+
                     createBubbles();
+
+                    if (currentIntake >= dailyGoal) {
+                        setTimeout(() => {
+                            alert("Congratulations! You've reached your daily water intake goal!");
+                        }, 600);
+                    }
                 } else {
                     alert("Please select a water bottle and fraction.");
                 }
             }
 
-            function animateWaterFill() {
-                waterFill.style.transition = 'y 0.5s ease-out';
-                waterWave.style.transition = 'transform 0.5s ease-out';
+            function animateWaterFill(isFullBottle) {
+                goalWaterFill.style.transition = 'y 0.5s ease-out';
+                goalWaterWave.style.transition = 'transform 0.5s ease-out';
+                selectedWaterFill.style.transition = 'y 0.5s ease-out';
+                selectedWaterWave.style.transition = 'transform 0.5s ease-out';
+
+                if (isFullBottle) {
+                    selectedWaterFill.setAttribute('y', 10);
+                    selectedWaterWave.setAttribute('transform', 'translate(0, -190)');
+                }
+
                 updateWaterTracker();
+
                 setTimeout(() => {
-                    waterFill.style.transition = '';
-                    waterWave.style.transition = '';
+                    goalWaterFill.style.transition = '';
+                    goalWaterWave.style.transition = '';
+                    selectedWaterFill.style.transition = '';
+                    selectedWaterWave.style.transition = '';
                 }, 500);
             }
 
             function createBubbles() {
-                for (let i = 0; i < 5; i++) {
-                    const bubble = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                    bubble.setAttribute("cx", Math.random() * 80 + 10);
-                    bubble.setAttribute("cy", 200);
-                    bubble.setAttribute("r", Math.random() * 3 + 1);
-                    bubble.setAttribute("fill", "rgba(255, 255, 255, 0.5)");
-                    bubblesContainer.appendChild(bubble);
+                ['goalBubbles', 'selectedBubbles'].forEach(containerId => {
+                    const bubblesContainer = document.getElementById(containerId);
+                    for (let i = 0; i < 5; i++) {
+                        const bubble = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                        bubble.setAttribute("cx", Math.random() * 80 + 10);
+                        bubble.setAttribute("cy", 200);
+                        bubble.setAttribute("r", Math.random() * 3 + 1);
+                        bubble.setAttribute("fill", "rgba(255, 255, 255, 0.5)");
+                        bubblesContainer.appendChild(bubble);
 
-                    const animateBubble = bubble.animate([
-                        { transform: `translate(0, 0)` },
-                        { transform: `translate(${Math.random() * 20 - 10}px, -${Math.random() * 100 + 50}px)` }
-                    ], {
-                        duration: Math.random() * 2000 + 1000,
-                        easing: 'ease-out',
-                        fill: 'forwards'
-                    });
+                        const animateBubble = bubble.animate([
+                            { transform: `translate(0, 0)` },
+                            { transform: `translate(${Math.random() * 20 - 10}px, -${Math.random() * 100 + 50}px)` }
+                        ], {
+                            duration: Math.random() * 2000 + 1000,
+                            easing: 'ease-out',
+                            fill: 'forwards'
+                        });
 
-                    animateBubble.onfinish = () => bubble.remove();
-                }
+                        animateBubble.onfinish = () => bubble.remove();
+                    }
+                });
             }
 
-            function resetIntake() {
+            function resetSelectedBottle() {
+                currentBottleIntake = 0;
+                updateWaterTracker();
+                document.getElementById('selectedBubbles').innerHTML = '';
+            }
+
+            function resetAllIntake() {
                 currentIntake = 0;
+                resetSelectedBottle();
                 updateWaterTracker();
                 bottleSelect.value = '';
+                fractionSelect.value = '1';
                 updateBottleImage('');
-                bubblesContainer.innerHTML = '';
+                selectedBottleLabel.textContent = 'Selected Bottle';
+                document.getElementById('goalBubbles').innerHTML = '';
             }
 
             addWaterBtn.addEventListener('click', addWater);
-            resetWaterBtn.addEventListener('click', resetIntake);
+            resetWaterBtn.addEventListener('click', resetAllIntake);
 
             bottleSelect.addEventListener('change', function() {
                 updateBottleImage(this.value);
-                addWaterBtn.disabled = !this.value;
+                addWaterBtn.disabled = !(this.value && fractionSelect.value);
             });
 
             fractionSelect.addEventListener('change', function() {
                 addWaterBtn.disabled = !(this.value && bottleSelect.value);
             });
 
-
-            // Initial update
+            // Initial setup
             updateWaterTracker();
             addWaterBtn.disabled = true;
+
+            // Set up goal bottle shape
+            const goalShape = "M30 10 L70 10 L80 30 L80 190 L20 190 L20 30 Z"; // Using Nalgene shape for goal
+            goalBottleShape.setAttribute('d', goalShape);
+            goalBottleOutline.setAttribute('d', goalShape);
         });
     </script>
     <script>
